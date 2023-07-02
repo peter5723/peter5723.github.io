@@ -37,7 +37,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "_posts/2023-7-2-test_new_pan.md",
+                "file": "_pages/about.md",
                 "mode": "source",
                 "source": false
               }
@@ -110,7 +110,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "_posts/2023-7-2-test_new_pan.md",
+                "file": "_pages/about.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -127,7 +127,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "_posts/2023-7-2-test_new_pan.md",
+                "file": "_pages/about.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -150,7 +150,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "_posts/2023-7-2-test_new_pan.md"
+                "file": "_pages/about.md"
               }
             }
           }
@@ -173,9 +173,14 @@
   },
   "active": "b3917291a99a0b89",
   "lastOpenFiles": [
-    "_posts/2022-06-30-tips_warnings_dangers.md",
-    "_posts/2023-7-2-test_new_pan.md",
+    "_posts/2022-06-26-wide_tables.md",
+    "_posts/2021-08-10-toc.md",
     "_posts/2019-04-29-license.md",
+    "_pages/contact.md",
+    "_pages/about.md",
+    "_pages/design/draft.md",
+    "_posts/2023-7-2-test_new_pan.md",
+    "_posts/2022-06-30-tips_warnings_dangers.md",
     "_posts/2019-04-27-why.md",
     "Highlights for Nature-2021-High-performance brain-to-text communication via handwriting.md",
     "文献笔记/@willettHighperformanceBraintotextCommunication2021.md",
