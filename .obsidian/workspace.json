@@ -1,0 +1,192 @@
+{
+  "main": {
+    "id": "4209f8a9a18ffd9d",
+    "type": "split",
+    "children": [
+      {
+        "id": "ca86a66adde9c32a",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "7887670901879c16",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "_posts/2022-06-30-tips_warnings_dangers.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "e1aa357e7d627899",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "_posts/2022-06-30-tips_warnings_dangers.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "b3917291a99a0b89",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "_posts/2023-7-2-test_new_pan.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          }
+        ],
+        "currentTab": 2
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "e676fcc4b819efec",
+    "type": "split",
+    "children": [
+      {
+        "id": "5bccd16308722ac8",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "4e55b1c8b2ea7c4e",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "e43fd3bdc851ea60",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "e764876273b2f27a",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {}
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "d3a53cd517adcdfb",
+    "type": "split",
+    "children": [
+      {
+        "id": "e698cadf40d4b369",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "919d694c524c87a4",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "_posts/2023-7-2-test_new_pan.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "4c0667a4be6aada3",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "_posts/2023-7-2-test_new_pan.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "69571582f0acd2fc",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true
+              }
+            }
+          },
+          {
+            "id": "b0b458f302028fbe",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "_posts/2023-7-2-test_new_pan.md"
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:打开快速切换": false,
+      "graph:查看关系图谱": false,
+      "canvas:新建白板": false,
+      "daily-notes:打开/创建今天的日记": false,
+      "templates:插入模板": false,
+      "command-palette:打开命令面板": false
+    }
+  },
+  "active": "b3917291a99a0b89",
+  "lastOpenFiles": [
+    "_posts/2022-06-30-tips_warnings_dangers.md",
+    "_posts/2023-7-2-test_new_pan.md",
+    "_posts/2019-04-29-license.md",
+    "_posts/2019-04-27-why.md",
+    "Highlights for Nature-2021-High-performance brain-to-text communication via handwriting.md",
+    "文献笔记/@willettHighperformanceBraintotextCommunication2021.md",
+    "文献/Nature-2021-High-performance brain-to-text communication via handwriting.pdf",
+    "文献/s41593-023-01304-9.pdf",
+    "文献/cell-2020-hand-knob.pdf",
+    "文献笔记/@tangSemanticReconstructionContinuous2023.md",
+    "文献笔记/@willettHandKnobArea2020.md",
+    "文献",
+    "新建文件夹",
+    "文献笔记/我的文库.json",
+    "文献笔记"
+  ]
+}
