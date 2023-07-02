@@ -1,16 +1,16 @@
 # Configurations
-title:            Jekyll Gitbook
-longtitle:        Jekyll Gitbook
-author:           HE Tao
-email:            sighingnow@gmail.com
+title:            Peter Gitbook
+longtitle:        Peter Gitbook
+author:           :)
+email:            905609587@qq.com
 description: >
-  Build Jekyll site with the GitBook style.
+  Peter's book copy from Jekyll site with the GitBook style.
 
 version:          1.0
 gitbook_version:  3.2.3
 
 url:              'https://peter5723.github.io'
-baseurl:          '/peter-gitbook'
+baseurl:          ''
 rss:              RSS
 
 # bootstrap: use the remote theme for the site itself
