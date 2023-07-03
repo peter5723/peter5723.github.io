@@ -25,7 +25,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "_pages/github pages.md",
+                "file": "_pages/github-pages.md",
                 "mode": "source",
                 "source": false
               }
@@ -98,7 +98,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "_pages/github pages.md",
+                "file": "_pages/github-pages.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -115,7 +115,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "_pages/github pages.md",
+                "file": "_pages/github-pages.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -138,7 +138,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "_pages/github pages.md"
+                "file": "_pages/github-pages.md"
               }
             }
           }
@@ -161,9 +161,11 @@
   },
   "active": "3058ae30aff0f2dc",
   "lastOpenFiles": [
-    "INDEX.md",
-    "_pages/github pages.md",
+    "_site/pages/github-pages/index.html",
+    "_site/pages/github-pages",
     "_posts/2023-07-03-new-start.md",
+    "_pages/github-pages.md",
+    "INDEX.md",
     "_site/jekyll/2023-07-03-new-start.html",
     "_site/jekyll/2021-08-10-new-start.html",
     "_pages/about.md",
@@ -178,7 +180,6 @@
     "_site/pages/contact/index.html",
     "_site/pages/about/index.html",
     "_site/pages/contact",
-    "_site/pages/about",
     "_site/INDEX.md",
     "_pages/design/draft.md",
     "_posts/2022-05-24-page_cover.md",
