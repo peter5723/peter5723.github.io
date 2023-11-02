@@ -25,14 +25,50 @@
             "state": {
               "type": "markdown",
               "state": {
+                "file": "_posts/2023-07-03-new-start.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "5428767b5b29633b",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "_posts/2023-11-02-some_note.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "0251fe128d145582",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
                 "file": "_pages/github-pages.md",
+                "mode": "preview",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "2fdd6d5450659e49",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "_posts/2023-11-02-some_note.md",
                 "mode": "source",
                 "source": false
               }
             }
           }
         ],
-        "currentTab": 1
+        "currentTab": 3
       }
     ],
     "direction": "vertical"
@@ -159,17 +195,21 @@
       "command-palette:打开命令面板": false
     }
   },
-  "active": "3058ae30aff0f2dc",
+  "active": "0251fe128d145582",
   "lastOpenFiles": [
+    "_posts/2023-07-03-new-start.md",
+    "_posts/2023-11-02-some_note.md",
+    "_pages/github-pages.md",
+    "_pages/contact.md",
+    "_site/assets/dinosaur.gif",
+    "_pages/about.md",
+    "_posts/2023-09-04-hello.md",
+    "_site/jekyll/2023-09-04-hello.html",
+    "INDEX.md",
     "_site/pages/github-pages/index.html",
     "_site/pages/github-pages",
-    "_posts/2023-07-03-new-start.md",
-    "_pages/github-pages.md",
-    "INDEX.md",
     "_site/jekyll/2023-07-03-new-start.html",
     "_site/jekyll/2021-08-10-new-start.html",
-    "_pages/about.md",
-    "_pages/contact.md",
     "_site/pages/github pages/index.html",
     "_site/pages/github pages",
     "_site/pages/github pages搭建/index.html",
@@ -178,8 +218,6 @@
     "_site/pages/未命名.md",
     "_site/未命名.md",
     "_site/pages/contact/index.html",
-    "_site/pages/about/index.html",
-    "_site/pages/contact",
     "_site/INDEX.md",
     "_pages/design/draft.md",
     "_posts/2022-05-24-page_cover.md",
@@ -190,7 +228,6 @@
     "_posts/2019-04-29-license.md",
     "_posts/2019-04-28-howto.md",
     "_posts/2019-04-27-why.md",
-    "_site/assets/dinosaur.gif",
     "README.md",
     "_site/assets/gitbook/fonts/fontawesome/fontawesome-webfont.svg",
     "_site/assets/gitbook/images/apple-touch-icon-precomposed-152.png",
