@@ -13,28 +13,29 @@ layout: post
 
 一、新建一个github仓库，仓库的名字是`username.github.io`。
 
-二、从网上找一个模板，复制到自己的仓库里面。
+二、从网上找一个模板，复制到自己的仓库里面。仓库的结构看这个网址:[目录结构 - Jekyll • 简单静态博客网站生成器 (jekyllcn.com)](http://jekyllcn.com/docs/structure/)
 
 三、`index.md` `readme.md`是主页内容。
 
 四、`_pages`文件夹里放网页
 
-这个开始的格式挺重要的
+这个开始的格式挺重要的(其实就是文档属性)。
+每一个网页都必须有文档属性，不然无法显示。
 ```
-	---
-	title: github pages搭建
-	author: Peter
-	date: 2023-07-03
-	category: Jekyll
-	layout: post
-	---
+---
+title: github pages搭建
+author: Peter
+date: 2023-07-03
+category: Jekyll
+layout: post
+---
 ```
 
 title就是网页的名称
 	
 别的没啥用，但是要保持这样的格式不然会报错
 	
-五、`_posts`文件夹就是用来放博客了，名称要求必须是`xxxx-xx-xx-name.md`，里面的开头的注释也必须是这样的:
+五、`_posts`文件夹就是用来放博客了，名称要求必须是`xxxx-xx-xx-name.md`，里面的开头也是必须有文档属性。属性`title`值就是这篇博客的标题了。
 ```
 ---
 title: 一定要这样写
@@ -46,7 +47,7 @@ layout: post
 ```
 下面的内容用markdown写就可以了。
 
-六、网页的本地测试具体看这个网站[Testing your GitHub Pages site locally with Jekyll - GitHub Docs](https://docs.github.com/en/pages/setting-up-a-github-pages-site-with-jekyll/testing-your-github-pages-site-locally-with-jekyll) 
+六、网页的本地测试具体看这个网站: [Testing your GitHub Pages site locally with Jekyll - GitHub Docs](https://docs.github.com/en/pages/setting-up-a-github-pages-site-with-jekyll/testing-your-github-pages-site-locally-with-jekyll) 
 
 按照上面的内容装了一大堆东西以后，以后要本地测试，就只需要：
 在网页文件夹里打开git bash
@@ -58,10 +59,19 @@ layout: post
 
 八、以后每次写完博客，`git push`上去就可以更新了，非常的方便，而且可以在obsidian里写博客，挺好的。
 
-九、这不是教程，只是一个整理，看不懂不关我的事。
-还不知道怎么插图片，估计挺麻烦的，可以不插。
+九、怎么插图片
+
+看这个链接，很简单：[jekyll 添加多媒体图片和附件 (abaojin.github.io)](https://abaojin.github.io/2017/01/13/jekyll-blog-media/)
+
+下面我插了一张图作为示例。
+![CPU](/media/image/CPUwww.png)
 
 十、参考的教程：
+
 [Setting up a GitHub Pages site with Jekyll - GitHub Docs](https://docs.github.com/en/pages/setting-up-a-github-pages-site-with-jekyll)
 
 [Jekyll Gitbook Theme · Jekyll Gitbook (sighingnow.github.io)](https://sighingnow.github.io/jekyll-gitbook/)
+
+想弄好博客，也可以多看看别人的博客源代码：
+
+[abaojin/abaojin.github.io: Welcome to view and use the blog](https://github.com/abaojin/abaojin.github.io)
