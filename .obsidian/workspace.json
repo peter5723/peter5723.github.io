@@ -49,8 +49,20 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "_pages/github-pages.md",
+                "file": "_posts/2023-11-02-some_note.md",
                 "mode": "preview",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "72da37ddebbe93b2",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "_posts/2023-11-02-some_note.md",
+                "mode": "source",
                 "source": false
               }
             }
@@ -68,7 +80,7 @@
             }
           }
         ],
-        "currentTab": 3
+        "currentTab": 4
       }
     ],
     "direction": "vertical"
@@ -134,7 +146,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "_pages/github-pages.md",
+                "file": "_posts/2023-11-02-some_note.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -151,7 +163,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "_pages/github-pages.md",
+                "file": "_posts/2023-11-02-some_note.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -174,7 +186,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "_pages/github-pages.md"
+                "file": "_posts/2023-11-02-some_note.md"
               }
             }
           }
@@ -195,17 +207,20 @@
       "command-palette:打开命令面板": false
     }
   },
-  "active": "0251fe128d145582",
+  "active": "72da37ddebbe93b2",
   "lastOpenFiles": [
-    "_posts/2023-07-03-new-start.md",
+    "_posts/note.md",
     "_posts/2023-11-02-some_note.md",
+    "_posts/未命名.md",
+    "_posts/2023-07-03-new-start.md",
+    "未命名",
+    "INDEX.md",
     "_pages/github-pages.md",
     "_pages/contact.md",
     "_site/assets/dinosaur.gif",
     "_pages/about.md",
     "_posts/2023-09-04-hello.md",
     "_site/jekyll/2023-09-04-hello.html",
-    "INDEX.md",
     "_site/pages/github-pages/index.html",
     "_site/pages/github-pages",
     "_site/jekyll/2023-07-03-new-start.html",
@@ -217,7 +232,6 @@
     "_site/pages/github pages搭建.md",
     "_site/pages/未命名.md",
     "_site/未命名.md",
-    "_site/pages/contact/index.html",
     "_site/INDEX.md",
     "_pages/design/draft.md",
     "_posts/2022-05-24-page_cover.md",
@@ -233,7 +247,6 @@
     "_site/assets/gitbook/images/apple-touch-icon-precomposed-152.png",
     "Highlights for Nature-2021-High-performance brain-to-text communication via handwriting.md",
     "文献笔记/@willettHighperformanceBraintotextCommunication2021.md",
-    "文献笔记/@tangSemanticReconstructionContinuous2023.md",
-    "文献笔记/@willettHandKnobArea2020.md"
+    "文献笔记/@tangSemanticReconstructionContinuous2023.md"
   ]
 }

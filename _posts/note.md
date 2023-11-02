@@ -1,0 +1,355 @@
+# PA 
+
+本文是Peter的PA的实验手册。只记录一些**东西**，不提供源代码。
+
+[课程网址]{https://nju-projectn.github.io/ics-pa-gitbook/ics2023/index.html}
+
+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
+
+# PA0 (tools)
+
+If you have problems in conflicting debs, just use the original source rather than tsinghua or ustc. It wastes a lot of time.
+
+终于可以输入中文了。好骚的sogou输入法.
+
+## clash
+
+首先照readme将url改成订阅地址
+
+后面 按提示即可
+
+`sudo bash start.sh`
+
+`source /etc/profile.d/clash.sh`
+
+`proxy_on` 打开代理
+
+`proxy_off`关闭代理
+
+`sudo bash shutdown.sh`关闭程序
+
+这样弄好以后，再打开系统的代理:
+
+ubuntu桌面版，右上角点击设置，网络，网络代理，手动，然后把http://127.0.0.1和7890
+
+Then you can google and github freely.
+
+## gcc
+
+-g  增加调试指令
+
+## gdb
+### Starting:
+  gdb
+
+  gdb <file> ----   open gdb with the file
+
+
+
+### Running and Stopping:
+```
+  quit   ----  exit gdb
+  **please run the program before debug...** 
+  run    ----  run the program(<file>)   
+  run 1 2 3  ---- run program with command-line arguments 1 2 3
+  kill  ---- stop the program
+```
+
+
+### Breakpoint:
+```
+  info break ---- list all breaks 
+  (b)
+  break <func> ---- Set breakpoint at the entry to <func>
+  break  \*0x80483c3 ----Set breakpoint at address 0x80483c3
+	break  9  ---- Set breakpoint at line 9
+  break main.c:9 if q==0 ---- conditional breakpoint
+  delete     ----     delete all breakpoints
+  delete 1   ----     delete the breakpoint 1
+  disable 1   ----    disable the breakpoint 1
+  enable 1    ----    enable the breakpoint 1
+  clear <func> ----   Clear any points at the entry to <func>
+
+  (w)
+  watch \*地址    # 当地址所指内容发送变化时断点
+  watch var    #当var值变化时，断点
+  watch (condition)    #当条件符合时，断点
+```
+
+### Execution:
+```
+  stepi ---- Execute 1 instruction (assemble instruction)
+  stepi 4 ---Execute 4 instruction (assemble instruction)
+  nexti ---- Execute 1 instruction, but it doesn't enter the  function and just execute it
+  step ---- Execute one C statement
+  next ---- Execute one C Statement but doesn't enter the function.
+  c(continue) -- -- execute to the next breakpoint
+  until 3 ---- continue exec until the breakpoint 3
+  finish ----   Resume execution until the current function return. 
+  call <func> ---- call the func and print the return Value
+```
+
+
+### Examining code:
+```
+  (p)
+  print /d $rax ----  Print contents of %rax in decimal
+  print /x $rax ----  Print contents of %rax in hex
+  print /t $rax ----  Print contents of %rax in binary
+  print /d (int)$rax ---- Print contents of %rax in decimal but it has signs.
+
+  Examine:
+  x/[num][size][format] address
+  num = number of objects todisplay
+  size = size of each project (b=byte h=half-word, w=word, g=quad-word) 
+  (1 word = 4 Byte)
+  FORMAT = how to display each object (d=decimal, x=hex, o=octal, etc.)
+  for example:
+   x/w  $rax
+   x/2wd 0xbffff890
+   x/200bc $rdi
+   x/s   $rsp (a string)
+```
+
+### Display
+  Compared with `examine`, If we use display, the value will be printed each time the code is stopped, which is very convenient.
+```
+  info display ---- get all the info of variables
+  display {var1 var2 var3} ---- print var1 var2 var3 each time.
+  display /i $pc ---- print where is pc at as asm.
+  delete display (%num) ---- delete all or %numth variable
+  disable/enable display (%num) ---- disable/enable %numth variable.
+```
+### Layout:
+  **use `layout` to display u want like source code .**	
+```
+  layout regs
+  layout split ---- asm and src
+  layout asm
+  layout src
+  layout prev
+  layout next
+  focus name
+  (name = cmd|src|asm|regs|next|prev)
+  refresh
+  update
+  <C-l> refresh
+  <C-x> 1/2 ---- 1/2 window
+  <c-x> a  ---- abort window
+```
+### Else:
+```
+  where  ----   Print the current address and stack backtrace
+  list ---- see which line the code has examined and its contexts.
+```
+## Makefile
+
+## vim
+#### 杂项
+
+用vim之前先在`.vimrc`中配置。
+
+与系统剪贴板复制粘贴使用`+y` and `+p`.
+
+`<C-G>` 显示文件信息
+
+`q:` 显示历史命令 用<C-G>关闭(实际上和宏有关，有机会展开)
+
+`%` 是找匹配的括号，在复制函数时很有用。
+
+`` 偶然发现可以用这个方便的跳转
+
+`.` 重复上一条指令
+
+### vim多文件编辑
+怎么使用vim像vscode那样同时编辑多个文件呢？
+```
+$vim txt1 txt2 ---- 打开txt1和txt2
+$vim -o txt1 txt2 ---- 打开txt1和txt2在同一个水平窗口里面
+$vim -O txt1 txt2 ---- 打开txt1和txt2在同一个垂直窗口里面
+<C-w> + w/hjkl ----- 切换窗口
+```
+
+#### vim itself
+在编辑器内
+```
+:sp 将窗口水平分割成两个
+:vsp 将窗口垂直分割成两个
+:n下一个文件 :N上一个文件
+:buffers ---- 显示当前所有正在编辑的文件
+:buffer %n ---- 切换到第n个文件
+:e txt3 ---- 打开txt3
+ZZ ---- 保存当前文件更改
+:wq ---- 保存所有文件更改
+```
+
+#### nerdtree
+
+实际上，使用nerdtree插件更为好用
+
+我用F2打开这个插件
+
+打开以后，仍然可以用<C-w> + w/hjkl 在代码窗口和tree窗口切换
+
+o 在当前窗口打开文件、文件夹
+
+t 在新tab里打开文件、文件夹（文件夹就是新树了）
+
+gt/gT 在tab之间切换
+
+s 垂直打开标签页
+
+（当然，也可以用鼠标点。）
+
+### Plugin introduction
+
+#### vundle 
+
+`vim +PluginInstall +qall`
+
+安装新的包。
+
+#### ctags
+```
+<C-]> 跳转到定义处
+<C-t> 返回
+```
+
+#### cscope
+我已经配置过：
+`<C-\\> + %ch`  等价于:`cscope find %ch <name at cursor>`
+
+于是
+```
+:cscope find s   symbol: find all references to the token under cursor
+:cscope find g   global: find global definition(s) of the token under cursor
+:cscope find c   calls:  find all calls to the function name under cursor
+:cscope find t   text:   find all instances of the text under cursor
+:cscope find e   egrep:  egrep search for the word under cursor
+:cscope find f   file:   open the filename under cursor
+:cscope find i   includes: find files that include the filename under cursor
+:cscope find d   called: find functions that function under cursor calls
+```
+#### YouCompleteMe
+very powerful.
+
+
+## linux
+### shell
+TODO find grep
+
+## tools
+### tmux
+#### 会话
+tmux可以用来打开多个terminal。
+
+命令行下输入`tmux`, 打开新会话。
+
+`tmux new -s <session-name>`可以给新会话取名字。
+
+`tmux info` 会话信息
+
+基本操作流程：
+
+1. 新建会话`tmux new -s my_session`。
+2. 在 Tmux 窗口运行所需的程序。
+3. 按下快捷键Ctrl+b d将会话分离。
+4. 下次使用时，重新连接到会话`tmux attach-session -t my_session`。
+当然用`tmux a`可以快速连接上一个会话。
+
+对tmux来说，最重要的快捷键就是<C-b>, 先输入这个，然后输入指令tmux才会响应。
+```
+Ctrl+b d ---- 分离当前会话。
+Ctrl+b s ---- 列出所有会话。
+Ctrl+b $ ---- 重命名当前会话
+Ctrl+b : ---- 进入命令行模式
+:kill-server 删除所有会话
+:kill-session 删除当前会话
+```
+
+#### window
+一个会话内，tmux可以包含多个窗口（感觉窗口和会话差不多，不赘述）
+似乎还是窗口更方便切换啊。
+```
+<C-b> c ---- new window
+<C-b> n ---- next window
+<C-b> p ---- last window
+<C-b> %num ---- to %numth window
+<C-b> , ---- rename window
+```
+#### 窗格
+也可以包含多个窗格
+```
+Ctrl+b %：划分左右两个窗格。
+Ctrl+b "：划分上下两个窗格。
+Ctrl+b <arrow key>：光标切换到其他窗格。括号表示方向键。
+Ctrl+b x：删除该窗格
+```
+
+## 寻求帮助
+Search The Fucking Web(STFW)
+
+Read The Fucking Manual(RTFM)
+
+Read The Fucking Source Code(RTFSC)
+
+拽你妈，会写几个程序了不起啊，一天到晚fucking fucking的.
+
+# PA1
+how to run `nemu`? enter `nemu` dictionary and `make` to complile, `make run` to run, `make gdb` to use gdb to debug.  
+## 框架介绍
+TRM - Turing Machine.
+
+存储器是个在`nemu/src/memory/paddr.c`中定义的大数组.
+
+```
+static uint8_t pmem[CONFIG_MSIZE] PG_ALIGN = {};
+```
+
+上面的代码定义了`pmem`,对应128M的存储空间
+
+
+PC和通用寄存器都在`nemu/src/isa/$ISA/include/isa-def.h`中的结构体中定义.
+寄存器有关的在全局变量`cpu`中,
+包括`cpu.pc`程序计数器
+和`cpu.gpr[n]`n表示第n个寄存器。
+
+`nemu/src/cpu/cpu-exec.c`中有和指令执行相关的内容
+`cpu_exec(n)`表示执行接下来的n条指令。
+
+
+## 怎么开机
+下面的代码在`monitor.c`中定义
+前面都是些必要的准备工作，介绍一下`init_isa()`函数，在`nemu/src/isa/$ISA/init.c`中定义
+```c
+void init_isa() {
+  /* Load built-in image. */
+  memcpy(guest_to_host(RESET_VECTOR), img, sizeof(img));
+
+  /* Initialize this virtual computer system. */
+  restart();
+}
+```
+
+第一项工作就是将一个内置的客户程序读入到内存中.直接就用了`memcpy`这个函数，明快。
+注意：
+`RESET_VECTOR`是存放代码的固定内存地址。由于本次实验采用`RISC-V`,内存地址不从零开始，所以要用`guest_to_host()`函数来转换。
+它将CPU要访问的内存地址转化成数组pmem中的偏移位置。
+`init_isa()`的第二项任务是初始化寄存器, 这是通过restart()函数来实现的.它设置`cpu.pc` 的值并将0号寄存器置0.
+
+
+## 题目回答 注意事项
+
+**在`cmd_c()`函数中, 调用`cpu_exec()`的时候传入了参数-1, 你知道这是什么意思吗?**
+看函数参数。是`uint_32t`类型的，是无符号整数。-1被看做无符号数，也就是2的32次方-1，就是运行这么多次。
+
+表达式求值测试这里：
+
+**如何过滤除以零的表达式?**
+gcc 在编译的时候就会对除以0的表达式发生警报。在编译选项中加入`-Werror`将警告视作错误即可过滤。
+
+**如何获得无符号数的运算结果?**
+c语言默认数字是有符号的，在数字后面加`u`表示无符号数，如`12333u`。
+
+**我加入了逻辑运算通不过测试可能是什么原因？**
+注意C语言中， "||" 和 "&&" 是短路操作。
