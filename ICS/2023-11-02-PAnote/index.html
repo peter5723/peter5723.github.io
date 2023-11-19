@@ -1,210 +1,1176 @@
-<!DOCTYPE html>
-<html class="writer-html5" lang="en" >
-<head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <link rel="shortcut icon" href="../../img/favicon.ico" />
-    <title>ICS - Peter's home</title>
-    <link rel="stylesheet" href="../../css/theme.css" />
-    <link rel="stylesheet" href="../../css/theme_extra.css" />
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
     
-      <script>
-        // Current page data
-        var mkdocs_page_name = "ICS";
-        var mkdocs_page_input_path = "ICS\\2023-11-02-PAnote.md";
-        var mkdocs_page_url = null;
-      </script>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+        <meta name="author" content="Peter">
+      
+      
+      
+        <link rel="prev" href="../../signal/ch6_ss/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.0.4">
     
-    <script src="../../js/jquery-3.6.0.min.js" defer></script>
-    <!--[if lt IE 9]>
-      <script src="../../js/html5shiv.min.js"></script>
-    <![endif]-->
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
-      <script>hljs.initHighlightingOnLoad();</script> 
-</head>
+    
+      
+        <title>PA_note - Peter's home</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.9c788c91.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.2505c338.min.css">
+      
+      
 
-<body class="wy-body-for-nav" role="document">
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.1.0/style.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
 
-  <div class="wy-grid-for-nav">
-    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
-    <div class="wy-side-scroll">
-      <div class="wy-side-nav-search">
-          <a href="../.." class="icon icon-home"> Peter's home
-        </a><div role="search">
-  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
-      <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
-  </form>
-</div>
-      </div>
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#_1" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
 
-      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
-                </li>
-              </ul>
-              <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../about/">About</a>
-                </li>
-              </ul>
-              <p class="caption"><span class="caption-text">build a website</span></p>
-              <ul>
-                  <li class="toctree-l1"><a class="reference internal" href="../../website/github-pages/">jekyll</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../../website/mkdocs/">mkdocs</a>
-                  </li>
-              </ul>
-              <p class="caption"><span class="caption-text">信号</span></p>
-              <ul>
-                  <li class="toctree-l1"><a class="reference internal" href="../../signal/2023-11-04-oneside_z_transform/">单边z变换</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../../signal/ch6_ss/">LTI系统频域特性（ss第6章）</a>
-                  </li>
-              </ul>
-              <ul class="current">
-                <li class="toctree-l1 current"><a class="reference internal current" href="./">ICS</a>
-    <ul class="current">
-    <li class="toctree-l2"><a class="reference internal" href="#c">C语言</a>
-        <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#macro">macro</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#_1">作用域和链接</a>
-        <ul>
-    <li class="toctree-l4"><a class="reference internal" href="#_2">作用域</a>
-    </li>
-    <li class="toctree-l4"><a class="reference internal" href="#_3">链接</a>
-    </li>
-    <li class="toctree-l4"><a class="reference internal" href="#_4">存储时期</a>
-    </li>
-        </ul>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#_5">字符串处理函数：</a>
-    </li>
-        </ul>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#clash">clash</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#gcc">gcc</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#gdb">gdb</a>
-        <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#starting">Starting:</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#running-and-stopping">Running and Stopping:</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#breakpoint">Breakpoint:</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#execution">Execution:</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#examining-code">Examining code:</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#display">Display</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#layout">Layout:</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#else">Else:</a>
-    </li>
-        </ul>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#makefile">Makefile</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#vim">vim</a>
-        <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#_6">杂项</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#vim_1">vim多文件编辑</a>
-        <ul>
-    <li class="toctree-l4"><a class="reference internal" href="#vim-itself">vim itself</a>
-    </li>
-    <li class="toctree-l4"><a class="reference internal" href="#nerdtree">nerdtree</a>
-    </li>
-        </ul>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#plugin-introduction">Plugin introduction</a>
-        <ul>
-    <li class="toctree-l4"><a class="reference internal" href="#vundle">vundle</a>
-    </li>
-    <li class="toctree-l4"><a class="reference internal" href="#ctags">ctags</a>
-    </li>
-    <li class="toctree-l4"><a class="reference internal" href="#cscope">cscope</a>
-    </li>
-    <li class="toctree-l4"><a class="reference internal" href="#youcompleteme">YouCompleteMe</a>
-    </li>
-        </ul>
-    </li>
-        </ul>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#linux">linux</a>
-        <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#shell">shell</a>
-    </li>
-        </ul>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#tools">tools</a>
-        <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#tmux">tmux</a>
-        <ul>
-    <li class="toctree-l4"><a class="reference internal" href="#_7">会话</a>
-    </li>
-    <li class="toctree-l4"><a class="reference internal" href="#window">window</a>
-    </li>
-    <li class="toctree-l4"><a class="reference internal" href="#_8">窗格</a>
-    </li>
-        </ul>
-    </li>
-        </ul>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#_9">寻求帮助</a>
-    </li>
-    </ul>
-                </li>
-              </ul>
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Peter&#39;s home" class="md-header__button md-logo" aria-label="Peter's home" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Peter's home
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              PA_note
+            
+          </span>
+        </div>
       </div>
     </div>
-    </nav>
-
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
-          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../..">Peter's home</a>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
         
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
       </nav>
-      <div class="wy-nav-content">
-        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
-  <ul class="wy-breadcrumbs">
-    <li><a href="../.." class="icon icon-home" alt="Docs"></a> &raquo;</li>
-      <li>ICS</li>
-    <li class="wy-breadcrumbs-aside">
-    </li>
-  </ul>
-  <hr/>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
-          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
-            <div class="section" itemprop="articleBody">
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
               
-                <p>本文是Peter的NJU PA的实验手册。只记录一些<strong>东西</strong>，不提供源代码。</p>
-<p><a href="https://nju-projectn.github.io/ics-pa-gitbook/ics2023/index.html">课程网址</a></p>
-<p>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</p>
-<h1 id="pa0-tools">PA0 (tools)</h1>
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Peter&#39;s home" class="md-nav__button md-logo" aria-label="Peter's home" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    Peter's home
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        Home
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../about/" class="md-nav__link">
+        About
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3" tabindex="0" aria-expanded="false">
+          build a website
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="build a website" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          build a website
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../website/mkdocs/" class="md-nav__link">
+        mkdocs
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../website/github-pages/" class="md-nav__link">
+        jekyll
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_4" type="checkbox" id="__nav_4" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4" tabindex="0" aria-expanded="false">
+          信号
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="信号" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          信号
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../signal/2023-11-04-oneside_z_transform/" class="md-nav__link">
+        单边z变换
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../signal/ch6_ss/" class="md-nav__link">
+        LTI系统频域特性（ss第6章）
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          ICS
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        ICS
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#pa0-tools" class="md-nav__link">
+    PA0 (tools)
+  </a>
+  
+    <nav class="md-nav" aria-label="PA0 (tools)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#c" class="md-nav__link">
+    C语言
+  </a>
+  
+    <nav class="md-nav" aria-label="C语言">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#macro" class="md-nav__link">
+    macro
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    作用域和链接
+  </a>
+  
+    <nav class="md-nav" aria-label="作用域和链接">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    作用域
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    链接
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    存储时期
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    字符串处理函数：
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#clash" class="md-nav__link">
+    clash
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gcc" class="md-nav__link">
+    gcc
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gdb" class="md-nav__link">
+    gdb
+  </a>
+  
+    <nav class="md-nav" aria-label="gdb">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#starting" class="md-nav__link">
+    Starting:
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#running-and-stopping" class="md-nav__link">
+    Running and Stopping:
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#breakpoint" class="md-nav__link">
+    Breakpoint:
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#execution" class="md-nav__link">
+    Execution:
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#examining-code" class="md-nav__link">
+    Examining code:
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#display" class="md-nav__link">
+    Display
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#layout" class="md-nav__link">
+    Layout:
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#else" class="md-nav__link">
+    Else:
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#makefile" class="md-nav__link">
+    Makefile
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#vim" class="md-nav__link">
+    vim
+  </a>
+  
+    <nav class="md-nav" aria-label="vim">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    杂项
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#vim_1" class="md-nav__link">
+    vim多文件编辑
+  </a>
+  
+    <nav class="md-nav" aria-label="vim多文件编辑">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#vim-itself" class="md-nav__link">
+    vim itself
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nerdtree" class="md-nav__link">
+    nerdtree
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#plugin-introduction" class="md-nav__link">
+    Plugin introduction
+  </a>
+  
+    <nav class="md-nav" aria-label="Plugin introduction">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#vundle" class="md-nav__link">
+    vundle
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ctags" class="md-nav__link">
+    ctags
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cscope" class="md-nav__link">
+    cscope
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#youcompleteme" class="md-nav__link">
+    YouCompleteMe
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#linux" class="md-nav__link">
+    linux
+  </a>
+  
+    <nav class="md-nav" aria-label="linux">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#shell" class="md-nav__link">
+    shell
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tools" class="md-nav__link">
+    tools
+  </a>
+  
+    <nav class="md-nav" aria-label="tools">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tmux" class="md-nav__link">
+    tmux
+  </a>
+  
+    <nav class="md-nav" aria-label="tmux">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    会话
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#window" class="md-nav__link">
+    window
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    窗格
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    寻求帮助
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pa1" class="md-nav__link">
+    PA1
+  </a>
+  
+    <nav class="md-nav" aria-label="PA1">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    框架介绍
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    怎么开机
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    题目回答 注意事项
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#pa0-tools" class="md-nav__link">
+    PA0 (tools)
+  </a>
+  
+    <nav class="md-nav" aria-label="PA0 (tools)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#c" class="md-nav__link">
+    C语言
+  </a>
+  
+    <nav class="md-nav" aria-label="C语言">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#macro" class="md-nav__link">
+    macro
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    作用域和链接
+  </a>
+  
+    <nav class="md-nav" aria-label="作用域和链接">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    作用域
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    链接
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    存储时期
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    字符串处理函数：
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#clash" class="md-nav__link">
+    clash
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gcc" class="md-nav__link">
+    gcc
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gdb" class="md-nav__link">
+    gdb
+  </a>
+  
+    <nav class="md-nav" aria-label="gdb">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#starting" class="md-nav__link">
+    Starting:
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#running-and-stopping" class="md-nav__link">
+    Running and Stopping:
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#breakpoint" class="md-nav__link">
+    Breakpoint:
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#execution" class="md-nav__link">
+    Execution:
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#examining-code" class="md-nav__link">
+    Examining code:
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#display" class="md-nav__link">
+    Display
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#layout" class="md-nav__link">
+    Layout:
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#else" class="md-nav__link">
+    Else:
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#makefile" class="md-nav__link">
+    Makefile
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#vim" class="md-nav__link">
+    vim
+  </a>
+  
+    <nav class="md-nav" aria-label="vim">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    杂项
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#vim_1" class="md-nav__link">
+    vim多文件编辑
+  </a>
+  
+    <nav class="md-nav" aria-label="vim多文件编辑">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#vim-itself" class="md-nav__link">
+    vim itself
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nerdtree" class="md-nav__link">
+    nerdtree
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#plugin-introduction" class="md-nav__link">
+    Plugin introduction
+  </a>
+  
+    <nav class="md-nav" aria-label="Plugin introduction">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#vundle" class="md-nav__link">
+    vundle
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ctags" class="md-nav__link">
+    ctags
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cscope" class="md-nav__link">
+    cscope
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#youcompleteme" class="md-nav__link">
+    YouCompleteMe
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#linux" class="md-nav__link">
+    linux
+  </a>
+  
+    <nav class="md-nav" aria-label="linux">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#shell" class="md-nav__link">
+    shell
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tools" class="md-nav__link">
+    tools
+  </a>
+  
+    <nav class="md-nav" aria-label="tools">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tmux" class="md-nav__link">
+    tmux
+  </a>
+  
+    <nav class="md-nav" aria-label="tmux">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    会话
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#window" class="md-nav__link">
+    window
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    窗格
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    寻求帮助
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pa1" class="md-nav__link">
+    PA1
+  </a>
+  
+    <nav class="md-nav" aria-label="PA1">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    框架介绍
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    怎么开机
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    题目回答 注意事项
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="_1">速查手册<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
+<p>本文是Peter的NJU PA的实验手册。只记录一些<strong>东西</strong>，不提供源代码。</p>
+<p><a href="https://nju-projectn.github.io/ics-pa-gitbook/ics2023/index.html">课程网址</a>在这里。</p>
+<h2 id="pa0-tools">PA0 (tools)<a class="headerlink" href="#pa0-tools" title="Permanent link">&para;</a></h2>
 <p>If you have problems in conflicting debs, just use the original source rather than tsinghua or ustc. It wastes a lot of time.</p>
 <p>包冲突的解决：直接用ubuntu提供的源即可，不用阿里云或者清华云了。可以保证下载速度的，也不会有冲突。</p>
 <p>终于可以输入中文了。好骚的sogou输入法.</p>
-<p>先安装一些必要的工具：</p>
-<pre><code>apt-get install build-essential    # build-essential packages, include binary utilities, gcc, make, and so on
-apt-get install man                # on-line reference manual
-apt-get install gcc-doc            # on-line reference manual for gcc
-apt-get install gdb                # GNU debugger
-apt-get install git                # revision control system
-apt-get install libreadline-dev    # a library used later
-apt-get install libsdl2-dev        # a library used later
-apt-get install llvm llvm-dev      # llvm project, which contains libraries used later
-apt-get install vim                # vim
-apt-get install vim-gtk            # vim-more
-</code></pre>
-<h2 id="c">C语言</h2>
+<p>先安装一些必要的工具：
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>apt-get install build-essential    # build-essential packages, include binary utilities, gcc, make, and so on
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>apt-get install man                # on-line reference manual
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>apt-get install gcc-doc            # on-line reference manual for gcc
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>apt-get install gdb                # GNU debugger
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>apt-get install git                # revision control system
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>apt-get install libreadline-dev    # a library used later
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>apt-get install libsdl2-dev        # a library used later
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>apt-get install llvm llvm-dev      # llvm project, which contains libraries used later
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>apt-get install vim                # vim
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>apt-get install vim-gtk            # vim-more
+</code></pre></div></p>
+<h3 id="c">C语言<a class="headerlink" href="#c" title="Permanent link">&para;</a></h3>
 <p>沧海遗珠的细节</p>
-<h3 id="macro">macro</h3>
+<h4 id="macro">macro<a class="headerlink" href="#macro" title="Permanent link">&para;</a></h4>
 <p>一是讨论一下<code>#include</code>的路径.</p>
 <p>若是用<code>&lt;&gt;</code>那么就是在标准目录中寻找文件</p>
 <p>若是用<code>""</code>, 就是在当前目录(c文件所在的位置)寻找文件. 写法和linux中目录的写法一致, 比如在上级文件夹下的另一个文件夹, 可以写成<code>#include "../another/hello.h"</code></p>
@@ -212,53 +1178,53 @@ apt-get install vim-gtk            # vim-more
 <p>头文件的内容一般包含: 明显常量, 宏, 函数声明, 结构模板定义和类型定义. </p>
 <p>在去年上数据结构课的时候, 碰到过这样的问题, 有多个文件引用<code>list.h</code>,  导致<code>list.h</code>中的结构类型<code>node</code>被重定义的问题. </p>
 <p><strong>c语言中,声明可以重复很多次, 但是定义只能有一次</strong></p>
-<pre><code class="language-c">int a();
-int a();
-int a();
-//这样不会报错
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kt">int</span><span class="w"> </span><span class="nf">a</span><span class="p">();</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="kt">int</span><span class="w"> </span><span class="nf">a</span><span class="p">();</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="kt">int</span><span class="w"> </span><span class="nf">a</span><span class="p">();</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="c1">//这样不会报错</span>
+</code></pre></div>
 <p>怎么解决这个问题呢, 就是用条件编译指令了:</p>
-<pre><code class="language-c">#ifndef LIST
-#define LIST
-struct Node;
-typedef struct Node *PtrToNode;
-typedef PtrToNode List;
-typedef PtrToNode Position;
-List MakeEmpty(List L);
-int IsListEmpty(List L);
-int IsLast(Position P,List L);
-void Insert(char X[], List L);
-Position Find(char X[],List L);
-struct Node{
-    char* Element;
-    Position Next;
-};
-#endif
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="cp">#ifndef LIST</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="cp">#define LIST</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="k">struct</span><span class="w"> </span><span class="nc">Node</span><span class="p">;</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="k">typedef</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">Node</span><span class="w"> </span><span class="o">*</span><span class="n">PtrToNode</span><span class="p">;</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="k">typedef</span><span class="w"> </span><span class="n">PtrToNode</span><span class="w"> </span><span class="n">List</span><span class="p">;</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="k">typedef</span><span class="w"> </span><span class="n">PtrToNode</span><span class="w"> </span><span class="n">Position</span><span class="p">;</span>
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="n">List</span><span class="w"> </span><span class="nf">MakeEmpty</span><span class="p">(</span><span class="n">List</span><span class="w"> </span><span class="n">L</span><span class="p">);</span>
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="kt">int</span><span class="w"> </span><span class="nf">IsListEmpty</span><span class="p">(</span><span class="n">List</span><span class="w"> </span><span class="n">L</span><span class="p">);</span>
+<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="kt">int</span><span class="w"> </span><span class="nf">IsLast</span><span class="p">(</span><span class="n">Position</span><span class="w"> </span><span class="n">P</span><span class="p">,</span><span class="n">List</span><span class="w"> </span><span class="n">L</span><span class="p">);</span>
+<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="kt">void</span><span class="w"> </span><span class="nf">Insert</span><span class="p">(</span><span class="kt">char</span><span class="w"> </span><span class="n">X</span><span class="p">[],</span><span class="w"> </span><span class="n">List</span><span class="w"> </span><span class="n">L</span><span class="p">);</span>
+<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="n">Position</span><span class="w"> </span><span class="nf">Find</span><span class="p">(</span><span class="kt">char</span><span class="w"> </span><span class="n">X</span><span class="p">[],</span><span class="n">List</span><span class="w"> </span><span class="n">L</span><span class="p">);</span>
+<a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a><span class="k">struct</span><span class="w"> </span><span class="nc">Node</span><span class="p">{</span>
+<a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a><span class="w">    </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">Element</span><span class="p">;</span>
+<a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a><span class="w">    </span><span class="n">Position</span><span class="w"> </span><span class="n">Next</span><span class="p">;</span>
+<a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a><span class="p">};</span>
+<a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a><span class="cp">#endif</span>
+</code></pre></div>
 <p>如上所示<code>ifndef</code>指令保证结构类型只被定义一次. <code>ifndef</code>指令常常用于防止多次包含同一文件, 保证这个文件只被包含一次.</p>
-<h3 id="_1">作用域和链接</h3>
-<h4 id="_2">作用域</h4>
+<h4 id="_2">作用域和链接<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h4>
+<h5 id="_3">作用域<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h5>
 <p>一个C变量的作用域可以是代码块作用域/函数原型作用域/文件作用域.</p>
 <p>对于一个全局变量来说, 它具有文件作用域, 整个文件都可以使用它</p>
-<h4 id="_3">链接</h4>
+<h5 id="_4">链接<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h5>
 <p>c变量可以有外部链接/内部链接/空链接</p>
 <p>对于一个局部变量来说, 它是只有空链接, 由代码块或者函数原型私有, 只有文件作用域的变量才讨论内部还是外部链接.</p>
-<pre><code class="language-c">int giant = 5;
-static int dog = 3;
-int main(){
-    ...
-}
-//main.c
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kt">int</span><span class="w"> </span><span class="n">giant</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="k">static</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">dog</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(){</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">    </span><span class="p">...</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="p">}</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="c1">//main.c</span>
+</code></pre></div>
 <p><code>giant</code>就具有外部链接, 其他文件都可以使用<code>giant</code>, 只要加上<code>extern</code>关键字:</p>
-<pre><code class="language-c">extern int giant;
-...
-//foo.c
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">extern</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">giant</span><span class="p">;</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="p">...</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="c1">//foo.c</span>
+</code></pre></div>
 <p>但是<code>dog</code>有<code>static</code>标识, 那么他就是<code>main.c</code>所私有的, 其他文件无法访问. 这里<code>static</code>声明是说该全局变量具有内部链接.</p>
-<h4 id="_4">存储时期</h4>
+<h5 id="_5">存储时期<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h5>
 <p><code>static</code>还有一个地方会碰到, 就是声明一个变量是静态存储时期. 一般的变量都是自动存储时期, 作用域结束就释放. 而静态存储时期的变量, 在整个程序执行期间一直存在. 很显然, 不管加不加<code>static</code>, 全局变量都一定是静态变量. 自动变量不初始化, 静态变量缺省地初始化为0.</p>
-<h3 id="_5">字符串处理函数：</h3>
+<h4 id="_6">字符串处理函数：<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h4>
 <p><strong>strtok</strong></p>
 <p>用于字符串切割</p>
 <p><code>char *strtok(char *str, const char *delim)</code></p>
@@ -267,28 +1233,28 @@ int main(){
 <li><strong>delim</strong> -- 包含分隔符的 C 字符串。</li>
 </ul>
 <p>该函数返回被分解的第一个子字符串，如果没有可检索的字符串，则返回一个空指针。</p>
-<pre><code class="language-c">#include &lt;stdio.h&gt;
-#include &lt;string.h&gt;
-int main() {
-    char str[90] = &quot;I    love you   So     much&quot;;
-    char* token;
-    token = strtok(str, &quot; &quot;);
-
-    char* a;
-    a = strtok(NULL, &quot; &quot;);
-    char* b; 
-    b = strtok(str+strlen(token)+1, &quot; &quot;);
-    printf(&quot;%s\n&quot;, token);
-    printf(&quot;%s\n&quot;,a);
-    printf(&quot;%s\n&quot;,b);
-    return 0;
-}
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;string.h&gt;</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="w">    </span><span class="kt">char</span><span class="w"> </span><span class="n">str</span><span class="p">[</span><span class="mi">90</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;I    love you   So     much&quot;</span><span class="p">;</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="w">    </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">token</span><span class="p">;</span>
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="w">    </span><span class="n">token</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">strtok</span><span class="p">(</span><span class="n">str</span><span class="p">,</span><span class="w"> </span><span class="s">&quot; &quot;</span><span class="p">);</span>
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>
+<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="w">    </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">a</span><span class="p">;</span>
+<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a><span class="w">    </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">strtok</span><span class="p">(</span><span class="nb">NULL</span><span class="p">,</span><span class="w"> </span><span class="s">&quot; &quot;</span><span class="p">);</span>
+<a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a><span class="w">    </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">b</span><span class="p">;</span><span class="w"> </span>
+<a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a><span class="w">    </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">strtok</span><span class="p">(</span><span class="n">str</span><span class="o">+</span><span class="n">strlen</span><span class="p">(</span><span class="n">token</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="s">&quot; &quot;</span><span class="p">);</span>
+<a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a><span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;%s</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">token</span><span class="p">);</span>
+<a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a><span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;%s</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="n">a</span><span class="p">);</span>
+<a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a><span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;%s</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="n">b</span><span class="p">);</span>
+<a id="__codelineno-5-15" name="__codelineno-5-15" href="#__codelineno-5-15"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<a id="__codelineno-5-16" name="__codelineno-5-16" href="#__codelineno-5-16"></a><span class="p">}</span>
+</code></pre></div>
 <p>会输出如下结果</p>
-<pre><code>I
-love
-love
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>I
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>love
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>love
+</code></pre></div>
 <p>注意:</p>
 <ol>
 <li>
@@ -311,7 +1277,7 @@ love
 <p><strong>sscanf</strong></p>
 <p><code>int sscanf(const char *src, const char *format, ...)</code></p>
 <p>和<code>scanf</code>基本一样, 只是<code>sscanf</code>是从<code>src</code>中读取数据. </p>
-<h2 id="clash">clash</h2>
+<h3 id="clash">clash<a class="headerlink" href="#clash" title="Permanent link">&para;</a></h3>
 <p>首先照readme将url改成订阅地址</p>
 <p>后面 按提示即可</p>
 <p><code>sudo bash start.sh</code></p>
@@ -322,102 +1288,100 @@ love
 <p>这样弄好以后，再打开系统的代理:</p>
 <p>ubuntu桌面版，右上角点击设置，网络，网络代理，手动，然后把http://127.0.0.1和7890</p>
 <p>Then you can google and github freely.</p>
-<h2 id="gcc">gcc</h2>
+<h3 id="gcc">gcc<a class="headerlink" href="#gcc" title="Permanent link">&para;</a></h3>
 <p><code>-g</code>  增加调试指令</p>
-<h2 id="gdb">gdb</h2>
-<h3 id="starting">Starting:</h3>
-<pre><code>
-  gdb
-
-  gdb &lt;file&gt; ----   open gdb with the file
-
-</code></pre>
-<h3 id="running-and-stopping">Running and Stopping:</h3>
-<pre><code>  quit   ----  exit gdb
-  **please run the program before debug...** 
-  run    ----  run the program(&lt;file&gt;)   
-  run 1 2 3  ---- run program with command-line arguments 1 2 3
-  kill  ---- stop the program
-</code></pre>
-<h3 id="breakpoint">Breakpoint:</h3>
-<pre><code>  info break ---- list all breaks 
-  (b)
-  break &lt;func&gt; ---- Set breakpoint at the entry to &lt;func&gt;
-  break  \*0x80483c3 ----Set breakpoint at address 0x80483c3
-  break  9  ---- Set breakpoint at line 9
-  break main.c:9 if q==0 ---- conditional breakpoint
-  delete     ----     delete all breakpoints
-  delete 1   ----     delete the breakpoint 1
-  disable 1   ----    disable the breakpoint 1
-  enable 1    ----    enable the breakpoint 1
-  clear &lt;func&gt; ----   Clear any points at the entry to &lt;func&gt;
-
-  (w)
-  watch \*地址    # 当地址所指内容发送变化时断点
-  watch var    #当var值变化时，断点
-  watch (condition)    #当条件符合时，断点
-</code></pre>
-<h3 id="execution">Execution:</h3>
-<pre><code>  stepi ---- Execute 1 instruction (assemble instruction)
-  stepi 4 ---Execute 4 instruction (assemble instruction)
-  nexti ---- Execute 1 instruction, but it doesn't enter the  function and just execute it
-  step ---- Execute one C statement
-  next ---- Execute one C Statement but doesn't enter the function.
-  c(continue) -- -- execute to the next breakpoint
-  until 3 ---- continue exec until the breakpoint 3
-  finish ----   Resume execution until the current function return. 
-  call &lt;func&gt; ---- call the func and print the return Value
-</code></pre>
-<h3 id="examining-code">Examining code:</h3>
-<pre><code>  (p)
-  print /d $rax ----  Print contents of %rax in decimal
-  print /x $rax ----  Print contents of %rax in hex
-  print /t $rax ----  Print contents of %rax in binary
-  print /d (int)$rax ---- Print contents of %rax in decimal but it has signs.
-
-  Examine:
-  x/[num][size][format] address
-  num = number of objects todisplay
-  size = size of each project (b=byte h=half-word, w=word, g=quad-word) 
-  (1 word = 4 Byte)
-  FORMAT = how to display each object (d=decimal, x=hex, o=octal, etc.)
-  for example:
-   x/w  $rax
-   x/2wd 0xbffff890
-   x/200bc $rdi
-   x/s   $rsp (a string)
-</code></pre>
-<h3 id="display">Display</h3>
-<p>Compared with <code>examine</code>, If we use display, the value will be printed each time the code is stopped, which is very convenient.</p>
-<pre><code>  info display ---- get all the info of variables
-  display {var1 var2 var3} ---- print var1 var2 var3 each time.
-  display /i $pc ---- print where is pc at as asm.
-  delete display (%num) ---- delete all or %numth variable
-  disable/enable display (%num) ---- disable/enable %numth variable.
-</code></pre>
-<h3 id="layout">Layout:</h3>
-<p><strong>use <code>layout</code> to display what you want, like source code .</strong> </p>
-<pre><code>  layout regs
-  layout split ---- asm and src
-  layout asm
-  layout src
-  layout prev
-  layout next
-  focus name
-  (name = cmd|src|asm|regs|next|prev)
-  refresh
-  update
-  &lt;C-l&gt; refresh
-  &lt;C-x&gt; 1/2 ---- 1/2 window
-  &lt;c-x&gt; a  ---- abort window
-</code></pre>
-<h3 id="else">Else:</h3>
-<pre><code>  where  ----   Print the current address and stack backtrace
-  list ---- see which line the code has examined and its contexts.
-</code></pre>
-<h2 id="makefile">Makefile</h2>
-<h2 id="vim">vim</h2>
-<h4 id="_6">杂项</h4>
+<h3 id="gdb">gdb<a class="headerlink" href="#gdb" title="Permanent link">&para;</a></h3>
+<h4 id="starting">Starting:<a class="headerlink" href="#starting" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>  gdb
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>  gdb &lt;file&gt; ----   open gdb with the file
+</code></pre></div>
+<h4 id="running-and-stopping">Running and Stopping:<a class="headerlink" href="#running-and-stopping" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>  quit   ----  exit gdb
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>  **please run the program before debug...** 
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>  run    ----  run the program(&lt;file&gt;)   
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>  run 1 2 3  ---- run program with command-line arguments 1 2 3
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>  kill  ---- stop the program
+</code></pre></div>
+<h4 id="breakpoint">Breakpoint:<a class="headerlink" href="#breakpoint" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>  info break ---- list all breaks 
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>  (b)
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>  break &lt;func&gt; ---- Set breakpoint at the entry to &lt;func&gt;
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>  break  \*0x80483c3 ----Set breakpoint at address 0x80483c3
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>  break  9  ---- Set breakpoint at line 9
+<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a>  break main.c:9 if q==0 ---- conditional breakpoint
+<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a>  delete     ----     delete all breakpoints
+<a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a>  delete 1   ----     delete the breakpoint 1
+<a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a>  disable 1   ----    disable the breakpoint 1
+<a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a>  enable 1    ----    enable the breakpoint 1
+<a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a>  clear &lt;func&gt; ----   Clear any points at the entry to &lt;func&gt;
+<a id="__codelineno-9-12" name="__codelineno-9-12" href="#__codelineno-9-12"></a>
+<a id="__codelineno-9-13" name="__codelineno-9-13" href="#__codelineno-9-13"></a>  (w)
+<a id="__codelineno-9-14" name="__codelineno-9-14" href="#__codelineno-9-14"></a>  watch \*地址    # 当地址所指内容发送变化时断点
+<a id="__codelineno-9-15" name="__codelineno-9-15" href="#__codelineno-9-15"></a>  watch var    #当var值变化时，断点
+<a id="__codelineno-9-16" name="__codelineno-9-16" href="#__codelineno-9-16"></a>  watch (condition)    #当条件符合时，断点
+</code></pre></div>
+<h4 id="execution">Execution:<a class="headerlink" href="#execution" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>  stepi ---- Execute 1 instruction (assemble instruction)
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>  stepi 4 ---Execute 4 instruction (assemble instruction)
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>  nexti ---- Execute 1 instruction, but it doesn&#39;t enter the  function and just execute it
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>  step ---- Execute one C statement
+<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a>  next ---- Execute one C Statement but doesn&#39;t enter the function.
+<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a>  c(continue) -- -- execute to the next breakpoint
+<a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a>  until 3 ---- continue exec until the breakpoint 3
+<a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a>  finish ----   Resume execution until the current function return. 
+<a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a>  call &lt;func&gt; ---- call the func and print the return Value
+</code></pre></div>
+<h4 id="examining-code">Examining code:<a class="headerlink" href="#examining-code" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>  (p)
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>  print /d $rax ----  Print contents of %rax in decimal
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>  print /x $rax ----  Print contents of %rax in hex
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>  print /t $rax ----  Print contents of %rax in binary
+<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a>  print /d (int)$rax ---- Print contents of %rax in decimal but it has signs.
+<a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a>
+<a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a>  Examine:
+<a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a>  x/[num][size][format] address
+<a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a>  num = number of objects todisplay
+<a id="__codelineno-11-10" name="__codelineno-11-10" href="#__codelineno-11-10"></a>  size = size of each project (b=byte h=half-word, w=word, g=quad-word) 
+<a id="__codelineno-11-11" name="__codelineno-11-11" href="#__codelineno-11-11"></a>  (1 word = 4 Byte)
+<a id="__codelineno-11-12" name="__codelineno-11-12" href="#__codelineno-11-12"></a>  FORMAT = how to display each object (d=decimal, x=hex, o=octal, etc.)
+<a id="__codelineno-11-13" name="__codelineno-11-13" href="#__codelineno-11-13"></a>  for example:
+<a id="__codelineno-11-14" name="__codelineno-11-14" href="#__codelineno-11-14"></a>   x/w  $rax
+<a id="__codelineno-11-15" name="__codelineno-11-15" href="#__codelineno-11-15"></a>   x/2wd 0xbffff890
+<a id="__codelineno-11-16" name="__codelineno-11-16" href="#__codelineno-11-16"></a>   x/200bc $rdi
+<a id="__codelineno-11-17" name="__codelineno-11-17" href="#__codelineno-11-17"></a>   x/s   $rsp (a string)
+</code></pre></div>
+<h4 id="display">Display<a class="headerlink" href="#display" title="Permanent link">&para;</a></h4>
+<p>Compared with <code>examine</code>, If we use display, the value will be printed each time the code is stopped, which is very convenient.
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>  info display ---- get all the info of variables
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>  display {var1 var2 var3} ---- print var1 var2 var3 each time.
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>  display /i $pc ---- print where is pc at as asm.
+<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>  delete display (%num) ---- delete all or %numth variable
+<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a>  disable/enable display (%num) ---- disable/enable %numth variable.
+</code></pre></div></p>
+<h4 id="layout">Layout:<a class="headerlink" href="#layout" title="Permanent link">&para;</a></h4>
+<p><strong>use <code>layout</code> to display what you want, like source code .</strong> 
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>  layout regs
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>  layout split ---- asm and src
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>  layout asm
+<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a>  layout src
+<a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a>  layout prev
+<a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a>  layout next
+<a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a>  focus name
+<a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a>  (name = cmd|src|asm|regs|next|prev)
+<a id="__codelineno-13-9" name="__codelineno-13-9" href="#__codelineno-13-9"></a>  refresh
+<a id="__codelineno-13-10" name="__codelineno-13-10" href="#__codelineno-13-10"></a>  update
+<a id="__codelineno-13-11" name="__codelineno-13-11" href="#__codelineno-13-11"></a>  &lt;C-l&gt; refresh
+<a id="__codelineno-13-12" name="__codelineno-13-12" href="#__codelineno-13-12"></a>  &lt;C-x&gt; 1/2 ---- 1/2 window
+<a id="__codelineno-13-13" name="__codelineno-13-13" href="#__codelineno-13-13"></a>  &lt;c-x&gt; a  ---- abort window
+</code></pre></div></p>
+<h4 id="else">Else:<a class="headerlink" href="#else" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>  where  ----   Print the current address and stack backtrace
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>  list ---- see which line the code has examined and its contexts.
+</code></pre></div>
+<h3 id="makefile">Makefile<a class="headerlink" href="#makefile" title="Permanent link">&para;</a></h3>
+<h3 id="vim">vim<a class="headerlink" href="#vim" title="Permanent link">&para;</a></h3>
+<h4 id="_7">杂项<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h4>
 <p>用vim之前先在<code>.vimrc</code>中配置。</p>
 <p>与系统剪贴板复制粘贴使用<code>+y</code> and <code>+p</code>.</p>
 <p><code>&lt;C-G&gt;</code> 显示文件信息</p>
@@ -425,25 +1389,25 @@ love
 <p><code>%</code> 是找匹配的括号，在复制函数时很有用。</p>
 <p>`` 偶然发现可以用这个方便的跳转</p>
 <p><code>.</code> 重复上一条指令</p>
-<h3 id="vim_1">vim多文件编辑</h3>
-<p>怎么使用vim像vscode那样同时编辑多个文件呢？</p>
-<pre><code>$vim txt1 txt2 ---- 打开txt1和txt2
-$vim -o txt1 txt2 ---- 打开txt1和txt2在同一个水平窗口里面
-$vim -O txt1 txt2 ---- 打开txt1和txt2在同一个垂直窗口里面
-&lt;C-w&gt; + w/hjkl ----- 切换窗口
-</code></pre>
-<h4 id="vim-itself">vim itself</h4>
-<p>在编辑器内</p>
-<pre><code>:sp 将窗口水平分割成两个
-:vsp 将窗口垂直分割成两个
-:n下一个文件 :N上一个文件
-:buffers ---- 显示当前所有正在编辑的文件
-:buffer %n ---- 切换到第n个文件
-:e txt3 ---- 打开txt3
-ZZ ---- 保存当前文件更改
-:wq ---- 保存所有文件更改
-</code></pre>
-<h4 id="nerdtree">nerdtree</h4>
+<h4 id="vim_1">vim多文件编辑<a class="headerlink" href="#vim_1" title="Permanent link">&para;</a></h4>
+<p>怎么使用vim像vscode那样同时编辑多个文件呢？
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>$vim txt1 txt2 ---- 打开txt1和txt2
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>$vim -o txt1 txt2 ---- 打开txt1和txt2在同一个水平窗口里面
+<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a>$vim -O txt1 txt2 ---- 打开txt1和txt2在同一个垂直窗口里面
+<a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a>&lt;C-w&gt; + w/hjkl ----- 切换窗口
+</code></pre></div></p>
+<h5 id="vim-itself">vim itself<a class="headerlink" href="#vim-itself" title="Permanent link">&para;</a></h5>
+<p>在编辑器内
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>:sp 将窗口水平分割成两个
+<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>:vsp 将窗口垂直分割成两个
+<a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a>:n下一个文件 :N上一个文件
+<a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a>:buffers ---- 显示当前所有正在编辑的文件
+<a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a>:buffer %n ---- 切换到第n个文件
+<a id="__codelineno-16-6" name="__codelineno-16-6" href="#__codelineno-16-6"></a>:e txt3 ---- 打开txt3
+<a id="__codelineno-16-7" name="__codelineno-16-7" href="#__codelineno-16-7"></a>ZZ ---- 保存当前文件更改
+<a id="__codelineno-16-8" name="__codelineno-16-8" href="#__codelineno-16-8"></a>:wq ---- 保存所有文件更改
+</code></pre></div></p>
+<h5 id="nerdtree">nerdtree<a class="headerlink" href="#nerdtree" title="Permanent link">&para;</a></h5>
 <p>实际上，使用<code>nerdtree</code>插件更为好用</p>
 <p>我用<code>F2</code>打开这个插件</p>
 <p>打开以后，仍然可以用<code>&lt;C-w&gt; + w/hjkl</code> 在代码窗口和tree窗口切换</p>
@@ -452,39 +1416,39 @@ ZZ ---- 保存当前文件更改
 <p><code>gt/gT</code>在tab之间切换</p>
 <p><code>s</code>垂直打开标签页</p>
 <p>（当然，也可以用鼠标点。）</p>
-<h3 id="plugin-introduction">Plugin introduction</h3>
-<h4 id="vundle">vundle</h4>
+<h4 id="plugin-introduction">Plugin introduction<a class="headerlink" href="#plugin-introduction" title="Permanent link">&para;</a></h4>
+<h5 id="vundle">vundle<a class="headerlink" href="#vundle" title="Permanent link">&para;</a></h5>
 <p><code>vim +PluginInstall +qall</code></p>
 <p>安装新的包。</p>
-<h4 id="ctags">ctags</h4>
-<pre><code>&lt;C-]&gt; 跳转到定义处
-&lt;C-t&gt; 返回
-</code></pre>
-<h4 id="cscope">cscope</h4>
+<h5 id="ctags">ctags<a class="headerlink" href="#ctags" title="Permanent link">&para;</a></h5>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>&lt;C-]&gt; 跳转到定义处
+<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>&lt;C-t&gt; 返回
+</code></pre></div>
+<h5 id="cscope">cscope<a class="headerlink" href="#cscope" title="Permanent link">&para;</a></h5>
 <p>我已经配置过：
 <code>&lt;C-\&gt; + %ch</code>  等价于:<code>cscope find %ch &lt;name at cursor&gt;</code></p>
-<p>于是</p>
-<pre><code>:cscope find s   # symbol: find all references to the token under cursor
-:cscope find g   # global: find global definition(s) of the token under cursor
-:cscope find c   # calls:  find all calls to the function name under cursor
-:cscope find t   # text:   find all instances of the text under cursor
-:cscope find e   # egrep:  egrep search for the word under cursor
-:cscope find f   # file:   open the filename under cursor
-:cscope find i   # includes: find files that include the filename under cursor
-:cscope find d   # called: find functions that function under cursor calls
-</code></pre>
-<h4 id="youcompleteme">YouCompleteMe</h4>
+<p>于是
+<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>:cscope find s   # symbol: find all references to the token under cursor
+<a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a>:cscope find g   # global: find global definition(s) of the token under cursor
+<a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a>:cscope find c   # calls:  find all calls to the function name under cursor
+<a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a>:cscope find t   # text:   find all instances of the text under cursor
+<a id="__codelineno-18-5" name="__codelineno-18-5" href="#__codelineno-18-5"></a>:cscope find e   # egrep:  egrep search for the word under cursor
+<a id="__codelineno-18-6" name="__codelineno-18-6" href="#__codelineno-18-6"></a>:cscope find f   # file:   open the filename under cursor
+<a id="__codelineno-18-7" name="__codelineno-18-7" href="#__codelineno-18-7"></a>:cscope find i   # includes: find files that include the filename under cursor
+<a id="__codelineno-18-8" name="__codelineno-18-8" href="#__codelineno-18-8"></a>:cscope find d   # called: find functions that function under cursor calls
+</code></pre></div></p>
+<h5 id="youcompleteme">YouCompleteMe<a class="headerlink" href="#youcompleteme" title="Permanent link">&para;</a></h5>
 <p>very powerful.</p>
 <p>在.vimrc中配置, 配置去网上抄. c语言要装clang先.</p>
 <p>个人配置的备忘: </p>
 <p>选择补选项: 一是用上下方向键, 二是用<code>&lt;C-N&gt;</code>和<code>&lt;C-P&gt;</code>, 实际上原本默认是tab键选择的, 但是被我禁用了现在.</p>
 <p>按了enter选中后是已经补全了, 但还是会剩下一个框. 不用管它继续编程即可.</p>
-<h2 id="linux">linux</h2>
-<h3 id="shell">shell</h3>
+<h3 id="linux">linux<a class="headerlink" href="#linux" title="Permanent link">&para;</a></h3>
+<h4 id="shell">shell<a class="headerlink" href="#shell" title="Permanent link">&para;</a></h4>
 <p>TODO find grep</p>
-<h2 id="tools">tools</h2>
-<h3 id="tmux">tmux</h3>
-<h4 id="_7">会话</h4>
+<h3 id="tools">tools<a class="headerlink" href="#tools" title="Permanent link">&para;</a></h3>
+<h4 id="tmux">tmux<a class="headerlink" href="#tmux" title="Permanent link">&para;</a></h4>
+<h5 id="_8">会话<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h5>
 <p>tmux可以用来打开多个terminal。</p>
 <p>命令行下输入<code>tmux</code>, 打开新会话。</p>
 <p><code>tmux new -s &lt;session-name&gt;</code>可以给新会话取名字。</p>
@@ -497,42 +1461,42 @@ ZZ ---- 保存当前文件更改
 <li>下次使用时，重新连接到会话<code>tmux attach-session -t my_session</code>。
 当然用<code>tmux a</code>可以快速连接上一个会话。</li>
 </ol>
-<p>对tmux来说，最重要的快捷键就是<code>&lt;C-b&gt;</code>, 先输入这个，然后输入指令tmux才会响应。</p>
-<pre><code>Ctrl+b d ---- 分离当前会话。
-Ctrl+b s ---- 列出所有会话。
-Ctrl+b $ ---- 重命名当前会话
-Ctrl+b : ---- 进入命令行模式
-:kill-server 删除所有会话
-:kill-session 删除当前会话
-</code></pre>
-<h4 id="window">window</h4>
+<p>对tmux来说，最重要的快捷键就是<code>&lt;C-b&gt;</code>, 先输入这个，然后输入指令tmux才会响应。
+<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>Ctrl+b d ---- 分离当前会话。
+<a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a>Ctrl+b s ---- 列出所有会话。
+<a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a>Ctrl+b $ ---- 重命名当前会话
+<a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a>Ctrl+b : ---- 进入命令行模式
+<a id="__codelineno-19-5" name="__codelineno-19-5" href="#__codelineno-19-5"></a>:kill-server 删除所有会话
+<a id="__codelineno-19-6" name="__codelineno-19-6" href="#__codelineno-19-6"></a>:kill-session 删除当前会话
+</code></pre></div></p>
+<h5 id="window">window<a class="headerlink" href="#window" title="Permanent link">&para;</a></h5>
 <p>一个会话内，tmux可以包含多个窗口（感觉窗口和会话差不多，不赘述）
-似乎还是窗口更方便切换啊。</p>
-<pre><code>&lt;C-b&gt; c ---- new window
-&lt;C-b&gt; n ---- next window
-&lt;C-b&gt; p ---- last window
-&lt;C-b&gt; %num ---- to %numth window
-&lt;C-b&gt; , ---- rename window
-</code></pre>
-<h4 id="_8">窗格</h4>
-<p>也可以包含多个窗格</p>
-<pre><code>Ctrl+b %：划分左右两个窗格。
-Ctrl+b &quot;：划分上下两个窗格。
-Ctrl+b &lt;arrow key&gt;：光标切换到其他窗格。括号表示方向键。
-Ctrl+b x：删除该窗格
-</code></pre>
-<h2 id="_9">寻求帮助</h2>
+似乎还是窗口更方便切换啊。
+<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>&lt;C-b&gt; c ---- new window
+<a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a>&lt;C-b&gt; n ---- next window
+<a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a>&lt;C-b&gt; p ---- last window
+<a id="__codelineno-20-4" name="__codelineno-20-4" href="#__codelineno-20-4"></a>&lt;C-b&gt; %num ---- to %numth window
+<a id="__codelineno-20-5" name="__codelineno-20-5" href="#__codelineno-20-5"></a>&lt;C-b&gt; , ---- rename window
+</code></pre></div></p>
+<h5 id="_9">窗格<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h5>
+<p>也可以包含多个窗格
+<div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a>Ctrl+b %：划分左右两个窗格。
+<a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a>Ctrl+b &quot;：划分上下两个窗格。
+<a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a>Ctrl+b &lt;arrow key&gt;：光标切换到其他窗格。括号表示方向键。
+<a id="__codelineno-21-4" name="__codelineno-21-4" href="#__codelineno-21-4"></a>Ctrl+b x：删除该窗格
+</code></pre></div></p>
+<h3 id="_10">寻求帮助<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h3>
 <p>Search The Fucking Web(STFW)</p>
 <p>Read The Fucking Manual(RTFM)</p>
 <p>Read The Fucking Source Code(RTFSC)</p>
 <p>拽你妈，会写几个程序了不起啊，一天到晚fucking fucking的.</p>
-<h1 id="pa1">PA1</h1>
+<h2 id="pa1">PA1<a class="headerlink" href="#pa1" title="Permanent link">&para;</a></h2>
 <p>how to run <code>nemu</code>? enter <code>nemu</code> dictionary and <code>make</code> to complile, <code>make run</code> to run, <code>make gdb</code> to use gdb to debug.  </p>
-<h2 id="_10">框架介绍</h2>
+<h3 id="_11">框架介绍<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h3>
 <p>TRM - Turing Machine.</p>
 <p>存储器是个在<code>nemu/src/memory/paddr.c</code>中定义的大数组.</p>
-<pre><code>static uint8_t pmem[CONFIG_MSIZE] PG_ALIGN = {};
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a>static uint8_t pmem[CONFIG_MSIZE] PG_ALIGN = {};
+</code></pre></div>
 <p>上面的代码定义了<code>pmem</code>,对应128M的存储空间</p>
 <p>PC和通用寄存器都在<code>nemu/src/isa/$ISA/include/isa-def.h</code>中的结构体中定义.
 寄存器有关的在全局变量<code>cpu</code>中,
@@ -540,23 +1504,23 @@ Ctrl+b x：删除该窗格
 和<code>cpu.gpr[n]</code>n表示第n个寄存器。</p>
 <p><code>nemu/src/cpu/cpu-exec.c</code>中有和指令执行相关的内容
 <code>cpu_exec(n)</code>表示执行接下来的n条指令。</p>
-<h2 id="_11">怎么开机</h2>
+<h3 id="_12">怎么开机<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h3>
 <p>初始化nemu的代码在<code>monitor.c</code>中定义
-前面都是些必要的准备工作，介绍一下<code>init_isa()</code>函数，在<code>nemu/src/isa/$ISA/init.c</code>中定义</p>
-<pre><code class="language-c">void init_isa() {
-  /* Load built-in image. */
-  memcpy(guest_to_host(RESET_VECTOR), img, sizeof(img));
-
-  /* Initialize this virtual computer system. */
-  restart();
-}
-</code></pre>
+前面都是些必要的准备工作，介绍一下<code>init_isa()</code>函数，在<code>nemu/src/isa/$ISA/init.c</code>中定义
+<div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="kt">void</span><span class="w"> </span><span class="nf">init_isa</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a><span class="w">  </span><span class="cm">/* Load built-in image. */</span>
+<a id="__codelineno-23-3" name="__codelineno-23-3" href="#__codelineno-23-3"></a><span class="w">  </span><span class="n">memcpy</span><span class="p">(</span><span class="n">guest_to_host</span><span class="p">(</span><span class="n">RESET_VECTOR</span><span class="p">),</span><span class="w"> </span><span class="n">img</span><span class="p">,</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="n">img</span><span class="p">));</span>
+<a id="__codelineno-23-4" name="__codelineno-23-4" href="#__codelineno-23-4"></a>
+<a id="__codelineno-23-5" name="__codelineno-23-5" href="#__codelineno-23-5"></a><span class="w">  </span><span class="cm">/* Initialize this virtual computer system. */</span>
+<a id="__codelineno-23-6" name="__codelineno-23-6" href="#__codelineno-23-6"></a><span class="w">  </span><span class="n">restart</span><span class="p">();</span>
+<a id="__codelineno-23-7" name="__codelineno-23-7" href="#__codelineno-23-7"></a><span class="p">}</span>
+</code></pre></div></p>
 <p>第一项工作就是将一个内置的客户程序读入到内存中.直接就用了<code>memcpy</code>这个函数，明快。
 注意：
 <code>RESET_VECTOR</code>是存放代码的固定内存地址。由于本次实验采用<code>RISC-V</code>,内存地址不从零开始，所以要用<code>guest_to_host()</code>函数来转换。
 它将CPU要访问的内存地址转化成数组pmem中的偏移位置。
 <code>init_isa()</code>的第二项任务是初始化寄存器, 这是通过restart()函数来实现的.它设置<code>cpu.pc</code> 的值并将0号寄存器置0.</p>
-<h2 id="_12">题目回答 注意事项</h2>
+<h3 id="_13">题目回答 注意事项<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h3>
 <p><strong>在<code>cmd_c()</code>函数中, 调用<code>cpu_exec()</code>的时候传入了参数-1, 你知道这是什么意思吗?</strong>
 看函数参数。是<code>uint_32t</code>类型的，是无符号整数。-1被看做无符号数，也就是2的32次方-1，就是运行这么多次。</p>
 <p>表达式求值测试这里：</p>
@@ -570,47 +1534,69 @@ c语言默认数字是有符号的，在数字后面加<code>u</code>表示无�
 <p>这里提供思路: 负号的识别看讲义. 负号的计算利用这个特征: 单元运算符只与最近的表达式(只能是括号或者是数字)相结合. 利用这个特点, 我考虑用栈, 若碰到单元运算符, 将之放入栈中. 另外再维护一个栈来记录下与这些单元运算符结合的括号或者数字的位置. 在递归出口时, 若是括号或者数字的情况, 比较该表达式所在位置和先前记录位置, 若相等, 说明栈中的运算符都是属于这个表达式的. 然后将运算符栈清空计算同时位置栈并弹出一个元素. 对了, 注意括号的情况. 有括号时, 将括号也压入栈, 弹出时弹到括号为止. </p>
 <p>表述能力有限, 多包涵. 该思路本身有些麻烦, 不过通过了一些测试. 希望有更简单的思路.</p>
 <p>做完PA1，你应该已经实现了一个简易的调试器。</p>
-              
+
+  <hr>
+<div class="md-source-file">
+  <small>
+    
+      Last update:
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-11-19</span>
+      
+        <br>
+        Created:
+        <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-11-02</span>
+      
+    
+  </small>
+</div>
+
+
+
+
+
+                
+              </article>
             </div>
-          </div><footer>
-    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
-        <a href="../../signal/ch6_ss/" class="btn btn-neutral float-left" title="LTI系统频域特性（ss第6章）"><span class="icon icon-circle-arrow-left"></span> Previous</a>
-    </div>
-
-  <hr/>
-
-  <div role="contentinfo">
-    <!-- Copyright etc -->
-  </div>
-
-  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
-</footer>
+          
           
         </div>
-      </div>
-
-    </section>
-
-  </div>
-
-  <div class="rst-versions" role="note" aria-label="Versions">
-  <span class="rst-current-version" data-toggle="rst-current-version">
-    
-    
-      <span><a href="../../signal/ch6_ss/" style="color: #fcfcfc">&laquo; Previous</a></span>
-    
-    
-  </span>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
 </div>
-    <script>var base_url = '../..';</script>
-    <script src="../../js/theme_extra.js" defer></script>
-    <script src="../../js/theme.js" defer></script>
-      <script src="../../search/main.js" defer></script>
-    <script defer>
-        window.onload = function () {
-            SphinxRtdTheme.Navigation.enable(true);
-        };
-    </script>
-
-</body>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["content.code.copy"], "search": "../../assets/javascripts/workers/search.e5c33ebb.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.ba449ae6.min.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
 </html>

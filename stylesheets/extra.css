@@ -1,0 +1,20 @@
+:root {
+  /* --md-primary-fg-color:        #d1ba84; */
+  --md-primary-fg-color:        #ab9561;
+  --md-accent-fg-color: #cdb785;
+}
+:root > * {
+  --md-code-bg-color: rgb(255, 238, 194);
+}
+body {
+      font-family: "LXGW WenKai", sans-serif;
+      /* Lite version */
+      /* font-family: "LXGW WenKai Lite", sans-serif; */
+      /* TC version */
+      /* font-family: "LXGW WenKai TC", sans-serif; */
+      /* Screen version */
+      /* font-family: "LXGW WenKai Screen", sans-serif; */
+      background-color:antiquewhite;
+    }
+
+

@@ -1,179 +1,510 @@
-<!DOCTYPE html>
-<html class="writer-html5" lang="en" >
-<head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <link rel="shortcut icon" href="../../img/favicon.ico" />
-    <title>单边z变换 - Peter's home</title>
-    <link rel="stylesheet" href="../../css/theme.css" />
-    <link rel="stylesheet" href="../../css/theme_extra.css" />
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
     
-      <script>
-        // Current page data
-        var mkdocs_page_name = "\u5355\u8fb9z\u53d8\u6362";
-        var mkdocs_page_input_path = "signal\\2023-11-04-oneside_z_transform.md";
-        var mkdocs_page_url = null;
-      </script>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+        <meta name="author" content="Peter">
+      
+      
+      
+        <link rel="prev" href="../../website/github-pages/">
+      
+      
+        <link rel="next" href="../ch6_ss/">
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.0.4">
     
-    <script src="../../js/jquery-3.6.0.min.js" defer></script>
-    <!--[if lt IE 9]>
-      <script src="../../js/html5shiv.min.js"></script>
-    <![endif]-->
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
-      <script>hljs.initHighlightingOnLoad();</script> 
-</head>
+    
+      
+        <title>单边z变换 - Peter's home</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.9c788c91.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.2505c338.min.css">
+      
+      
 
-<body class="wy-body-for-nav" role="document">
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.1.0/style.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
 
-  <div class="wy-grid-for-nav">
-    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
-    <div class="wy-side-scroll">
-      <div class="wy-side-nav-search">
-          <a href="../.." class="icon icon-home"> Peter's home
-        </a><div role="search">
-  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
-      <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
-  </form>
-</div>
-      </div>
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#z" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
 
-      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
-                </li>
-              </ul>
-              <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../about/">About</a>
-                </li>
-              </ul>
-              <p class="caption"><span class="caption-text">build a website</span></p>
-              <ul>
-                  <li class="toctree-l1"><a class="reference internal" href="../../website/github-pages/">jekyll</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../../website/mkdocs/">mkdocs</a>
-                  </li>
-              </ul>
-              <p class="caption"><span class="caption-text">信号</span></p>
-              <ul class="current">
-                  <li class="toctree-l1 current"><a class="reference internal current" href="./">单边z变换</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../ch6_ss/">LTI系统频域特性（ss第6章）</a>
-                  </li>
-              </ul>
-              <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../ICS/2023-11-02-PAnote/">ICS</a>
-                </li>
-              </ul>
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Peter&#39;s home" class="md-header__button md-logo" aria-label="Peter's home" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Peter's home
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              单边z变换
+            
+          </span>
+        </div>
       </div>
     </div>
-    </nav>
-
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
-          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../..">Peter's home</a>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
         
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
       </nav>
-      <div class="wy-nav-content">
-        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
-  <ul class="wy-breadcrumbs">
-    <li><a href="../.." class="icon icon-home" alt="Docs"></a> &raquo;</li>
-          <li>信号 &raquo;</li>
-      <li>单边z变换</li>
-    <li class="wy-breadcrumbs-aside">
-    </li>
-  </ul>
-  <hr/>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
-          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
-            <div class="section" itemprop="articleBody">
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
               
-                <p>参考的资料：</p>
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Peter&#39;s home" class="md-nav__button md-logo" aria-label="Peter's home" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    Peter's home
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        Home
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../about/" class="md-nav__link">
+        About
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3" tabindex="0" aria-expanded="false">
+          build a website
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="build a website" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          build a website
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../website/mkdocs/" class="md-nav__link">
+        mkdocs
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../website/github-pages/" class="md-nav__link">
+        jekyll
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_4" type="checkbox" id="__nav_4" checked>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4" tabindex="0" aria-expanded="true">
+          信号
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="信号" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          信号
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        单边z变换
+      </a>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch6_ss/" class="md-nav__link">
+        LTI系统频域特性（ss第6章）
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ICS/2023-11-02-PAnote/" class="md-nav__link">
+        ICS
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="z">单边z变换<a class="headerlink" href="#z" title="Permanent link">&para;</a></h1>
+<p>参考的资料：</p>
 <p><a href="https://math.stackexchange.com/questions/1719754/unilateral-laplace-transform-vs-bilateral-fourier-transform">https://math.stackexchange.com/questions/1719754/unilateral-laplace-transform-vs-bilateral-fourier-transform</a></p>
 <p><a href="http://episte.math.ntu.edu.tw/articles/mm/mm_02_4_10/index.html">http://episte.math.ntu.edu.tw/articles/mm/mm_02_4_10/index.html</a></p>
 <p><a href="https://mathworld.wolfram.com/BilateralZ-Transform.html">https://mathworld.wolfram.com/BilateralZ-Transform.html</a></p>
 <p>什么时候采用单边z变换，又是什么时候使用双边z变换呢？</p>
 <p>我们在教科书上，常常用微分或者差分方程来描述一个连续或者离散的时间系统。由于公式套用的太快了，有时候就会忘记了这一点：要求解一个差分方程除了方程本身，也是需要初值条件的。</p>
-<p>差分方程在什么时候能够来描述一个LTI离散时间系统呢？答案是弛豫条件（IAR，initial at rest）。什么是弛豫条件？就是：若$n\leq n_0$时$x[n]=0$，则$y[n]=0$. 有这个条件的话，这个由差分方程描述的系统不仅是线性时不变的，而且也是因果的。</p>
-<p>上面说的条件非常重要，以奥本海姆的信号与系统为例，整本书关于系统的讨论都是基于这个条件的。有了这个条件，才能保证系统是LTI系统，那么才有这个性质：
-$$
+<p>差分方程在什么时候能够来描述一个LTI离散时间系统呢？答案是弛豫条件（IAR，initial at rest）。什么是弛豫条件？就是：若<span class="arithmatex">\(n\leq n_0\)</span>时<span class="arithmatex">\(x[n]=0\)</span>，则<span class="arithmatex">\(y[n]=0\)</span>. 有这个条件的话，这个由差分方程描述的系统不仅是线性时不变的，而且也是因果的。</p>
+<p>上面说的条件非常重要，以奥本海姆的信号与系统为例，整本书关于系统的讨论都是基于这个条件的。有了这个条件，才能保证系统是LTI系统，那么才有这个性质：</p>
+<div class="arithmatex">\[
 H(z)X(z) \Leftrightarrow h[n] \ast x[n]
-$$
- $H(z)$是由差分方程得到的传递函数.</p>
+\]</div>
+<p><span class="arithmatex">\(H(z)\)</span>是由差分方程得到的传递函数.</p>
 <p>我们用上面的式子来计算离散系统的输出。</p>
 <p>如果不满足这个条件的话，系统都不一定是线性的, 就更加不能用上面的性质了.</p>
-<p>很多教科书都会举一个这个例子:
-$$
+<p>很多教科书都会举一个这个例子:</p>
+<div class="arithmatex">\[
 y[n]-ay[n-1]=x[n]
-$$
-若告诉你输入为$x[n]=Au[n]$和初值$y[-1]=1$ 求解差分方程</p>
-<p>$x[-1]=0$ 而 $y[-1]=1$ 根据线性系统的尺度性质这是不可能的, 所以这是一个非线性系统.</p>
-<p>如果我们用双边z变换, 我们当然可以得到$Y(z)=H(z)X(z)$,  然后做一个z逆变换, 得到$y[n]$, 实际上这个$y[n]=x[n]\ast z[n]$. 但是对于非线性系统来说, 它的输出肯定是不满足卷积的, 即$y[n] \neq x[n] * h[n]$. 这就是双边z变换局限的地方了, 它必须建立在LTI系统的前提之上才能得到正确的结果, 而且技术上来说它也只能得到这样一种结果, 即系统弛豫状态下的输出. 因为它的time-shift性质无法考虑初值: $x[n-1] \Leftrightarrow z^{-1}X(z)$.</p>
-<p>而单边z变换在技术上是可以解决这种初值不为0的差分方程的, 因为看它的time-shift性质: $x[n-1]\Leftrightarrow z^{-1}X(z)+x[-1]$. 考虑到了初值. 上面的方程看奥本哈姆&lt;离散时间信号处理&gt;e3.23, 我就不继续解下去了.</p>
+\]</div>
+<p>若告诉你输入为<span class="arithmatex">\(x[n]=Au[n]\)</span>和初值<span class="arithmatex">\(y[-1]=1\)</span> 求解差分方程</p>
+<p><span class="arithmatex">\(x[-1]=0\)</span> 而 <span class="arithmatex">\(y[-1]=1\)</span> 根据线性系统的尺度性质这是不可能的, 所以这是一个非线性系统.</p>
+<p>如果我们用双边z变换, 我们当然可以得到<span class="arithmatex">\(Y(z)=H(z)X(z)\)</span>,  然后做一个z逆变换, 得到<span class="arithmatex">\(y[n]\)</span>, 实际上这个<span class="arithmatex">\(y[n]=x[n]\ast z[n]\)</span>. 但是对于非线性系统来说, 它的输出肯定是不满足卷积的, 即<span class="arithmatex">\(y[n] \neq x[n] * h[n]\)</span>. 这就是双边z变换局限的地方了, 它必须建立在LTI系统的前提之上才能得到正确的结果, 而且技术上来说它也只能得到这样一种结果, 即系统弛豫状态下的输出. 因为它的time-shift性质无法考虑初值: <span class="arithmatex">\(x[n-1] \Leftrightarrow z^{-1}X(z)\)</span>.</p>
+<p>而单边z变换在技术上是可以解决这种初值不为0的差分方程的, 因为看它的time-shift性质: <span class="arithmatex">\(x[n-1]\Leftrightarrow z^{-1}X(z)+x[-1]\)</span>. 考虑到了初值. 上面的方程看奥本哈姆&lt;离散时间信号处理&gt;e3.23, 我就不继续解下去了.</p>
 <p><strong>总结来说</strong>, 就是双边的变换(不管是z变换/laplace变换/fourier变换)都必须基于一个假设, 也就是初始弛豫条件(IAR), 输入为0输出必为0. 然而单边的变换却可以用来分析非线性系统(比如设了初值的差分方程), 这使得它的用途更为广泛. 另外, 使用单边z变换求解差分方程本质上似乎是和生成函数求解是一致的. 这一点可以以后再看看.</p>
 <p>差分方程描绘的传递函数是(零状态响应/零初值条件响应) , 初值描绘的是(零输入响应).</p>
-<p>在初始弛豫条件下, 单边变换和双边变换对系统的分析基本上是完全一致的. 对于一个因果($x[n]=0, n&lt;0$)的信号单边变换和双边变换是一致的. 若一个信号非因果, 那么使用双边变换即可. 由于实际信号一般都是因果信号, 所以单边变换又赢.</p>
+<p>在初始弛豫条件下, 单边变换和双边变换对系统的分析基本上是完全一致的. 对于一个因果(<span class="arithmatex">\(x[n]=0, n&lt;0\)</span>)的信号单边变换和双边变换是一致的. 若一个信号非因果, 那么使用双边变换即可. 由于实际信号一般都是因果信号, 所以单边变换又赢.</p>
 <p>如果你在日常做信号题目,只要题目未给初值, 一般就默认有初始弛豫这个条件. 即没有输入就没有输出.</p>
 <p>matlab的filter函数也可以添加初值:</p>
-<p>对于下面这个方程:
-$$
+<p>对于下面这个方程:</p>
+<div class="arithmatex">\[
 y[n]+1.5y[n-1]+0.5y[n-2]=x[n]-x[n-1], y[-1]=2, y[-2]=1
-$$</p>
-<pre><code class="language-matlab">num = [1 -1 0];
-den = [1 1.5 .5];
-n = 0:20;
-x = ones(1,length(n));
-%zi = [-a1*y[-1] - a2*y[-2], -a2*y[-1]]
-zi = [-1.5*2-0.5*1,-0.5∗2]; %zi就是y[n]初值向量
-y = filter(num,den,x,zi);
-</code></pre>
+\]</div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="n">num</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="p">];</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="n">den</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="w"> </span><span class="mf">1.5</span><span class="w"> </span><span class="mf">.5</span><span class="p">];</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="n">n</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">0</span><span class="p">:</span><span class="mi">20</span><span class="p">;</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="n">x</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">ones</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="nb">length</span><span class="p">(</span><span class="n">n</span><span class="p">));</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="c">%zi = [-a1*y[-1] - a2*y[-2], -a2*y[-1]]</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="n">zi</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="o">-</span><span class="mf">1.5</span><span class="o">*</span><span class="mi">2</span><span class="o">-</span><span class="mf">0.5</span><span class="o">*</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mf">0.5</span>∗<span class="mi">2</span><span class="p">];</span><span class="w"> </span><span class="c">%zi就是y[n]初值向量</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="n">y</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">filter</span><span class="p">(</span><span class="n">num</span><span class="p">,</span><span class="n">den</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">zi</span><span class="p">);</span>
+</code></pre></div>
 <p>网上资料比较少, 有很多都是自己的整理和思考, 可能会有错误, 麻烦指正. 905609587@qq.com</p>
-              
+
+  <hr>
+<div class="md-source-file">
+  <small>
+    
+      Last update:
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-11-19</span>
+      
+        <br>
+        Created:
+        <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-11-04</span>
+      
+    
+  </small>
+</div>
+
+
+
+
+
+                
+              </article>
             </div>
-          </div><footer>
-    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
-        <a href="../../website/mkdocs/" class="btn btn-neutral float-left" title="mkdocs"><span class="icon icon-circle-arrow-left"></span> Previous</a>
-        <a href="../ch6_ss/" class="btn btn-neutral float-right" title="LTI系统频域特性（ss第6章）">Next <span class="icon icon-circle-arrow-right"></span></a>
-    </div>
-
-  <hr/>
-
-  <div role="contentinfo">
-    <!-- Copyright etc -->
-  </div>
-
-  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
-</footer>
+          
           
         </div>
-      </div>
-
-    </section>
-
-  </div>
-
-  <div class="rst-versions" role="note" aria-label="Versions">
-  <span class="rst-current-version" data-toggle="rst-current-version">
-    
-    
-      <span><a href="../../website/mkdocs/" style="color: #fcfcfc">&laquo; Previous</a></span>
-    
-    
-      <span><a href="../ch6_ss/" style="color: #fcfcfc">Next &raquo;</a></span>
-    
-  </span>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
 </div>
-    <script>var base_url = '../..';</script>
-    <script src="../../js/theme_extra.js" defer></script>
-    <script src="../../js/theme.js" defer></script>
-      <script src="../../search/main.js" defer></script>
-    <script defer>
-        window.onload = function () {
-            SphinxRtdTheme.Navigation.enable(true);
-        };
-    </script>
-
-</body>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["content.code.copy"], "search": "../../assets/javascripts/workers/search.e5c33ebb.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.ba449ae6.min.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
 </html>
