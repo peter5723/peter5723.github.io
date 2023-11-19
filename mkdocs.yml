@@ -1,0 +1,15 @@
+site_name: Peter's home
+site_url: https://peter5723.github.io/
+# nav快速添加导航栏
+nav:
+  - Home: index.md
+  - teach: github-pages.md
+  - About: about.md
+  - "信号": 
+    - "单边z变换": "signal/2023-11-04-oneside_z_transform.md"
+    - "LTI系统频域特性（ss第6章）": "signal/ch6_ss.md"
+  - ICS: "ICS/2023-11-02-PAnote.md"
+theme: readthedocs
+
+plugins:
+    - search
