@@ -1,5 +1,5 @@
 site_name: Peter's home
-site_url: https://peter5723.github.io/
+# site_url: https://peter5723.github.io/
 # nav快速添加导航栏
 nav:
   - Home: index.md
