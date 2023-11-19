@@ -23,6 +23,9 @@ theme:
     repo: fontawesome/solid/trash
   features:
     - content.code.copy
+  font:
+    code:
+      - Inconsolata
 
 
 markdown_extensions:
