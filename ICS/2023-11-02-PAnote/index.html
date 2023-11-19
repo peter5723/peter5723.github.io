@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://peter5723.github.io/ICS/2023-11-02-PAnote/" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>ICS - Peter's home</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "ICS";
+        var mkdocs_page_input_path = "ICS\\2023-11-02-PAnote.md";
+        var mkdocs_page_url = "/ICS/2023-11-02-PAnote/";
+      </script>
+    
+    <script src="../../js/jquery-3.6.0.min.js" defer></script>
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+      <script>hljs.initHighlightingOnLoad();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> Peter's home
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../github-pages/">teach</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../about/">About</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">信号</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../signal/2023-11-04-oneside_z_transform/">单边z变换</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../signal/ch6_ss/">LTI系统频域特性（ss第6章）</a>
+                  </li>
+              </ul>
+              <ul class="current">
+                <li class="toctree-l1 current"><a class="reference internal current" href="./">ICS</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#c">C语言</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#macro">macro</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#_1">作用域和链接</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#_2">作用域</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#_3">链接</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#_4">存储时期</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#_5">字符串处理函数：</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#clash">clash</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#gcc">gcc</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#gdb">gdb</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#starting">Starting:</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#running-and-stopping">Running and Stopping:</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#breakpoint">Breakpoint:</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#execution">Execution:</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#examining-code">Examining code:</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#display">Display</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#layout">Layout:</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#else">Else:</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#makefile">Makefile</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#vim">vim</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#_6">杂项</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#vim_1">vim多文件编辑</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#vim-itself">vim itself</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#nerdtree">nerdtree</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#plugin-introduction">Plugin introduction</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#vundle">vundle</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#ctags">ctags</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#cscope">cscope</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#youcompleteme">YouCompleteMe</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#linux">linux</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#shell">shell</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#tools">tools</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#tmux">tmux</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#_7">会话</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#window">window</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#_8">窗格</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#_9">寻求帮助</a>
+    </li>
+    </ul>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">Peter's home</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" alt="Docs"></a> &raquo;</li>
+      <li>ICS</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <p>本文是Peter的NJU PA的实验手册。只记录一些<strong>东西</strong>，不提供源代码。</p>
+<p><a href="https://nju-projectn.github.io/ics-pa-gitbook/ics2023/index.html">课程网址</a></p>
+<p>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</p>
+<h1 id="pa0-tools">PA0 (tools)</h1>
+<p>If you have problems in conflicting debs, just use the original source rather than tsinghua or ustc. It wastes a lot of time.</p>
+<p>包冲突的解决：直接用ubuntu提供的源即可，不用阿里云或者清华云了。可以保证下载速度的，也不会有冲突。</p>
+<p>终于可以输入中文了。好骚的sogou输入法.</p>
+<p>先安装一些必要的工具：</p>
+<pre><code>apt-get install build-essential    # build-essential packages, include binary utilities, gcc, make, and so on
+apt-get install man                # on-line reference manual
+apt-get install gcc-doc            # on-line reference manual for gcc
+apt-get install gdb                # GNU debugger
+apt-get install git                # revision control system
+apt-get install libreadline-dev    # a library used later
+apt-get install libsdl2-dev        # a library used later
+apt-get install llvm llvm-dev      # llvm project, which contains libraries used later
+apt-get install vim                # vim
+apt-get install vim-gtk            # vim-more
+</code></pre>
+<h2 id="c">C语言</h2>
+<p>沧海遗珠的细节</p>
+<h3 id="macro">macro</h3>
+<p>一是讨论一下<code>#include</code>的路径.</p>
+<p>若是用<code>&lt;&gt;</code>那么就是在标准目录中寻找文件</p>
+<p>若是用<code>""</code>, 就是在当前目录(c文件所在的位置)寻找文件. 写法和linux中目录的写法一致, 比如在上级文件夹下的另一个文件夹, 可以写成<code>#include "../another/hello.h"</code></p>
+<p>一般要把函数声明放在头文件中, 这样可以需要这个函数的c文件引用这个头文件就可以使用该函数了.</p>
+<p>头文件的内容一般包含: 明显常量, 宏, 函数声明, 结构模板定义和类型定义. </p>
+<p>在去年上数据结构课的时候, 碰到过这样的问题, 有多个文件引用<code>list.h</code>,  导致<code>list.h</code>中的结构类型<code>node</code>被重定义的问题. </p>
+<p><strong>c语言中,声明可以重复很多次, 但是定义只能有一次</strong></p>
+<pre><code class="language-c">int a();
+int a();
+int a();
+//这样不会报错
+</code></pre>
+<p>怎么解决这个问题呢, 就是用条件编译指令了:</p>
+<pre><code class="language-c">#ifndef LIST
+#define LIST
+struct Node;
+typedef struct Node *PtrToNode;
+typedef PtrToNode List;
+typedef PtrToNode Position;
+List MakeEmpty(List L);
+int IsListEmpty(List L);
+int IsLast(Position P,List L);
+void Insert(char X[], List L);
+Position Find(char X[],List L);
+struct Node{
+    char* Element;
+    Position Next;
+};
+#endif
+</code></pre>
+<p>如上所示<code>ifndef</code>指令保证结构类型只被定义一次. <code>ifndef</code>指令常常用于防止多次包含同一文件, 保证这个文件只被包含一次.</p>
+<h3 id="_1">作用域和链接</h3>
+<h4 id="_2">作用域</h4>
+<p>一个C变量的作用域可以是代码块作用域/函数原型作用域/文件作用域.</p>
+<p>对于一个全局变量来说, 它具有文件作用域, 整个文件都可以使用它</p>
+<h4 id="_3">链接</h4>
+<p>c变量可以有外部链接/内部链接/空链接</p>
+<p>对于一个局部变量来说, 它是只有空链接, 由代码块或者函数原型私有, 只有文件作用域的变量才讨论内部还是外部链接.</p>
+<pre><code class="language-c">int giant = 5;
+static int dog = 3;
+int main(){
+    ...
+}
+//main.c
+</code></pre>
+<p><code>giant</code>就具有外部链接, 其他文件都可以使用<code>giant</code>, 只要加上<code>extern</code>关键字:</p>
+<pre><code class="language-c">extern int giant;
+...
+//foo.c
+</code></pre>
+<p>但是<code>dog</code>有<code>static</code>标识, 那么他就是<code>main.c</code>所私有的, 其他文件无法访问. 这里<code>static</code>声明是说该全局变量具有内部链接.</p>
+<h4 id="_4">存储时期</h4>
+<p><code>static</code>还有一个地方会碰到, 就是声明一个变量是静态存储时期. 一般的变量都是自动存储时期, 作用域结束就释放. 而静态存储时期的变量, 在整个程序执行期间一直存在. 很显然, 不管加不加<code>static</code>, 全局变量都一定是静态变量. 自动变量不初始化, 静态变量缺省地初始化为0.</p>
+<h3 id="_5">字符串处理函数：</h3>
+<p><strong>strtok</strong></p>
+<p>用于字符串切割</p>
+<p><code>char *strtok(char *str, const char *delim)</code></p>
+<ul>
+<li><strong>str</strong> -- 要被分解成一组小字符串的字符串。</li>
+<li><strong>delim</strong> -- 包含分隔符的 C 字符串。</li>
+</ul>
+<p>该函数返回被分解的第一个子字符串，如果没有可检索的字符串，则返回一个空指针。</p>
+<pre><code class="language-c">#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+int main() {
+    char str[90] = &quot;I    love you   So     much&quot;;
+    char* token;
+    token = strtok(str, &quot; &quot;);
+
+    char* a;
+    a = strtok(NULL, &quot; &quot;);
+    char* b; 
+    b = strtok(str+strlen(token)+1, &quot; &quot;);
+    printf(&quot;%s\n&quot;, token);
+    printf(&quot;%s\n&quot;,a);
+    printf(&quot;%s\n&quot;,b);
+    return 0;
+}
+</code></pre>
+<p>会输出如下结果</p>
+<pre><code>I
+love
+love
+</code></pre>
+<p>注意:</p>
+<ol>
+<li>
+<p><code>strtok</code>是会改变原字符串的, 在<code>str</code>的第一个被分隔的位置将<code>delim</code>中对应的字符替换成<code>\0</code></p>
+</li>
+<li>
+<p>如果要继续分割当前字符串, <code>a = strtok(NULL, " ");</code>即可, </p>
+</li>
+</ol>
+<p>和<code>b = strtok(str+strlen(token)+1, " ");</code>的效果是一样的, <code>strlen(token)</code>是前面被分割的总长度.</p>
+<ol>
+<li>没有了, 就这样.</li>
+</ol>
+<p><strong>strncpy</strong></p>
+<p><code>char *strncpy(char *dest, char *src, size_t n)</code></p>
+<p>将<code>src</code>赋值到<code>dest</code>, 返回<code>dest</code>的首地址, 最多复制n个字符</p>
+<p><strong>sprintf</strong></p>
+<p><code>int sprintf(char* dest, char *format_string, ...)</code></p>
+<p>将格式化字符串输出到<code>dest</code>中</p>
+<p><strong>sscanf</strong></p>
+<p><code>int sscanf(const char *src, const char *format, ...)</code></p>
+<p>和<code>scanf</code>基本一样, 只是<code>sscanf</code>是从<code>src</code>中读取数据. </p>
+<h2 id="clash">clash</h2>
+<p>首先照readme将url改成订阅地址</p>
+<p>后面 按提示即可</p>
+<p><code>sudo bash start.sh</code></p>
+<p><code>source /etc/profile.d/clash.sh</code></p>
+<p><code>proxy_on</code> 打开代理</p>
+<p><code>proxy_off</code>关闭代理</p>
+<p><code>sudo bash shutdown.sh</code>关闭程序</p>
+<p>这样弄好以后，再打开系统的代理:</p>
+<p>ubuntu桌面版，右上角点击设置，网络，网络代理，手动，然后把http://127.0.0.1和7890</p>
+<p>Then you can google and github freely.</p>
+<h2 id="gcc">gcc</h2>
+<p><code>-g</code>  增加调试指令</p>
+<h2 id="gdb">gdb</h2>
+<h3 id="starting">Starting:</h3>
+<pre><code>
+  gdb
+
+  gdb &lt;file&gt; ----   open gdb with the file
+
+</code></pre>
+<h3 id="running-and-stopping">Running and Stopping:</h3>
+<pre><code>  quit   ----  exit gdb
+  **please run the program before debug...** 
+  run    ----  run the program(&lt;file&gt;)   
+  run 1 2 3  ---- run program with command-line arguments 1 2 3
+  kill  ---- stop the program
+</code></pre>
+<h3 id="breakpoint">Breakpoint:</h3>
+<pre><code>  info break ---- list all breaks 
+  (b)
+  break &lt;func&gt; ---- Set breakpoint at the entry to &lt;func&gt;
+  break  \*0x80483c3 ----Set breakpoint at address 0x80483c3
+  break  9  ---- Set breakpoint at line 9
+  break main.c:9 if q==0 ---- conditional breakpoint
+  delete     ----     delete all breakpoints
+  delete 1   ----     delete the breakpoint 1
+  disable 1   ----    disable the breakpoint 1
+  enable 1    ----    enable the breakpoint 1
+  clear &lt;func&gt; ----   Clear any points at the entry to &lt;func&gt;
+
+  (w)
+  watch \*地址    # 当地址所指内容发送变化时断点
+  watch var    #当var值变化时，断点
+  watch (condition)    #当条件符合时，断点
+</code></pre>
+<h3 id="execution">Execution:</h3>
+<pre><code>  stepi ---- Execute 1 instruction (assemble instruction)
+  stepi 4 ---Execute 4 instruction (assemble instruction)
+  nexti ---- Execute 1 instruction, but it doesn't enter the  function and just execute it
+  step ---- Execute one C statement
+  next ---- Execute one C Statement but doesn't enter the function.
+  c(continue) -- -- execute to the next breakpoint
+  until 3 ---- continue exec until the breakpoint 3
+  finish ----   Resume execution until the current function return. 
+  call &lt;func&gt; ---- call the func and print the return Value
+</code></pre>
+<h3 id="examining-code">Examining code:</h3>
+<pre><code>  (p)
+  print /d $rax ----  Print contents of %rax in decimal
+  print /x $rax ----  Print contents of %rax in hex
+  print /t $rax ----  Print contents of %rax in binary
+  print /d (int)$rax ---- Print contents of %rax in decimal but it has signs.
+
+  Examine:
+  x/[num][size][format] address
+  num = number of objects todisplay
+  size = size of each project (b=byte h=half-word, w=word, g=quad-word) 
+  (1 word = 4 Byte)
+  FORMAT = how to display each object (d=decimal, x=hex, o=octal, etc.)
+  for example:
+   x/w  $rax
+   x/2wd 0xbffff890
+   x/200bc $rdi
+   x/s   $rsp (a string)
+</code></pre>
+<h3 id="display">Display</h3>
+<p>Compared with <code>examine</code>, If we use display, the value will be printed each time the code is stopped, which is very convenient.</p>
+<pre><code>  info display ---- get all the info of variables
+  display {var1 var2 var3} ---- print var1 var2 var3 each time.
+  display /i $pc ---- print where is pc at as asm.
+  delete display (%num) ---- delete all or %numth variable
+  disable/enable display (%num) ---- disable/enable %numth variable.
+</code></pre>
+<h3 id="layout">Layout:</h3>
+<p><strong>use <code>layout</code> to display what you want, like source code .</strong> </p>
+<pre><code>  layout regs
+  layout split ---- asm and src
+  layout asm
+  layout src
+  layout prev
+  layout next
+  focus name
+  (name = cmd|src|asm|regs|next|prev)
+  refresh
+  update
+  &lt;C-l&gt; refresh
+  &lt;C-x&gt; 1/2 ---- 1/2 window
+  &lt;c-x&gt; a  ---- abort window
+</code></pre>
+<h3 id="else">Else:</h3>
+<pre><code>  where  ----   Print the current address and stack backtrace
+  list ---- see which line the code has examined and its contexts.
+</code></pre>
+<h2 id="makefile">Makefile</h2>
+<h2 id="vim">vim</h2>
+<h4 id="_6">杂项</h4>
+<p>用vim之前先在<code>.vimrc</code>中配置。</p>
+<p>与系统剪贴板复制粘贴使用<code>+y</code> and <code>+p</code>.</p>
+<p><code>&lt;C-G&gt;</code> 显示文件信息</p>
+<p><code>q:</code> 显示历史命令 用<code>&lt;C-G&gt;</code>关闭(实际上和宏有关，有机会展开)</p>
+<p><code>%</code> 是找匹配的括号，在复制函数时很有用。</p>
+<p>`` 偶然发现可以用这个方便的跳转</p>
+<p><code>.</code> 重复上一条指令</p>
+<h3 id="vim_1">vim多文件编辑</h3>
+<p>怎么使用vim像vscode那样同时编辑多个文件呢？</p>
+<pre><code>$vim txt1 txt2 ---- 打开txt1和txt2
+$vim -o txt1 txt2 ---- 打开txt1和txt2在同一个水平窗口里面
+$vim -O txt1 txt2 ---- 打开txt1和txt2在同一个垂直窗口里面
+&lt;C-w&gt; + w/hjkl ----- 切换窗口
+</code></pre>
+<h4 id="vim-itself">vim itself</h4>
+<p>在编辑器内</p>
+<pre><code>:sp 将窗口水平分割成两个
+:vsp 将窗口垂直分割成两个
+:n下一个文件 :N上一个文件
+:buffers ---- 显示当前所有正在编辑的文件
+:buffer %n ---- 切换到第n个文件
+:e txt3 ---- 打开txt3
+ZZ ---- 保存当前文件更改
+:wq ---- 保存所有文件更改
+</code></pre>
+<h4 id="nerdtree">nerdtree</h4>
+<p>实际上，使用<code>nerdtree</code>插件更为好用</p>
+<p>我用<code>F2</code>打开这个插件</p>
+<p>打开以后，仍然可以用<code>&lt;C-w&gt; + w/hjkl</code> 在代码窗口和tree窗口切换</p>
+<p><code>o</code>在当前窗口打开文件、文件夹</p>
+<p><code>t</code>在新tab里打开文件、文件夹（文件夹就是新树了）</p>
+<p><code>gt/gT</code>在tab之间切换</p>
+<p><code>s</code>垂直打开标签页</p>
+<p>（当然，也可以用鼠标点。）</p>
+<h3 id="plugin-introduction">Plugin introduction</h3>
+<h4 id="vundle">vundle</h4>
+<p><code>vim +PluginInstall +qall</code></p>
+<p>安装新的包。</p>
+<h4 id="ctags">ctags</h4>
+<pre><code>&lt;C-]&gt; 跳转到定义处
+&lt;C-t&gt; 返回
+</code></pre>
+<h4 id="cscope">cscope</h4>
+<p>我已经配置过：
+<code>&lt;C-\&gt; + %ch</code>  等价于:<code>cscope find %ch &lt;name at cursor&gt;</code></p>
+<p>于是</p>
+<pre><code>:cscope find s   # symbol: find all references to the token under cursor
+:cscope find g   # global: find global definition(s) of the token under cursor
+:cscope find c   # calls:  find all calls to the function name under cursor
+:cscope find t   # text:   find all instances of the text under cursor
+:cscope find e   # egrep:  egrep search for the word under cursor
+:cscope find f   # file:   open the filename under cursor
+:cscope find i   # includes: find files that include the filename under cursor
+:cscope find d   # called: find functions that function under cursor calls
+</code></pre>
+<h4 id="youcompleteme">YouCompleteMe</h4>
+<p>very powerful.</p>
+<p>在.vimrc中配置, 配置去网上抄. c语言要装clang先.</p>
+<p>个人配置的备忘: </p>
+<p>选择补选项: 一是用上下方向键, 二是用<code>&lt;C-N&gt;</code>和<code>&lt;C-P&gt;</code>, 实际上原本默认是tab键选择的, 但是被我禁用了现在.</p>
+<p>按了enter选中后是已经补全了, 但还是会剩下一个框. 不用管它继续编程即可.</p>
+<h2 id="linux">linux</h2>
+<h3 id="shell">shell</h3>
+<p>TODO find grep</p>
+<h2 id="tools">tools</h2>
+<h3 id="tmux">tmux</h3>
+<h4 id="_7">会话</h4>
+<p>tmux可以用来打开多个terminal。</p>
+<p>命令行下输入<code>tmux</code>, 打开新会话。</p>
+<p><code>tmux new -s &lt;session-name&gt;</code>可以给新会话取名字。</p>
+<p><code>tmux info</code> 会话信息</p>
+<p>基本操作流程：</p>
+<ol>
+<li>新建会话<code>tmux new -s my_session</code>。</li>
+<li>在 Tmux 窗口运行所需的程序。</li>
+<li>按下快捷键Ctrl+b d将会话分离。</li>
+<li>下次使用时，重新连接到会话<code>tmux attach-session -t my_session</code>。
+当然用<code>tmux a</code>可以快速连接上一个会话。</li>
+</ol>
+<p>对tmux来说，最重要的快捷键就是<code>&lt;C-b&gt;</code>, 先输入这个，然后输入指令tmux才会响应。</p>
+<pre><code>Ctrl+b d ---- 分离当前会话。
+Ctrl+b s ---- 列出所有会话。
+Ctrl+b $ ---- 重命名当前会话
+Ctrl+b : ---- 进入命令行模式
+:kill-server 删除所有会话
+:kill-session 删除当前会话
+</code></pre>
+<h4 id="window">window</h4>
+<p>一个会话内，tmux可以包含多个窗口（感觉窗口和会话差不多，不赘述）
+似乎还是窗口更方便切换啊。</p>
+<pre><code>&lt;C-b&gt; c ---- new window
+&lt;C-b&gt; n ---- next window
+&lt;C-b&gt; p ---- last window
+&lt;C-b&gt; %num ---- to %numth window
+&lt;C-b&gt; , ---- rename window
+</code></pre>
+<h4 id="_8">窗格</h4>
+<p>也可以包含多个窗格</p>
+<pre><code>Ctrl+b %：划分左右两个窗格。
+Ctrl+b &quot;：划分上下两个窗格。
+Ctrl+b &lt;arrow key&gt;：光标切换到其他窗格。括号表示方向键。
+Ctrl+b x：删除该窗格
+</code></pre>
+<h2 id="_9">寻求帮助</h2>
+<p>Search The Fucking Web(STFW)</p>
+<p>Read The Fucking Manual(RTFM)</p>
+<p>Read The Fucking Source Code(RTFSC)</p>
+<p>拽你妈，会写几个程序了不起啊，一天到晚fucking fucking的.</p>
+<h1 id="pa1">PA1</h1>
+<p>how to run <code>nemu</code>? enter <code>nemu</code> dictionary and <code>make</code> to complile, <code>make run</code> to run, <code>make gdb</code> to use gdb to debug.  </p>
+<h2 id="_10">框架介绍</h2>
+<p>TRM - Turing Machine.</p>
+<p>存储器是个在<code>nemu/src/memory/paddr.c</code>中定义的大数组.</p>
+<pre><code>static uint8_t pmem[CONFIG_MSIZE] PG_ALIGN = {};
+</code></pre>
+<p>上面的代码定义了<code>pmem</code>,对应128M的存储空间</p>
+<p>PC和通用寄存器都在<code>nemu/src/isa/$ISA/include/isa-def.h</code>中的结构体中定义.
+寄存器有关的在全局变量<code>cpu</code>中,
+包括<code>cpu.pc</code>程序计数器
+和<code>cpu.gpr[n]</code>n表示第n个寄存器。</p>
+<p><code>nemu/src/cpu/cpu-exec.c</code>中有和指令执行相关的内容
+<code>cpu_exec(n)</code>表示执行接下来的n条指令。</p>
+<h2 id="_11">怎么开机</h2>
+<p>初始化nemu的代码在<code>monitor.c</code>中定义
+前面都是些必要的准备工作，介绍一下<code>init_isa()</code>函数，在<code>nemu/src/isa/$ISA/init.c</code>中定义</p>
+<pre><code class="language-c">void init_isa() {
+  /* Load built-in image. */
+  memcpy(guest_to_host(RESET_VECTOR), img, sizeof(img));
+
+  /* Initialize this virtual computer system. */
+  restart();
+}
+</code></pre>
+<p>第一项工作就是将一个内置的客户程序读入到内存中.直接就用了<code>memcpy</code>这个函数，明快。
+注意：
+<code>RESET_VECTOR</code>是存放代码的固定内存地址。由于本次实验采用<code>RISC-V</code>,内存地址不从零开始，所以要用<code>guest_to_host()</code>函数来转换。
+它将CPU要访问的内存地址转化成数组pmem中的偏移位置。
+<code>init_isa()</code>的第二项任务是初始化寄存器, 这是通过restart()函数来实现的.它设置<code>cpu.pc</code> 的值并将0号寄存器置0.</p>
+<h2 id="_12">题目回答 注意事项</h2>
+<p><strong>在<code>cmd_c()</code>函数中, 调用<code>cpu_exec()</code>的时候传入了参数-1, 你知道这是什么意思吗?</strong>
+看函数参数。是<code>uint_32t</code>类型的，是无符号整数。-1被看做无符号数，也就是2的32次方-1，就是运行这么多次。</p>
+<p>表达式求值测试这里：</p>
+<p><strong>如何过滤除以零的表达式?</strong>
+gcc 在编译的时候就会对除以0的表达式发生警报。在编译选项中加入<code>-Werror</code>将警告视作错误即可过滤。</p>
+<p><strong>如何获得无符号数的运算结果?</strong>
+c语言默认数字是有符号的，在数字后面加<code>u</code>表示无符号数，如<code>12333u</code>。</p>
+<p><strong>我加入了逻辑运算通不过测试可能是什么原因？</strong>
+注意C语言中， "||" 和 "&amp;&amp;" 是短路操作。你实现了吗？</p>
+<p><strong>负号怎么实现?</strong></p>
+<p>这里提供思路: 负号的识别看讲义. 负号的计算利用这个特征: 单元运算符只与最近的表达式(只能是括号或者是数字)相结合. 利用这个特点, 我考虑用栈, 若碰到单元运算符, 将之放入栈中. 另外再维护一个栈来记录下与这些单元运算符结合的括号或者数字的位置. 在递归出口时, 若是括号或者数字的情况, 比较该表达式所在位置和先前记录位置, 若相等, 说明栈中的运算符都是属于这个表达式的. 然后将运算符栈清空计算同时位置栈并弹出一个元素. 对了, 注意括号的情况. 有括号时, 将括号也压入栈, 弹出时弹到括号为止. </p>
+<p>表述能力有限, 多包涵. 该思路本身有些麻烦, 不过通过了一些测试. 希望有更简单的思路.</p>
+<p>做完PA1，你应该已经实现了一个简易的调试器。</p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../../signal/ch6_ss/" class="btn btn-neutral float-left" title="LTI系统频域特性（ss第6章）"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../../signal/ch6_ss/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+  </span>
+</div>
+    <script>var base_url = '../..';</script>
+    <script src="../../js/theme_extra.js" defer></script>
+    <script src="../../js/theme.js" defer></script>
+      <script src="../../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>
