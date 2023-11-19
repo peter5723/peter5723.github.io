@@ -5,7 +5,9 @@ date: 2023-07-03
 category: Jekyll
 layout: post
 ---
-## 不知道取啥题目，试一下2级标题大小
+## Jekyll
+
+现在我用 mkdocs 来部署，这个 jekyll 的教程也没啥用了，就留作纪念吧。
 
 今天（应该说是昨天）折腾了巨久怎么样基于github pages和Jekyll，搭建一个网页，现在终于基本上差不多弄好了，虽然是很简陋的gitbook的形式，不过也足够用了。其实我现在还是不知道Jekyll是什么，但是它能用2333.
 
