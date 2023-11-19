@@ -1,17 +1,68 @@
 site_name: Peter's home
 # site_url: https://peter5723.github.io/
 # nav快速添加导航栏
+
+
 nav:
   - Home: index.md
   - About: about.md
-  - "build a website":
-    - "jekyll": "website/github-pages.md"
+  - "build a website": 
     - "mkdocs": "website/mkdocs.md"
+    - "jekyll": "website/github-pages.md"
   - "信号": 
     - "单边z变换": "signal/2023-11-04-oneside_z_transform.md"
     - "LTI系统频域特性（ss第6章）": "signal/ch6_ss.md"
   - ICS: "ICS/2023-11-02-PAnote.md"
-theme: readthedocs
+
+theme: 
+  name: 'material'
+  palette:
+    primary: custom
+    accent: custom
+  icon:
+    repo: fontawesome/solid/trash
+  features:
+    - content.code.copy
+
+
+markdown_extensions:
+  - pymdownx.arithmatex:
+      generic: true
+  - pymdownx.emoji:
+      emoji_index: !!python/name:materialx.emoji.twemoji
+      emoji_generator: !!python/name:materialx.emoji.to_svg
+  - pymdownx.highlight:                     # 代码高亮
+      #auto_title: true
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences
+  - toc:
+      permalink: true                         # 每个标题后面的 锚链接
+      #toc_depth: 2                           # table of content 显示的级数，0就不会显示
+  - footnotes
+  - meta
+
+extra_javascript:
+  - javascripts/mathjax.js
+  - https://polyfill.io/v3/polyfill.min.js?features=es6
+  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
 
 plugins:
-    - search
+  - search:
+      lang: ja                               # 实测搜索语言改成日本可以支持中文搜搜
+  - git-revision-date-localized:
+      type: iso_date
+      custom_format: "%d. %B %Y"
+      timezone: Asia/Shanghai
+      locale: en
+      fallback_to_build_date: false
+      enable_creation_date: true
+      exclude:
+          - index.md
+      enabled: true
+      strict: true
+
+extra_css:
+  - stylesheets/extra.css
+  - https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.1.0/style.css  #字体

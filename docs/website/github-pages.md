@@ -66,7 +66,7 @@ layout: post
 看这个链接，很简单：[jekyll 添加多媒体图片和附件 (abaojin.github.io)](https://abaojin.github.io/2017/01/13/jekyll-blog-media/)
 
 下面我插了一张图作为示例。
-![CPU](../media/image/CPUwww.png)
+![CPU](/media/image/CPUwww.png)
 
 十、参考的教程：
 
