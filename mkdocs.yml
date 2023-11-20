@@ -3,18 +3,7 @@ site_name: Peter's home
 # nav快速添加导航栏
 
 
-nav:
-  - Home: index.md
-  - About: about.md
-  - "build a website": 
-    - "mkdocs": "website/mkdocs.md"
-    - "jekyll": "website/github-pages.md"
-  - "信号": 
-    - "单边z变换": "signal/2023-11-04-oneside_z_transform.md"
-    - "DFT": "signal/DFT.md"
-    - "短时傅里叶变换": "signal/stft.md"
-    - "LTI系统频域特性（ss第6章）": "signal/ch6_ss.md"
-  - ICS: "ICS/2023-11-02-PAnote.md"
+
 
 theme: 
   name: 'material'
@@ -82,3 +71,20 @@ plugins:
 extra_css:
   - stylesheets/extra.css
   - https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.1.0/style.css  #字体
+
+
+nav:
+  - Home: index.md
+  - About: about.md
+  - "build a website": 
+    - "mkdocs": "website/mkdocs.md"
+    - "jekyll": "website/github-pages.md"
+  - "信号": 
+    - "单边z变换": "signal/2023-11-04-oneside_z_transform.md"
+    - "DFT": "signal/DFT.md"
+    - "短时傅里叶变换": "signal/stft.md"
+    - "LTI系统频域特性（ss第6章）": "signal/ch6_ss.md"
+  - 计算机: 
+    - "PA": "ICS/2023-11-02-PAnote.md"
+    - "vim": "ICS/vim.md"
+    - "GNU Make": "ICS/make.md"

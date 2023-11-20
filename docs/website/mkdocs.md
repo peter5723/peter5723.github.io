@@ -98,3 +98,5 @@ body {
 <https://wcowin.work/>
 
 <https://blog.arisa.moe/>
+
+<https://note.tonycrane.cc/>
