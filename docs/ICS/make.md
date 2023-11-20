@@ -191,17 +191,18 @@ all:$(subst .c,.o,$(wildcard *.c))
 伪目标同样也是 target，最大的不同是它不生成新的文件，比如一开始提到的 `clean`。
 
 伪目标有以下几种情况：
-1. 没有依赖（prerequisites）
-   比如经典的 clean 例子：
+
+1. 没有依赖（prerequisites），比如经典的 clean 例子：
     ```makefile
     .PHONY : clean
     clean :
         rm *.o temp
     ```
+    
     此时目标就是单纯的执行 shell 语句。注意，`.PHONY : clean` 显式声明某一个目标是伪目标。不声明也可以，一般 make能够自动推导出来。
-2. 依赖也是 targets
-   看下面的例子：
-   ```makefile
+
+2. 依赖也是 targets，看下面的例子：
+    ```makefile
     all : prog1 prog2 prog3
     .PHONY : all
 
@@ -214,8 +215,8 @@ all:$(subst .c,.o,$(wildcard *.c))
     prog3 : prog3.o sort.o utils.o
         cc -o prog3 prog3.o sort.o utils.o
     ```
-    此时，`all` 就是一个伪目标，make 会实现后面作为依赖的多个目标。
-    实际上，介绍 `%` 的那一节，举的例子中的 `all` 都是类似的伪目标。
+
+    此时，`all` 就是一个伪目标，make 会实现后面作为依赖的多个目标。实际上，介绍 `%` 的那一节，举的例子中的 `all` 都是类似的伪目标。
 
 ### 函数 （functions）
 函数也像是一种变量，格式如下
