@@ -4,12 +4,16 @@
 
 说回 make。什么是 make？简单的说，make 用来构建 C 语言的项目。首先你要下载 make。在项目文件夹里必须要有 `Makefile` 文件，make 才能运行。`Makefile` 文件里面有什么呢？
 
-## rule
+## Makefile 介绍
+摘自官方文档：Makefiles contain five kinds of things: explicit rules, implicit rules, variable definitions,
+directives, and comments.
+
+### rule
 `Makefile`里面必须包含 `rules`。`rules` 由这三部分构成：`target`, `prerequisite`, `recipe`。
 
 - `target` 是最终生成的目标文件名称
-- `prerequisite` 是生成 `target` 所需要的文件
-- `recipe` 是需要执行的操作
+- `prerequisite` 是生成 `target` 所需要的文件，称为前置条件
+- `recipe` 是需要执行的操作。由于 make 就是在 shell 中执行，所以 `recipe` 就是一系列的 shell 语句（当然后期写复杂了也会包含一些结构，比如分支、循环、函数等）
 
 差不多是这种形式：
 
@@ -20,7 +24,7 @@ recipe
 ...
 ```
 
-下面是一个示例 `Makefile`，它包含了好几个 `rule`，并最终生成名为 `edit` 的文件。注意，`clean` 是一个比较特殊的 `target`，它不需要 `prerequisites`。运行 `make`，执行前面的所有操作；运行 `make clean`，是完成 `clean` 这个 `target`，一般是用来清楚所有编译结果。
+下面是一个示例 `Makefile`，它包含了好几个 `rule`，并最终生成名为 `edit` 的文件。注意，`clean` 是一个比较特殊的 `target`，它不需要 `prerequisites`。运行 `make`，执行前面的所有操作；运行 `make clean`，是完成 `clean` 这个 `target`，一般是用来清除所有编译结果。
 
 ```Makefile
 edit : main.o kbd.o command.o display.o \
@@ -48,10 +52,11 @@ rm edit main.o kbd.o command.o display.o \
 insert.o search.o files.o utils.o
 ```
 
-## variable
+### variable
 
 像上面这样写出所有文件将会非常冗长，所以引入了 `variable` 这个概念，就是变量。
-变量可以在文件开头先定义好，后面要用的时候使用 `$(var)` 就可以引用我们想要的变量了，看下面的例子。
+变量可以在文件开头先定义好，后面要用的时候使用 `$(var)` 就可以引用我们想要的变量了，看下面的例子。这个变量，和 c 语言中的宏非常相似。
+
 另外，下面的例子用到的省略：如果 `target` 是二进制文件，就只需要给出 `prerequisites`, 
 gcc 会找到同名的 c 文件进行编译。
 
@@ -75,3 +80,194 @@ clean :
 rm edit $(objects)
 ```
 
+### comments
+comment 就是注释，注释很简单，用 `#` 即可注释。
+
+### directive
+directive 就是指令，实现特殊的事情，比如 `include`.
+
+#### include
+`include` 让 make 暂停，引用外部的文件。比如：
+`include foo *.mk $(bar)` 引用 `foo`, 所有 `.mk` 为后缀名的文件
+和变量 `$(bar)` 对应的文件。
+
+
+### make的工作方式
+1. 读入所有的Makefile。
+2. 读入被include的其它Makefile。
+3. 初始化文件中的变量。
+4. 推导隐式规则，并分析所有规则。
+5. 为所有的目标文件创建依赖关系链。
+6. 根据依赖关系，决定哪些目标要重新生成。
+7. 执行生成命令。
+
+
+## Makefile 编写
+
+前面已经初步了解了 `make`，下面可以更详细地看看。
+
+一个 `Makefile` 文件里面会包含好几个 rules。除了默认第一个是最终的项目文件，顺序并不重要。
+
+怎么运行？如果指令指定了某一个 target：`make sometarget`，那么就生成那个 target。如果指令是 `make`，就生成 `Makefile` 中的第一个 target。
+
+下面也不知道按什么顺序介绍，就随便写吧。
+
+### 回声
+正常情况下，make 会打印每条命令（包括注释），然后再执行，这就叫做回声（echoing）。
+
+可以使用 `@` 来忽略打印的输出。一般是用于注释和显示的 `echo` 命令。
+
+```Makefile
+test:
+    @# 这是测试
+    @echo TODO
+```
+
+
+### 自动变量
+看 `Makefile` 文件的时候，经常会看到一些奇怪的符号，比如 `$@` 和 `$<` 等等，它们都是自动变量（automatic variables），它们的值与当前规则有关。哈哈，实际上 `$` 打头的就是变量，下面详细介绍一下。
+
+1. `$@`：指代当前目标，就是 Make 命令当前构建的那个目标。比如
+    ```Makefile
+    a.txt b.txt: 
+    touch $@
+    ```
+    和
+    ```
+    a.txt:
+        touch a.txt
+    b.txt:
+        touch b.txt
+    ```
+    等价
+
+2. `$<`：指代第一个前置条件。比如
+    ```Makefile
+    a.txt: b.txt c.txt
+    cp $< $@ 
+    ```
+    和
+    ```Makefile
+    a.txt: b.txt c.txt
+    cp b.txt a.txt
+    ```
+    等价
+3. `$?`：指代比目标更新的所有前置条件，（默认）之间以空格分隔。
+4. `$^`： 指代所有前置条件。比如，规则为 `t: p1 p2`，那么 `$^` 就指代 `p1 p2` 。
+### 匹配（%）
+`%` 匹配任意个字符，是 make 特有的匹配，正则表达式里没有。
+
+有很多博客会单独拎出来 `%` 这个符号，讲它用来匹配任意个字符。然后就很容易和正则表达式的 `*` 搞混，搞不清楚它们的区别是什么。可以看[这个](https://blog.csdn.net/qq_44139306/article/details/130395123)来辨析。
+
+按照手册，不妨把 `%` 看成一个语法结构的组成部分，也就是 **static pattern rules**，静态匹配模式。语法如下：
+```makefile
+targets ...: target-pattern: prereq-patterns ...
+recipe
+...
+
+先来看个例子吧：
+```makefile
+objects = foo.o bar.o
+
+all: $(objects)
+
+$(objects): %.o: %.c
+    $(CC) -c $(CFLAGS) $< -o $@
+```
+
+规则就是首先 target-pattern（即 `%.o`） 在 target（即 `$(objects)`） 里面找到对应的模式，存储到 `%` 中，然后将这个模式替换 prereq-patterns（即 `%.c`） 中的 `%`。这个语法一下子可以处理很多文件，故而备受欢迎。
+
+实际也很常用的是用 `%` 编写 implicit rules（隐式规则）中的模式规则。
+下面是一个例子，编译文件夹里的所有 c 文件
+```Makefile
+all:$(subst .c,.o,$(wildcard *.c))
+%.o:%.c
+    gcc -o $@ $<
+```
+注意，此时 `%` 是从上下文寻找，也就是一定要上下文出现过才能匹配。这也就是为什么删除 `all:$(subst .c,.o,$(wildcard *.c))` 会导致 targets not found 这个编译错误的原因。
+
+
+### 伪目标 （prony targets）
+伪目标同样也是 target，最大的不同是它不生成新的文件，比如一开始提到的 `clean`。
+
+伪目标有以下几种情况：
+1. 没有依赖（prerequisites）
+   比如经典的 clean 例子：
+    ```makefile
+    .PHONY : clean
+    clean :
+        rm *.o temp
+    ```
+    此时目标就是单纯的执行 shell 语句。注意，`.PHONY : clean` 显式声明某一个目标是伪目标。不声明也可以，一般 make能够自动推导出来。
+2. 依赖也是 targets
+   看下面的例子：
+   ```makefile
+    all : prog1 prog2 prog3
+    .PHONY : all
+
+    prog1 : prog1.o utils.o
+        cc -o prog1 prog1.o utils.o
+
+    prog2 : prog2.o
+        cc -o prog2 prog2.o
+
+    prog3 : prog3.o sort.o utils.o
+        cc -o prog3 prog3.o sort.o utils.o
+    ```
+    此时，`all` 就是一个伪目标，make 会实现后面作为依赖的多个目标。
+    实际上，介绍 `%` 的那一节，举的例子中的 `all` 都是类似的伪目标。
+
+### 函数 （functions）
+函数也像是一种变量，格式如下
+```makefile
+$(<function> <arguments>)
+```
+### 分支语句
+很像 c 语言的条件宏语句，也是读取 `makefile` 文件就做了判断。
+下面是一个例子：
+```makefile
+libs_for_gcc = -lgnu
+normal_libs =
+
+ifeq ($(CC),gcc)
+    libs=$(libs_for_gcc)
+else
+    libs=$(normal_libs)
+endif
+
+foo: $(objects)
+    $(CC) -o foo $(objects) $(libs)
+```
+### 等号辨析与追加
+
+## 参考
+
+别人的博客：<https://www.ruanyifeng.com/blog/2015/02/make.html>
+
+官方文档：<https://www.gnu.org/software/make/manual/>
+
+一份中文参考教程：<https://seisman.github.io/how-to-write-makefile/index.html>
+
+另外，实际上你可以发现，很多教程都是大量参考官方文档的，所以能看官方文档就看官方文档吧。这就叫做 RTFM 吧（:rofl:）
+
+## Emoji in Markdown
+markdown 怎么使用 emoji 呢？
+
+教程：
+
+<https://markdown.com.cn/extended-syntax/emoji.html>
+
+所有的 emoji 集合：
+
+<https://gist.github.com/rxaviers/7360908>
+
+<https://awes0mem4n.github.io/emojis-github.html>
+
+
+因为网站弄得很好看，所以想把文档也弄得好看一点；但是很麻烦，比如说英文与数字和中文要空格；文档最好只使用二三四级标题，因为五级标题比正文还小；熟练使用 markdown，文档的结构怎么安排，什么时候用代码符号，文章多了以后怎么排网站的结构，等等，现在就很晚了，只是大致了解了 make，还有一些内容没补全，强迫症犯了就要命。我以后要放飞自我了，不会遵守规范了，哈哈。
+
+另外，我认为，说话或者写字的目的可以分成四点（并不准确）：说明（比如写技术类型的文档），议论（发表想法、感受、键政等等），叙述（比如讲一个故事），提问。写字，我好像大部分的时间都在“说明”这个环节上了；和别人交流的时候，好像也是，不是在“说明”就是在“提问”。我不知道自己的感受去哪里了，也许被我自己刻意隐瞒了。每次说到什么事情，都拿“印象深刻”来带过，语言真是匮乏！我好像不长于叙述一件事情；其实只是叙述的太少了，说来可笑，这样的自信还是几篇英语作文带给我的。英语第一次选考前写了几篇很高分的续写，一篇是续写发现女儿怀孕之后的情况；一篇是描写足球比赛的精彩状况；剩下的忘记了。我也没想到有一天会在“叙述”这个方面被老师表扬，哈哈。
+
+为什么要做一个网站呢，不仅是整理知识，也希望有一个地方能够“表达”。但是，我其实并没有什么勇气，展示自己的感受，哪怕是仅仅是给自己看，哪怕仅仅是写出来。所以大部分的笔记本，肯定是以“说明”为主，否则逃不掉被我扔掉的命运:rofl:。建一个公众号，有人在看，我怎么写想法呢？建一个网站总没有人看了吧！我也需要表达，不然我会窒息。我的表达不会多么有逻辑，我也不会像写议论文或者说明文那样构建逻辑，就是乱写一通。希望以后这个网站不会变成纯“说明”的博客吧，哈哈。
+
+上面一段一行，改你 markdown 的人要气死！什么鬼啊，哈哈！
