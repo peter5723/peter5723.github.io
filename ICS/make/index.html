@@ -1038,49 +1038,51 @@ gcc 会找到同名的 c 文件进行编译。</p>
 注意，此时 <code>%</code> 是从上下文寻找，也就是一定要上下文出现过才能匹配。这也就是为什么删除 <code>all:$(subst .c,.o,$(wildcard *.c))</code> 会导致 targets not found 这个编译错误的原因。</p>
 <h3 id="prony-targets">伪目标 （prony targets）<a class="headerlink" href="#prony-targets" title="Permanent link">&para;</a></h3>
 <p>伪目标同样也是 target，最大的不同是它不生成新的文件，比如一开始提到的 <code>clean</code>。</p>
-<p>伪目标有以下几种情况：
-1. 没有依赖（prerequisites）
-   比如经典的 clean 例子：
+<p>伪目标有以下几种情况：</p>
+<ol>
+<li>
+<p>没有依赖（prerequisites），比如经典的 clean 例子：
     <div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="nf">.PHONY </span><span class="o">:</span><span class="w"> </span><span class="n">clean</span>
 <a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="nf">clean </span><span class="o">:</span>
 <a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="w">    </span>rm<span class="w"> </span>*.o<span class="w"> </span>temp
-</code></pre></div>
-    此时目标就是单纯的执行 shell 语句。注意，<code>.PHONY : clean</code> 显式声明某一个目标是伪目标。不声明也可以，一般 make能够自动推导出来。
-2. 依赖也是 targets
-   看下面的例子：
-   ```makefile
-    all : prog1 prog2 prog3
-    .PHONY : all</p>
-<div class="highlight"><pre><span></span><code>prog1 : prog1.o utils.o
-    cc -o prog1 prog1.o utils.o
-
-prog2 : prog2.o
-    cc -o prog2 prog2.o
-
-prog3 : prog3.o sort.o utils.o
-    cc -o prog3 prog3.o sort.o utils.o
-```
-此时，`all` 就是一个伪目标，make 会实现后面作为依赖的多个目标。
-实际上，介绍 `%` 的那一节，举的例子中的 `all` 都是类似的伪目标。
-</code></pre></div>
+</code></pre></div></p>
+<p>此时目标就是单纯的执行 shell 语句。注意，<code>.PHONY : clean</code> 显式声明某一个目标是伪目标。不声明也可以，一般 make能够自动推导出来。</p>
+</li>
+<li>
+<p>依赖也是 targets，看下面的例子：
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="nf">all </span><span class="o">:</span><span class="w"> </span><span class="n">prog</span>1 <span class="n">prog</span>2 <span class="n">prog</span>3
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="nf">.PHONY </span><span class="o">:</span><span class="w"> </span><span class="n">all</span>
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="nf">prog1 </span><span class="o">:</span><span class="w"> </span><span class="n">prog</span>1.<span class="n">o</span> <span class="n">utils</span>.<span class="n">o</span>
+<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a><span class="w">    </span>cc<span class="w"> </span>-o<span class="w"> </span>prog1<span class="w"> </span>prog1.o<span class="w"> </span>utils.o
+<a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a>
+<a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a><span class="nf">prog2 </span><span class="o">:</span><span class="w"> </span><span class="n">prog</span>2.<span class="n">o</span>
+<a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a><span class="w">    </span>cc<span class="w"> </span>-o<span class="w"> </span>prog2<span class="w"> </span>prog2.o
+<a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a>
+<a id="__codelineno-11-10" name="__codelineno-11-10" href="#__codelineno-11-10"></a><span class="nf">prog3 </span><span class="o">:</span><span class="w"> </span><span class="n">prog</span>3.<span class="n">o</span> <span class="n">sort</span>.<span class="n">o</span> <span class="n">utils</span>.<span class="n">o</span>
+<a id="__codelineno-11-11" name="__codelineno-11-11" href="#__codelineno-11-11"></a><span class="w">    </span>cc<span class="w"> </span>-o<span class="w"> </span>prog3<span class="w"> </span>prog3.o<span class="w"> </span>sort.o<span class="w"> </span>utils.o
+</code></pre></div></p>
+<p>此时，<code>all</code> 就是一个伪目标，make 会实现后面作为依赖的多个目标。实际上，介绍 <code>%</code> 的那一节，举的例子中的 <code>all</code> 都是类似的伪目标。</p>
+</li>
+</ol>
 <h3 id="functions">函数 （functions）<a class="headerlink" href="#functions" title="Permanent link">&para;</a></h3>
 <p>函数也像是一种变量，格式如下
-<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="k">$(</span>&lt;<span class="nv">function</span>&gt; &lt;<span class="nv">arguments</span>&gt;<span class="k">)</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="k">$(</span>&lt;<span class="nv">function</span>&gt; &lt;<span class="nv">arguments</span>&gt;<span class="k">)</span>
 </code></pre></div></p>
 <h3 id="_4">分支语句<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
 <p>很像 c 语言的条件宏语句，也是读取 <code>makefile</code> 文件就做了判断。
 下面是一个例子：
-<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="nv">libs_for_gcc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>-lgnu
-<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="nv">normal_libs</span><span class="w"> </span><span class="o">=</span>
-<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>
-<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a><span class="cp">ifeq ($(CC),gcc)</span>
-<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a><span class="w">    </span><span class="nv">libs</span><span class="o">=</span><span class="k">$(</span>libs_for_gcc<span class="k">)</span>
-<a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a><span class="cp">else</span>
-<a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a><span class="w">    </span><span class="nv">libs</span><span class="o">=</span><span class="k">$(</span>normal_libs<span class="k">)</span>
-<a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a><span class="cp">endif</span>
-<a id="__codelineno-12-9" name="__codelineno-12-9" href="#__codelineno-12-9"></a>
-<a id="__codelineno-12-10" name="__codelineno-12-10" href="#__codelineno-12-10"></a><span class="nf">foo</span><span class="o">:</span><span class="w"> </span><span class="k">$(</span><span class="nv">objects</span><span class="k">)</span>
-<a id="__codelineno-12-11" name="__codelineno-12-11" href="#__codelineno-12-11"></a><span class="w">    </span><span class="k">$(</span>CC<span class="k">)</span><span class="w"> </span>-o<span class="w"> </span>foo<span class="w"> </span><span class="k">$(</span>objects<span class="k">)</span><span class="w"> </span><span class="k">$(</span>libs<span class="k">)</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="nv">libs_for_gcc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>-lgnu
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="nv">normal_libs</span><span class="w"> </span><span class="o">=</span>
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>
+<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a><span class="cp">ifeq ($(CC),gcc)</span>
+<a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a><span class="w">    </span><span class="nv">libs</span><span class="o">=</span><span class="k">$(</span>libs_for_gcc<span class="k">)</span>
+<a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a><span class="cp">else</span>
+<a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a><span class="w">    </span><span class="nv">libs</span><span class="o">=</span><span class="k">$(</span>normal_libs<span class="k">)</span>
+<a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a><span class="cp">endif</span>
+<a id="__codelineno-13-9" name="__codelineno-13-9" href="#__codelineno-13-9"></a>
+<a id="__codelineno-13-10" name="__codelineno-13-10" href="#__codelineno-13-10"></a><span class="nf">foo</span><span class="o">:</span><span class="w"> </span><span class="k">$(</span><span class="nv">objects</span><span class="k">)</span>
+<a id="__codelineno-13-11" name="__codelineno-13-11" href="#__codelineno-13-11"></a><span class="w">    </span><span class="k">$(</span>CC<span class="k">)</span><span class="w"> </span>-o<span class="w"> </span>foo<span class="w"> </span><span class="k">$(</span>objects<span class="k">)</span><span class="w"> </span><span class="k">$(</span>libs<span class="k">)</span>
 </code></pre></div></p>
 <h3 id="_5">等号辨析与追加<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
 <h2 id="_6">参考<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
