@@ -93,10 +93,14 @@ nav:
     - "DFT": "signal/DFT.md"
     - "短时傅里叶变换": "signal/stft.md"
     - "LTI系统频域特性（ss第6章）": "signal/ch6_ss.md"
-  - 计算机: 
+  - "计算机系统": 
     - "PA": "ICS/2023-11-02-PAnote.md"
     - "vim": "ICS/vim.md"
     - "GNU Make": "ICS/make.md"
+  - "算法":
+    - "介绍": "algorithm/intro.md"
+    - "搜索":
+      - "DFS": "algorithm/search/DFS.md"
   - diary:
     - "one diary":
       - "one one diary": "diary.md"
