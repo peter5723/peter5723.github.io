@@ -88,6 +88,8 @@ nav:
   - "build a website": 
     - "mkdocs": "website/mkdocs.md"
     - "jekyll": "website/github-pages.md"
+  - "化学":
+    - "化学热力学中的一些问题": "chem/thermo.md"
   - "信号": 
     - "单边z变换": "signal/2023-11-04-oneside_z_transform.md"
     - "DFT": "signal/DFT.md"
