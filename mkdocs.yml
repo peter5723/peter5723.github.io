@@ -47,6 +47,7 @@ markdown_extensions:
   - pymdownx.mark
   - pymdownx.tilde
   - pymdownx.critic
+  - pymdownx.details
   - toc:
       permalink: true                         # 每个标题后面的 锚链接
       #toc_depth: 2                           # table of content 显示的级数，0就不会显示
@@ -96,9 +97,10 @@ nav:
     - "短时傅里叶变换": "signal/stft.md"
     - "LTI系统频域特性（ss第6章）": "signal/ch6_ss.md"
   - "计算机系统": 
-    - "PA": "ICS/2023-11-02-PAnote.md"
+    - "PA 实验记录": "ICS/2023-11-02-PAnote.md"
     - "vim": "ICS/vim.md"
     - "GNU Make": "ICS/make.md"
+    - "risc-v": "ICS/riscv.md"
   - "算法":
     - "介绍": "algorithm/intro.md"
     - "搜索":

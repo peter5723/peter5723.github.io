@@ -62,19 +62,21 @@ The theme is [Material for Mkdocs](https://squidfunk.github.io/mkdocs-material/)
 
 ## 其它
 
-插件、主题、导航栏
+介绍一些杂七杂八的问题、插件、主题、导航栏等等吧。
 
+### 数学公式
 数学公式的插件，参考这个链接即可: 
 
 <https://hucorz.github.io/myDoc/%E5%85%B6%E4%BB%96/Mkdocs/#markdown>
 
 <https://wdk-docs.github.io/mkdocs-material-docs/reference/mathjax/#configuration>
 
+### 显示修改日期
 显示修改日期插件: 
 
 <https://timvink.github.io/mkdocs-git-revision-date-localized-plugin/>
 
-中文字体：
+### 中文字体：
 
 就是想试试别的字体了，这个字体是霞鹜文楷（能用的中文字体不多啊2333）。官网是 <https://lxgw.github.io/>. 
 
@@ -93,6 +95,14 @@ body {
 ```
 就可以成功改变字体了。
 
+### highlight 和 删除线
+
+<https://squidfunk.github.io/mkdocs-material/reference/formatting/#sub-and-superscripts>
+
+### 添加提示信息等
+
+<https://facelessuser.github.io/pymdown-extensions/extensions/details/>
+### 别人的博客
 可以看看别人的博客怎么搭建:
 
 <https://wcowin.work/>
