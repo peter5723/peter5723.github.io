@@ -12,7 +12,7 @@
         <link rel="prev" href="../make/">
       
       
-        <link rel="next" href="../../algorithm/intro/">
+        <link rel="next" href="../c_lan/">
       
       <link rel="icon" href="../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.0.4">
@@ -41,6 +41,8 @@
         <style>:root{--md-text-font:"Roboto";--md-code-font:"['Inconsolata']"}</style>
       
     
+    
+      <link rel="stylesheet" href="../../stylesheets/riscv.css">
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
@@ -540,10 +542,107 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    1. 例子
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-rv32i" class="md-nav__link">
+    2. RV32I 指令集
+  </a>
+  
+    <nav class="md-nav" aria-label="2. RV32I 指令集">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#r" class="md-nav__link">
+    R 型
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#i" class="md-nav__link">
+    I 型
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#s" class="md-nav__link">
+    S 型
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#b" class="md-nav__link">
+    B 型
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#u" class="md-nav__link">
+    U 型
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#j" class="md-nav__link">
+    J 型
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    3. 伪指令
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    4. 指令表
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5" class="md-nav__link">
+    5. 寄存器
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
       
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../c_lan/" class="md-nav__link">
+        c 语言
+      </a>
     </li>
   
 
@@ -768,6 +867,89 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    1. 例子
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-rv32i" class="md-nav__link">
+    2. RV32I 指令集
+  </a>
+  
+    <nav class="md-nav" aria-label="2. RV32I 指令集">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#r" class="md-nav__link">
+    R 型
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#i" class="md-nav__link">
+    I 型
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#s" class="md-nav__link">
+    S 型
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#b" class="md-nav__link">
+    B 型
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#u" class="md-nav__link">
+    U 型
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#j" class="md-nav__link">
+    J 型
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    3. 伪指令
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    4. 指令表
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5" class="md-nav__link">
+    5. 寄存器
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -816,9 +998,426 @@
 <p>x86 是典型的 CISC ISA，就是说它的指令数量非常多，很繁杂。与此相对应的就是 RISC，精简化指令集，指令数量更少。
 ARM 和 risc-v 都属于 RISC 指令集。</p>
 </details>
-<p>下面就介绍 riscv 了。开始之前，先放一些可能需要的链接吧：</p>
+<p>下面就介绍 riscv 了。开始之前，先放一些可能需要的链接和资料吧：</p>
 <p>优秀笔记：<a href="https://note.tonycrane.cc/cs/pl/riscv/">https://note.tonycrane.cc/cs/pl/riscv/</a></p>
 <p>官网：<a href="https://riscv.org/">https://riscv.org/</a></p>
+<p>官方资料：<a href="https://riscv.org/technical/specifications/">https://riscv.org/technical/specifications/</a></p>
+<p>教材：《计算机组成与设计：硬件软件接口（原书第5版·RISC-V版）》</p>
+<p>实际上我很想转载别人的文章，因为链接可能会失效。但是可能会有些不必要的麻烦，那就算了吧。</p>
+<h2 id="1">1. 例子<a class="headerlink" href="#1" title="Permanent link">&para;</a></h2>
+<p>直接讲指令有点抽象，我们来看一个实例吧。下面的代码段打印了 hello world。
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="w">    </span><span class="na">.text</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">    </span><span class="na">.align</span><span class="w"> </span><span class="mi">2</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">    </span><span class="na">.globl</span><span class="w"> </span><span class="no">main</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="nl">main:</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">    </span><span class="nf">addi</span><span class="w"> </span><span class="no">sp</span><span class="p">,</span><span class="w"> </span><span class="no">sp</span><span class="p">,</span><span class="w"> </span><span class="mi">-16</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="w">    </span><span class="nf">sw</span><span class="w"> </span><span class="no">ra</span><span class="p">,</span><span class="w"> </span><span class="mi">12</span><span class="p">(</span><span class="no">sp</span><span class="p">)</span>
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="w">    </span><span class="nf">lui</span><span class="w"> </span><span class="no">a0</span><span class="p">,</span><span class="w"> </span><span class="nv">%hi</span><span class="p">(</span><span class="no">string1</span><span class="p">)</span>
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="w">    </span><span class="nf">addi</span><span class="w"> </span><span class="no">a0</span><span class="p">,</span><span class="w"> </span><span class="no">a0</span><span class="p">,</span><span class="w"> </span><span class="nv">%lo</span><span class="p">(</span><span class="no">string1</span><span class="p">)</span>
+<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="w">    </span><span class="nf">lui</span><span class="w"> </span><span class="no">a1</span><span class="p">,</span><span class="w"> </span><span class="nv">%hi</span><span class="p">(</span><span class="no">string2</span><span class="p">)</span>
+<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="w">    </span><span class="nf">addi</span><span class="w"> </span><span class="no">a1</span><span class="p">,</span><span class="w"> </span><span class="no">a1</span><span class="p">,</span><span class="w"> </span><span class="nv">%lo</span><span class="p">(</span><span class="no">string2</span><span class="p">)</span>
+<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="w">    </span><span class="nf">call</span><span class="w"> </span><span class="no">printf</span>
+<a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a><span class="w">    </span><span class="nf">lw</span><span class="w"> </span><span class="no">ra</span><span class="p">,</span><span class="w"> </span><span class="mi">12</span><span class="p">(</span><span class="no">sp</span><span class="p">)</span>
+<a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a><span class="w">    </span><span class="nf">addi</span><span class="w"> </span><span class="no">sp</span><span class="p">,</span><span class="w"> </span><span class="no">sp</span><span class="p">,</span><span class="w"> </span><span class="mi">16</span>
+<a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a><span class="w">    </span><span class="nf">li</span><span class="w"> </span><span class="no">a0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span>
+<a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a><span class="w">    </span><span class="nf">ret</span>
+<a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a>
+<a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a><span class="w">    </span><span class="na">.section</span><span class="w"> </span><span class="no">.rodata</span>
+<a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a><span class="w">    </span><span class="na">.balign</span><span class="w"> </span><span class="mi">4</span>
+<a id="__codelineno-2-19" name="__codelineno-2-19" href="#__codelineno-2-19"></a><span class="nl">string1:</span>
+<a id="__codelineno-2-20" name="__codelineno-2-20" href="#__codelineno-2-20"></a><span class="w">    </span><span class="na">.string</span><span class="w"> </span><span class="s">&quot;Hello, %s!\n&quot;</span>
+<a id="__codelineno-2-21" name="__codelineno-2-21" href="#__codelineno-2-21"></a><span class="nl">string2:</span>
+<a id="__codelineno-2-22" name="__codelineno-2-22" href="#__codelineno-2-22"></a><span class="w">    </span><span class="na">.string</span><span class="w"> </span><span class="s">&quot;world&quot;</span>
+</code></pre></div></p>
+<p>可以看到，程序的结构和 x86 还是有很多相似之处的。</p>
+<h2 id="2-rv32i">2. RV32I 指令集<a class="headerlink" href="#2-rv32i" title="Permanent link">&para;</a></h2>
+<p>RV32I 是 RISCV 的基础整数指令集。指令集中的所有指令都是 32 位的，在一个机器周期内就能完成。</p>
+<p>RV32I 的指令可以分为 6 种：</p>
+<ul>
+<li>R 型，寄存器-寄存器操作</li>
+<li>I 型，端立即数和访存 load 操作</li>
+<li>S 型，访存 store 操作</li>
+<li>B 型，条件跳转操作</li>
+<li>U 型，长立即数操作</li>
+<li>J 型，无条件跳转</li>
+</ul>
+<p>我们来看一看这 6 种指令所对应的机器码的格式。</p>
+<h3 id="r">R 型<a class="headerlink" href="#r" title="Permanent link">&para;</a></h3>
+<p>我们可以将一条 R 型指令分成下面的字段：</p>
+<!-- ps, 要加上对应的 css 样式才能成功显示下面的表格 -->
+<table class="riscv-table">
+<tr>
+    <td class="riscv-table-numnodel">31</td>
+    <td class="riscv-table-numnode" colspan="5"></td>
+    <td class="riscv-table-numnoder">25</td>
+    <td class="riscv-table-numnodel">24</td>
+    <td class="riscv-table-numnode" colspan="3"></td>
+    <td class="riscv-table-numnoder">20</td>
+    <td class="riscv-table-numnodel">19</td>
+    <td class="riscv-table-numnode" colspan="3"></td>
+    <td class="riscv-table-numnoder">15</td>
+    <td class="riscv-table-numnodel">14</td>
+    <td class="riscv-table-numnode" colspan="1"></td>
+    <td class="riscv-table-numnoder">12</td>
+    <td class="riscv-table-numnodel">11</td>
+    <td class="riscv-table-numnode" colspan="3"></td>
+    <td class="riscv-table-numnoder">7</td>
+    <td class="riscv-table-numnodel">6</td>
+    <td class="riscv-table-numnode" colspan="5"></td>
+    <td class="riscv-table-numnoder">0</td>
+</tr>
+<tr>
+    <td colspan="7" class="riscv-table-node">funct7</td>
+    <td colspan="5" class="riscv-table-node">rs2</td>
+    <td colspan="5" class="riscv-table-node">rs1</td>
+    <td colspan="3" class="riscv-table-node">funct3</td>
+    <td colspan="5" class="riscv-table-node">rd</td>
+    <td colspan="7" class="riscv-table-node">opcode</td>
+</tr>
+</table>
+
+<p>下面是每个字段名称的含义：</p>
+<ul>
+<li>opcode：操作码，指示指令的基本操作，确定这条指令的类型</li>
+<li>rd：目的操作数寄存器，存放操作结果（register destination）</li>
+<li>funct3：一个另外的操作码字段</li>
+<li>rs1：第一个源操作数寄存器（register source）</li>
+<li>rs2：第二个源操作数寄存器</li>
+<li>funct7：一个另外的操作码字段。</li>
+</ul>
+<p>很明显的，R 型里面都是寄存器之间的操作，比如说 add 指令就是一个 R 型操作。看下面的一个指令例子：</p>
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>add x9, x20, x21
+</code></pre></div>
+它执行 C 语言中 <code>x9 = x20 + x21;</code> 这个操作。</p>
+<p>我们也可以把这条指令以二进制的形式表示：</p>
+<table class="riscv-table">
+<tr>
+    <td class="riscv-table-numnodel">31</td>
+    <td class="riscv-table-numnode" colspan="5"></td>
+    <td class="riscv-table-numnoder">25</td>
+    <td class="riscv-table-numnodel">24</td>
+    <td class="riscv-table-numnode" colspan="3"></td>
+    <td class="riscv-table-numnoder">20</td>
+    <td class="riscv-table-numnodel">19</td>
+    <td class="riscv-table-numnode" colspan="3"></td>
+    <td class="riscv-table-numnoder">15</td>
+    <td class="riscv-table-numnodel">14</td>
+    <td class="riscv-table-numnode" colspan="1"></td>
+    <td class="riscv-table-numnoder">12</td>
+    <td class="riscv-table-numnodel">11</td>
+    <td class="riscv-table-numnode" colspan="3"></td>
+    <td class="riscv-table-numnoder">7</td>
+    <td class="riscv-table-numnodel">6</td>
+    <td class="riscv-table-numnode" colspan="5"></td>
+    <td class="riscv-table-numnoder">0</td>
+</tr>
+<tr>
+    <td colspan="7" class="riscv-table-node">0000000</td>
+    <td colspan="5" class="riscv-table-node">10101</td>
+    <td colspan="5" class="riscv-table-node">10100</td>
+    <td colspan="3" class="riscv-table-node">000</td>
+    <td colspan="5" class="riscv-table-node">01001</td>
+    <td colspan="7" class="riscv-table-node">0110011</td>
+</tr>
+</table>
+
+<p>func7、func3 和 opcode 字段组合起来确定是 add 操作。其中 opcode 字段确定是这条指令的类型是 R 型；然后再由 funct3 和 funct7 确定是 add。</p>
+<p>剩下的字段就是用来表示寄存器操作数了。</p>
+<h3 id="i">I 型<a class="headerlink" href="#i" title="Permanent link">&para;</a></h3>
+<table class="riscv-table">
+<tr>
+    <td class="riscv-table-numnodel">31</td>
+    <td class="riscv-table-numnode" colspan="10"></td>
+    <td class="riscv-table-numnoder">20</td>
+    <td class="riscv-table-numnodel">19</td>
+    <td class="riscv-table-numnode" colspan="3"></td>
+    <td class="riscv-table-numnoder">15</td>
+    <td class="riscv-table-numnodel">14</td>
+    <td class="riscv-table-numnode" colspan="1"></td>
+    <td class="riscv-table-numnoder">12</td>
+    <td class="riscv-table-numnodel">11</td>
+    <td class="riscv-table-numnode" colspan="3"></td>
+    <td class="riscv-table-numnoder">7</td>
+    <td class="riscv-table-numnodel">6</td>
+    <td class="riscv-table-numnode" colspan="5"></td>
+    <td class="riscv-table-numnoder">0</td>
+</tr>
+<tr>
+    <td colspan="12" class="riscv-table-node">imm[11:0]</td>
+    <td colspan="5" class="riscv-table-node">rs1</td>
+    <td colspan="3" class="riscv-table-node">funct3</td>
+    <td colspan="5" class="riscv-table-node">rd</td>
+    <td colspan="7" class="riscv-table-node">opcode</td>
+</tr>
+</table>
+
+<p>新的字段 imm 表示立即数。</p>
+<p>I 型使用两个寄存器和和一个立即数进行运算。如果像 R 型那样，只留 5 位给立即数，那能表示的立即数太少了。所以如此设计，可以表示更大的立即数（12位可以表示 -2048 ~ 2048）。 </p>
+<p>除此之外，load 类型的操作也属于 I 型的，比如 <code>ld x9, 240(x10)</code>。立即数用来储存变址寻址的偏移量。</p>
+<p>I 型的运算类型由 opcode 和 funct3 决定。</p>
+<h3 id="s">S 型<a class="headerlink" href="#s" title="Permanent link">&para;</a></h3>
+<table class="riscv-table">
+<tr>
+    <td class="riscv-table-numnodel">31</td>
+    <td class="riscv-table-numnode" colspan="5"></td>
+    <td class="riscv-table-numnoder">25</td>
+    <td class="riscv-table-numnodel">24</td>
+    <td class="riscv-table-numnode" colspan="3"></td>
+    <td class="riscv-table-numnoder">20</td>
+    <td class="riscv-table-numnodel">19</td>
+    <td class="riscv-table-numnode" colspan="3"></td>
+    <td class="riscv-table-numnoder">15</td>
+    <td class="riscv-table-numnodel">14</td>
+    <td class="riscv-table-numnode" colspan="1"></td>
+    <td class="riscv-table-numnoder">12</td>
+    <td class="riscv-table-numnodel">11</td>
+    <td class="riscv-table-numnode" colspan="3"></td>
+    <td class="riscv-table-numnoder">7</td>
+    <td class="riscv-table-numnodel">6</td>
+    <td class="riscv-table-numnode" colspan="5"></td>
+    <td class="riscv-table-numnoder">0</td>
+</tr>
+<tr>
+    <td colspan="7" class="riscv-table-node">imm[11:5]</td>
+    <td colspan="5" class="riscv-table-node">rs2</td>
+    <td colspan="5" class="riscv-table-node">rs1</td>
+    <td colspan="3" class="riscv-table-node">funct3</td>
+    <td colspan="5" class="riscv-table-node">imm[4:0]</td>
+    <td colspan="7" class="riscv-table-node">opcode</td>
+</tr>
+</table>
+
+<p>S 型主要用来进行 store 操作，它可以变址寻址。比如 sd 指令就是 S 型的。
+举个例子：
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>sd x9, 240(x22) // x9 中的数据储存回 x22 中的地址后移 240 位的地址中。
+</code></pre></div>
+为了保持寄存器 rs1 和 rs2 的位置一致，所以将一个立即数分成两部分表示。比如说，这里 (240)<sub>10</sub> = (0000111 10000)<sub>2</sub>，那么 0000111 将会保存到 imm[11:5]，10000 将会保存到 imm[4:0]。</p>
+<h3 id="b">B 型<a class="headerlink" href="#b" title="Permanent link">&para;</a></h3>
+<table class="riscv-table">
+<tr>
+    <td class="riscv-table-numnodel">31</td>
+    <td class="riscv-table-numnode" colspan="5"></td>
+    <td class="riscv-table-numnoder">25</td>
+    <td class="riscv-table-numnodel">24</td>
+    <td class="riscv-table-numnode" colspan="3"></td>
+    <td class="riscv-table-numnoder">20</td>
+    <td class="riscv-table-numnodel">19</td>
+    <td class="riscv-table-numnode" colspan="3"></td>
+    <td class="riscv-table-numnoder">15</td>
+    <td class="riscv-table-numnodel">14</td>
+    <td class="riscv-table-numnode" colspan="1"></td>
+    <td class="riscv-table-numnoder">12</td>
+    <td class="riscv-table-numnodel">11</td>
+    <td class="riscv-table-numnode" colspan="3"></td>
+    <td class="riscv-table-numnoder">7</td>
+    <td class="riscv-table-numnodel">6</td>
+    <td class="riscv-table-numnode" colspan="5"></td>
+    <td class="riscv-table-numnoder">0</td>
+</tr>
+<tr>
+    <td colspan="7" class="riscv-table-node">imm[12,10:5]</td>
+    <td colspan="5" class="riscv-table-node">rs2</td>
+    <td colspan="5" class="riscv-table-node">rs1</td>
+    <td colspan="3" class="riscv-table-node">funct3</td>
+    <td colspan="5" class="riscv-table-node">imm[4:1,11]</td>
+    <td colspan="7" class="riscv-table-node">opcode</td>
+</tr>
+</table>
+
+<p>B 型指令本质上是 S 型的变种，主要区别就是立即数读取的顺序不同。它用于分支跳转指令，比如 beq，相等时跳转，对应 C 语言的 <code>if(rs1 == rs2) PC += imm</code>。</p>
+<p>可以看到，B 型和 S 型都需要两个寄存器和一个立即数进行操作。</p>
+<h3 id="u">U 型<a class="headerlink" href="#u" title="Permanent link">&para;</a></h3>
+<table class="riscv-table">
+<tr>
+    <td class="riscv-table-numnodel">31</td>
+    <td class="riscv-table-numnode" colspan="18"></td>
+    <td class="riscv-table-numnoder">12</td>
+    <td class="riscv-table-numnodel">11</td>
+    <td class="riscv-table-numnode" colspan="3"></td>
+    <td class="riscv-table-numnoder">7</td>
+    <td class="riscv-table-numnodel">6</td>
+    <td class="riscv-table-numnode" colspan="5"></td>
+    <td class="riscv-table-numnoder">0</td>
+</tr>
+<tr>
+    <td colspan="20" class="riscv-table-node">imm[31:12]</td>
+    <td colspan="5" class="riscv-table-node">rd</td>
+    <td colspan="7" class="riscv-table-node">opcode</td>
+</tr>
+</table>
+
+<p>很显然，就是一个寄存器和一个立即数参与操作；而且没有源操作数。
+例子就是 lui，对应的 C 语言描述是 <code>rd = imm &lt;&lt; 12</code></p>
+<p>U 型操作只能通过 opcode 来区分。</p>
+<h3 id="j">J 型<a class="headerlink" href="#j" title="Permanent link">&para;</a></h3>
+<table class="riscv-table">
+<tr>
+    <td class="riscv-table-numnodel">31</td>
+    <td class="riscv-table-numnode" colspan="18"></td>
+    <td class="riscv-table-numnoder">12</td>
+    <td class="riscv-table-numnodel">11</td>
+    <td class="riscv-table-numnode" colspan="3"></td>
+    <td class="riscv-table-numnoder">7</td>
+    <td class="riscv-table-numnodel">6</td>
+    <td class="riscv-table-numnode" colspan="5"></td>
+    <td class="riscv-table-numnoder">0</td>
+</tr>
+<tr>
+    <td colspan="20" class="riscv-table-node">imm[20,10:1,11,19:12]</td>
+    <td colspan="5" class="riscv-table-node">rd</td>
+    <td colspan="7" class="riscv-table-node">opcode</td>
+</tr>
+</table>
+
+<p>U 型指令的变种，用于无条件跳转指令，比如 jal。</p>
+<h2 id="3">3. 伪指令<a class="headerlink" href="#3" title="Permanent link">&para;</a></h2>
+<p>除了上面说的六种指令外，我们也可以用在汇编代码中使用伪指令，在实际编译时，它们会被上面的指令替代。</p>
+<p>可以看看下面的几个例子：</p>
+<table>
+<thead>
+<tr>
+<th>Pseudoinstruction</th>
+<th>Base Instruction(s)</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>nop</td>
+<td>addi x0, x0, 0</td>
+<td>No operation</td>
+</tr>
+<tr>
+<td>mv rd, rs</td>
+<td>addi rd, rs, 0</td>
+<td>Copy register</td>
+</tr>
+<tr>
+<td>j offset</td>
+<td>jal x0, offset</td>
+<td>Jump</td>
+</tr>
+<tr>
+<td>ret</td>
+<td>jalr x0, x1, 0</td>
+<td>通过返回地址 x1 返回</td>
+</tr>
+<tr>
+<td>call offset</td>
+<td>auipc x1, offset[31 : 12] + offset[11] </br> jalr x1, offset[11:0](x1)</td>
+<td>远调用</td>
+</tr>
+</tbody>
+</table>
+<details>
+<summary>tips</summary>
+<ol>
+<li>怎么插入 markdown 表格？
+    可以在这个网站快速生成：<a href="https://www.tablesgenerator.com/markdown_tables">https://www.tablesgenerator.com/markdown_tables</a></li>
+<li>html 语言，用 <code>&lt;/br&gt;</code> 表示换行。举个例子：</br></li>
+<li>可以看到，这些伪代码和有些和 x86 中学过的是很相似的，可以比较容易的迁移学习。</li>
+</ol>
+</details>
+<h2 id="4">4. 指令表<a class="headerlink" href="#4" title="Permanent link">&para;</a></h2>
+<p>实际上，riscv 的指令是如此的简单，以至于他们很容易就被整理在几张表上了：</p>
+<p>cs61c 的表：</p>
+<p><a href="https://github.com/jameslzhu/riscv-card/blob/master/riscv-card.pdf">https://github.com/jameslzhu/riscv-card/blob/master/riscv-card.pdf</a></p>
+<p>官方表：</p>
+<p><a href="https://www.cl.cam.ac.uk/teaching/1617/ECAD+Arch/files/docs/RISCVGreenCardv8-20151013.pdf">https://www.cl.cam.ac.uk/teaching/1617/ECAD+Arch/files/docs/RISCVGreenCardv8-20151013.pdf</a></p>
+<p>有很多人都做了表，我就不整理指令了。（真的不是因为偷懒吗</p>
+<h2 id="5">5. 寄存器<a class="headerlink" href="#5" title="Permanent link">&para;</a></h2>
+<p>上面代码中出现过寄存器了，下面介绍一下。</p>
+<p>寄存器包括 1 个 PC 寄存器和 32 个 32 位特殊寄存器。它们的功能简要介绍如下表：</p>
+<table>
+<thead>
+<tr>
+<th align="center">寄存器</th>
+<th align="center">ABI 名称</th>
+<th align="left">用途描述</th>
+<th align="center">saver</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">x0</td>
+<td align="center">zero</td>
+<td align="left">硬件 0</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">x1</td>
+<td align="center">ra</td>
+<td align="left">返回地址（return address）</td>
+<td align="center">caller</td>
+</tr>
+<tr>
+<td align="center">x2</td>
+<td align="center">sp</td>
+<td align="left">栈指针（stack pointer）</td>
+<td align="center">callee</td>
+</tr>
+<tr>
+<td align="center">x3</td>
+<td align="center">gp</td>
+<td align="left">全局指针（global pointer）</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">x4</td>
+<td align="center">tp</td>
+<td align="left">线程指针（thread pointer）</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">x5</td>
+<td align="center">t0</td>
+<td align="left">临时变量/备用链接寄存器（alternate link reg）</td>
+<td align="center">caller</td>
+</tr>
+<tr>
+<td align="center">x6-7</td>
+<td align="center">t1-2</td>
+<td align="left">临时变量</td>
+<td align="center">caller</td>
+</tr>
+<tr>
+<td align="center">x8</td>
+<td align="center">s0/fp</td>
+<td align="left">需要保存的寄存器/帧指针（frame pointer）</td>
+<td align="center">callee</td>
+</tr>
+<tr>
+<td align="center">x9</td>
+<td align="center">s1</td>
+<td align="left">需要保存的寄存器</td>
+<td align="center">callee</td>
+</tr>
+<tr>
+<td align="center">x10-11</td>
+<td align="center">a0-1</td>
+<td align="left">函数参数/返回值</td>
+<td align="center">caller</td>
+</tr>
+<tr>
+<td align="center">x12-17</td>
+<td align="center">a2-7</td>
+<td align="left">函数参数</td>
+<td align="center">caller</td>
+</tr>
+<tr>
+<td align="center">x18-27</td>
+<td align="center">s2-11</td>
+<td align="left">需要保存的寄存器</td>
+<td align="center">callee</td>
+</tr>
+<tr>
+<td align="center">x28-31</td>
+<td align="center">t3-6</td>
+<td align="left">临时变量</td>
+<td align="center">caller</td>
+</tr>
+</tbody>
+</table>
 
   <hr>
 <div class="md-source-file">
