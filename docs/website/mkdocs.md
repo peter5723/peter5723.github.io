@@ -99,6 +99,9 @@ body {
 
 <https://squidfunk.github.io/mkdocs-material/reference/formatting/#sub-and-superscripts>
 
+### 下标
+<https://facelessuser.github.io/pymdown-extensions/extensions/tilde/>
+
 ### 添加提示信息等
 
 <https://facelessuser.github.io/pymdown-extensions/extensions/details/>

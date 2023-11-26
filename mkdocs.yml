@@ -75,6 +75,7 @@ plugins:
       strict: true
 
 extra_css:
+  - stylesheets/riscv.css
   - stylesheets/extra.css
   - https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.1.0/style.css  #字体
 
@@ -101,6 +102,7 @@ nav:
     - "vim": "ICS/vim.md"
     - "GNU Make": "ICS/make.md"
     - "risc-v": "ICS/riscv.md"
+    - "c 语言": "ICS/c_lan.md"
   - "算法":
     - "介绍": "algorithm/intro.md"
     - "搜索":

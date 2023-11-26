@@ -42,8 +42,365 @@
     x86 是典型的 CISC ISA，就是说它的指令数量非常多，很繁杂。与此相对应的就是 RISC，精简化指令集，指令数量更少。
     ARM 和 risc-v 都属于 RISC 指令集。
 
-下面就介绍 riscv 了。开始之前，先放一些可能需要的链接吧：
+下面就介绍 riscv 了。开始之前，先放一些可能需要的链接和资料吧：
 
 优秀笔记：<https://note.tonycrane.cc/cs/pl/riscv/>
 
 官网：<https://riscv.org/>
+
+官方资料：<https://riscv.org/technical/specifications/>
+
+教材：《计算机组成与设计：硬件软件接口（原书第5版·RISC-V版）》
+
+实际上我很想转载别人的文章，因为链接可能会失效。但是可能会有些不必要的麻烦，那就算了吧。
+
+## 1. 例子
+直接讲指令有点抽象，我们来看一个实例吧。下面的代码段打印了 hello world。
+```asm
+    .text
+    .align 2
+    .globl main
+main:
+    addi sp, sp, -16
+    sw ra, 12(sp)
+    lui a0, %hi(string1)
+    addi a0, a0, %lo(string1)
+    lui a1, %hi(string2)
+    addi a1, a1, %lo(string2)
+    call printf
+    lw ra, 12(sp)
+    addi sp, sp, 16
+    li a0, 0
+    ret
+
+    .section .rodata
+    .balign 4
+string1:
+    .string "Hello, %s!\n"
+string2:
+    .string "world"
+```
+
+可以看到，程序的结构和 x86 还是有很多相似之处的。
+
+## 2. RV32I 指令集
+
+RV32I 是 RISCV 的基础整数指令集。指令集中的所有指令都是 32 位的，在一个机器周期内就能完成。
+
+RV32I 的指令可以分为 6 种：
+
+- R 型，寄存器-寄存器操作
+- I 型，端立即数和访存 load 操作
+- S 型，访存 store 操作
+- B 型，条件跳转操作
+- U 型，长立即数操作
+- J 型，无条件跳转
+
+我们来看一看这 6 种指令所对应的机器码的格式。
+
+### R 型
+
+我们可以将一条 R 型指令分成下面的字段：
+
+<!-- ps, 要加上对应的 css 样式才能成功显示下面的表格 -->
+<table class="riscv-table">
+<tr>
+    <td class="riscv-table-numnodel">31</td>
+    <td class="riscv-table-numnode" colspan="5"></td>
+    <td class="riscv-table-numnoder">25</td>
+    <td class="riscv-table-numnodel">24</td>
+    <td class="riscv-table-numnode" colspan="3"></td>
+    <td class="riscv-table-numnoder">20</td>
+    <td class="riscv-table-numnodel">19</td>
+    <td class="riscv-table-numnode" colspan="3"></td>
+    <td class="riscv-table-numnoder">15</td>
+    <td class="riscv-table-numnodel">14</td>
+    <td class="riscv-table-numnode" colspan="1"></td>
+    <td class="riscv-table-numnoder">12</td>
+    <td class="riscv-table-numnodel">11</td>
+    <td class="riscv-table-numnode" colspan="3"></td>
+    <td class="riscv-table-numnoder">7</td>
+    <td class="riscv-table-numnodel">6</td>
+    <td class="riscv-table-numnode" colspan="5"></td>
+    <td class="riscv-table-numnoder">0</td>
+</tr>
+<tr>
+    <td colspan="7" class="riscv-table-node">funct7</td>
+    <td colspan="5" class="riscv-table-node">rs2</td>
+    <td colspan="5" class="riscv-table-node">rs1</td>
+    <td colspan="3" class="riscv-table-node">funct3</td>
+    <td colspan="5" class="riscv-table-node">rd</td>
+    <td colspan="7" class="riscv-table-node">opcode</td>
+</tr>
+</table>
+
+下面是每个字段名称的含义：
+
+- opcode：操作码，指示指令的基本操作，确定这条指令的类型
+- rd：目的操作数寄存器，存放操作结果（register destination）
+- funct3：一个另外的操作码字段
+- rs1：第一个源操作数寄存器（register source）
+- rs2：第二个源操作数寄存器
+- funct7：一个另外的操作码字段。
+
+很明显的，R 型里面都是寄存器之间的操作，比如说 add 指令就是一个 R 型操作。看下面的一个指令例子：
+
+```
+add x9, x20, x21
+```
+它执行 C 语言中 `x9 = x20 + x21;` 这个操作。
+
+我们也可以把这条指令以二进制的形式表示：
+<table class="riscv-table">
+<tr>
+    <td class="riscv-table-numnodel">31</td>
+    <td class="riscv-table-numnode" colspan="5"></td>
+    <td class="riscv-table-numnoder">25</td>
+    <td class="riscv-table-numnodel">24</td>
+    <td class="riscv-table-numnode" colspan="3"></td>
+    <td class="riscv-table-numnoder">20</td>
+    <td class="riscv-table-numnodel">19</td>
+    <td class="riscv-table-numnode" colspan="3"></td>
+    <td class="riscv-table-numnoder">15</td>
+    <td class="riscv-table-numnodel">14</td>
+    <td class="riscv-table-numnode" colspan="1"></td>
+    <td class="riscv-table-numnoder">12</td>
+    <td class="riscv-table-numnodel">11</td>
+    <td class="riscv-table-numnode" colspan="3"></td>
+    <td class="riscv-table-numnoder">7</td>
+    <td class="riscv-table-numnodel">6</td>
+    <td class="riscv-table-numnode" colspan="5"></td>
+    <td class="riscv-table-numnoder">0</td>
+</tr>
+<tr>
+    <td colspan="7" class="riscv-table-node">0000000</td>
+    <td colspan="5" class="riscv-table-node">10101</td>
+    <td colspan="5" class="riscv-table-node">10100</td>
+    <td colspan="3" class="riscv-table-node">000</td>
+    <td colspan="5" class="riscv-table-node">01001</td>
+    <td colspan="7" class="riscv-table-node">0110011</td>
+</tr>
+</table>
+
+func7、func3 和 opcode 字段组合起来确定是 add 操作。其中 opcode 字段确定是这条指令的类型是 R 型；然后再由 funct3 和 funct7 确定是 add。
+
+剩下的字段就是用来表示寄存器操作数了。
+
+### I 型
+
+<table class="riscv-table">
+<tr>
+    <td class="riscv-table-numnodel">31</td>
+    <td class="riscv-table-numnode" colspan="10"></td>
+    <td class="riscv-table-numnoder">20</td>
+    <td class="riscv-table-numnodel">19</td>
+    <td class="riscv-table-numnode" colspan="3"></td>
+    <td class="riscv-table-numnoder">15</td>
+    <td class="riscv-table-numnodel">14</td>
+    <td class="riscv-table-numnode" colspan="1"></td>
+    <td class="riscv-table-numnoder">12</td>
+    <td class="riscv-table-numnodel">11</td>
+    <td class="riscv-table-numnode" colspan="3"></td>
+    <td class="riscv-table-numnoder">7</td>
+    <td class="riscv-table-numnodel">6</td>
+    <td class="riscv-table-numnode" colspan="5"></td>
+    <td class="riscv-table-numnoder">0</td>
+</tr>
+<tr>
+    <td colspan="12" class="riscv-table-node">imm[11:0]</td>
+    <td colspan="5" class="riscv-table-node">rs1</td>
+    <td colspan="3" class="riscv-table-node">funct3</td>
+    <td colspan="5" class="riscv-table-node">rd</td>
+    <td colspan="7" class="riscv-table-node">opcode</td>
+</tr>
+</table>
+
+新的字段 imm 表示立即数。
+
+I 型使用两个寄存器和和一个立即数进行运算。如果像 R 型那样，只留 5 位给立即数，那能表示的立即数太少了。所以如此设计，可以表示更大的立即数（12位可以表示 -2048 ~ 2048）。 
+
+除此之外，load 类型的操作也属于 I 型的，比如 `ld x9, 240(x10)`。立即数用来储存变址寻址的偏移量。
+
+I 型的运算类型由 opcode 和 funct3 决定。
+
+### S 型
+
+<table class="riscv-table">
+<tr>
+    <td class="riscv-table-numnodel">31</td>
+    <td class="riscv-table-numnode" colspan="5"></td>
+    <td class="riscv-table-numnoder">25</td>
+    <td class="riscv-table-numnodel">24</td>
+    <td class="riscv-table-numnode" colspan="3"></td>
+    <td class="riscv-table-numnoder">20</td>
+    <td class="riscv-table-numnodel">19</td>
+    <td class="riscv-table-numnode" colspan="3"></td>
+    <td class="riscv-table-numnoder">15</td>
+    <td class="riscv-table-numnodel">14</td>
+    <td class="riscv-table-numnode" colspan="1"></td>
+    <td class="riscv-table-numnoder">12</td>
+    <td class="riscv-table-numnodel">11</td>
+    <td class="riscv-table-numnode" colspan="3"></td>
+    <td class="riscv-table-numnoder">7</td>
+    <td class="riscv-table-numnodel">6</td>
+    <td class="riscv-table-numnode" colspan="5"></td>
+    <td class="riscv-table-numnoder">0</td>
+</tr>
+<tr>
+    <td colspan="7" class="riscv-table-node">imm[11:5]</td>
+    <td colspan="5" class="riscv-table-node">rs2</td>
+    <td colspan="5" class="riscv-table-node">rs1</td>
+    <td colspan="3" class="riscv-table-node">funct3</td>
+    <td colspan="5" class="riscv-table-node">imm[4:0]</td>
+    <td colspan="7" class="riscv-table-node">opcode</td>
+</tr>
+</table>
+
+S 型主要用来进行 store 操作，它可以变址寻址。比如 sd 指令就是 S 型的。
+举个例子：
+```
+sd x9, 240(x22) // x9 中的数据储存回 x22 中的地址后移 240 位的地址中。
+```
+为了保持寄存器 rs1 和 rs2 的位置一致，所以将一个立即数分成两部分表示。比如说，这里 (240)~10~ = (0000111 10000)~2~，那么 0000111 将会保存到 imm[11:5]，10000 将会保存到 imm[4:0]。
+
+### B 型
+
+<table class="riscv-table">
+<tr>
+    <td class="riscv-table-numnodel">31</td>
+    <td class="riscv-table-numnode" colspan="5"></td>
+    <td class="riscv-table-numnoder">25</td>
+    <td class="riscv-table-numnodel">24</td>
+    <td class="riscv-table-numnode" colspan="3"></td>
+    <td class="riscv-table-numnoder">20</td>
+    <td class="riscv-table-numnodel">19</td>
+    <td class="riscv-table-numnode" colspan="3"></td>
+    <td class="riscv-table-numnoder">15</td>
+    <td class="riscv-table-numnodel">14</td>
+    <td class="riscv-table-numnode" colspan="1"></td>
+    <td class="riscv-table-numnoder">12</td>
+    <td class="riscv-table-numnodel">11</td>
+    <td class="riscv-table-numnode" colspan="3"></td>
+    <td class="riscv-table-numnoder">7</td>
+    <td class="riscv-table-numnodel">6</td>
+    <td class="riscv-table-numnode" colspan="5"></td>
+    <td class="riscv-table-numnoder">0</td>
+</tr>
+<tr>
+    <td colspan="7" class="riscv-table-node">imm[12,10:5]</td>
+    <td colspan="5" class="riscv-table-node">rs2</td>
+    <td colspan="5" class="riscv-table-node">rs1</td>
+    <td colspan="3" class="riscv-table-node">funct3</td>
+    <td colspan="5" class="riscv-table-node">imm[4:1,11]</td>
+    <td colspan="7" class="riscv-table-node">opcode</td>
+</tr>
+</table>
+
+B 型指令本质上是 S 型的变种，主要区别就是立即数读取的顺序不同。它用于分支跳转指令，比如 beq，相等时跳转，对应 C 语言的 `if(rs1 == rs2) PC += imm`。
+
+可以看到，B 型和 S 型都需要两个寄存器和一个立即数进行操作。
+
+### U 型
+
+<table class="riscv-table">
+<tr>
+    <td class="riscv-table-numnodel">31</td>
+    <td class="riscv-table-numnode" colspan="18"></td>
+    <td class="riscv-table-numnoder">12</td>
+    <td class="riscv-table-numnodel">11</td>
+    <td class="riscv-table-numnode" colspan="3"></td>
+    <td class="riscv-table-numnoder">7</td>
+    <td class="riscv-table-numnodel">6</td>
+    <td class="riscv-table-numnode" colspan="5"></td>
+    <td class="riscv-table-numnoder">0</td>
+</tr>
+<tr>
+    <td colspan="20" class="riscv-table-node">imm[31:12]</td>
+    <td colspan="5" class="riscv-table-node">rd</td>
+    <td colspan="7" class="riscv-table-node">opcode</td>
+</tr>
+</table>
+
+很显然，就是一个寄存器和一个立即数参与操作；而且没有源操作数。
+例子就是 lui，对应的 C 语言描述是 `rd = imm << 12`
+
+U 型操作只能通过 opcode 来区分。
+
+### J 型
+
+<table class="riscv-table">
+<tr>
+    <td class="riscv-table-numnodel">31</td>
+    <td class="riscv-table-numnode" colspan="18"></td>
+    <td class="riscv-table-numnoder">12</td>
+    <td class="riscv-table-numnodel">11</td>
+    <td class="riscv-table-numnode" colspan="3"></td>
+    <td class="riscv-table-numnoder">7</td>
+    <td class="riscv-table-numnodel">6</td>
+    <td class="riscv-table-numnode" colspan="5"></td>
+    <td class="riscv-table-numnoder">0</td>
+</tr>
+<tr>
+    <td colspan="20" class="riscv-table-node">imm[20,10:1,11,19:12]</td>
+    <td colspan="5" class="riscv-table-node">rd</td>
+    <td colspan="7" class="riscv-table-node">opcode</td>
+</tr>
+</table>
+
+U 型指令的变种，用于无条件跳转指令，比如 jal。
+
+## 3. 伪指令
+
+除了上面说的六种指令外，我们也可以用在汇编代码中使用伪指令，在实际编译时，它们会被上面的指令替代。
+
+可以看看下面的几个例子：
+
+| Pseudoinstruction | Base Instruction(s)                                               | Meaning              |
+|-------------------|-------------------------------------------------------------------|----------------------|
+| nop               | addi x0, x0, 0                                                    | No operation         |
+| mv rd, rs        | addi rd, rs, 0                                                    | Copy register        |
+| j offset          | jal x0, offset                                                    | Jump                 |
+| ret               | jalr x0, x1, 0                                                    | 通过返回地址 x1 返回 |
+| call offset       | auipc x1, offset[31 : 12] + offset[11] </br> jalr x1, offset\[11:0\](x1) | 远调用               |
+
+??? "tips"
+    1. 怎么插入 markdown 表格？
+        可以在这个网站快速生成：<https://www.tablesgenerator.com/markdown_tables>
+    2. html 语言，用 `</br>` 表示换行。举个例子：</br>
+    3. 可以看到，这些伪代码和有些和 x86 中学过的是很相似的，可以比较容易的迁移学习。
+## 4. 指令表
+
+实际上，riscv 的指令是如此的简单，以至于他们很容易就被整理在几张表上了：
+
+cs61c 的表：
+
+<https://github.com/jameslzhu/riscv-card/blob/master/riscv-card.pdf>
+
+官方表：
+
+<https://www.cl.cam.ac.uk/teaching/1617/ECAD+Arch/files/docs/RISCVGreenCardv8-20151013.pdf>
+
+有很多人都做了表，我就不整理指令了。（真的不是因为偷懒吗
+
+## 5. 寄存器
+
+上面代码中出现过寄存器了，下面介绍一下。
+
+
+寄存器包括 1 个 PC 寄存器和 32 个 32 位特殊寄存器。它们的功能简要介绍如下表：
+
+|寄存器|ABI 名称|用途描述|saver|
+|:--:|:--:|:--|:--:|
+|x0|zero|硬件 0||
+|x1|ra|返回地址（return address）|caller|
+|x2|sp|栈指针（stack pointer）|callee|
+|x3|gp|全局指针（global pointer）||
+|x4|tp|线程指针（thread pointer）||
+|x5|t0|临时变量/备用链接寄存器（alternate link reg）|caller|
+|x6-7|t1-2|临时变量|caller|
+|x8|s0/fp|需要保存的寄存器/帧指针（frame pointer）|callee|
+|x9|s1|需要保存的寄存器|callee|
+|x10-11|a0-1|函数参数/返回值|caller|
+|x12-17|a2-7|函数参数|caller|
+|x18-27|s2-11|需要保存的寄存器|callee|
+|x28-31|t3-6|临时变量|caller|
