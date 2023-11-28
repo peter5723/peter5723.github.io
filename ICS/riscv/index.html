@@ -12,14 +12,14 @@
         <link rel="prev" href="../make/">
       
       
-        <link rel="next" href="../c_lan/">
+        <link rel="next" href="../number/">
       
       <link rel="icon" href="../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.0.4">
     
     
       
-        <title>risc-v - Peter's home</title>
+        <title>RISC-V - Peter's home</title>
       
     
     
@@ -106,7 +106,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              risc-v
+              RISC-V
             
           </span>
         </div>
@@ -512,12 +512,12 @@
       
       
         <label class="md-nav__link md-nav__link--active" for="__toc">
-          risc-v
+          RISC-V
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <a href="./" class="md-nav__link md-nav__link--active">
-        risc-v
+        RISC-V
       </a>
       
         
@@ -640,8 +640,8 @@
   
   
     <li class="md-nav__item">
-      <a href="../c_lan/" class="md-nav__link">
-        c 语言
+      <a href="../number/" class="md-nav__link">
+        数字与算术
       </a>
     </li>
   
@@ -1155,6 +1155,7 @@ ARM 和 risc-v 都属于 RISC 指令集。</p>
 <p>I 型使用两个寄存器和和一个立即数进行运算。如果像 R 型那样，只留 5 位给立即数，那能表示的立即数太少了。所以如此设计，可以表示更大的立即数（12位可以表示 -2048 ~ 2048）。 </p>
 <p>除此之外，load 类型的操作也属于 I 型的，比如 <code>ld x9, 240(x10)</code>。立即数用来储存变址寻址的偏移量。</p>
 <p>I 型的运算类型由 opcode 和 funct3 决定。</p>
+<p>立即数是 {{20{inst[31]}}, inst[31:20]}。</p>
 <h3 id="s">S 型<a class="headerlink" href="#s" title="Permanent link">&para;</a></h3>
 <table class="riscv-table">
 <tr>
@@ -1192,6 +1193,7 @@ ARM 和 risc-v 都属于 RISC 指令集。</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>sd x9, 240(x22) // x9 中的数据储存回 x22 中的地址后移 240 位的地址中。
 </code></pre></div>
 为了保持寄存器 rs1 和 rs2 的位置一致，所以将一个立即数分成两部分表示。比如说，这里 (240)<sub>10</sub> = (0000111 10000)<sub>2</sub>，那么 0000111 将会保存到 imm[11:5]，10000 将会保存到 imm[4:0]。</p>
+<p>S 型的立即数是 {{20{inst[31]}}, inst[31:25], inst[11:7]}。</p>
 <h3 id="b">B 型<a class="headerlink" href="#b" title="Permanent link">&para;</a></h3>
 <table class="riscv-table">
 <tr>
@@ -1226,6 +1228,7 @@ ARM 和 risc-v 都属于 RISC 指令集。</p>
 
 <p>B 型指令本质上是 S 型的变种，主要区别就是立即数读取的顺序不同。它用于分支跳转指令，比如 beq，相等时跳转，对应 C 语言的 <code>if(rs1 == rs2) PC += imm</code>。</p>
 <p>可以看到，B 型和 S 型都需要两个寄存器和一个立即数进行操作。</p>
+<p>立即数是 {{19{inst[31]}}, inst[31], inst[7], inst[30:25], inst[11:8], 1'b0}。前面是符号位填充到 32 位，补 1 位 0。</p>
 <h3 id="u">U 型<a class="headerlink" href="#u" title="Permanent link">&para;</a></h3>
 <table class="riscv-table">
 <tr>
@@ -1249,6 +1252,7 @@ ARM 和 risc-v 都属于 RISC 指令集。</p>
 <p>很显然，就是一个寄存器和一个立即数参与操作；而且没有源操作数。
 例子就是 lui，对应的 C 语言描述是 <code>rd = imm &lt;&lt; 12</code></p>
 <p>U 型操作只能通过 opcode 来区分。</p>
+<p>立即数是 {inst[31:12], 12'b0}</p>
 <h3 id="j">J 型<a class="headerlink" href="#j" title="Permanent link">&para;</a></h3>
 <table class="riscv-table">
 <tr>
@@ -1270,6 +1274,9 @@ ARM 和 risc-v 都属于 RISC 指令集。</p>
 </table>
 
 <p>U 型指令的变种，用于无条件跳转指令，比如 jal。</p>
+<p>立即数是 </p>
+<p>{{11{inst[31]}}, inst[31], inst[19:12], inst[20], inst[30:21], 1'b0}</p>
+<p>前面符号填充，注意最后一位要补上 0。还没有找到这样的原因，但是这个 0 浪费了我很久的时间，先记一下。</p>
 <h2 id="3">3. 伪指令<a class="headerlink" href="#3" title="Permanent link">&para;</a></h2>
 <p>除了上面说的六种指令外，我们也可以用在汇编代码中使用伪指令，在实际编译时，它们会被上面的指令替代。</p>
 <p>可以看看下面的几个例子：</p>
@@ -1424,7 +1431,7 @@ ARM 和 risc-v 都属于 RISC 指令集。</p>
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-11-26</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-11-29</span>
       
         <br>
         Created:
