@@ -101,8 +101,8 @@ nav:
     - "PA 实验记录": "ICS/2023-11-02-PAnote.md"
     - "vim": "ICS/vim.md"
     - "GNU Make": "ICS/make.md"
-    - "risc-v": "ICS/riscv.md"
-    - "c 语言": "ICS/c_lan.md"
+    - "RISC-V": "ICS/riscv.md"
+    - "数字与算术": "ICS/number.md"
   - "算法":
     - "介绍": "algorithm/intro.md"
     - "搜索":
