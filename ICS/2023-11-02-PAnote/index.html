@@ -14,7 +14,7 @@
         <link rel="prev" href="../../signal/ch6_ss/">
       
       
-        <link rel="next" href="../vim/">
+        <link rel="next" href="../shell/">
       
       <link rel="icon" href="../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.0.4">
@@ -855,10 +855,139 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#pa2" class="md-nav__link">
+    PA2
+  </a>
+  
+    <nav class="md-nav" aria-label="PA2">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-nemu" class="md-nav__link">
+    1. NEMU 中，一条指令是怎么完整执行的
+  </a>
+  
+    <nav class="md-nav" aria-label="1. NEMU 中，一条指令是怎么完整执行的">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
+    取指
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_15" class="md-nav__link">
+    译码
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_16" class="md-nav__link">
+    执行
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pc" class="md-nav__link">
+    更新 PC
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nemu" class="md-nav__link">
+    NEMU 是什么？
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-am" class="md-nav__link">
+    2. AM 是什么？运行时环境是什么？
+  </a>
+  
+    <nav class="md-nav" aria-label="2. AM 是什么？运行时环境是什么？">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_17" class="md-nav__link">
+    具体实现
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-am-nemu" class="md-nav__link">
+    3. AM 程序怎么构建，怎么在 NEMU 中运行？
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-io" class="md-nav__link">
+    4. IO 设备
+  </a>
+  
+    <nav class="md-nav" aria-label="4. IO 设备">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_18" class="md-nav__link">
+    声卡
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5" class="md-nav__link">
+    5. 杂项
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
     </ul>
   
 </nav>
       
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../shell/" class="md-nav__link">
+        shell
+      </a>
     </li>
   
 
@@ -1492,6 +1621,121 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#pa2" class="md-nav__link">
+    PA2
+  </a>
+  
+    <nav class="md-nav" aria-label="PA2">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-nemu" class="md-nav__link">
+    1. NEMU 中，一条指令是怎么完整执行的
+  </a>
+  
+    <nav class="md-nav" aria-label="1. NEMU 中，一条指令是怎么完整执行的">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
+    取指
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_15" class="md-nav__link">
+    译码
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_16" class="md-nav__link">
+    执行
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pc" class="md-nav__link">
+    更新 PC
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nemu" class="md-nav__link">
+    NEMU 是什么？
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-am" class="md-nav__link">
+    2. AM 是什么？运行时环境是什么？
+  </a>
+  
+    <nav class="md-nav" aria-label="2. AM 是什么？运行时环境是什么？">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_17" class="md-nav__link">
+    具体实现
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-am-nemu" class="md-nav__link">
+    3. AM 程序怎么构建，怎么在 NEMU 中运行？
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-io" class="md-nav__link">
+    4. IO 设备
+  </a>
+  
+    <nav class="md-nav" aria-label="4. IO 设备">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_18" class="md-nav__link">
+    声卡
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5" class="md-nav__link">
+    5. 杂项
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -1649,6 +1893,8 @@
 <p>Then you can google and github freely.</p>
 <h3 id="gcc">gcc<a class="headerlink" href="#gcc" title="Permanent link">&para;</a></h3>
 <p><code>-g</code>  增加调试指令</p>
+<p>gcc 可以增加警告，警告视作错误。</p>
+<p>gcc 可以只输出宏定义展开，不编译。</p>
 <h3 id="gdb">gdb<a class="headerlink" href="#gdb" title="Permanent link">&para;</a></h3>
 <h4 id="starting">Starting:<a class="headerlink" href="#starting" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>  gdb
@@ -1796,6 +2042,9 @@
 <a id="__codelineno-18-7" name="__codelineno-18-7" href="#__codelineno-18-7"></a>:cscope find i   # includes: find files that include the filename under cursor
 <a id="__codelineno-18-8" name="__codelineno-18-8" href="#__codelineno-18-8"></a>:cscope find d   # called: find functions that function under cursor calls
 </code></pre></div></p>
+<p>在使用 cscope 时，可以输入 <code>:cw</code> 来打开 quickfix 窗口，来显示所有结果出现的位置。
+在 quickfix 窗口切换不同的匹配项，可以输入 <code>:cs cn</code> 切换到下一个匹配项，<code>:cs cp</code> 切换到上一个匹配项。
+当然，上下左右hjkl也可以。</p>
 <h5 id="youcompleteme">YouCompleteMe<a class="headerlink" href="#youcompleteme" title="Permanent link">&para;</a></h5>
 <p>very powerful.</p>
 <p>在.vimrc中配置, 配置去网上抄. c语言要装clang先.</p>
@@ -1894,13 +2143,200 @@ c语言默认数字是有符号的，在数字后面加<code>u</code>表示无�
 <p>这里提供思路: 负号的识别看讲义. 负号的计算利用这个特征: 单元运算符只与最近的表达式(只能是括号或者是数字)相结合. 利用这个特点, 我考虑用栈, 若碰到单元运算符, 将之放入栈中. 另外再维护一个栈来记录下与这些单元运算符结合的括号或者数字的位置. 在递归出口时, 若是括号或者数字的情况, 比较该表达式所在位置和先前记录位置, 若相等, 说明栈中的运算符都是属于这个表达式的. 然后将运算符栈清空计算同时位置栈并弹出一个元素. 对了, 注意括号的情况. 有括号时, 将括号也压入栈, 弹出时弹到括号为止. </p>
 <p>表述能力有限, 多包涵. 该思路本身有些麻烦, 不过通过了一些测试. 希望有更简单的思路.</p>
 <p>做完PA1，你应该已经实现了一个简易的调试器。</p>
+<h2 id="pa2">PA2<a class="headerlink" href="#pa2" title="Permanent link">&para;</a></h2>
+<p>C 语言库函数源码</p>
+<p><a href="https://stackoverflow.com/questions/5233514/where-to-find-stdio-h-functions-implementations">https://stackoverflow.com/questions/5233514/where-to-find-stdio-h-functions-implementations</a></p>
+<p>孙燕姿的学会真好听啊，很治愈。</p>
+<p>做这个 PA 实验花的时间比预想的久，一个是我学得慢，riscv 看了一天，然后 make 怎么用看了一天，基本上每天只能过一点点进度，一天做显卡，一天做声卡；但是确实很有收获的，之前很少有机会看这么多代码。本来想等做完了再整理，真的快做完了又不知道从哪里开始整理比较好。</p>
+<p>PA 2 这个实验花了应该有 100+ 小时吧，陆陆续续写了两个星期了</p>
+<p>就以问题为导向好了，不过不会回答讲义上的所有问题。</p>
+<h3 id="1-nemu">1. NEMU 中，一条指令是怎么完整执行的<a class="headerlink" href="#1-nemu" title="Permanent link">&para;</a></h3>
+<p>好吧，就从这个必答题：一条汇编指令在 NEMU 中的执行过程开始说起。</p>
+<p>连学过大计基的人也知道，指令的执行过程是取指、译码、执行，而 NEMU 正是这样的一个模拟器。</p>
+<p>首先是开机， <code>nemu/src/monitor/monitor.c</code> 中做了各种初始化的工作</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a><span class="n">init_rand</span><span class="p">();</span>
+<a id="__codelineno-24-2" name="__codelineno-24-2" href="#__codelineno-24-2"></a><span class="n">init_mem</span><span class="p">();</span>
+<a id="__codelineno-24-3" name="__codelineno-24-3" href="#__codelineno-24-3"></a><span class="n">init_isa</span><span class="p">();</span>
+<a id="__codelineno-24-4" name="__codelineno-24-4" href="#__codelineno-24-4"></a><span class="n">load_img</span><span class="p">();</span>
+<a id="__codelineno-24-5" name="__codelineno-24-5" href="#__codelineno-24-5"></a><span class="n">IFDEF</span><span class="p">(</span><span class="n">CONFIG_DEVICE</span><span class="p">,</span><span class="w"> </span><span class="n">init_device</span><span class="p">());</span>
+<a id="__codelineno-24-6" name="__codelineno-24-6" href="#__codelineno-24-6"></a><span class="n">welcome</span><span class="p">();</span>
+</code></pre></div>
+<p>然后，开始执行你的程序。 执行有关的代码都在 <code>nemu/src/cpu/cpu-exec.c</code> 中。我们一层一层看下去就知道了（用 GDB 调试更清楚）。执行一条指令的函数是 <code>exec_once()</code>，它做了什么呢。
+先看一个数据类型吧，看这个 Decode 结构的定义
+<div class="highlight"><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a><span class="k">typedef</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">Decode</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-25-2" name="__codelineno-25-2" href="#__codelineno-25-2"></a><span class="w">  </span><span class="n">vaddr_t</span><span class="w"> </span><span class="n">pc</span><span class="p">;</span>
+<a id="__codelineno-25-3" name="__codelineno-25-3" href="#__codelineno-25-3"></a><span class="w">  </span><span class="n">vaddr_t</span><span class="w"> </span><span class="n">snpc</span><span class="p">;</span><span class="w"> </span><span class="c1">// static next pc</span>
+<a id="__codelineno-25-4" name="__codelineno-25-4" href="#__codelineno-25-4"></a><span class="w">  </span><span class="n">vaddr_t</span><span class="w"> </span><span class="n">dnpc</span><span class="p">;</span><span class="w"> </span><span class="c1">// dynamic next pc</span>
+<a id="__codelineno-25-5" name="__codelineno-25-5" href="#__codelineno-25-5"></a><span class="w">  </span><span class="n">ISADecodeInfo</span><span class="w"> </span><span class="n">isa</span><span class="p">;</span>
+<a id="__codelineno-25-6" name="__codelineno-25-6" href="#__codelineno-25-6"></a><span class="w">  </span><span class="n">IFDEF</span><span class="p">(</span><span class="n">CONFIG_ITRACE</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="n">logbuf</span><span class="p">[</span><span class="mi">128</span><span class="p">]);</span>
+<a id="__codelineno-25-7" name="__codelineno-25-7" href="#__codelineno-25-7"></a><span class="p">}</span><span class="w"> </span><span class="n">Decode</span><span class="p">;</span>
+</code></pre></div>
+包括 pc（当前指令）snpc 下一条动态指令 dnpc 下一条静态指令</p>
+<p>这个结构体存储了 <code>pc</code> 的信息。于是我们就这样更新 cpu.pc 这个程序计数器
+<div class="highlight"><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a><span class="n">s</span><span class="o">-&gt;</span><span class="n">pc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pc</span><span class="p">;</span>
+<a id="__codelineno-26-2" name="__codelineno-26-2" href="#__codelineno-26-2"></a><span class="n">s</span><span class="o">-&gt;</span><span class="n">snpc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pc</span><span class="p">;</span>
+<a id="__codelineno-26-3" name="__codelineno-26-3" href="#__codelineno-26-3"></a><span class="n">isa_exec_once</span><span class="p">(</span><span class="n">s</span><span class="p">);</span>
+<a id="__codelineno-26-4" name="__codelineno-26-4" href="#__codelineno-26-4"></a><span class="n">cpu</span><span class="p">.</span><span class="n">pc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">s</span><span class="o">-&gt;</span><span class="n">dnpc</span><span class="p">;</span>
+</code></pre></div>
+然后在 isa_exec_once 中就是具体的 <strong>取指译码执行</strong>操作了。具体的代码在 <code>nemu/src/isa/riscv32/inst.c</code> 中。</p>
+<h4 id="_14">取指<a class="headerlink" href="#_14" title="Permanent link">&para;</a></h4>
+<p>首先要取指。 <code>s-&gt;pc</code> 存储了当前要执行的指令地址，从这个地址读取指令。具体来说是这样，在NEMU中, 有一个函数<code>inst_fetch()</code>(在<code>nemu/include/cpu/ifetch.h</code>中定义)专门负责取指令的工作. <code>inst_fetch()</code>最终会根据参数len来调用<code>vaddr_ifetch()</code>(在<code>nemu/src/memory/vaddr.c</code>中定义), 而目前<code>vaddr_ifetch()</code>又会通过<code>paddr_read()</code>来访问物理内存中的内容. 因此, 取指操作的本质只不过就是一次内存的访问而已.</p>
+<p>另外，isa_exec_once()在调用inst_fetch()的时候传入了s-&gt;snpc的地址, 因此inst_fetch()最后还会根据len（即指令长度）来更新s-&gt;snpc, 从而让s-&gt;snpc指向下一条指令. </p>
+<h4 id="_15">译码<a class="headerlink" href="#_15" title="Permanent link">&para;</a></h4>
+<p>然后译码。接下来代码会进入decode_exec()函数, 来进行译码。译码，顾名思义就是翻译取出的指令，看对应的操作是什么。</p>
+<p>在 NEMU 中，译码是通过模式匹配来实现的。要实现匹配，又定义了一个非常精妙的宏 <code>INSTPAT</code> 来定义。</p>
+<p>格式是这样</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a>INSTPAT(模式字符串, 指令名称, 指令类型, 指令执行操作);
+</code></pre></div>
+<p>例子如下</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a><span class="n">INSTPAT_START</span><span class="p">();</span>
+<a id="__codelineno-28-2" name="__codelineno-28-2" href="#__codelineno-28-2"></a><span class="n">INSTPAT</span><span class="p">(</span><span class="s">&quot;??????? ????? ????? ??? ????? 00101 11&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">auipc</span><span class="p">,</span><span class="w"> </span><span class="n">U</span><span class="p">,</span><span class="w"> </span><span class="n">R</span><span class="p">(</span><span class="n">rd</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">s</span><span class="o">-&gt;</span><span class="n">pc</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">imm</span><span class="p">);</span>
+<a id="__codelineno-28-3" name="__codelineno-28-3" href="#__codelineno-28-3"></a><span class="n">INSTPAT</span><span class="p">(</span><span class="s">&quot;0000000 00001 00000 000 00000 11100 11&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">ebreak</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="n">N</span><span class="p">,</span><span class="w"> </span><span class="n">NEMUTRAP</span><span class="p">(</span><span class="n">s</span><span class="o">-&gt;</span><span class="n">pc</span><span class="p">,</span><span class="w"> </span><span class="n">R</span><span class="p">(</span><span class="mi">10</span><span class="p">)));</span><span class="w"> </span><span class="c1">// R(10) is $a0</span>
+<a id="__codelineno-28-4" name="__codelineno-28-4" href="#__codelineno-28-4"></a><span class="n">INSTPAT</span><span class="p">(</span><span class="s">&quot;??????? ????? ????? ??? ????? ????? ??&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">inv</span><span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="n">N</span><span class="p">,</span><span class="w"> </span><span class="n">INV</span><span class="p">(</span><span class="n">s</span><span class="o">-&gt;</span><span class="n">pc</span><span class="p">));</span><span class="w"> </span><span class="c1">// invalid inst</span>
+<a id="__codelineno-28-5" name="__codelineno-28-5" href="#__codelineno-28-5"></a><span class="c1">// ...</span>
+<a id="__codelineno-28-6" name="__codelineno-28-6" href="#__codelineno-28-6"></a><span class="n">INSTPAT_END</span><span class="p">();</span>
+</code></pre></div>
+<p>如果你的指令满足某一条匹配规则，那么我们就可以根据这个规则将一串二进制 01 翻译成对应的执行操作了。</p>
+<h4 id="_16">执行<a class="headerlink" href="#_16" title="Permanent link">&para;</a></h4>
+<p>译码完成了以后，相应的动作都是用 C 语言模拟的，我们执行这些动作就可以了。</p>
+<h4 id="pc">更新 PC<a class="headerlink" href="#pc" title="Permanent link">&para;</a></h4>
+<p>上面执行完了以后，回到 exec-once 函数， 更新 pc 就结束了。</p>
+<p>然后下面的代码，是打印出取到的指令的 16 进制表示及其反汇编结果的；源码很清楚，就不多说了，自己看吧。</p>
+<details open="open">
+<summary>tips</summary>
+<p>宏定义太复杂了，要绕晕了怎么办呢？编译器可以帮助我们。gcc 加 <code>-E</code> 选项可以只打印展开结果而不编译。</p>
+<p>有两个宏定义的结构体，展开了就很清晰了：
+一个就是存储寄存器和 PC 的情况，还有一个就是用来存储指令的结构体</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a><span class="k">typedef</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-29-2" name="__codelineno-29-2" href="#__codelineno-29-2"></a><span class="n">word_t</span><span class="w"> </span><span class="n">gpr</span><span class="p">[</span><span class="mi">32</span><span class="p">];</span>
+<a id="__codelineno-29-3" name="__codelineno-29-3" href="#__codelineno-29-3"></a><span class="w">  </span><span class="n">vaddr_t</span><span class="w"> </span><span class="n">pc</span><span class="p">;</span>
+<a id="__codelineno-29-4" name="__codelineno-29-4" href="#__codelineno-29-4"></a><span class="p">}</span><span class="w"> </span><span class="n">riscv32_CPU_state</span><span class="p">;</span>
+<a id="__codelineno-29-5" name="__codelineno-29-5" href="#__codelineno-29-5"></a><span class="k">typedef</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-29-6" name="__codelineno-29-6" href="#__codelineno-29-6"></a><span class="k">union</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-29-7" name="__codelineno-29-7" href="#__codelineno-29-7"></a><span class="w">    </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">val</span><span class="p">;</span>
+<a id="__codelineno-29-8" name="__codelineno-29-8" href="#__codelineno-29-8"></a><span class="w">  </span><span class="p">}</span><span class="w"> </span><span class="n">inst</span><span class="p">;</span>
+<a id="__codelineno-29-9" name="__codelineno-29-9" href="#__codelineno-29-9"></a><span class="p">}</span><span class="w"> </span><span class="n">riscv32_ISADecodeInfo</span><span class="p">;</span>
+</code></pre></div>
+</details>
+<p>根据 riscv 指令来一条条添加匹配规则，这就是 PA2 的第一部分了。这里就体现了 riscv 的优越性，只需要添加大约 40 条指令就可以通过所有的测试了，这是 x86 想都不敢想的事情。</p>
+<p>上面就是一条指令完整的执行结果了。</p>
+<h4 id="nemu">NEMU 是什么？<a class="headerlink" href="#nemu" title="Permanent link">&para;</a></h4>
+<p>NEMU 是一个模拟器，它模拟了真实计算机的硬件，从执行指令的 CPU 、内存到后面显卡、声卡等外设，都可以被它模拟出来。</p>
+<h3 id="2-am">2. AM 是什么？运行时环境是什么？<a class="headerlink" href="#2-am" title="Permanent link">&para;</a></h3>
+<p>我写了一个 C 程序，要在 NEMU 上运行，怎么运行呢？我们要为程序提供它需要的运行时环境。运行时环境是一个抽象的概念，可以理解成“程序运行所需的各种需求的满足”。</p>
+<p>在上一部分中我们实现了四十多条指令，意味着我们可以进行各种计算了，我们实现了一个“图灵机”。“图灵机”就是最简单的运行时环境：内存，结束运行的方式和运算的指令。</p>
+<p>然后呢，如果我的程序的需求更多呢？它不满足于运算，它想要打印，它想要显示，想要接受键盘输入，等等，怎么办？我们要为它提供更丰富的运行时环境。</p>
+<p>于是 AM 就应运而生了。AM 是一个为应用程序提供各种运行时环境的库。</p>
+<p>AM 将程序运行的需求都收集起来，抽象成了统一的 API，应用程序有需求，直接调用对应的 API 就可以了。</p>
+<p>其实，你也可以说，应用程序干嘛非得调库呢？我有需求，我自己码代码实现不可以吗？比如说，我想操控硬件，那我就直接写对硬件读写的代码呗，不行吗？</p>
+<p>实际上，当然是可以的。但是，这样不麻烦吗？所以，AM 存在的最大意义就是为了抽象，而抽象是为了简单。我抽象出来，让应用程序不必关注底层的硬件，专注于实现自己的功能就可以了。</p>
+<p>所以，原本的软硬件关系是这样的：
+<div class="highlight"><pre><span></span><code><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a>NEMU -&gt; 应用软件层
+</code></pre></div>
+NEMU 提供硬件功能；应用软件直接执行，直接和硬件交互</p>
+<p>现在增加了一层 AM 抽象层：
+<div class="highlight"><pre><span></span><code><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a>NEMU -&gt; AM 抽象层 -&gt; 应用软件层
+</code></pre></div>
+NEMU 提供硬件功能；AM 抽象层负责和上层的软件和底层的硬件进行交互，屏蔽掉交互细节，只提供抽象接口给应用软件层；应用软件层不直接操纵硬件，只和 AM 抽象层进行交互。</p>
+<p>AM 中的 API，帮助实现了程序需要的运行时环境，于是将这些 API 称作 abstract machine，这就是 AM 库名称的由来。调用了这些接口的程序，称为 AM 程序。细细理解也是，这些接口实现，很像一个为程序运行提供各种东西的计算机。AM 库包含下面部分：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a>AM = TRM + IOE + CTE + VME + MPE
+</code></pre></div>
+<p>TRM 提供计算功能，IOE 提供输入输出功能，其他的还未涉及。</p>
+<h4 id="_17">具体实现<a class="headerlink" href="#_17" title="Permanent link">&para;</a></h4>
+<p>运行时环境可以分为架构相关和架构无关。io 就是典型的架构相关的，不同 isa 对应的底层硬件不同，所以对每一种架构都要写一个对应的函数。还有一些库函数是架构无关的，一个实现就可以给所有的架构用了。</p>
+<p>实现库函数这里都是苦力活，没什么好说的。就一个 bug 需要提一提，在实现 <code>strcmp</code> 的时候发现的，关于 <code>char</code> 的 bug。</p>
+<ol>
+<li><code>char</code> 在编译时居然是默认被解释为无符号类型的，即 <code>unsigned char</code>。应该是交叉编译导致的，因为 x86 的下编译是解释为有符号类型的（等待 difftest 验证）。解决方法是使用 <code>int8_t</code> 来明确类型。</li>
+<li>8 位无符号数相减得到的却是有符号数，然而结果用 (int) 扩展到 32 位后结果又变成了无符号数。这个特性不管是 x86 还是 riscv 都有。解决方法就是小心一点多做一步强制类型转换。</li>
+<li>所以 <code>&lt;stdint.h&gt;</code> 规避了很多歧义，建议使用。</li>
+</ol>
+<h3 id="3-am-nemu">3. AM 程序怎么构建，怎么在 NEMU 中运行？<a class="headerlink" href="#3-am-nemu" title="Permanent link">&para;</a></h3>
+<p>讲义值得参考的部分：<a href="https://nju-projectn.github.io/ics-pa-gitbook/ics2023/2.3.html#rtfsc3">https://nju-projectn.github.io/ics-pa-gitbook/ics2023/2.3.html#rtfsc3</a> </p>
+<p>可以问一个更加具体的问题：在<code>am-kernels/kernels/hello/</code> 下运行 <code>make ARCH=$ISA-nemu run</code>，make 到底做了些什么呢？</p>
+<p>先看 AM 程序是怎么构建的吧。看 AM 的 Makefile 源文件，我可以看出来编译和链接的代码，并且可以根据 <code>ARCH</code> 这个命令行参数来选择不同的架构。选择的架构不同，就会选择不同的交叉编译工具，编译不同架构的代码。如果选择的架构是<code>native</code>，就直接用 gcc 编译成 <code>x86</code> 类型的文件，可以直接在 linux 主机上运行；如果选择的是<code>riscv32-nemu</code>，就会用riscv64-linux-gnu-gcc 来编译，并进行进一步处理，来使得程序可以在 nemu 上运行。</p>
+<details class="小问题" open="open">
+<summary>小问题</summary>
+<p>问题：我目前还没有搞清楚在 Makefile 中怎么规定编译链接的顺序。</p>
+<p>勉强答：编译的先后顺序无所谓，链接的顺序是 ld 根据链接脚本 <code>abstract-machine/scripts/linker.ld</code> 来链接，but 这个文件我还是看不懂。</p>
+</details>
+<details class="交叉编译" open="open">
+<summary>交叉编译</summary>
+<p>什么是交叉编译呢？在一个平台上将代码编译成另一个平台的程序就叫交叉编译。比如我们这里，就是在 <code>x86</code> 的 linux 平台下把代码编译成 <code>riscv32</code> 类型的文件。</p>
+</details>
+<p>如果要搞清楚 make 在做什么的话，可以利用 make 的 -n 选项来查看运行 make 会执行哪些命令。这里我们运行</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-33-1" name="__codelineno-33-1" href="#__codelineno-33-1"></a>make -n ARCH=riscv32-nemu run
+</code></pre></div>
+<p>输出的结果很长，我就不放了。
+做的事情概括起来是：</p>
+<ol>
+<li>gcc 将 AM 实现源文件编译成目标文件，用 ar 将目标文件打包成一个库</li>
+<li>通过 gcc 和 ar 将 klib 的实现编译打包成库</li>
+<li>gcc 把应用程序源文件 <code>hello.c</code> 编译成目标文件</li>
+<li>用 ld 根据链接脚本 <code>abstract-machine/scripts/linker.ld</code>, 将上述目标文件和归档文件链接成可执行文件，<code>*.bin</code>是镜像文件，将加载到 nemu 中运行，<code>*.elf</code> 是对应的 16 进制文件，我们可以读取它获得相应的信息。</li>
+<li>run 选项对应的代码是 <code>$(MAKE)i-C $(NEMU_HOME) ISA=$(ISA) run ARGS="$(NEMUFLAGS)" IMG=$(IMAGE).bin</code>。很简单，是在 nemu 的主文件夹下编译构建出 nemu interpreter，并运行它。</li>
+</ol>
+<p>接着，nemu 运行它的应用程序的过程：</p>
+<ol>
+<li>打开 nemu 以后，nemu 在初始化的过程中会将即将执行的应用程序的镜像文件 (*.bin) 加载到内存 (pmem) 中。</li>
+<li>开始运行程序后，第一条指令从 <code>abstract-machine/am/src/$ISA/nemu/start.S</code> 开始, 设置好栈顶之后就跳转到 <code>abstract-machine/am/src/platform/nemu/trm.c</code> 的 <code>_trm_init()</code> 函数处执行.</li>
+<li>在 <code>_trm_init()</code>中调用 <code>main()</code> 函数执行程序的主体功能</li>
+<li>从 <code>main()</code> 函数返回后, 调用 <code>halt()</code> 结束运行</li>
+</ol>
+<details class="小问题" open="open">
+<summary>小问题</summary>
+<p>问题：编译构建 nemu 项目时，最后的项目名称 <code>nemu-intepreter</code> 哪里来的？我还没搞清楚。</p>
+</details>
+<h3 id="4-io">4. IO 设备<a class="headerlink" href="#4-io" title="Permanent link">&para;</a></h3>
+<p>NEMU 是怎么实现输入输出设备的模拟的？</p>
+<p>看一看源码，一个设备是怎么注册的。首先规定好设备的大小，给设备接口分配一个所需的大小的空间（用 malloc 即可），然后规定好设备的映射地址，以及相应的回调函数，最后将空间、地址和函数等信息通过初始化函数存储起来，就完成了注册。</p>
+<p>如果我注册了一个设备，当我访问这段物理地址的时候，就会跳转到对应 I/O 设备地址（就是上面 malloc 分配的额外的空间，而不再是 pmem 内存中了）。当我对这段地址读写时，可能会触发相应的回调函数，回调函数就是这个设备的“动作”了。比如串口的回调函数，就是打印写入的字符到标准错误流中。</p>
+<p>更具体的，就 RTFSC 吧，源代码还是比较清楚的，讲义也很详细了： <a href="https://nju-projectn.github.io/ics-pa-gitbook/ics2023/2.5.html">https://nju-projectn.github.io/ics-pa-gitbook/ics2023/2.5.html</a></p>
+<h4 id="_18">声卡<a class="headerlink" href="#_18" title="Permanent link">&para;</a></h4>
+<p>最麻烦的就是声卡，需要软件硬件协同操作。</p>
+<p>但是学到的也最多，实现了声卡了以后，理解就更深刻，在 AM 中寄存器的操作都还是软件层，AM 就是软件和硬件的桥梁，将相应的数据写到对应的内存中，然后硬件（NEMU）再进行处理，进行声音的播放。看到完整的 bad apple 还怪高兴的哈哈。</p>
+<p>打开声卡前，最好关闭 trace 功能。</p>
+<p>声卡很吃配置，打开声卡以后，超级玛丽完全玩不了了。（显卡还有十几帧的）。</p>
+<p>另外，不要老是挂起虚拟机。正常的指令执行速度是每秒两千万条，有的时候性能降低到每秒八万条，打字都卡，就赶紧关机重启吧。</p>
+<p>二次元是这样的：
+<div class="highlight"><pre><span></span><code><a id="__codelineno-34-1" name="__codelineno-34-1" href="#__codelineno-34-1"></a>................................................................................
+<a id="__codelineno-34-2" name="__codelineno-34-2" href="#__codelineno-34-2"></a>..............................................X.X.X.............................
+<a id="__codelineno-34-3" name="__codelineno-34-3" href="#__codelineno-34-3"></a>.............................................XXXXXXXXX..........................
+<a id="__codelineno-34-4" name="__codelineno-34-4" href="#__codelineno-34-4"></a>..............................................XXXXXXXXX.XXXXX...................
+<a id="__codelineno-34-5" name="__codelineno-34-5" href="#__codelineno-34-5"></a>............................................XXXXXXXXXXXXXXXXXXX.................
+<a id="__codelineno-34-6" name="__codelineno-34-6" href="#__codelineno-34-6"></a>........................................X.XXXXXXXXXXXXXXXXXXXXX.................
+<a id="__codelineno-34-7" name="__codelineno-34-7" href="#__codelineno-34-7"></a>........................................XXXXXXXXXXXXXXXXXXXXXXXX................
+<a id="__codelineno-34-8" name="__codelineno-34-8" href="#__codelineno-34-8"></a>........................................XXXXXXXXXXXXXXXXXXXXXXXXX...............
+<a id="__codelineno-34-9" name="__codelineno-34-9" href="#__codelineno-34-9"></a>.......................................XXXXXXXXXXXXXXXXXXXXXXXXXXX..............
+<a id="__codelineno-34-10" name="__codelineno-34-10" href="#__codelineno-34-10"></a>........................................XXXXXXXXXXXXXXXXXXXXXXXXXXX.............
+<a id="__codelineno-34-11" name="__codelineno-34-11" href="#__codelineno-34-11"></a>...........................................XXXXXXXXXXXXXXXXXXXXXXXX.............
+<a id="__codelineno-34-12" name="__codelineno-34-12" href="#__codelineno-34-12"></a>............................................XXXXXXXXXXXXXXXXXXXXXXX.............
+<a id="__codelineno-34-13" name="__codelineno-34-13" href="#__codelineno-34-13"></a>.............................................XXXXXXXXXXXXXXXXXXXXXX.............
+<a id="__codelineno-34-14" name="__codelineno-34-14" href="#__codelineno-34-14"></a>..............................................XXX.XXXXXXXXXXXXXXXXX.............
+<a id="__codelineno-34-15" name="__codelineno-34-15" href="#__codelineno-34-15"></a>..............................................XXXXXXXXXXXXXXXXXXXXXX............
+<a id="__codelineno-34-16" name="__codelineno-34-16" href="#__codelineno-34-16"></a>........................X.X.X.X...............XXXXXXXXXXXXXXXXX.X.X.............
+<a id="__codelineno-34-17" name="__codelineno-34-17" href="#__codelineno-34-17"></a>.......................XXXXXXXXX...............XXXXXXXXXXXXXXXX.................
+<a id="__codelineno-34-18" name="__codelineno-34-18" href="#__codelineno-34-18"></a>......................XXXXXXXXXXX...........X.XXXXXXXXXXXXXXX.X.................
+<a id="__codelineno-34-19" name="__codelineno-34-19" href="#__codelineno-34-19"></a>.......................XXXXXXXXXXX.X.......XXXXXXXXXXXXXXXXXXX..................
+<a id="__codelineno-34-20" name="__codelineno-34-20" href="#__codelineno-34-20"></a>........................XXXXXXXXXXXXXXX.X.XXXXXXXXXXXXXXXXXXXX..................
+<a id="__codelineno-34-21" name="__codelineno-34-21" href="#__codelineno-34-21"></a>.............................XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX..................
+<a id="__codelineno-34-22" name="__codelineno-34-22" href="#__codelineno-34-22"></a>............................XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX...X.X...........
+<a id="__codelineno-34-23" name="__codelineno-34-23" href="#__codelineno-34-23"></a>.............................XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX.X............
+<a id="__codelineno-34-24" name="__codelineno-34-24" href="#__codelineno-34-24"></a>............................XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX...............
+<a id="__codelineno-34-25" name="__codelineno-34-25" href="#__codelineno-34-25"></a>............................XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX..............
+</code></pre></div></p>
+<h3 id="5">5. 杂项<a class="headerlink" href="#5" title="Permanent link">&para;</a></h3>
+<p>ftrace 真的是要老命了，纯苦力活。</p>
+<p>读取 ELF 文件？问互联网、问手册、问 GPT 吧。</p>
+<p>怎么判断 riscv 中何时 call、何时 ret？call 和 ret 都会离开当前函数体。先判断 call，如果下一条指令地址是一个函数头，就一定是 call，反之就是 ret。</p>
+<p>而且做完以后还引入一个新 bug：我关闭调试信息选项以后，编译不通过了是几个意思？？？（其实可以理解，因为关闭调试选项意味着没有了任何信息，导致读入的都是无效的字符，所以导致编译器报未初始化警告）</p>
+<p>想尽可能把实验的记录写清楚点，但是真的太花精力了，睡觉！</p>
 
   <hr>
 <div class="md-source-file">
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-11-21</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-12-10</span>
       
         <br>
         Created:

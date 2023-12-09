@@ -9,7 +9,7 @@
       
       
       
-        <link rel="prev" href="../2023-11-02-PAnote/">
+        <link rel="prev" href="../shell/">
       
       
         <link rel="next" href="../make/">
@@ -472,6 +472,20 @@
               
   
   
+  
+    <li class="md-nav__item">
+      <a href="../shell/" class="md-nav__link">
+        shell
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
     
   
   
@@ -518,6 +532,13 @@
           <li class="md-nav__item">
   <a href="#_1" class="md-nav__link">
     替换
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    外部命令
   </a>
   
 </li>
@@ -805,6 +826,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    外部命令
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -835,13 +863,19 @@
 <li><code>:%s /old/new/ gc</code> 对整篇文章进行搜索。</li>
 </ul>
 <p>字符均支持正则表达式，比如 <code>:%s/^/xxx/g</code> 就是在每一行的行首插入xxx，<code>^</code>表示行首，<code>$</code>表示行尾。</p>
+<h3 id="_2">外部命令<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
+<p><a href="https://zhuanlan.zhihu.com/p/56381336">https://zhuanlan.zhihu.com/p/56381336</a></p>
+<p>vim 可以执行外部命令</p>
+<p>最简单的 <code>:!</code> 就可以执行外部命令了。比如 <code>:!date</code> 显示今天日期</p>
+<p><code>:read</code> 命令可以获得命令执行的输出结果，新增一行插入该结果。如 <code>:read!date</code></p>
+<p>我最常用的还是 <code>:terminal</code>. 直接打开一个新的终端</p>
 
   <hr>
 <div class="md-source-file">
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-11-20</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-12-10</span>
       
         <br>
         Created:
