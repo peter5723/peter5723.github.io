@@ -99,6 +99,7 @@ nav:
     - "LTI系统频域特性（ss第6章）": "signal/ch6_ss.md"
   - "计算机系统": 
     - "PA 实验记录": "ICS/2023-11-02-PAnote.md"
+    - "shell": "ICS/shell.md"
     - "vim": "ICS/vim.md"
     - "GNU Make": "ICS/make.md"
     - "RISC-V": "ICS/riscv.md"
