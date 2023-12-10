@@ -559,6 +559,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#todoinline-volatile" class="md-nav__link">
+    TODO：inline 和 volatile 关键字
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -638,6 +645,13 @@
           <li class="md-nav__item">
   <a href="#else" class="md-nav__link">
     Else:
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#todo-frame" class="md-nav__link">
+    TODO: frame 找段错误
   </a>
   
 </li>
@@ -746,19 +760,6 @@
   <a href="#linux" class="md-nav__link">
     linux
   </a>
-  
-    <nav class="md-nav" aria-label="linux">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#shell" class="md-nav__link">
-    shell
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
         
@@ -1325,6 +1326,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#todoinline-volatile" class="md-nav__link">
+    TODO：inline 和 volatile 关键字
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -1404,6 +1412,13 @@
           <li class="md-nav__item">
   <a href="#else" class="md-nav__link">
     Else:
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#todo-frame" class="md-nav__link">
+    TODO: frame 找段错误
   </a>
   
 </li>
@@ -1512,19 +1527,6 @@
   <a href="#linux" class="md-nav__link">
     linux
   </a>
-  
-    <nav class="md-nav" aria-label="linux">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#shell" class="md-nav__link">
-    shell
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
         
@@ -1752,7 +1754,7 @@
 
 
 
-<h1 id="_1">速查手册<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
+<h1 id="_1">实验手册<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
 <p>本文是Peter的NJU PA的实验手册。只记录一些<strong>东西</strong>，不提供源代码。</p>
 <p><a href="https://nju-projectn.github.io/ics-pa-gitbook/ics2023/index.html">课程网址</a>在这里。</p>
 <h2 id="pa0-tools">PA0 (tools)<a class="headerlink" href="#pa0-tools" title="Permanent link">&para;</a></h2>
@@ -1825,6 +1827,17 @@
 <a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="c1">//foo.c</span>
 </code></pre></div>
 <p>但是<code>dog</code>有<code>static</code>标识, 那么他就是<code>main.c</code>所私有的, 其他文件无法访问. 这里<code>static</code>声明是说该全局变量具有内部链接.</p>
+<details class="tips" open="open">
+<summary>Tips</summary>
+<p>注意：
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="k">extern</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">giant</span><span class="p">;</span>
+</code></pre></div>
+是声明</p>
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="kt">int</span><span class="w"> </span><span class="n">giant</span><span class="p">;</span>
+</code></pre></div>
+是定义。
+C语言声明可以有很多次，而定义只能有一次。故若要使用同名的独立的全局变量，必须加 static 关键字。而如果使用的是外部变量，除非是第一次定义，否则必须加 extern 声明。如果在两个文件中同时定义了 <code>int giant</code>，则会报错。</p>
+</details>
 <h5 id="_5">存储时期<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h5>
 <p><code>static</code>还有一个地方会碰到, 就是声明一个变量是静态存储时期. 一般的变量都是自动存储时期, 作用域结束就释放. 而静态存储时期的变量, 在整个程序执行期间一直存在. 很显然, 不管加不加<code>static</code>, 全局变量都一定是静态变量. 自动变量不初始化, 静态变量缺省地初始化为0.</p>
 <h4 id="_6">字符串处理函数：<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h4>
@@ -1836,27 +1849,27 @@
 <li><strong>delim</strong> -- 包含分隔符的 C 字符串。</li>
 </ul>
 <p>该函数返回被分解的第一个子字符串，如果没有可检索的字符串，则返回一个空指针。</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
-<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;string.h&gt;</span>
-<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="w">    </span><span class="kt">char</span><span class="w"> </span><span class="n">str</span><span class="p">[</span><span class="mi">90</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;I    love you   So     much&quot;</span><span class="p">;</span>
-<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="w">    </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">token</span><span class="p">;</span>
-<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="w">    </span><span class="n">token</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">strtok</span><span class="p">(</span><span class="n">str</span><span class="p">,</span><span class="w"> </span><span class="s">&quot; &quot;</span><span class="p">);</span>
-<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>
-<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="w">    </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">a</span><span class="p">;</span>
-<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a><span class="w">    </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">strtok</span><span class="p">(</span><span class="nb">NULL</span><span class="p">,</span><span class="w"> </span><span class="s">&quot; &quot;</span><span class="p">);</span>
-<a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a><span class="w">    </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">b</span><span class="p">;</span><span class="w"> </span>
-<a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a><span class="w">    </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">strtok</span><span class="p">(</span><span class="n">str</span><span class="o">+</span><span class="n">strlen</span><span class="p">(</span><span class="n">token</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="s">&quot; &quot;</span><span class="p">);</span>
-<a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a><span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;%s</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">token</span><span class="p">);</span>
-<a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a><span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;%s</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="n">a</span><span class="p">);</span>
-<a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a><span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;%s</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="n">b</span><span class="p">);</span>
-<a id="__codelineno-5-15" name="__codelineno-5-15" href="#__codelineno-5-15"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
-<a id="__codelineno-5-16" name="__codelineno-5-16" href="#__codelineno-5-16"></a><span class="p">}</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;string.h&gt;</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="w">    </span><span class="kt">char</span><span class="w"> </span><span class="n">str</span><span class="p">[</span><span class="mi">90</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;I    love you   So     much&quot;</span><span class="p">;</span>
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="w">    </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">token</span><span class="p">;</span>
+<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="w">    </span><span class="n">token</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">strtok</span><span class="p">(</span><span class="n">str</span><span class="p">,</span><span class="w"> </span><span class="s">&quot; &quot;</span><span class="p">);</span>
+<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a>
+<a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a><span class="w">    </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">a</span><span class="p">;</span>
+<a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a><span class="w">    </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">strtok</span><span class="p">(</span><span class="nb">NULL</span><span class="p">,</span><span class="w"> </span><span class="s">&quot; &quot;</span><span class="p">);</span>
+<a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a><span class="w">    </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">b</span><span class="p">;</span><span class="w"> </span>
+<a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a><span class="w">    </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">strtok</span><span class="p">(</span><span class="n">str</span><span class="o">+</span><span class="n">strlen</span><span class="p">(</span><span class="n">token</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="s">&quot; &quot;</span><span class="p">);</span>
+<a id="__codelineno-7-12" name="__codelineno-7-12" href="#__codelineno-7-12"></a><span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;%s</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">token</span><span class="p">);</span>
+<a id="__codelineno-7-13" name="__codelineno-7-13" href="#__codelineno-7-13"></a><span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;%s</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="n">a</span><span class="p">);</span>
+<a id="__codelineno-7-14" name="__codelineno-7-14" href="#__codelineno-7-14"></a><span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;%s</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="n">b</span><span class="p">);</span>
+<a id="__codelineno-7-15" name="__codelineno-7-15" href="#__codelineno-7-15"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<a id="__codelineno-7-16" name="__codelineno-7-16" href="#__codelineno-7-16"></a><span class="p">}</span>
 </code></pre></div>
 <p>会输出如下结果</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>I
-<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>love
-<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>love
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>I
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>love
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>love
 </code></pre></div>
 <p>注意:</p>
 <ol>
@@ -1880,6 +1893,7 @@
 <p><strong>sscanf</strong></p>
 <p><code>int sscanf(const char *src, const char *format, ...)</code></p>
 <p>和<code>scanf</code>基本一样, 只是<code>sscanf</code>是从<code>src</code>中读取数据. </p>
+<h4 id="todoinline-volatile">TODO：inline 和 volatile 关键字<a class="headerlink" href="#todoinline-volatile" title="Permanent link">&para;</a></h4>
 <h3 id="clash">clash<a class="headerlink" href="#clash" title="Permanent link">&para;</a></h3>
 <p>首先照readme将url改成订阅地址</p>
 <p>后面 按提示即可</p>
@@ -1897,93 +1911,94 @@
 <p>gcc 可以只输出宏定义展开，不编译。</p>
 <h3 id="gdb">gdb<a class="headerlink" href="#gdb" title="Permanent link">&para;</a></h3>
 <h4 id="starting">Starting:<a class="headerlink" href="#starting" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>  gdb
-<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>
-<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>  gdb &lt;file&gt; ----   open gdb with the file
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>  gdb
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>  gdb &lt;file&gt; ----   open gdb with the file
 </code></pre></div>
 <h4 id="running-and-stopping">Running and Stopping:<a class="headerlink" href="#running-and-stopping" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>  quit   ----  exit gdb
-<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>  **please run the program before debug...** 
-<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>  run    ----  run the program(&lt;file&gt;)   
-<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>  run 1 2 3  ---- run program with command-line arguments 1 2 3
-<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>  kill  ---- stop the program
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>  quit   ----  exit gdb
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>  **please run the program before debug...** 
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>  run    ----  run the program(&lt;file&gt;)   
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>  run 1 2 3  ---- run program with command-line arguments 1 2 3
+<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a>  kill  ---- stop the program
 </code></pre></div>
 <h4 id="breakpoint">Breakpoint:<a class="headerlink" href="#breakpoint" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>  info break ---- list all breaks 
-<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>  (b)
-<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>  break &lt;func&gt; ---- Set breakpoint at the entry to &lt;func&gt;
-<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>  break  \*0x80483c3 ----Set breakpoint at address 0x80483c3
-<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>  break  9  ---- Set breakpoint at line 9
-<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a>  break main.c:9 if q==0 ---- conditional breakpoint
-<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a>  delete     ----     delete all breakpoints
-<a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a>  delete 1   ----     delete the breakpoint 1
-<a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a>  disable 1   ----    disable the breakpoint 1
-<a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a>  enable 1    ----    enable the breakpoint 1
-<a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a>  clear &lt;func&gt; ----   Clear any points at the entry to &lt;func&gt;
-<a id="__codelineno-9-12" name="__codelineno-9-12" href="#__codelineno-9-12"></a>
-<a id="__codelineno-9-13" name="__codelineno-9-13" href="#__codelineno-9-13"></a>  (w)
-<a id="__codelineno-9-14" name="__codelineno-9-14" href="#__codelineno-9-14"></a>  watch \*地址    # 当地址所指内容发送变化时断点
-<a id="__codelineno-9-15" name="__codelineno-9-15" href="#__codelineno-9-15"></a>  watch var    #当var值变化时，断点
-<a id="__codelineno-9-16" name="__codelineno-9-16" href="#__codelineno-9-16"></a>  watch (condition)    #当条件符合时，断点
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>  info break ---- list all breaks 
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>  (b)
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>  break &lt;func&gt; ---- Set breakpoint at the entry to &lt;func&gt;
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>  break  \*0x80483c3 ----Set breakpoint at address 0x80483c3
+<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a>  break  9  ---- Set breakpoint at line 9
+<a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a>  break main.c:9 if q==0 ---- conditional breakpoint
+<a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a>  delete     ----     delete all breakpoints
+<a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a>  delete 1   ----     delete the breakpoint 1
+<a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a>  disable 1   ----    disable the breakpoint 1
+<a id="__codelineno-11-10" name="__codelineno-11-10" href="#__codelineno-11-10"></a>  enable 1    ----    enable the breakpoint 1
+<a id="__codelineno-11-11" name="__codelineno-11-11" href="#__codelineno-11-11"></a>  clear &lt;func&gt; ----   Clear any points at the entry to &lt;func&gt;
+<a id="__codelineno-11-12" name="__codelineno-11-12" href="#__codelineno-11-12"></a>
+<a id="__codelineno-11-13" name="__codelineno-11-13" href="#__codelineno-11-13"></a>  (w)
+<a id="__codelineno-11-14" name="__codelineno-11-14" href="#__codelineno-11-14"></a>  watch \*地址    # 当地址所指内容发送变化时断点
+<a id="__codelineno-11-15" name="__codelineno-11-15" href="#__codelineno-11-15"></a>  watch var    #当var值变化时，断点
+<a id="__codelineno-11-16" name="__codelineno-11-16" href="#__codelineno-11-16"></a>  watch (condition)    #当条件符合时，断点
 </code></pre></div>
 <h4 id="execution">Execution:<a class="headerlink" href="#execution" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>  stepi ---- Execute 1 instruction (assemble instruction)
-<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>  stepi 4 ---Execute 4 instruction (assemble instruction)
-<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>  nexti ---- Execute 1 instruction, but it doesn&#39;t enter the  function and just execute it
-<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>  step ---- Execute one C statement
-<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a>  next ---- Execute one C Statement but doesn&#39;t enter the function.
-<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a>  c(continue) -- -- execute to the next breakpoint
-<a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a>  until 3 ---- continue exec until the breakpoint 3
-<a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a>  finish ----   Resume execution until the current function return. 
-<a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a>  call &lt;func&gt; ---- call the func and print the return Value
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>  stepi ---- Execute 1 instruction (assemble instruction)
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>  stepi 4 ---Execute 4 instruction (assemble instruction)
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>  nexti ---- Execute 1 instruction, but it doesn&#39;t enter the  function and just execute it
+<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>  step ---- Execute one C statement
+<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a>  next ---- Execute one C Statement but doesn&#39;t enter the function.
+<a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a>  c(continue) -- -- execute to the next breakpoint
+<a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a>  until 3 ---- continue exec until the breakpoint 3
+<a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a>  finish ----   Resume execution until the current function return. 
+<a id="__codelineno-12-9" name="__codelineno-12-9" href="#__codelineno-12-9"></a>  call &lt;func&gt; ---- call the func and print the return Value
 </code></pre></div>
 <h4 id="examining-code">Examining code:<a class="headerlink" href="#examining-code" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>  (p)
-<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>  print /d $rax ----  Print contents of %rax in decimal
-<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>  print /x $rax ----  Print contents of %rax in hex
-<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>  print /t $rax ----  Print contents of %rax in binary
-<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a>  print /d (int)$rax ---- Print contents of %rax in decimal but it has signs.
-<a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a>
-<a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a>  Examine:
-<a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a>  x/[num][size][format] address
-<a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a>  num = number of objects todisplay
-<a id="__codelineno-11-10" name="__codelineno-11-10" href="#__codelineno-11-10"></a>  size = size of each project (b=byte h=half-word, w=word, g=quad-word) 
-<a id="__codelineno-11-11" name="__codelineno-11-11" href="#__codelineno-11-11"></a>  (1 word = 4 Byte)
-<a id="__codelineno-11-12" name="__codelineno-11-12" href="#__codelineno-11-12"></a>  FORMAT = how to display each object (d=decimal, x=hex, o=octal, etc.)
-<a id="__codelineno-11-13" name="__codelineno-11-13" href="#__codelineno-11-13"></a>  for example:
-<a id="__codelineno-11-14" name="__codelineno-11-14" href="#__codelineno-11-14"></a>   x/w  $rax
-<a id="__codelineno-11-15" name="__codelineno-11-15" href="#__codelineno-11-15"></a>   x/2wd 0xbffff890
-<a id="__codelineno-11-16" name="__codelineno-11-16" href="#__codelineno-11-16"></a>   x/200bc $rdi
-<a id="__codelineno-11-17" name="__codelineno-11-17" href="#__codelineno-11-17"></a>   x/s   $rsp (a string)
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>  (p)
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>  print /d $rax ----  Print contents of %rax in decimal
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>  print /x $rax ----  Print contents of %rax in hex
+<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a>  print /t $rax ----  Print contents of %rax in binary
+<a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a>  print /d (int)$rax ---- Print contents of %rax in decimal but it has signs.
+<a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a>
+<a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a>  Examine:
+<a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a>  x/[num][size][format] address
+<a id="__codelineno-13-9" name="__codelineno-13-9" href="#__codelineno-13-9"></a>  num = number of objects todisplay
+<a id="__codelineno-13-10" name="__codelineno-13-10" href="#__codelineno-13-10"></a>  size = size of each project (b=byte h=half-word, w=word, g=quad-word) 
+<a id="__codelineno-13-11" name="__codelineno-13-11" href="#__codelineno-13-11"></a>  (1 word = 4 Byte)
+<a id="__codelineno-13-12" name="__codelineno-13-12" href="#__codelineno-13-12"></a>  FORMAT = how to display each object (d=decimal, x=hex, o=octal, etc.)
+<a id="__codelineno-13-13" name="__codelineno-13-13" href="#__codelineno-13-13"></a>  for example:
+<a id="__codelineno-13-14" name="__codelineno-13-14" href="#__codelineno-13-14"></a>   x/w  $rax
+<a id="__codelineno-13-15" name="__codelineno-13-15" href="#__codelineno-13-15"></a>   x/2wd 0xbffff890
+<a id="__codelineno-13-16" name="__codelineno-13-16" href="#__codelineno-13-16"></a>   x/200bc $rdi
+<a id="__codelineno-13-17" name="__codelineno-13-17" href="#__codelineno-13-17"></a>   x/s   $rsp (a string)
 </code></pre></div>
 <h4 id="display">Display<a class="headerlink" href="#display" title="Permanent link">&para;</a></h4>
 <p>Compared with <code>examine</code>, If we use display, the value will be printed each time the code is stopped, which is very convenient.
-<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>  info display ---- get all the info of variables
-<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>  display {var1 var2 var3} ---- print var1 var2 var3 each time.
-<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>  display /i $pc ---- print where is pc at as asm.
-<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>  delete display (%num) ---- delete all or %numth variable
-<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a>  disable/enable display (%num) ---- disable/enable %numth variable.
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>  info display ---- get all the info of variables
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>  display {var1 var2 var3} ---- print var1 var2 var3 each time.
+<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a>  display /i $pc ---- print where is pc at as asm.
+<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a>  delete display (%num) ---- delete all or %numth variable
+<a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a>  disable/enable display (%num) ---- disable/enable %numth variable.
 </code></pre></div></p>
 <h4 id="layout">Layout:<a class="headerlink" href="#layout" title="Permanent link">&para;</a></h4>
 <p><strong>use <code>layout</code> to display what you want, like source code .</strong> 
-<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>  layout regs
-<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>  layout split ---- asm and src
-<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>  layout asm
-<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a>  layout src
-<a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a>  layout prev
-<a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a>  layout next
-<a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a>  focus name
-<a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a>  (name = cmd|src|asm|regs|next|prev)
-<a id="__codelineno-13-9" name="__codelineno-13-9" href="#__codelineno-13-9"></a>  refresh
-<a id="__codelineno-13-10" name="__codelineno-13-10" href="#__codelineno-13-10"></a>  update
-<a id="__codelineno-13-11" name="__codelineno-13-11" href="#__codelineno-13-11"></a>  &lt;C-l&gt; refresh
-<a id="__codelineno-13-12" name="__codelineno-13-12" href="#__codelineno-13-12"></a>  &lt;C-x&gt; 1/2 ---- 1/2 window
-<a id="__codelineno-13-13" name="__codelineno-13-13" href="#__codelineno-13-13"></a>  &lt;c-x&gt; a  ---- abort window
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>  layout regs
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>  layout split ---- asm and src
+<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a>  layout asm
+<a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a>  layout src
+<a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a>  layout prev
+<a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a>  layout next
+<a id="__codelineno-15-7" name="__codelineno-15-7" href="#__codelineno-15-7"></a>  focus name
+<a id="__codelineno-15-8" name="__codelineno-15-8" href="#__codelineno-15-8"></a>  (name = cmd|src|asm|regs|next|prev)
+<a id="__codelineno-15-9" name="__codelineno-15-9" href="#__codelineno-15-9"></a>  refresh
+<a id="__codelineno-15-10" name="__codelineno-15-10" href="#__codelineno-15-10"></a>  update
+<a id="__codelineno-15-11" name="__codelineno-15-11" href="#__codelineno-15-11"></a>  &lt;C-l&gt; refresh
+<a id="__codelineno-15-12" name="__codelineno-15-12" href="#__codelineno-15-12"></a>  &lt;C-x&gt; 1/2 ---- 1/2 window
+<a id="__codelineno-15-13" name="__codelineno-15-13" href="#__codelineno-15-13"></a>  &lt;c-x&gt; a  ---- abort window
 </code></pre></div></p>
 <h4 id="else">Else:<a class="headerlink" href="#else" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>  where  ----   Print the current address and stack backtrace
-<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>  list ---- see which line the code has examined and its contexts.
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>  where  ----   Print the current address and stack backtrace
+<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>  list ---- see which line the code has examined and its contexts.
 </code></pre></div>
+<h4 id="todo-frame">TODO: frame 找段错误<a class="headerlink" href="#todo-frame" title="Permanent link">&para;</a></h4>
 <h3 id="makefile">Makefile<a class="headerlink" href="#makefile" title="Permanent link">&para;</a></h3>
 <h3 id="vim">vim<a class="headerlink" href="#vim" title="Permanent link">&para;</a></h3>
 <h4 id="_7">杂项<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h4>
@@ -1996,21 +2011,21 @@
 <p><code>.</code> 重复上一条指令</p>
 <h4 id="vim_1">vim多文件编辑<a class="headerlink" href="#vim_1" title="Permanent link">&para;</a></h4>
 <p>怎么使用vim像vscode那样同时编辑多个文件呢？
-<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>$vim txt1 txt2 ---- 打开txt1和txt2
-<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>$vim -o txt1 txt2 ---- 打开txt1和txt2在同一个水平窗口里面
-<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a>$vim -O txt1 txt2 ---- 打开txt1和txt2在同一个垂直窗口里面
-<a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a>&lt;C-w&gt; + w/hjkl ----- 切换窗口
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>$vim txt1 txt2 ---- 打开txt1和txt2
+<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>$vim -o txt1 txt2 ---- 打开txt1和txt2在同一个水平窗口里面
+<a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a>$vim -O txt1 txt2 ---- 打开txt1和txt2在同一个垂直窗口里面
+<a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a>&lt;C-w&gt; + w/hjkl ----- 切换窗口
 </code></pre></div></p>
 <h5 id="vim-itself">vim itself<a class="headerlink" href="#vim-itself" title="Permanent link">&para;</a></h5>
 <p>在编辑器内
-<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>:sp 将窗口水平分割成两个
-<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>:vsp 将窗口垂直分割成两个
-<a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a>:n下一个文件 :N上一个文件
-<a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a>:buffers ---- 显示当前所有正在编辑的文件
-<a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a>:buffer %n ---- 切换到第n个文件
-<a id="__codelineno-16-6" name="__codelineno-16-6" href="#__codelineno-16-6"></a>:e txt3 ---- 打开txt3
-<a id="__codelineno-16-7" name="__codelineno-16-7" href="#__codelineno-16-7"></a>ZZ ---- 保存当前文件更改
-<a id="__codelineno-16-8" name="__codelineno-16-8" href="#__codelineno-16-8"></a>:wq ---- 保存所有文件更改
+<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>:sp 将窗口水平分割成两个
+<a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a>:vsp 将窗口垂直分割成两个
+<a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a>:n下一个文件 :N上一个文件
+<a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a>:buffers ---- 显示当前所有正在编辑的文件
+<a id="__codelineno-18-5" name="__codelineno-18-5" href="#__codelineno-18-5"></a>:buffer %n ---- 切换到第n个文件
+<a id="__codelineno-18-6" name="__codelineno-18-6" href="#__codelineno-18-6"></a>:e txt3 ---- 打开txt3
+<a id="__codelineno-18-7" name="__codelineno-18-7" href="#__codelineno-18-7"></a>ZZ ---- 保存当前文件更改
+<a id="__codelineno-18-8" name="__codelineno-18-8" href="#__codelineno-18-8"></a>:wq ---- 保存所有文件更改
 </code></pre></div></p>
 <h5 id="nerdtree">nerdtree<a class="headerlink" href="#nerdtree" title="Permanent link">&para;</a></h5>
 <p>实际上，使用<code>nerdtree</code>插件更为好用</p>
@@ -2026,21 +2041,21 @@
 <p><code>vim +PluginInstall +qall</code></p>
 <p>安装新的包。</p>
 <h5 id="ctags">ctags<a class="headerlink" href="#ctags" title="Permanent link">&para;</a></h5>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>&lt;C-]&gt; 跳转到定义处
-<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>&lt;C-t&gt; 返回
+<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>&lt;C-]&gt; 跳转到定义处
+<a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a>&lt;C-t&gt; 返回
 </code></pre></div>
 <h5 id="cscope">cscope<a class="headerlink" href="#cscope" title="Permanent link">&para;</a></h5>
 <p>我已经配置过：
 <code>&lt;C-\&gt; + %ch</code>  等价于:<code>cscope find %ch &lt;name at cursor&gt;</code></p>
 <p>于是
-<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>:cscope find s   # symbol: find all references to the token under cursor
-<a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a>:cscope find g   # global: find global definition(s) of the token under cursor
-<a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a>:cscope find c   # calls:  find all calls to the function name under cursor
-<a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a>:cscope find t   # text:   find all instances of the text under cursor
-<a id="__codelineno-18-5" name="__codelineno-18-5" href="#__codelineno-18-5"></a>:cscope find e   # egrep:  egrep search for the word under cursor
-<a id="__codelineno-18-6" name="__codelineno-18-6" href="#__codelineno-18-6"></a>:cscope find f   # file:   open the filename under cursor
-<a id="__codelineno-18-7" name="__codelineno-18-7" href="#__codelineno-18-7"></a>:cscope find i   # includes: find files that include the filename under cursor
-<a id="__codelineno-18-8" name="__codelineno-18-8" href="#__codelineno-18-8"></a>:cscope find d   # called: find functions that function under cursor calls
+<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>:cscope find s   # symbol: find all references to the token under cursor
+<a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a>:cscope find g   # global: find global definition(s) of the token under cursor
+<a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a>:cscope find c   # calls:  find all calls to the function name under cursor
+<a id="__codelineno-20-4" name="__codelineno-20-4" href="#__codelineno-20-4"></a>:cscope find t   # text:   find all instances of the text under cursor
+<a id="__codelineno-20-5" name="__codelineno-20-5" href="#__codelineno-20-5"></a>:cscope find e   # egrep:  egrep search for the word under cursor
+<a id="__codelineno-20-6" name="__codelineno-20-6" href="#__codelineno-20-6"></a>:cscope find f   # file:   open the filename under cursor
+<a id="__codelineno-20-7" name="__codelineno-20-7" href="#__codelineno-20-7"></a>:cscope find i   # includes: find files that include the filename under cursor
+<a id="__codelineno-20-8" name="__codelineno-20-8" href="#__codelineno-20-8"></a>:cscope find d   # called: find functions that function under cursor calls
 </code></pre></div></p>
 <p>在使用 cscope 时，可以输入 <code>:cw</code> 来打开 quickfix 窗口，来显示所有结果出现的位置。
 在 quickfix 窗口切换不同的匹配项，可以输入 <code>:cs cn</code> 切换到下一个匹配项，<code>:cs cp</code> 切换到上一个匹配项。
@@ -2052,8 +2067,6 @@
 <p>选择补选项: 一是用上下方向键, 二是用<code>&lt;C-N&gt;</code>和<code>&lt;C-P&gt;</code>, 实际上原本默认是tab键选择的, 但是被我禁用了现在.</p>
 <p>按了enter选中后是已经补全了, 但还是会剩下一个框. 不用管它继续编程即可.</p>
 <h3 id="linux">linux<a class="headerlink" href="#linux" title="Permanent link">&para;</a></h3>
-<h4 id="shell">shell<a class="headerlink" href="#shell" title="Permanent link">&para;</a></h4>
-<p>TODO find grep</p>
 <h3 id="tools">tools<a class="headerlink" href="#tools" title="Permanent link">&para;</a></h3>
 <h4 id="tmux">tmux<a class="headerlink" href="#tmux" title="Permanent link">&para;</a></h4>
 <h5 id="_8">会话<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h5>
@@ -2070,28 +2083,28 @@
 当然用<code>tmux a</code>可以快速连接上一个会话。</li>
 </ol>
 <p>对tmux来说，最重要的快捷键就是<code>&lt;C-b&gt;</code>, 先输入这个，然后输入指令tmux才会响应。
-<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>Ctrl+b d ---- 分离当前会话。
-<a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a>Ctrl+b s ---- 列出所有会话。
-<a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a>Ctrl+b $ ---- 重命名当前会话
-<a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a>Ctrl+b : ---- 进入命令行模式
-<a id="__codelineno-19-5" name="__codelineno-19-5" href="#__codelineno-19-5"></a>:kill-server 删除所有会话
-<a id="__codelineno-19-6" name="__codelineno-19-6" href="#__codelineno-19-6"></a>:kill-session 删除当前会话
+<div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a>Ctrl+b d ---- 分离当前会话。
+<a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a>Ctrl+b s ---- 列出所有会话。
+<a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a>Ctrl+b $ ---- 重命名当前会话
+<a id="__codelineno-21-4" name="__codelineno-21-4" href="#__codelineno-21-4"></a>Ctrl+b : ---- 进入命令行模式
+<a id="__codelineno-21-5" name="__codelineno-21-5" href="#__codelineno-21-5"></a>:kill-server 删除所有会话
+<a id="__codelineno-21-6" name="__codelineno-21-6" href="#__codelineno-21-6"></a>:kill-session 删除当前会话
 </code></pre></div></p>
 <h5 id="window">window<a class="headerlink" href="#window" title="Permanent link">&para;</a></h5>
 <p>一个会话内，tmux可以包含多个窗口（感觉窗口和会话差不多，不赘述）
 似乎还是窗口更方便切换啊。
-<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>&lt;C-b&gt; c ---- new window
-<a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a>&lt;C-b&gt; n ---- next window
-<a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a>&lt;C-b&gt; p ---- last window
-<a id="__codelineno-20-4" name="__codelineno-20-4" href="#__codelineno-20-4"></a>&lt;C-b&gt; %num ---- to %numth window
-<a id="__codelineno-20-5" name="__codelineno-20-5" href="#__codelineno-20-5"></a>&lt;C-b&gt; , ---- rename window
+<div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a>&lt;C-b&gt; c ---- new window
+<a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a>&lt;C-b&gt; n ---- next window
+<a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a>&lt;C-b&gt; p ---- last window
+<a id="__codelineno-22-4" name="__codelineno-22-4" href="#__codelineno-22-4"></a>&lt;C-b&gt; %num ---- to %numth window
+<a id="__codelineno-22-5" name="__codelineno-22-5" href="#__codelineno-22-5"></a>&lt;C-b&gt; , ---- rename window
 </code></pre></div></p>
 <h5 id="_9">窗格<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h5>
 <p>也可以包含多个窗格
-<div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a>Ctrl+b %：划分左右两个窗格。
-<a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a>Ctrl+b &quot;：划分上下两个窗格。
-<a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a>Ctrl+b &lt;arrow key&gt;：光标切换到其他窗格。括号表示方向键。
-<a id="__codelineno-21-4" name="__codelineno-21-4" href="#__codelineno-21-4"></a>Ctrl+b x：删除该窗格
+<div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a>Ctrl+b %：划分左右两个窗格。
+<a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a>Ctrl+b &quot;：划分上下两个窗格。
+<a id="__codelineno-23-3" name="__codelineno-23-3" href="#__codelineno-23-3"></a>Ctrl+b &lt;arrow key&gt;：光标切换到其他窗格。括号表示方向键。
+<a id="__codelineno-23-4" name="__codelineno-23-4" href="#__codelineno-23-4"></a>Ctrl+b x：删除该窗格
 </code></pre></div></p>
 <h3 id="_10">寻求帮助<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h3>
 <p>Search The Fucking Web(STFW)</p>
@@ -2104,7 +2117,7 @@
 <h3 id="_11">框架介绍<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h3>
 <p>TRM - Turing Machine.</p>
 <p>存储器是个在<code>nemu/src/memory/paddr.c</code>中定义的大数组.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a>static uint8_t pmem[CONFIG_MSIZE] PG_ALIGN = {};
+<div class="highlight"><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a>static uint8_t pmem[CONFIG_MSIZE] PG_ALIGN = {};
 </code></pre></div>
 <p>上面的代码定义了<code>pmem</code>,对应128M的存储空间</p>
 <p>PC和通用寄存器都在<code>nemu/src/isa/$ISA/include/isa-def.h</code>中的结构体中定义.
@@ -2116,13 +2129,13 @@
 <h3 id="_12">怎么开机<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h3>
 <p>初始化nemu的代码在<code>monitor.c</code>中定义
 前面都是些必要的准备工作，介绍一下<code>init_isa()</code>函数，在<code>nemu/src/isa/$ISA/init.c</code>中定义
-<div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="kt">void</span><span class="w"> </span><span class="nf">init_isa</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a><span class="w">  </span><span class="cm">/* Load built-in image. */</span>
-<a id="__codelineno-23-3" name="__codelineno-23-3" href="#__codelineno-23-3"></a><span class="w">  </span><span class="n">memcpy</span><span class="p">(</span><span class="n">guest_to_host</span><span class="p">(</span><span class="n">RESET_VECTOR</span><span class="p">),</span><span class="w"> </span><span class="n">img</span><span class="p">,</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="n">img</span><span class="p">));</span>
-<a id="__codelineno-23-4" name="__codelineno-23-4" href="#__codelineno-23-4"></a>
-<a id="__codelineno-23-5" name="__codelineno-23-5" href="#__codelineno-23-5"></a><span class="w">  </span><span class="cm">/* Initialize this virtual computer system. */</span>
-<a id="__codelineno-23-6" name="__codelineno-23-6" href="#__codelineno-23-6"></a><span class="w">  </span><span class="n">restart</span><span class="p">();</span>
-<a id="__codelineno-23-7" name="__codelineno-23-7" href="#__codelineno-23-7"></a><span class="p">}</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a><span class="kt">void</span><span class="w"> </span><span class="nf">init_isa</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-25-2" name="__codelineno-25-2" href="#__codelineno-25-2"></a><span class="w">  </span><span class="cm">/* Load built-in image. */</span>
+<a id="__codelineno-25-3" name="__codelineno-25-3" href="#__codelineno-25-3"></a><span class="w">  </span><span class="n">memcpy</span><span class="p">(</span><span class="n">guest_to_host</span><span class="p">(</span><span class="n">RESET_VECTOR</span><span class="p">),</span><span class="w"> </span><span class="n">img</span><span class="p">,</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="n">img</span><span class="p">));</span>
+<a id="__codelineno-25-4" name="__codelineno-25-4" href="#__codelineno-25-4"></a>
+<a id="__codelineno-25-5" name="__codelineno-25-5" href="#__codelineno-25-5"></a><span class="w">  </span><span class="cm">/* Initialize this virtual computer system. */</span>
+<a id="__codelineno-25-6" name="__codelineno-25-6" href="#__codelineno-25-6"></a><span class="w">  </span><span class="n">restart</span><span class="p">();</span>
+<a id="__codelineno-25-7" name="__codelineno-25-7" href="#__codelineno-25-7"></a><span class="p">}</span>
 </code></pre></div></p>
 <p>第一项工作就是将一个内置的客户程序读入到内存中.直接就用了<code>memcpy</code>这个函数，明快。
 注意：
@@ -2130,15 +2143,15 @@
 它将CPU要访问的内存地址转化成数组pmem中的偏移位置。
 <code>init_isa()</code>的第二项任务是初始化寄存器, 这是通过restart()函数来实现的.它设置<code>cpu.pc</code> 的值并将0号寄存器置0.</p>
 <h3 id="_13">题目回答 注意事项<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h3>
-<p><strong>在<code>cmd_c()</code>函数中, 调用<code>cpu_exec()</code>的时候传入了参数-1, 你知道这是什么意思吗?</strong>
-看函数参数。是<code>uint_32t</code>类型的，是无符号整数。-1被看做无符号数，也就是2的32次方-1，就是运行这么多次。</p>
+<p><strong>在<code>cmd_c()</code>函数中, 调用<code>cpu_exec()</code>的时候传入了参数-1, 你知道这是什么意思吗?</strong></p>
+<p>看函数参数。是<code>uint_32t</code>类型的，是无符号整数。-1被看做无符号数，也就是2的32次方-1，就是运行这么多次。</p>
 <p>表达式求值测试这里：</p>
-<p><strong>如何过滤除以零的表达式?</strong>
-gcc 在编译的时候就会对除以0的表达式发生警报。在编译选项中加入<code>-Werror</code>将警告视作错误即可过滤。</p>
-<p><strong>如何获得无符号数的运算结果?</strong>
-c语言默认数字是有符号的，在数字后面加<code>u</code>表示无符号数，如<code>12333u</code>。</p>
-<p><strong>我加入了逻辑运算通不过测试可能是什么原因？</strong>
-注意C语言中， "||" 和 "&amp;&amp;" 是短路操作。你实现了吗？</p>
+<p><strong>如何过滤除以零的表达式?</strong></p>
+<p>gcc 在编译的时候就会对除以0的表达式发生警报。在编译选项中加入<code>-Werror</code>将警告视作错误即可过滤。</p>
+<p><strong>如何获得无符号数的运算结果?</strong></p>
+<p>c语言默认数字是有符号的，在数字后面加<code>u</code>表示无符号数，如<code>12333u</code>。</p>
+<p><strong>我加入了逻辑运算通不过测试可能是什么原因？</strong></p>
+<p>注意C语言中， "||" 和 "&amp;&amp;" 是短路操作。你实现了吗？</p>
 <p><strong>负号怎么实现?</strong></p>
 <p>这里提供思路: 负号的识别看讲义. 负号的计算利用这个特征: 单元运算符只与最近的表达式(只能是括号或者是数字)相结合. 利用这个特点, 我考虑用栈, 若碰到单元运算符, 将之放入栈中. 另外再维护一个栈来记录下与这些单元运算符结合的括号或者数字的位置. 在递归出口时, 若是括号或者数字的情况, 比较该表达式所在位置和先前记录位置, 若相等, 说明栈中的运算符都是属于这个表达式的. 然后将运算符栈清空计算同时位置栈并弹出一个元素. 对了, 注意括号的情况. 有括号时, 将括号也压入栈, 弹出时弹到括号为止. </p>
 <p>表述能力有限, 多包涵. 该思路本身有些麻烦, 不过通过了一些测试. 希望有更简单的思路.</p>
@@ -2146,76 +2159,77 @@ c语言默认数字是有符号的，在数字后面加<code>u</code>表示无�
 <h2 id="pa2">PA2<a class="headerlink" href="#pa2" title="Permanent link">&para;</a></h2>
 <p>C 语言库函数源码</p>
 <p><a href="https://stackoverflow.com/questions/5233514/where-to-find-stdio-h-functions-implementations">https://stackoverflow.com/questions/5233514/where-to-find-stdio-h-functions-implementations</a></p>
+<p>上面是 glibc 的实现。有好奇过 printf 是怎么实现的吗？看看上面的链接吧。</p>
 <p>孙燕姿的学会真好听啊，很治愈。</p>
-<p>做这个 PA 实验花的时间比预想的久，一个是我学得慢，riscv 看了一天，然后 make 怎么用看了一天，基本上每天只能过一点点进度，一天做显卡，一天做声卡；但是确实很有收获的，之前很少有机会看这么多代码。本来想等做完了再整理，真的快做完了又不知道从哪里开始整理比较好。</p>
+<p>做这个 PA 实验花的时间比预想的久，一个是我学得慢，riscv 看了一天，然后 make 怎么用看了一天，基本上每天只能过一点点进度，一天做显卡，一天做声卡；但是确实很有收获的，之前很少有机会看这么多代码。最大的收获就是对计算机系统的把握吧。</p>
 <p>PA 2 这个实验花了应该有 100+ 小时吧，陆陆续续写了两个星期了</p>
-<p>就以问题为导向好了，不过不会回答讲义上的所有问题。</p>
+<p>下面就以问题为导向来整理好了。</p>
 <h3 id="1-nemu">1. NEMU 中，一条指令是怎么完整执行的<a class="headerlink" href="#1-nemu" title="Permanent link">&para;</a></h3>
 <p>好吧，就从这个必答题：一条汇编指令在 NEMU 中的执行过程开始说起。</p>
-<p>连学过大计基的人也知道，指令的执行过程是取指、译码、执行，而 NEMU 正是这样的一个模拟器。</p>
+<p>只学过大计基的人也知道，指令的执行过程是取指、译码、执行，而 NEMU 正是这样的一个模拟器。</p>
 <p>首先是开机， <code>nemu/src/monitor/monitor.c</code> 中做了各种初始化的工作</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a><span class="n">init_rand</span><span class="p">();</span>
-<a id="__codelineno-24-2" name="__codelineno-24-2" href="#__codelineno-24-2"></a><span class="n">init_mem</span><span class="p">();</span>
-<a id="__codelineno-24-3" name="__codelineno-24-3" href="#__codelineno-24-3"></a><span class="n">init_isa</span><span class="p">();</span>
-<a id="__codelineno-24-4" name="__codelineno-24-4" href="#__codelineno-24-4"></a><span class="n">load_img</span><span class="p">();</span>
-<a id="__codelineno-24-5" name="__codelineno-24-5" href="#__codelineno-24-5"></a><span class="n">IFDEF</span><span class="p">(</span><span class="n">CONFIG_DEVICE</span><span class="p">,</span><span class="w"> </span><span class="n">init_device</span><span class="p">());</span>
-<a id="__codelineno-24-6" name="__codelineno-24-6" href="#__codelineno-24-6"></a><span class="n">welcome</span><span class="p">();</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a><span class="n">init_rand</span><span class="p">();</span>
+<a id="__codelineno-26-2" name="__codelineno-26-2" href="#__codelineno-26-2"></a><span class="n">init_mem</span><span class="p">();</span>
+<a id="__codelineno-26-3" name="__codelineno-26-3" href="#__codelineno-26-3"></a><span class="n">init_isa</span><span class="p">();</span>
+<a id="__codelineno-26-4" name="__codelineno-26-4" href="#__codelineno-26-4"></a><span class="n">load_img</span><span class="p">();</span>
+<a id="__codelineno-26-5" name="__codelineno-26-5" href="#__codelineno-26-5"></a><span class="n">IFDEF</span><span class="p">(</span><span class="n">CONFIG_DEVICE</span><span class="p">,</span><span class="w"> </span><span class="n">init_device</span><span class="p">());</span>
+<a id="__codelineno-26-6" name="__codelineno-26-6" href="#__codelineno-26-6"></a><span class="n">welcome</span><span class="p">();</span>
 </code></pre></div>
 <p>然后，开始执行你的程序。 执行有关的代码都在 <code>nemu/src/cpu/cpu-exec.c</code> 中。我们一层一层看下去就知道了（用 GDB 调试更清楚）。执行一条指令的函数是 <code>exec_once()</code>，它做了什么呢。
 先看一个数据类型吧，看这个 Decode 结构的定义
-<div class="highlight"><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a><span class="k">typedef</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">Decode</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-25-2" name="__codelineno-25-2" href="#__codelineno-25-2"></a><span class="w">  </span><span class="n">vaddr_t</span><span class="w"> </span><span class="n">pc</span><span class="p">;</span>
-<a id="__codelineno-25-3" name="__codelineno-25-3" href="#__codelineno-25-3"></a><span class="w">  </span><span class="n">vaddr_t</span><span class="w"> </span><span class="n">snpc</span><span class="p">;</span><span class="w"> </span><span class="c1">// static next pc</span>
-<a id="__codelineno-25-4" name="__codelineno-25-4" href="#__codelineno-25-4"></a><span class="w">  </span><span class="n">vaddr_t</span><span class="w"> </span><span class="n">dnpc</span><span class="p">;</span><span class="w"> </span><span class="c1">// dynamic next pc</span>
-<a id="__codelineno-25-5" name="__codelineno-25-5" href="#__codelineno-25-5"></a><span class="w">  </span><span class="n">ISADecodeInfo</span><span class="w"> </span><span class="n">isa</span><span class="p">;</span>
-<a id="__codelineno-25-6" name="__codelineno-25-6" href="#__codelineno-25-6"></a><span class="w">  </span><span class="n">IFDEF</span><span class="p">(</span><span class="n">CONFIG_ITRACE</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="n">logbuf</span><span class="p">[</span><span class="mi">128</span><span class="p">]);</span>
-<a id="__codelineno-25-7" name="__codelineno-25-7" href="#__codelineno-25-7"></a><span class="p">}</span><span class="w"> </span><span class="n">Decode</span><span class="p">;</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a><span class="k">typedef</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">Decode</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-27-2" name="__codelineno-27-2" href="#__codelineno-27-2"></a><span class="w">  </span><span class="n">vaddr_t</span><span class="w"> </span><span class="n">pc</span><span class="p">;</span>
+<a id="__codelineno-27-3" name="__codelineno-27-3" href="#__codelineno-27-3"></a><span class="w">  </span><span class="n">vaddr_t</span><span class="w"> </span><span class="n">snpc</span><span class="p">;</span><span class="w"> </span><span class="c1">// static next pc</span>
+<a id="__codelineno-27-4" name="__codelineno-27-4" href="#__codelineno-27-4"></a><span class="w">  </span><span class="n">vaddr_t</span><span class="w"> </span><span class="n">dnpc</span><span class="p">;</span><span class="w"> </span><span class="c1">// dynamic next pc</span>
+<a id="__codelineno-27-5" name="__codelineno-27-5" href="#__codelineno-27-5"></a><span class="w">  </span><span class="n">ISADecodeInfo</span><span class="w"> </span><span class="n">isa</span><span class="p">;</span>
+<a id="__codelineno-27-6" name="__codelineno-27-6" href="#__codelineno-27-6"></a><span class="w">  </span><span class="n">IFDEF</span><span class="p">(</span><span class="n">CONFIG_ITRACE</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="n">logbuf</span><span class="p">[</span><span class="mi">128</span><span class="p">]);</span>
+<a id="__codelineno-27-7" name="__codelineno-27-7" href="#__codelineno-27-7"></a><span class="p">}</span><span class="w"> </span><span class="n">Decode</span><span class="p">;</span>
 </code></pre></div>
 包括 pc（当前指令）snpc 下一条动态指令 dnpc 下一条静态指令</p>
 <p>这个结构体存储了 <code>pc</code> 的信息。于是我们就这样更新 cpu.pc 这个程序计数器
-<div class="highlight"><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a><span class="n">s</span><span class="o">-&gt;</span><span class="n">pc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pc</span><span class="p">;</span>
-<a id="__codelineno-26-2" name="__codelineno-26-2" href="#__codelineno-26-2"></a><span class="n">s</span><span class="o">-&gt;</span><span class="n">snpc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pc</span><span class="p">;</span>
-<a id="__codelineno-26-3" name="__codelineno-26-3" href="#__codelineno-26-3"></a><span class="n">isa_exec_once</span><span class="p">(</span><span class="n">s</span><span class="p">);</span>
-<a id="__codelineno-26-4" name="__codelineno-26-4" href="#__codelineno-26-4"></a><span class="n">cpu</span><span class="p">.</span><span class="n">pc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">s</span><span class="o">-&gt;</span><span class="n">dnpc</span><span class="p">;</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a><span class="n">s</span><span class="o">-&gt;</span><span class="n">pc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pc</span><span class="p">;</span>
+<a id="__codelineno-28-2" name="__codelineno-28-2" href="#__codelineno-28-2"></a><span class="n">s</span><span class="o">-&gt;</span><span class="n">snpc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pc</span><span class="p">;</span>
+<a id="__codelineno-28-3" name="__codelineno-28-3" href="#__codelineno-28-3"></a><span class="n">isa_exec_once</span><span class="p">(</span><span class="n">s</span><span class="p">);</span>
+<a id="__codelineno-28-4" name="__codelineno-28-4" href="#__codelineno-28-4"></a><span class="n">cpu</span><span class="p">.</span><span class="n">pc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">s</span><span class="o">-&gt;</span><span class="n">dnpc</span><span class="p">;</span>
 </code></pre></div>
 然后在 isa_exec_once 中就是具体的 <strong>取指译码执行</strong>操作了。具体的代码在 <code>nemu/src/isa/riscv32/inst.c</code> 中。</p>
 <h4 id="_14">取指<a class="headerlink" href="#_14" title="Permanent link">&para;</a></h4>
-<p>首先要取指。 <code>s-&gt;pc</code> 存储了当前要执行的指令地址，从这个地址读取指令。具体来说是这样，在NEMU中, 有一个函数<code>inst_fetch()</code>(在<code>nemu/include/cpu/ifetch.h</code>中定义)专门负责取指令的工作. <code>inst_fetch()</code>最终会根据参数len来调用<code>vaddr_ifetch()</code>(在<code>nemu/src/memory/vaddr.c</code>中定义), 而目前<code>vaddr_ifetch()</code>又会通过<code>paddr_read()</code>来访问物理内存中的内容. 因此, 取指操作的本质只不过就是一次内存的访问而已.</p>
-<p>另外，isa_exec_once()在调用inst_fetch()的时候传入了s-&gt;snpc的地址, 因此inst_fetch()最后还会根据len（即指令长度）来更新s-&gt;snpc, 从而让s-&gt;snpc指向下一条指令. </p>
+<p>首先要取指。 <code>s-&gt;pc</code> 存储了当前要执行的指令地址，从这个地址读取指令。具体来说是这样，在NEMU中, 有一个函数 <code>inst_fetch()</code> (在 <code>nemu/include/cpu/ifetch.h</code> 中定义)专门负责取指令的工作.  <code>inst_fetch()</code> 最终会根据参数len来调用 <code>vaddr_ifetch()</code> (在 <code>nemu/src/memory/vaddr.c</code> 中定义), 而目前 <code>vaddr_ifetch()</code> 又会通过 <code>paddr_read()</code> 来访问物理内存中的内容. 因此, 取指操作的本质只不过就是一次内存的访问而已.</p>
+<p>另外， <code>isa_exec_once()</code> 在调用 <code>inst_fetch()</code> 的时候传入了 <code>s-&gt;snpc</code> 的地址, 因此 <code>inst_fetch()</code> 最后还会根据 <code>len</code> （即指令长度）来更新 <code>s-&gt;snpc</code> , 从而让 <code>s-&gt;snpc</code> 指向下一条指令. </p>
 <h4 id="_15">译码<a class="headerlink" href="#_15" title="Permanent link">&para;</a></h4>
-<p>然后译码。接下来代码会进入decode_exec()函数, 来进行译码。译码，顾名思义就是翻译取出的指令，看对应的操作是什么。</p>
+<p>然后译码。接下来代码会进入 <code>decode_exec()</code> 函数, 来进行译码。译码，顾名思义就是翻译取出的指令，看对应的操作是什么。</p>
 <p>在 NEMU 中，译码是通过模式匹配来实现的。要实现匹配，又定义了一个非常精妙的宏 <code>INSTPAT</code> 来定义。</p>
 <p>格式是这样</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a>INSTPAT(模式字符串, 指令名称, 指令类型, 指令执行操作);
+<div class="highlight"><pre><span></span><code><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a>INSTPAT(模式字符串, 指令名称, 指令类型, 指令执行操作);
 </code></pre></div>
 <p>例子如下</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a><span class="n">INSTPAT_START</span><span class="p">();</span>
-<a id="__codelineno-28-2" name="__codelineno-28-2" href="#__codelineno-28-2"></a><span class="n">INSTPAT</span><span class="p">(</span><span class="s">&quot;??????? ????? ????? ??? ????? 00101 11&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">auipc</span><span class="p">,</span><span class="w"> </span><span class="n">U</span><span class="p">,</span><span class="w"> </span><span class="n">R</span><span class="p">(</span><span class="n">rd</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">s</span><span class="o">-&gt;</span><span class="n">pc</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">imm</span><span class="p">);</span>
-<a id="__codelineno-28-3" name="__codelineno-28-3" href="#__codelineno-28-3"></a><span class="n">INSTPAT</span><span class="p">(</span><span class="s">&quot;0000000 00001 00000 000 00000 11100 11&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">ebreak</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="n">N</span><span class="p">,</span><span class="w"> </span><span class="n">NEMUTRAP</span><span class="p">(</span><span class="n">s</span><span class="o">-&gt;</span><span class="n">pc</span><span class="p">,</span><span class="w"> </span><span class="n">R</span><span class="p">(</span><span class="mi">10</span><span class="p">)));</span><span class="w"> </span><span class="c1">// R(10) is $a0</span>
-<a id="__codelineno-28-4" name="__codelineno-28-4" href="#__codelineno-28-4"></a><span class="n">INSTPAT</span><span class="p">(</span><span class="s">&quot;??????? ????? ????? ??? ????? ????? ??&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">inv</span><span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="n">N</span><span class="p">,</span><span class="w"> </span><span class="n">INV</span><span class="p">(</span><span class="n">s</span><span class="o">-&gt;</span><span class="n">pc</span><span class="p">));</span><span class="w"> </span><span class="c1">// invalid inst</span>
-<a id="__codelineno-28-5" name="__codelineno-28-5" href="#__codelineno-28-5"></a><span class="c1">// ...</span>
-<a id="__codelineno-28-6" name="__codelineno-28-6" href="#__codelineno-28-6"></a><span class="n">INSTPAT_END</span><span class="p">();</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a><span class="n">INSTPAT_START</span><span class="p">();</span>
+<a id="__codelineno-30-2" name="__codelineno-30-2" href="#__codelineno-30-2"></a><span class="n">INSTPAT</span><span class="p">(</span><span class="s">&quot;??????? ????? ????? ??? ????? 00101 11&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">auipc</span><span class="p">,</span><span class="w"> </span><span class="n">U</span><span class="p">,</span><span class="w"> </span><span class="n">R</span><span class="p">(</span><span class="n">rd</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">s</span><span class="o">-&gt;</span><span class="n">pc</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">imm</span><span class="p">);</span>
+<a id="__codelineno-30-3" name="__codelineno-30-3" href="#__codelineno-30-3"></a><span class="n">INSTPAT</span><span class="p">(</span><span class="s">&quot;0000000 00001 00000 000 00000 11100 11&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">ebreak</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="n">N</span><span class="p">,</span><span class="w"> </span><span class="n">NEMUTRAP</span><span class="p">(</span><span class="n">s</span><span class="o">-&gt;</span><span class="n">pc</span><span class="p">,</span><span class="w"> </span><span class="n">R</span><span class="p">(</span><span class="mi">10</span><span class="p">)));</span><span class="w"> </span><span class="c1">// R(10) is $a0</span>
+<a id="__codelineno-30-4" name="__codelineno-30-4" href="#__codelineno-30-4"></a><span class="n">INSTPAT</span><span class="p">(</span><span class="s">&quot;??????? ????? ????? ??? ????? ????? ??&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">inv</span><span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="n">N</span><span class="p">,</span><span class="w"> </span><span class="n">INV</span><span class="p">(</span><span class="n">s</span><span class="o">-&gt;</span><span class="n">pc</span><span class="p">));</span><span class="w"> </span><span class="c1">// invalid inst</span>
+<a id="__codelineno-30-5" name="__codelineno-30-5" href="#__codelineno-30-5"></a><span class="c1">// ...</span>
+<a id="__codelineno-30-6" name="__codelineno-30-6" href="#__codelineno-30-6"></a><span class="n">INSTPAT_END</span><span class="p">();</span>
 </code></pre></div>
 <p>如果你的指令满足某一条匹配规则，那么我们就可以根据这个规则将一串二进制 01 翻译成对应的执行操作了。</p>
 <h4 id="_16">执行<a class="headerlink" href="#_16" title="Permanent link">&para;</a></h4>
 <p>译码完成了以后，相应的动作都是用 C 语言模拟的，我们执行这些动作就可以了。</p>
 <h4 id="pc">更新 PC<a class="headerlink" href="#pc" title="Permanent link">&para;</a></h4>
-<p>上面执行完了以后，回到 exec-once 函数， 更新 pc 就结束了。</p>
-<p>然后下面的代码，是打印出取到的指令的 16 进制表示及其反汇编结果的；源码很清楚，就不多说了，自己看吧。</p>
+<p>上面执行完了以后，回到 <code>exec-once</code> 函数， 更新 pc 就结束了。</p>
+<p>再之后的代码，就是打印出取到的指令的 16 进制表示及其反汇编结果的；源码很清楚，就不多说了，自己看吧。</p>
 <details open="open">
 <summary>tips</summary>
 <p>宏定义太复杂了，要绕晕了怎么办呢？编译器可以帮助我们。gcc 加 <code>-E</code> 选项可以只打印展开结果而不编译。</p>
 <p>有两个宏定义的结构体，展开了就很清晰了：
 一个就是存储寄存器和 PC 的情况，还有一个就是用来存储指令的结构体</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a><span class="k">typedef</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-29-2" name="__codelineno-29-2" href="#__codelineno-29-2"></a><span class="n">word_t</span><span class="w"> </span><span class="n">gpr</span><span class="p">[</span><span class="mi">32</span><span class="p">];</span>
-<a id="__codelineno-29-3" name="__codelineno-29-3" href="#__codelineno-29-3"></a><span class="w">  </span><span class="n">vaddr_t</span><span class="w"> </span><span class="n">pc</span><span class="p">;</span>
-<a id="__codelineno-29-4" name="__codelineno-29-4" href="#__codelineno-29-4"></a><span class="p">}</span><span class="w"> </span><span class="n">riscv32_CPU_state</span><span class="p">;</span>
-<a id="__codelineno-29-5" name="__codelineno-29-5" href="#__codelineno-29-5"></a><span class="k">typedef</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-29-6" name="__codelineno-29-6" href="#__codelineno-29-6"></a><span class="k">union</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-29-7" name="__codelineno-29-7" href="#__codelineno-29-7"></a><span class="w">    </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">val</span><span class="p">;</span>
-<a id="__codelineno-29-8" name="__codelineno-29-8" href="#__codelineno-29-8"></a><span class="w">  </span><span class="p">}</span><span class="w"> </span><span class="n">inst</span><span class="p">;</span>
-<a id="__codelineno-29-9" name="__codelineno-29-9" href="#__codelineno-29-9"></a><span class="p">}</span><span class="w"> </span><span class="n">riscv32_ISADecodeInfo</span><span class="p">;</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a><span class="k">typedef</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-31-2" name="__codelineno-31-2" href="#__codelineno-31-2"></a><span class="n">word_t</span><span class="w"> </span><span class="n">gpr</span><span class="p">[</span><span class="mi">32</span><span class="p">];</span>
+<a id="__codelineno-31-3" name="__codelineno-31-3" href="#__codelineno-31-3"></a><span class="w">  </span><span class="n">vaddr_t</span><span class="w"> </span><span class="n">pc</span><span class="p">;</span>
+<a id="__codelineno-31-4" name="__codelineno-31-4" href="#__codelineno-31-4"></a><span class="p">}</span><span class="w"> </span><span class="n">riscv32_CPU_state</span><span class="p">;</span>
+<a id="__codelineno-31-5" name="__codelineno-31-5" href="#__codelineno-31-5"></a><span class="k">typedef</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-31-6" name="__codelineno-31-6" href="#__codelineno-31-6"></a><span class="k">union</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-31-7" name="__codelineno-31-7" href="#__codelineno-31-7"></a><span class="w">    </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">val</span><span class="p">;</span>
+<a id="__codelineno-31-8" name="__codelineno-31-8" href="#__codelineno-31-8"></a><span class="w">  </span><span class="p">}</span><span class="w"> </span><span class="n">inst</span><span class="p">;</span>
+<a id="__codelineno-31-9" name="__codelineno-31-9" href="#__codelineno-31-9"></a><span class="p">}</span><span class="w"> </span><span class="n">riscv32_ISADecodeInfo</span><span class="p">;</span>
 </code></pre></div>
 </details>
 <p>根据 riscv 指令来一条条添加匹配规则，这就是 PA2 的第一部分了。这里就体现了 riscv 的优越性，只需要添加大约 40 条指令就可以通过所有的测试了，这是 x86 想都不敢想的事情。</p>
@@ -2231,15 +2245,15 @@ c语言默认数字是有符号的，在数字后面加<code>u</code>表示无�
 <p>其实，你也可以说，应用程序干嘛非得调库呢？我有需求，我自己码代码实现不可以吗？比如说，我想操控硬件，那我就直接写对硬件读写的代码呗，不行吗？</p>
 <p>实际上，当然是可以的。但是，这样不麻烦吗？所以，AM 存在的最大意义就是为了抽象，而抽象是为了简单。我抽象出来，让应用程序不必关注底层的硬件，专注于实现自己的功能就可以了。</p>
 <p>所以，原本的软硬件关系是这样的：
-<div class="highlight"><pre><span></span><code><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a>NEMU -&gt; 应用软件层
+<div class="highlight"><pre><span></span><code><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a>NEMU -&gt; 应用软件层
 </code></pre></div>
 NEMU 提供硬件功能；应用软件直接执行，直接和硬件交互</p>
 <p>现在增加了一层 AM 抽象层：
-<div class="highlight"><pre><span></span><code><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a>NEMU -&gt; AM 抽象层 -&gt; 应用软件层
+<div class="highlight"><pre><span></span><code><a id="__codelineno-33-1" name="__codelineno-33-1" href="#__codelineno-33-1"></a>NEMU -&gt; AM 抽象层 -&gt; 应用软件层
 </code></pre></div>
 NEMU 提供硬件功能；AM 抽象层负责和上层的软件和底层的硬件进行交互，屏蔽掉交互细节，只提供抽象接口给应用软件层；应用软件层不直接操纵硬件，只和 AM 抽象层进行交互。</p>
 <p>AM 中的 API，帮助实现了程序需要的运行时环境，于是将这些 API 称作 abstract machine，这就是 AM 库名称的由来。调用了这些接口的程序，称为 AM 程序。细细理解也是，这些接口实现，很像一个为程序运行提供各种东西的计算机。AM 库包含下面部分：</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a>AM = TRM + IOE + CTE + VME + MPE
+<div class="highlight"><pre><span></span><code><a id="__codelineno-34-1" name="__codelineno-34-1" href="#__codelineno-34-1"></a>AM = TRM + IOE + CTE + VME + MPE
 </code></pre></div>
 <p>TRM 提供计算功能，IOE 提供输入输出功能，其他的还未涉及。</p>
 <h4 id="_17">具体实现<a class="headerlink" href="#_17" title="Permanent link">&para;</a></h4>
@@ -2264,7 +2278,7 @@ NEMU 提供硬件功能；AM 抽象层负责和上层的软件和底层的硬件
 <p>什么是交叉编译呢？在一个平台上将代码编译成另一个平台的程序就叫交叉编译。比如我们这里，就是在 <code>x86</code> 的 linux 平台下把代码编译成 <code>riscv32</code> 类型的文件。</p>
 </details>
 <p>如果要搞清楚 make 在做什么的话，可以利用 make 的 -n 选项来查看运行 make 会执行哪些命令。这里我们运行</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-33-1" name="__codelineno-33-1" href="#__codelineno-33-1"></a>make -n ARCH=riscv32-nemu run
+<div class="highlight"><pre><span></span><code><a id="__codelineno-35-1" name="__codelineno-35-1" href="#__codelineno-35-1"></a>make -n ARCH=riscv32-nemu run
 </code></pre></div>
 <p>输出的结果很长，我就不放了。
 做的事情概括起来是：</p>
@@ -2298,38 +2312,39 @@ NEMU 提供硬件功能；AM 抽象层负责和上层的软件和底层的硬件
 <p>声卡很吃配置，打开声卡以后，超级玛丽完全玩不了了。（显卡还有十几帧的）。</p>
 <p>另外，不要老是挂起虚拟机。正常的指令执行速度是每秒两千万条，有的时候性能降低到每秒八万条，打字都卡，就赶紧关机重启吧。</p>
 <p>二次元是这样的：
-<div class="highlight"><pre><span></span><code><a id="__codelineno-34-1" name="__codelineno-34-1" href="#__codelineno-34-1"></a>................................................................................
-<a id="__codelineno-34-2" name="__codelineno-34-2" href="#__codelineno-34-2"></a>..............................................X.X.X.............................
-<a id="__codelineno-34-3" name="__codelineno-34-3" href="#__codelineno-34-3"></a>.............................................XXXXXXXXX..........................
-<a id="__codelineno-34-4" name="__codelineno-34-4" href="#__codelineno-34-4"></a>..............................................XXXXXXXXX.XXXXX...................
-<a id="__codelineno-34-5" name="__codelineno-34-5" href="#__codelineno-34-5"></a>............................................XXXXXXXXXXXXXXXXXXX.................
-<a id="__codelineno-34-6" name="__codelineno-34-6" href="#__codelineno-34-6"></a>........................................X.XXXXXXXXXXXXXXXXXXXXX.................
-<a id="__codelineno-34-7" name="__codelineno-34-7" href="#__codelineno-34-7"></a>........................................XXXXXXXXXXXXXXXXXXXXXXXX................
-<a id="__codelineno-34-8" name="__codelineno-34-8" href="#__codelineno-34-8"></a>........................................XXXXXXXXXXXXXXXXXXXXXXXXX...............
-<a id="__codelineno-34-9" name="__codelineno-34-9" href="#__codelineno-34-9"></a>.......................................XXXXXXXXXXXXXXXXXXXXXXXXXXX..............
-<a id="__codelineno-34-10" name="__codelineno-34-10" href="#__codelineno-34-10"></a>........................................XXXXXXXXXXXXXXXXXXXXXXXXXXX.............
-<a id="__codelineno-34-11" name="__codelineno-34-11" href="#__codelineno-34-11"></a>...........................................XXXXXXXXXXXXXXXXXXXXXXXX.............
-<a id="__codelineno-34-12" name="__codelineno-34-12" href="#__codelineno-34-12"></a>............................................XXXXXXXXXXXXXXXXXXXXXXX.............
-<a id="__codelineno-34-13" name="__codelineno-34-13" href="#__codelineno-34-13"></a>.............................................XXXXXXXXXXXXXXXXXXXXXX.............
-<a id="__codelineno-34-14" name="__codelineno-34-14" href="#__codelineno-34-14"></a>..............................................XXX.XXXXXXXXXXXXXXXXX.............
-<a id="__codelineno-34-15" name="__codelineno-34-15" href="#__codelineno-34-15"></a>..............................................XXXXXXXXXXXXXXXXXXXXXX............
-<a id="__codelineno-34-16" name="__codelineno-34-16" href="#__codelineno-34-16"></a>........................X.X.X.X...............XXXXXXXXXXXXXXXXX.X.X.............
-<a id="__codelineno-34-17" name="__codelineno-34-17" href="#__codelineno-34-17"></a>.......................XXXXXXXXX...............XXXXXXXXXXXXXXXX.................
-<a id="__codelineno-34-18" name="__codelineno-34-18" href="#__codelineno-34-18"></a>......................XXXXXXXXXXX...........X.XXXXXXXXXXXXXXX.X.................
-<a id="__codelineno-34-19" name="__codelineno-34-19" href="#__codelineno-34-19"></a>.......................XXXXXXXXXXX.X.......XXXXXXXXXXXXXXXXXXX..................
-<a id="__codelineno-34-20" name="__codelineno-34-20" href="#__codelineno-34-20"></a>........................XXXXXXXXXXXXXXX.X.XXXXXXXXXXXXXXXXXXXX..................
-<a id="__codelineno-34-21" name="__codelineno-34-21" href="#__codelineno-34-21"></a>.............................XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX..................
-<a id="__codelineno-34-22" name="__codelineno-34-22" href="#__codelineno-34-22"></a>............................XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX...X.X...........
-<a id="__codelineno-34-23" name="__codelineno-34-23" href="#__codelineno-34-23"></a>.............................XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX.X............
-<a id="__codelineno-34-24" name="__codelineno-34-24" href="#__codelineno-34-24"></a>............................XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX...............
-<a id="__codelineno-34-25" name="__codelineno-34-25" href="#__codelineno-34-25"></a>............................XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX..............
+<div class="highlight"><pre><span></span><code><a id="__codelineno-36-1" name="__codelineno-36-1" href="#__codelineno-36-1"></a>................................................................................
+<a id="__codelineno-36-2" name="__codelineno-36-2" href="#__codelineno-36-2"></a>..............................................X.X.X.............................
+<a id="__codelineno-36-3" name="__codelineno-36-3" href="#__codelineno-36-3"></a>.............................................XXXXXXXXX..........................
+<a id="__codelineno-36-4" name="__codelineno-36-4" href="#__codelineno-36-4"></a>..............................................XXXXXXXXX.XXXXX...................
+<a id="__codelineno-36-5" name="__codelineno-36-5" href="#__codelineno-36-5"></a>............................................XXXXXXXXXXXXXXXXXXX.................
+<a id="__codelineno-36-6" name="__codelineno-36-6" href="#__codelineno-36-6"></a>........................................X.XXXXXXXXXXXXXXXXXXXXX.................
+<a id="__codelineno-36-7" name="__codelineno-36-7" href="#__codelineno-36-7"></a>........................................XXXXXXXXXXXXXXXXXXXXXXXX................
+<a id="__codelineno-36-8" name="__codelineno-36-8" href="#__codelineno-36-8"></a>........................................XXXXXXXXXXXXXXXXXXXXXXXXX...............
+<a id="__codelineno-36-9" name="__codelineno-36-9" href="#__codelineno-36-9"></a>.......................................XXXXXXXXXXXXXXXXXXXXXXXXXXX..............
+<a id="__codelineno-36-10" name="__codelineno-36-10" href="#__codelineno-36-10"></a>........................................XXXXXXXXXXXXXXXXXXXXXXXXXXX.............
+<a id="__codelineno-36-11" name="__codelineno-36-11" href="#__codelineno-36-11"></a>...........................................XXXXXXXXXXXXXXXXXXXXXXXX.............
+<a id="__codelineno-36-12" name="__codelineno-36-12" href="#__codelineno-36-12"></a>............................................XXXXXXXXXXXXXXXXXXXXXXX.............
+<a id="__codelineno-36-13" name="__codelineno-36-13" href="#__codelineno-36-13"></a>.............................................XXXXXXXXXXXXXXXXXXXXXX.............
+<a id="__codelineno-36-14" name="__codelineno-36-14" href="#__codelineno-36-14"></a>..............................................XXX.XXXXXXXXXXXXXXXXX.............
+<a id="__codelineno-36-15" name="__codelineno-36-15" href="#__codelineno-36-15"></a>..............................................XXXXXXXXXXXXXXXXXXXXXX............
+<a id="__codelineno-36-16" name="__codelineno-36-16" href="#__codelineno-36-16"></a>........................X.X.X.X...............XXXXXXXXXXXXXXXXX.X.X.............
+<a id="__codelineno-36-17" name="__codelineno-36-17" href="#__codelineno-36-17"></a>.......................XXXXXXXXX...............XXXXXXXXXXXXXXXX.................
+<a id="__codelineno-36-18" name="__codelineno-36-18" href="#__codelineno-36-18"></a>......................XXXXXXXXXXX...........X.XXXXXXXXXXXXXXX.X.................
+<a id="__codelineno-36-19" name="__codelineno-36-19" href="#__codelineno-36-19"></a>.......................XXXXXXXXXXX.X.......XXXXXXXXXXXXXXXXXXX..................
+<a id="__codelineno-36-20" name="__codelineno-36-20" href="#__codelineno-36-20"></a>........................XXXXXXXXXXXXXXX.X.XXXXXXXXXXXXXXXXXXXX..................
+<a id="__codelineno-36-21" name="__codelineno-36-21" href="#__codelineno-36-21"></a>.............................XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX..................
+<a id="__codelineno-36-22" name="__codelineno-36-22" href="#__codelineno-36-22"></a>............................XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX...X.X...........
+<a id="__codelineno-36-23" name="__codelineno-36-23" href="#__codelineno-36-23"></a>.............................XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX.X............
+<a id="__codelineno-36-24" name="__codelineno-36-24" href="#__codelineno-36-24"></a>............................XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX...............
+<a id="__codelineno-36-25" name="__codelineno-36-25" href="#__codelineno-36-25"></a>............................XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX..............
 </code></pre></div></p>
 <h3 id="5">5. 杂项<a class="headerlink" href="#5" title="Permanent link">&para;</a></h3>
 <p>ftrace 真的是要老命了，纯苦力活。</p>
-<p>读取 ELF 文件？问互联网、问手册、问 GPT 吧。</p>
+<p>读取 ELF 文件？问互联网、问手册、问 GPT 吧。简单的说，利用 <code>fread</code> <code>fseek</code> 将文件里的信息读取到 <code>&lt;elf.h&gt;</code> 中定义的结构体里面，就成功了。</p>
 <p>怎么判断 riscv 中何时 call、何时 ret？call 和 ret 都会离开当前函数体。先判断 call，如果下一条指令地址是一个函数头，就一定是 call，反之就是 ret。</p>
-<p>而且做完以后还引入一个新 bug：我关闭调试信息选项以后，编译不通过了是几个意思？？？（其实可以理解，因为关闭调试选项意味着没有了任何信息，导致读入的都是无效的字符，所以导致编译器报未初始化警告）</p>
+<p>而且 ftrace 做完以后还引入一个新 bug：我关闭调试信息选项以后，编译不通过了是几个意思？？？（其实可以理解，因为关闭调试选项意味着没有了任何信息，导致读入的都是无效的字符，所以导致编译器报未初始化警告）</p>
 <p>想尽可能把实验的记录写清楚点，但是真的太花精力了，睡觉！</p>
+<p>TODO: 上面的NEMU只能运行一个程序。如何实现多程序同时运行？虚拟内存：PA3 的内容</p>
 
   <hr>
 <div class="md-source-file">
