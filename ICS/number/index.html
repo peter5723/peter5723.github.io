@@ -1035,7 +1035,7 @@
 <p>假设一个整数数据类型有 w 位。有符号数的最高位可以看成符号位，之后的 w - 1 位参与构成这个数字。于是，在非负数的情况下，最高位是 0，表示的整数可以在 <span class="arithmatex">\([0, 2^{w-1}-1]\)</span> 之间。二进制来看是 <span class="arithmatex">\([(00..00)_2, (01..11)_2]\)</span>。</p>
 <p>在负数的情况下，最高位是 1，表示 <span class="arithmatex">\(-2^{w-1}\)</span>。于是负数的范围是 <span class="arithmatex">\([-2^{w-1}, -1]\)</span>。二进制来看是 <span class="arithmatex">\([(10..00)_2, (11..11)_2]\)</span>。</p>
 <p>综上，w 位有符号数表示的范围是 <span class="arithmatex">\([-2^{w-1}, 2^{w-1}-1]\)</span>。</p>
-<p>快速得到负数对应的补码十进制值：先去掉符号位，然后对每一位取反，最后对结果加一，就得到这个补码对应的数字了。举例：6 位补码 111010 是 -6。先知道它是负数，去掉符号位，留下 11010，取反加一得到 00110，就是 6，于是知道 6 位补码 111010 对应 -6。反之也一样，取反加一后补上符号位即可。</p>
+<p>怎么知道一个数的相反数对应的补码表示呢？太简单了，<strong>取反加一</strong>即可。举个例子：111010，取反加一得到 000110，很快就知道原来是 -6，得到的相反数是 6。</p>
 <h3 id="3">3. 有符号数与无符号数的转换<a class="headerlink" href="#3" title="Permanent link">&para;</a></h3>
 <p>碰到这种问题时，不要想太多，从位的角度去考虑。</p>
 <p>最简单的方法就是写出二进制表示，再转化成另一种类型，不展开说了。</p>
@@ -1076,7 +1076,7 @@
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-11-29</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-12-12</span>
       
         <br>
         Created:
