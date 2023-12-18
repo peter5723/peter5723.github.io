@@ -7,21 +7,19 @@
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
       
-        <meta name="author" content="Peter">
       
       
+        <link rel="prev" href="../github-pages/">
       
-        <link rel="prev" href="../mkdocs/">
       
-      
-        <link rel="next" href="../pic-bed/">
+        <link rel="next" href="../../chem/thermo/">
       
       <link rel="icon" href="../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.0.4">
     
     
       
-        <title>github pages搭建 - Peter's home</title>
+        <title>图床 - Peter's home</title>
       
     
     
@@ -75,7 +73,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#jekyll" class="md-skip">
+        <a href="#_1" class="md-skip">
           Skip to content
         </a>
       
@@ -108,7 +106,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              github pages搭建
+              图床
             
           </span>
         </div>
@@ -271,48 +269,11 @@
               
   
   
-    
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-      
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          jekyll
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../github-pages/" class="md-nav__link">
         jekyll
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#jekyll" class="md-nav__link">
-    Jekyll
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -322,11 +283,21 @@
               
   
   
+    
   
-    <li class="md-nav__item">
-      <a href="../pic-bed/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         图床
       </a>
+      
     </li>
   
 
@@ -794,21 +765,8 @@
   
   
   
+    
   
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#jekyll" class="md-nav__link">
-    Jekyll
-  </a>
-  
-</li>
-      
-    </ul>
   
 </nav>
                   </div>
@@ -824,66 +782,22 @@
 
 
 
-  <h1>jekyll</h1>
-
-<h2 id="jekyll">Jekyll<a class="headerlink" href="#jekyll" title="Permanent link">&para;</a></h2>
-<p>现在我用 mkdocs 来部署，这个 jekyll 的教程也没啥用了，就留作纪念吧。</p>
-<p>今天（应该说是昨天）折腾了巨久怎么样基于github pages和Jekyll，搭建一个网页，现在终于基本上差不多弄好了，虽然是很简陋的gitbook的形式，不过也足够用了。其实我现在还是不知道Jekyll是什么，但是它能用2333.</p>
-<p>现在想整理一下应该怎么用，以免以后忘记了。</p>
-<p>一、新建一个github仓库，仓库的名字是<code>username.github.io</code>。</p>
-<p>二、从网上找一个模板，复制到自己的仓库里面。仓库的结构看这个网址:<a href="http://jekyllcn.com/docs/structure/">目录结构 - Jekyll • 简单静态博客网站生成器 (jekyllcn.com)</a></p>
-<p>三、<code>index.md</code> <code>readme.md</code>是主页内容。</p>
-<p>四、<code>_pages</code>文件夹里放网页</p>
-<p>这个开始的格式挺重要的(其实就是文档属性)。
-每一个网页都必须有文档属性，不然无法显示。
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>---
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>title: github pages搭建
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>author: Peter
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>date: 2023-07-03
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>category: Jekyll
-<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>layout: post
-<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>---
-</code></pre></div></p>
-<p>title就是网页的名称</p>
-<p>别的没啥用，但是要保持这样的格式不然会报错</p>
-<p>五、<code>_posts</code>文件夹就是用来放博客了，名称要求必须是<code>xxxx-xx-xx-name.md</code>，里面的开头也是必须有文档属性。属性<code>title</code>值就是这篇博客的标题了。
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>---
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>title: 一定要这样写
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>author: Peter
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>date: 2021-08-10
-<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>category: Jekyll
-<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>layout: post
-<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>---
-</code></pre></div>
-下面的内容用markdown写就可以了。</p>
-<p>六、网页的本地测试具体看这个网站: <a href="https://docs.github.com/en/pages/setting-up-a-github-pages-site-with-jekyll/testing-your-github-pages-site-locally-with-jekyll">Testing your GitHub Pages site locally with Jekyll - GitHub Docs</a> </p>
-<p>按照上面的内容装了一大堆东西以后，以后要本地测试，就只需要：
-在网页文件夹里打开git bash
-然后<code>bundle install</code>
-然后<code>bundle exec jekyll serve</code>
-就可以在<code>http://localhost:4000</code>查看网页了。</p>
-<p>七、网页URL的配置在<code>_config.yml</code>文件中，记得配置</p>
-<p>八、以后每次写完博客，<code>git push</code>上去就可以更新了，非常的方便，而且可以在obsidian里写博客，挺好的。</p>
-<p>九、怎么插图片</p>
-<p>看这个链接，很简单：<a href="https://abaojin.github.io/2017/01/13/jekyll-blog-media/">jekyll 添加多媒体图片和附件 (abaojin.github.io)</a></p>
-<p>下面我插了一张图作为示例。
-<img alt="CPU" src="/media/image/CPUwww.png" /></p>
-<p>十、参考的教程：</p>
-<p><a href="https://docs.github.com/en/pages/setting-up-a-github-pages-site-with-jekyll">Setting up a GitHub Pages site with Jekyll - GitHub Docs</a></p>
-<p><a href="https://sighingnow.github.io/jekyll-gitbook/">Jekyll Gitbook Theme · Jekyll Gitbook (sighingnow.github.io)</a></p>
-<p>想弄好博客，也可以多看看别人的博客源代码：</p>
-<p><a href="https://github.com/abaojin/abaojin.github.io">abaojin/abaojin.github.io: Welcome to view and use the blog</a></p>
+<h1 id="_1">图床<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
+<p>有的时候肯定是需要图片的，所以找了一个图床。</p>
+<p>我选择的图床平台是 <a href="https://imgur.com/">https://imgur.com/</a></p>
+<p>下面这张图片来自我上传到图床的图片，看看能不能显示</p>
+<p><img alt="Imgur" src="https://i.imgur.com/HDGYdGn.jpg" /></p>
 
   <hr>
 <div class="md-source-file">
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-11-19</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-12-19</span>
       
         <br>
         Created:
-        <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-07-03</span>
+        <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-12-19</span>
       
     
   </small>
