@@ -53,6 +53,8 @@ markdown_extensions:
       #toc_depth: 2                           # table of content 显示的级数，0就不会显示
   - footnotes
   - meta
+  - attr_list
+  - md_in_html
 
 extra_javascript:
   - javascripts/mathjax.js
@@ -90,6 +92,7 @@ nav:
   - "build a website": 
     - "mkdocs": "website/mkdocs.md"
     - "jekyll": "website/github-pages.md"
+    - "图床": "website/pic-bed.md"
   - "化学":
     - "化学热力学中的一些问题": "chem/thermo.md"
   - "信号": 
