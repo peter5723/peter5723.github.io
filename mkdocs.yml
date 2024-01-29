@@ -111,6 +111,8 @@ nav:
     - "介绍": "algorithm/intro.md"
     - "搜索":
       - "DFS": "algorithm/search/DFS.md"
+  - "C++":
+    - "介绍": "Cpp/intro.md"
   - diary:
     - "one diary":
       - "one one diary": "diary.md"
