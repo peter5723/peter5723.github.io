@@ -1041,6 +1041,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#pa-33" class="md-nav__link">
+    PA 3.3
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -1918,6 +1925,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#pa-33" class="md-nav__link">
+    PA 3.3
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -2588,8 +2602,7 @@ NEMU 提供硬件功能；AM 抽象层负责和上层的软件和底层的硬件
 <li>mainargs 是怎么传参到程序的。我遭遇了 bug，前几天能成功传参的，现在突然不行了.</li>
 <li>https://www.cnblogs.com/nosae/p/17066439.html#%E7%90%86%E8%A7%A3mainargs</li>
 <li>别人直接都把答案写在博客里了，还是要自己独立完成啊。</li>
-<li>CFLAGS += -DMAINARGS=\"$(mainargs)\"
-$AM_HOME/scripts/platform/nemu.mk</li>
+<li>CFLAGS += -DMAINARGS=\"$(mainargs)\"  $AM_HOME/scripts/platform/nemu.mk</li>
 </ol>
 <h2 id="pa3">PA3<a class="headerlink" href="#pa3" title="Permanent link">&para;</a></h2>
 <h3 id="pa31">PA3.1<a class="headerlink" href="#pa31" title="Permanent link">&para;</a></h3>
@@ -2620,24 +2633,59 @@ $AM_HOME/scripts/platform/nemu.mk</li>
 <p>如果只看 C 语言代码的话，是永远也找不到答案的。答案在汇编代码 <code>trap.S</code> 中。<code>__am_irq_handle</code> 是在 <code>trap.S</code> 中被调用的。汇编语言的函数参数是怎么确定的呢？关键就是调用函数前一句代码，<code>mv a0, sp</code>，这是汇编语言的传参。看一下 riscv 的手册也可以知道，<code>a0</code> 寄存器储存函数的第一个参数。<code>__am_irq_handle</code> 的第一个参数就是结构指针 <code>c</code>，所以传入的参数就是栈地址 <code>sp</code>。<strong>结构体有这样的性质：如果某个地址开头正好是结构体的地址，并且写入顺序和结构体的定义顺序一致，那么就相当于向一个结构体写数据</strong>。所以，赋值的过程，在我们将寄存器压入内存的时候就已经完成了。这就是这个问题的答案，也是 PA 的其中一个问题，要求我们按规定的顺序来定义 context 结构体的原因。</p>
 <p>总结：PA3.1 主要的坑一个是内联汇编不熟悉，还有一个是汇编语言已经忘记得差不多了，所以完全没有看出来 <code>mv a0, sp</code> 是函数参数的赋值。非常感谢：<a href="https://www.cnblogs.com/GrootStudy/p/17039807.html">https://www.cnblogs.com/GrootStudy/p/17039807.html</a> 给了我很大的启发。</p>
 <h3 id="pa-32">PA 3.2<a class="headerlink" href="#pa-32" title="Permanent link">&para;</a></h3>
-<p>小问题，为什么 NEMU 内存可以直接通过绝对地址访问？"0x83000000"</p>
-<p>这个问题其实挺简单的。一般来讲代码里的变量、数组的地址都是通过编译器来分配的。但你直接写一个绝对地址，访问这个地址也是可以的，最后编译器转化成底层的汇编代码后，那些底层的汇编代码就会访问你写的绝对地址。paddr_read、write 这些函数都是在模拟汇编指令的时候调用了。</p>
-<p>时刻记得，AM 已经是软件层面的事情了。</p>
+<p>PA 3.2 主要的任务是实现了系统调用，然后可以用 nanos-lite 这个简单的批处理系统加载一些应用程序。</p>
+<p>要实现上面的功能，首先就是要先将应用程序加载到对应的内存中。这里我想到一个小问题，为什么 NEMU 内存可以直接通过绝对地址访问？比如 "0x83000000" ？</p>
+<p>这个问题其实挺简单的。一般来讲代码里的变量、数组的地址都是通过编译器来分配的。但你直接写一个绝对地址，访问这个地址也是可以的，最后编译器转化成底层的汇编代码后，那些底层的汇编代码就会访问你写的绝对地址。<code>paddr_read</code>、<code>paddr_write</code> 这些函数都是在模拟汇编指令的时候调用了。</p>
+<p>然后就是实现系统调用了，首先对 AM 进行一些修改，使得我们的批处理系统能够分辨是自陷事件还是系统调用事件，然后根据不同的系统调用，进行底层的 AM 实现就可以了。我们现在实现的系统调用有：yield 调用进入自陷，write 调用进行输出，exit 调用退出程序，sbrk 调用分配内存等。</p>
+<p>下面我们就完完整整地讲解一下 hello 这个测试程序的来龙去脉吧。目前我也还有些没完全搞清楚，期待补充。</p>
+<p>首先得解释一下，navy 项目中的程序都是依赖于 newlib 库来运行的，newlib 是一个为嵌入式系统提供的 C 库。hello 程序中的 printf 函数可能与 AM 项目中的函数重名，但是具体的实现是在 newlib 中实现的，并且逻辑也不同。下面会详细说明。</p>
+<p>用户程序从哪里开始的呢？好吧我承认我没看仔细讲义里有的。用户程序的入口位于 <code>navy-apps/libs/libos/src/crt0/start.S</code> 中的 <code>_start()</code> 函数，<code>_start()</code> 函数会调用 <code>navy-apps/libs/libos/src/crt0/crt0.c</code> 中的 <code>call_main()</code> 函数, 然后调用用户程序的 <code>main()</code> 函数， 从 <code>main()</code> 函数返回后会调用 <code>exit()</code> 结束运行。怎么跳转到用户程序的入口呢？ Nanos-lite 在加载好用户程序后，返回用户地址入口 <code>entry</code>，然后 <code>((void (*)())entry)();</code> 就跳转了。</p>
+<p>hallo 程序中涉及了上面除了 yield 外所有的系统调用。首先是 <code>write</code> 函数，查看一下 <code>write</code> 函数的源代码就知道，<code>write</code> 调用了 <code>_write_r</code> 函数，<code>_write_r</code> 函数调用了 <code>_write</code> 函数，<code>_write</code> 函数调用了我们的系统函数 <code>_syscall_</code>。上面都是应用程序层面的实现，一直到 <code>_syscall_</code> 才到底层的实现。<code>_syscall_</code> 函数将异常状态号和输入参数设置好以后，就执行 <code>ebreak</code> 指令，<code>ebreak</code> 指令跳转到之前设置的异常入口地址 <code>__am_asm_trap</code>，然后是 <code>__am_irq_handle</code>，然后是回调函数 <code>do_event</code>，<code>do_event</code> 识别是 <code>syscall</code> 类型的事件，然后执行 <code>do_syscall</code> 函数，<code>do_syscall</code> 识别是 <code>write</code> 系统调用，执行 <code>sys_write</code> 函数，在这个函数里终于通过 <code>putch</code> 函数，将字符一个个输出到串口。</p>
+<p>然后介绍 <code>printf</code> 函数。<code>printf</code> 的实现就非常复杂了。具体可以看这个链接：<a href="https://www.cnblogs.com/DF11G/p/14750056.html">https://www.cnblogs.com/DF11G/p/14750056.html</a>。可以简单的理解为，先通过 <code>sbrk</code> 系统调用获取内存，然后再通过上面讲解 <code>write</code> 系统调用输出。而 AM 中的 <code>printf</code>，本质上就是直接通过 <code>putch</code> 输出格式化的字符串。所以两者还是非常不同的。</p>
+<p>程序结束后，就会通过 <code>exit</code> 函数退出。（原来的 hello 程序是死循环，我把循环改了）。exit() 函数层层跳转后，就是我们的 <code>exit</code> 系统调用。另外，我这里有一个 bug 没有解决，就是在调用 <code>printf</code> 函数后，系统的退出值就不是 0，但是可惜很难看出是哪方面的原因，但是总而言之，与我无瓜，因为即使是 <code>sbrk</code> 没有实现的情况下，结果也如此。更新：完成 PA3.3 的文件系统后，这个 bug 突然消失了，又可以完美退出了，可怕。</p>
+<p>接下来我们来看一下 <code>sbrk</code> 系统调用吧。newlib 库中的 <code>malloc</code> 函数最终就是调用了 <code>_sbrk</code> 函数。这里我有一些不太理解的地方，感觉 <code>_sbrk</code> 函数实际上做的事情只不过是返回了一个地址而已。比如我们可以看一下 libgross 库中 ARM 体系的实现。（libgross 是 newlib 库中自带的底层实现，但是可惜没有 PA 系统的底层实现，哈哈）</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-44-1" name="__codelineno-44-1" href="#__codelineno-44-1"></a><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nf">__attribute__</span><span class="p">((</span><span class="n">weak</span><span class="p">))</span>
+<a id="__codelineno-44-2" name="__codelineno-44-2" href="#__codelineno-44-2"></a><span class="n">_sbrk</span><span class="w"> </span><span class="p">(</span><span class="kt">ptrdiff_t</span><span class="w"> </span><span class="n">incr</span><span class="p">)</span>
+<a id="__codelineno-44-3" name="__codelineno-44-3" href="#__codelineno-44-3"></a><span class="p">{</span>
+<a id="__codelineno-44-4" name="__codelineno-44-4" href="#__codelineno-44-4"></a><span class="w">  </span><span class="k">extern</span><span class="w"> </span><span class="kt">char</span><span class="w">   </span><span class="n">end</span><span class="w"> </span><span class="k">asm</span><span class="w"> </span><span class="p">(</span><span class="s">&quot;end&quot;</span><span class="p">);</span><span class="w"> </span><span class="cm">/* Defined by the linker.  */</span>
+<a id="__codelineno-44-5" name="__codelineno-44-5" href="#__codelineno-44-5"></a><span class="w">  </span><span class="k">static</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">heap_end</span><span class="p">;</span>
+<a id="__codelineno-44-6" name="__codelineno-44-6" href="#__codelineno-44-6"></a><span class="w">  </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="w">        </span><span class="n">prev_heap_end</span><span class="p">;</span>
+<a id="__codelineno-44-7" name="__codelineno-44-7" href="#__codelineno-44-7"></a>
+<a id="__codelineno-44-8" name="__codelineno-44-8" href="#__codelineno-44-8"></a><span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">heap_end</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nb">NULL</span><span class="p">)</span>
+<a id="__codelineno-44-9" name="__codelineno-44-9" href="#__codelineno-44-9"></a><span class="w">    </span><span class="n">heap_end</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">end</span><span class="p">;</span>
+<a id="__codelineno-44-10" name="__codelineno-44-10" href="#__codelineno-44-10"></a>
+<a id="__codelineno-44-11" name="__codelineno-44-11" href="#__codelineno-44-11"></a><span class="w">  </span><span class="n">prev_heap_end</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">heap_end</span><span class="p">;</span>
+<a id="__codelineno-44-12" name="__codelineno-44-12" href="#__codelineno-44-12"></a>
+<a id="__codelineno-44-13" name="__codelineno-44-13" href="#__codelineno-44-13"></a><span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">((</span><span class="n">heap_end</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">incr</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">stack_ptr</span><span class="p">)</span>
+<a id="__codelineno-44-14" name="__codelineno-44-14" href="#__codelineno-44-14"></a><span class="w">      </span><span class="cm">/* Honour heap limit if it&#39;s valid.  */</span>
+<a id="__codelineno-44-15" name="__codelineno-44-15" href="#__codelineno-44-15"></a><span class="w">      </span><span class="o">||</span><span class="w"> </span><span class="p">(</span><span class="n">__heap_limit</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="mh">0xcafedead</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">heap_end</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">incr</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="p">(</span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="p">)</span><span class="n">__heap_limit</span><span class="p">))</span>
+<a id="__codelineno-44-16" name="__codelineno-44-16" href="#__codelineno-44-16"></a><span class="w">    </span><span class="p">{</span>
+<a id="__codelineno-44-17" name="__codelineno-44-17" href="#__codelineno-44-17"></a><span class="w">      </span><span class="n">errno</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ENOMEM</span><span class="p">;</span>
+<a id="__codelineno-44-18" name="__codelineno-44-18" href="#__codelineno-44-18"></a><span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="p">(</span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="mi">-1</span><span class="p">;</span>
+<a id="__codelineno-44-19" name="__codelineno-44-19" href="#__codelineno-44-19"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-44-20" name="__codelineno-44-20" href="#__codelineno-44-20"></a><span class="w">  </span><span class="n">heap_end</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">incr</span><span class="p">;</span>
+<a id="__codelineno-44-21" name="__codelineno-44-21" href="#__codelineno-44-21"></a><span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="p">(</span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="n">prev_heap_end</span><span class="p">;</span>
+<a id="__codelineno-44-22" name="__codelineno-44-22" href="#__codelineno-44-22"></a><span class="p">}</span>
+</code></pre></div>
+<p>解答上面这个疑惑可能要知道 <code>&amp;end</code> 是程序 bss 段的起始地址。 
+TODO：其实好理解的但是需要学一些新知识来准确解释。</p>
+<p>上面基本就是 PA3, part 2 了。总结一下，在 NEMU 硬件上，我们实现了 AM 接口，然后写了一个 AM 程序 nanos-lite，在 nanos-lite 上，我们运行应用程序。应用程序不能直接操控底层，而是通过系统调用来和底层交互（对应用程序来说，AM 也算是底层了，毕竟是直接和硬件交互的库）。</p>
+<p>TODO：程序结构介绍</p>
 <p>查看程序 riscv 文件信息是这样的：</p>
 <p>riscv64-linux-gnu-readelf -a <filename>
 riscv64-linux-gnu-objdump -d <filename></p>
 <p>elf 文件的魔数：0x7F,0x45,0x4c,0x46,</p>
-<p>学而不思则罔，思而不学则殆，PA3.2基本上完成了，但是一些关于程序的知识仍然不了解，比如堆的机制。系统调用的过程还需要好好理解，elf 文件的结构要整理了。PA3 和前面最大的区别就是多了一些我没学习过的理论知识需要补充吧。
-TODO stdint 和 stddef 中的类型</p>
-<p>PA3.2  最关键的问题实际上是从 printf 到 write 的过程。注意一点，应用程序的 printf 和 AM 的 printf 只是同名，内部结构并不一样。</p>
-<p>然后还有的问题是，实际上我很多函数的实现都没有找到，libc中，它们是怎么编译出来的？</p>
+<p>学而不思则罔，思而不学则殆，PA3.2 基本上完成了，但是一些关于程序的知识仍然不了解，比如堆的机制。系统调用的过程还需要好好理解，elf 文件的结构要整理了。PA3 和前面最大的区别就是多了一些我没学习过的理论知识需要补充吧。</p>
+<p>TODO stdint 和 stddef 和 unistd 中的类型</p>
+<h3 id="pa-33">PA 3.3<a class="headerlink" href="#pa-33" title="Permanent link">&para;</a></h3>
+<p>首先是实现了一个简单的文件系统。</p>
 
   <hr>
 <div class="md-source-file">
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2024-01-29</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2024-02-06</span>
       
         <br>
         Created:

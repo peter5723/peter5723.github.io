@@ -819,6 +819,47 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#lecture-4-streams" class="md-nav__link">
+    Lecture 4: Streams
+  </a>
+  
+    <nav class="md-nav" aria-label="Lecture 4: Streams">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    介绍
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    输出流
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    输入流
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#io" class="md-nav__link">
+    IO 类
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -1030,6 +1071,47 @@
           <li class="md-nav__item">
   <a href="#_2" class="md-nav__link">
     常量
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lecture-4-streams" class="md-nav__link">
+    Lecture 4: Streams
+  </a>
+  
+    <nav class="md-nav" aria-label="Lecture 4: Streams">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    介绍
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    输出流
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    输入流
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#io" class="md-nav__link">
+    IO 类
   </a>
   
 </li>
@@ -1336,13 +1418,50 @@
 <div class="highlight"><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
 </code></pre></div>
 <p>只有一点是新的，常量不能被非常量引用引用，所以 <code>int&amp; b = a</code> 会导致错误，而 <code>const int &amp;b = a</code> 则语法正确。</p>
+<h2 id="lecture-4-streams">Lecture 4: Streams<a class="headerlink" href="#lecture-4-streams" title="Permanent link">&para;</a></h2>
+<p>参考链接：<a href="https://www.runoob.com/cplusplus/cpp-basic-input-output.html">https://www.runoob.com/cplusplus/cpp-basic-input-output.html</a></p>
+<h3 id="_3">介绍<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<p>Streams 输入输出流这个概念是 C++ 中的重要概念。知道了它就可以使用高贵的 <code>cin</code> 和 <code>cout</code>，抛弃可怜的 <code>scanf</code> 和 <code>printf</code> 了。</p>
+<p>那么到底什么是 stream 呢？stream 就是 C++ 为输入输出数据提供的一种抽象。抽象的作用就是提供高层的接口，避免直接和底层打交道。stream 的本质是字节序列，从 IO 设备读出或者写入 IO 设备。</p>
+<p>在 C++ 中，使用 <code>iostream</code> 库来实现流，提供输入输出机制。<code>iostream</code> 中有两个基础类，<code>istream</code> 和 <code>ostream</code>，分别表示输入流和输出流。在标准库中，又定义了 4 个对象：<code>cin</code>，<code>cout</code>，<code>cerr</code>，<code>clog</code>。<code>cin</code> 是 <code>istream</code> 类型的实例，<code>cout</code> 和后面两个是 <code>ostream</code> 类型的实例。</p>
+<h3 id="_4">输出流<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
+<p>还是来看一个例子吧：
+<div class="highlight"><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a><span class="cp">#include</span><span class="cpf">&lt;iostream&gt;</span>
+<a id="__codelineno-25-2" name="__codelineno-25-2" href="#__codelineno-25-2"></a><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span>
+<a id="__codelineno-25-3" name="__codelineno-25-3" href="#__codelineno-25-3"></a><span class="p">{</span>
+<a id="__codelineno-25-4" name="__codelineno-25-4" href="#__codelineno-25-4"></a><span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;hello, world&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<a id="__codelineno-25-5" name="__codelineno-25-5" href="#__codelineno-25-5"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<a id="__codelineno-25-6" name="__codelineno-25-6" href="#__codelineno-25-6"></a><span class="p">}</span>
+</code></pre></div></p>
+<p>上面的例子，很简单，就是打印 hello, world 到屏幕上。但是有一些细节需要说明。<code>std::cout &lt;&lt; "hello, world" &lt;&lt; std::endl</code> 本质上是一个表达式，<code>&lt;&lt;</code> 是一个输出运算符。（从现在开始要认识到 <code>cout</code> 不是一个函数了。） </p>
+<p><code>&lt;&lt;</code> 运算符接受两个运算对象，左侧的是一个 <code>ostream</code> 对象，右侧的运算对象是要打印的值。这个运算符将给定的值（右侧）写入到给定的 <code>ostream</code> 对象（左侧）中，就是说，计算结果就是写入给定值的左侧的 <code>ostream</code> 对象。 </p>
+<p>所以我们可以把表达式写成
+<div class="highlight"><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;hello, world&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+</code></pre></div></p>
+<p>或者是
+<div class="highlight"><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;hello, world&quot;</span><span class="p">;</span>
+<a id="__codelineno-27-2" name="__codelineno-27-2" href="#__codelineno-27-2"></a><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+</code></pre></div></p>
+<p>得到的输出都是相同的。</p>
+<p>那么这个 <code>std::endl</code> 又是怎么回事呢？<code>endl</code> 是一个被称为操纵符的特殊值，它的效果是结束当前行，并将缓冲区的内容全部刷新到设备中，清空缓冲区。</p>
+<h3 id="_5">输入流<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
+<p>上面简单介绍了一下输出流，其实对于输入流也类似的。</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a><span class="kt">int</span><span class="w"> </span><span class="n">v1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">v2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<a id="__codelineno-28-2" name="__codelineno-28-2" href="#__codelineno-28-2"></a><span class="n">std</span><span class="o">::</span><span class="n">cin</span><span class="w"> </span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">v1</span><span class="w"> </span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">v2</span><span class="p">;</span>
+</code></pre></div>
+<p><code>&gt;&gt;</code> 是输入运算符，接受 istream 类为左侧运算对象，将数据输入到右侧对象中，返回左侧对象作为运算结果。<code>&gt;&gt;</code> 读取 istream 的内容时，读到空格停止（和 <code>scanf</code> 一样）。</p>
+<p>stream 提供了一种 universal 的方式来处理输入输出。</p>
+<h3 id="io">IO 类<a class="headerlink" href="#io" title="Permanent link">&para;</a></h3>
+<p>除 <code>istream</code> 和 <code>ostream</code> 之外，标准库还定义了其他的一些 IO 类型，定义在三个独立的头文件中：<code>iostream</code> 定义了用于读写流的基本类型，<code>fstream</code> 定义了读写文件的类型，<code>sstream</code> 定义了读写字符串对象的类型。实际上，这三种 IO 类型是通过继承机制实现的，关系如下图所示：</p>
+<p><img alt="pF1JSmt.jpg" src="https://s11.ax1x.com/2024/02/06/pF1JSmt.jpg" /></p>
+<p><code>stringstream</code>和 <code>fstream</code> 都是继承自 <code>iostream</code> 的。</p>
 
   <hr>
 <div class="md-source-file">
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2024-01-29</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2024-02-06</span>
       
         <br>
         Created:
