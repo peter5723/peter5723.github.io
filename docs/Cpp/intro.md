@@ -366,3 +366,67 @@ const int a = 1;
 ```
 
 只有一点是新的，常量不能被非常量引用引用，所以 `int& b = a` 会导致错误，而 `const int &b = a` 则语法正确。
+
+
+## Lecture 4: Streams
+
+参考链接：<https://www.runoob.com/cplusplus/cpp-basic-input-output.html>
+
+### 介绍
+Streams 输入输出流这个概念是 C++ 中的重要概念。知道了它就可以使用高贵的 `cin` 和 `cout`，抛弃可怜的 `scanf` 和 `printf` 了。
+
+那么到底什么是 stream 呢？stream 就是 C++ 为输入输出数据提供的一种抽象。抽象的作用就是提供高层的接口，避免直接和底层打交道。stream 的本质是字节序列，从 IO 设备读出或者写入 IO 设备。
+
+在 C++ 中，使用 `iostream` 库来实现流，提供输入输出机制。`iostream` 中有两个基础类，`istream` 和 `ostream`，分别表示输入流和输出流。在标准库中，又定义了 4 个对象：`cin`，`cout`，`cerr`，`clog`。`cin` 是 `istream` 类型的实例，`cout` 和后面两个是 `ostream` 类型的实例。
+
+### 输出流
+还是来看一个例子吧：
+```cpp
+#include<iostream>
+int main() 
+{
+    std::cout << "hello, world" << std::endl;
+    return 0;
+}
+```
+
+上面的例子，很简单，就是打印 hello, world 到屏幕上。但是有一些细节需要说明。`std::cout << "hello, world" << std::endl` 本质上是一个表达式，`<<` 是一个输出运算符。（从现在开始要认识到 `cout` 不是一个函数了。） 
+
+`<<` 运算符接受两个运算对象，左侧的是一个 `ostream` 对象，右侧的运算对象是要打印的值。这个运算符将给定的值（右侧）写入到给定的 `ostream` 对象（左侧）中，就是说，计算结果就是写入给定值的左侧的 `ostream` 对象。 
+
+所以我们可以把表达式写成
+```cpp
+(std::cout << "hello, world") << std::endl;
+```
+
+或者是
+```cpp
+std::cout << "hello, world";
+std::cout << std::endl;
+```
+
+得到的输出都是相同的。
+
+那么这个 `std::endl` 又是怎么回事呢？`endl` 是一个被称为操纵符的特殊值，它的效果是结束当前行，并将缓冲区的内容全部刷新到设备中，清空缓冲区。
+
+### 输入流
+上面简单介绍了一下输出流，其实对于输入流也类似的。
+
+```cpp
+int v1 = 0, v2 = 0;
+std::cin >> v1 >> v2;
+```
+
+`>>` 是输入运算符，接受 istream 类为左侧运算对象，将数据输入到右侧对象中，返回左侧对象作为运算结果。`>>` 读取 istream 的内容时，读到空格停止（和 `scanf` 一样）。
+
+stream 提供了一种 universal 的方式来处理输入输出。
+
+### IO 类
+
+除 `istream` 和 `ostream` 之外，标准库还定义了其他的一些 IO 类型，定义在三个独立的头文件中：`iostream` 定义了用于读写流的基本类型，`fstream` 定义了读写文件的类型，`sstream` 定义了读写字符串对象的类型。实际上，这三种 IO 类型是通过继承机制实现的，关系如下图所示：
+
+![pF1JSmt.jpg](https://s11.ax1x.com/2024/02/06/pF1JSmt.jpg)
+
+`stringstream`和 `fstream` 都是继承自 `iostream` 的。
+
+
