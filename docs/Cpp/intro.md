@@ -430,3 +430,172 @@ stream 提供了一种 universal 的方式来处理输入输出。
 `stringstream`和 `fstream` 都是继承自 `iostream` 的。
 
 
+先看一个 `stringstream` 的例子：
+```cpp
+std::string initial_quote = "Bjarne Stroustrup C makes it easy to shoot yourself in the foot"; 
+
+std::stringstream ss;
+ss << initial_quote;
+// stringstream 也可以像 cout 那样用输出运算符来赋值
+std::string first;
+std::string last;
+std::string language, extracted_quote;
+
+ss >> first >> last >> language;
+// 可以用输入运算符对字符串赋值，就像 cin 那样，每一次赋值到空格结束
+std::getline(ss, extracted_quote);
+std::cout << first << " " << last <<" said this: " << language << " " << extracted_quote << std::endl;
+```
+
+如果直接用输入运算符，那么到空格就截止了。有时我们需要读入一整行，就像上面的 `extracted_quote` 那样，这时候就要使用 `getline` 函数。来看一下 `getline` 函数的原型：
+
+```cpp
+istream& getline(istream& is, string& str, char delim)
+```
+
+`getline()` 函数读取一个输入流对象 `is`，直到遇到 `delim`  字符，并将读取结果储存在 `str` 中。默认的 `delim` 就是换行符 `\n`。注意：`getline()`  函数会消耗换行符。
+
+然后我们再看一下文件流的例子。
+
+```cpp
+int main() {
+    std::ofstream ofs("hello.txt");
+    if (ofs.is_open()) {
+        ofs << "Heloo CS106L!" << '\n';
+    }
+    ofs.close();
+    ofs << "this won't get written";
+
+    ofs.open("hello.txt");
+    ofs << "this will though! It’s open again";
+    return 0;
+}
+```
+
+文件流的输入输出和 IO 也是类似的，就好像 `fprintf` 和 `printf` 之间的关系一样。
+
+
+### 格式化输出
+
+例子抄自这个链接：<https://zhuanlan.zhihu.com/p/583649384>
+
+C++ 怎么用 `cout` 做到类似于 `printf` 的格式化输出呢？C++ 的 `ostream` 库中定义了大量的“流操纵算子”来控制输出。下面介绍一下：
+
+#### 整数不同进制输出
+
+输出整数时用的流操纵算子有 `dec`，`oct`，`hex` 等等。在更改进制显示方式之后，系统默认后面使用该方式显示数据，如果有显示为其他进制形式的需要重新设置进制显示方式。
+
+```cpp
+cout << "cout以不同进制显示整数***********************************************************" << endl;
+/*cout以不同进制显示整数*/
+i = 90;
+cout << "以十进制显示i：" << dec << i << endl;//以十进制显示
+cout << "以八进制显示i：" << oct << i << endl;//以八进制显示
+cout << "以16进制显示i：" << hex << i << endl;//以16进制显示
+//如需更改为十进制显示方式，则可以使用以下方式
+cout.setf(ios_base::dec);
+cout << "以十进制显示i：" << i << endl << endl;
+/*bool数据类型显示*/
+cout << "bool数据类型显示" << endl;
+bool is_true = true;
+cout.setf(ios_base::boolalpha);//可以显示为true或false
+cout << "is_true = " << is_true << endl;
+is_true = false;
+cout << "is_true = " << is_true << endl << endl;
+```
+
+输出：
+```
+cout以不同进制显示整数***********************************************************
+以十进制显示i：90
+以八进制显示i：132
+以16进制显示i：5a
+以十进制显示i：90
+
+bool数据类型显示
+is_true = true
+is_true = false
+```
+
+#### 设置宽度
+
+`cout` 使用 `width` 方法可以设置宽度。`width()` 只影响下一次的cout，然后字段宽度将恢复默认值。C++ 不会截断数据，如果显示字段宽度小于数字宽度，C++ 将增宽字段，以容纳该数据，如最后一个例子。
+
+```cpp
+cout << "width()***************************************************************************" << endl;
+int w = cout.width(30);
+cout << "default field width = " << w << ":\n";
+cout.width(5);
+cout << "N" << ':';
+cout.width(8);
+cout << "N * N" << ":\n";
+for (long i = 1; i <= 100; i *= 10)
+{
+    cout.width(5);
+    cout << i << ':';
+    cout.width(8);
+    cout << i * i << ":\n";
+}
+cout.width(5);
+cout << 9.888889999 << endl;//将不会截断
+```
+
+运行结果
+
+```
+width()***************************************************************************
+        default field width = 0:
+    N:   N * N:
+    1:       1:
+   10:     100:
+  100:   10000:
+9.88889
+```
+
+#### 更改填充字符
+
+`fill()` 方法更改空位填充的字符（默认是空格），也是全局设定，更改后系统都用这个字符填充。
+
+```cpp
+cout << "更改填充字符****************************************************************************" << endl;
+cout.fill('*');
+const char* staff[2] = { "Waldo Whipsnade", "Wilmarie Wooper" };
+long bonus[2] = { 900, 1350 };
+for (int i = 0; i < 2; i++)
+{
+    cout << staff[i] << ": $";
+    cout.width(7);
+    cout << bonus[i] << "\n";
+}
+```
+
+输出：
+```
+更改填充字符****************************************************************************
+Waldo Whipsnade: $****900
+Wilmarie Wooper: $***1350
+```
+
+#### 更改显示精度
+`precision` 方法可以更改显示精度，也是全局设置。
+
+```cpp
+cout << "设置小数显示精度：precision()***********************************************************" << endl;
+double j = 3333.1415926;
+/*设置显示有效数字位数*/
+cout << "默认情况显示(6位)：" << j << endl;//输出浮点数时，默认情况下保留六位有效数字
+cout.precision(9);//可以使用cout.precision(n)设置输出浮点数时保留n位有效数字
+cout << "设置有效数字位数为9位时：" << j << endl;
+cout.precision(3);//当有效数字位数小于整数有效数字位数时，使用科学计数法显示
+cout << "设置有效数字位数为3位时：" << j << endl << endl;
+```
+
+输出
+```
+设置小数显示精度：precision()***********************************************************
+默认情况显示(6位)：3333.14
+设置有效数字位数为9位时：3333.14159
+设置有效数字位数为3位时：3.33e+03
+```
+
+总的来说感觉还是 `printf()` 好用？但是人要学会接受新事物。
