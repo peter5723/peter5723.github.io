@@ -599,3 +599,61 @@ cout << "设置有效数字位数为3位时：" << j << endl << endl;
 ```
 
 总的来说感觉还是 `printf()` 好用？但是人要学会接受新事物。
+
+
+
+## Lecture 5: Containers
+
+Container 容器，就是对象的集合。更准确的说，container is an object that allows us to collect other objects together and interact with them in some way.
+
+我们用过的 `vectors`，`stacks`，`queues` 都是所谓的 container 类型。已经比较熟悉了，下面就只简单介绍 `vector`。
+
+```cpp
+vector<string> v{"hello", "hi", "qq"}; //初始化
+v.push_pack("va"); //"va"添加到vector的最后
+v.empty(); //v 是否为空
+v.size(); //元素个数
+v[n]; //第n个位置上的元素引用
+v1 = v2; // v2 中的元素拷贝替换v1中的元素
+v1 = {a,b,c ...} //列表中的元素拷贝替换v1中的元素
+v1 == v2; //元素数量和元素值是否相同
+v1 != v2; 
+v1 < v2; //字典顺序比较
+```
+注意，下标运算符只能访问已存在的元素，而不能用于添加元素。
+```cpp
+vector<int> ivec;
+for(int ix=0;ix<10;ix++)
+    ivec[ix] = ix; //严重错误
+```
+正确的是
+```cpp
+vector<int> ivec;
+for(int ix=0;ix<10;ix++)
+    ivec.push_back(ix) = ix; 
+```
+
+## Lecture 6: Iterators and Pointers
+要访问容器中的对象，除了用下标运算符，也可以使用 iterator（迭代器）实现。而且，所有标准库容器都支持迭代器，但是只有少数几种还同时支持下标运算符。
+
+对一个容器对象，我们可以用 `begin` 和 `end` 获得迭代器。`begin` 指向第一个元素，`end` 指向最后一个元素的下一个位置。
+
+```cpp
+auto b = v.begin(), e = v.end();
+```
+
+迭代器的本质是指针。
+
+迭代器支持的运算如下：
+```cpp
+*iter; //返回迭代器所指元素的引用
+iter->mem; //相当于(*iter).mem
+++iter; //让迭代器指示容器的下一个元素
+--iter; //让迭代器指示容器的上一个元素
+iter + n; // 向后/向前移动 n 个元素
+iter1==iter2;
+iter1!=iter2;
+//判断两个迭代器是否相等：是否指示同一个元素或者是同一个容器的尾后迭代器
+iter1-iter2; //比较两个迭代器的距离
+iter1<iter2; //判断先后位置
+```
