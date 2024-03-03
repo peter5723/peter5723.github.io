@@ -2348,6 +2348,7 @@ C语言声明可以有很多次，而定义只能有一次。故若要使用同�
 <a id="__codelineno-28-3" name="__codelineno-28-3" href="#__codelineno-28-3"></a>&lt;C-b&gt; p ---- last window
 <a id="__codelineno-28-4" name="__codelineno-28-4" href="#__codelineno-28-4"></a>&lt;C-b&gt; %num ---- to %numth window
 <a id="__codelineno-28-5" name="__codelineno-28-5" href="#__codelineno-28-5"></a>&lt;C-b&gt; , ---- rename window
+<a id="__codelineno-28-6" name="__codelineno-28-6" href="#__codelineno-28-6"></a>&lt;C-b&gt; [ ---- 进入复制模式（可以上下滚动屏幕），ESC 退出
 </code></pre></div></p>
 <h5 id="_10">窗格<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h5>
 <p>也可以包含多个窗格
@@ -2360,8 +2361,6 @@ C语言声明可以有很多次，而定义只能有一次。故若要使用同�
 <p>Search The Fucking Web(STFW)</p>
 <p>Read The Fucking Manual(RTFM)</p>
 <p>Read The Fucking Source Code(RTFSC)</p>
-<p><del class="critic"> 拽你妈，会写几个程序了不起啊，一天到晚fucking fucking的. </del></p>
-<p>这个字体太好看了，不忍心用这个字体骂人。</p>
 <h2 id="pa1">PA1<a class="headerlink" href="#pa1" title="Permanent link">&para;</a></h2>
 <p>how to run <code>nemu</code>? enter <code>nemu</code> dictionary and <code>make</code> to complile, <code>make run</code> to run, <code>make gdb</code> to use gdb to debug.  </p>
 <h3 id="_12">框架介绍<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h3>
@@ -2671,21 +2670,31 @@ NEMU 提供硬件功能；AM 抽象层负责和上层的软件和底层的硬件
 TODO：其实好理解的但是需要学一些新知识来准确解释。</p>
 <p>上面基本就是 PA3, part 2 了。总结一下，在 NEMU 硬件上，我们实现了 AM 接口，然后写了一个 AM 程序 nanos-lite，在 nanos-lite 上，我们运行应用程序。应用程序不能直接操控底层，而是通过系统调用来和底层交互（对应用程序来说，AM 也算是底层了，毕竟是直接和硬件交互的库）。</p>
 <p>TODO：程序结构介绍</p>
-<p>查看程序 riscv 文件信息是这样的：</p>
-<p>riscv64-linux-gnu-readelf -a <filename>
-riscv64-linux-gnu-objdump -d <filename></p>
+<p>查看程序 riscv 文件信息是这样的：
+<div class="highlight"><pre><span></span><code><a id="__codelineno-45-1" name="__codelineno-45-1" href="#__codelineno-45-1"></a>riscv64-linux-gnu-readelf -a &lt;filename&gt;
+<a id="__codelineno-45-2" name="__codelineno-45-2" href="#__codelineno-45-2"></a>riscv64-linux-gnu-objdump -d &lt;filename&gt;
+</code></pre></div></p>
 <p>elf 文件的魔数：0x7F,0x45,0x4c,0x46,</p>
 <p>学而不思则罔，思而不学则殆，PA3.2 基本上完成了，但是一些关于程序的知识仍然不了解，比如堆的机制。系统调用的过程还需要好好理解，elf 文件的结构要整理了。PA3 和前面最大的区别就是多了一些我没学习过的理论知识需要补充吧。</p>
 <p>TODO stdint 和 stddef 和 unistd 中的类型</p>
 <h3 id="pa-33">PA 3.3<a class="headerlink" href="#pa-33" title="Permanent link">&para;</a></h3>
-<p>首先是实现了一个简单的文件系统。</p>
+<p>PA3.3 首先是实现了一个简单的文件系统，实现了 open、read、write、lseek、close 系统调用，这样我们就可以进行文件操作了。在 linux 中，有一个说法是“一切皆文件”。这是因为 IO 接口也被抽象成文件了，我们进行 IO 的过程就被抽象成文件读写的过程，上层 API 无需改动，只要根据文件类型更改底层调用的读写函数就可以了。基于这个逻辑，我们很快就实现了操作系统的各种 IO 接口，比如输入输出，键盘，显存，时间等等。完成这些接口以后，我们就可以运行各式各样的应用程序了。</p>
+<p>当然理论如此，实践的时候总会碰到各种各样的问题。比如说，一开始提供的多媒体库是 NDL 库，它的实现是直接进行系统调用。然而，对于较为复杂的程序，直接用它编程仍然比较难，所以我们要提供更加上层的运行时环境，这里就是 SDL 库，在 SDL 库的实现中调用 NDL 库。具体的编程过程就不细说了，有些繁琐，调试了很久才基本完全跑通，主要还是要仔细阅读手册和讲义内容。</p>
+<p>上面都是一些概括，说一个稍具体些的例子吧。讲义里面有一个问题是：仙剑奇侠传的代码如何从 mgo.mkf 文件中读出仙鹤的像素信息, 并且更新到屏幕上?</p>
+<p>仙剑奇侠传的代码很复杂，而且函数也是一层一层套的。但是到底层，调用的仍然是我们实现的 SDL 库函数来进行绘图和更新屏幕，<code>SDL_UpdateRect()</code>，这个函数调用的是 NDL 库的函数 <code>NDL_DrawRect()</code>。<code>NDL_DrawRect()</code> 调用 <code>write()</code> 函数，将像素数组 <code>pixels</code> 写入虚拟文件 <code>/dev/fb</code> （也就是帧缓冲 frame buffer）中。这是上层的内容，即应用程序看到的内容。</p>
+<p>然后操作系统 Nanos-lite 看到的内容是，数据写入 <code>/dev/fb</code>，要调用对应的写函数。就 C 语言具体实现来说，利用函数指针就可以轻松地根据文件的类型来选择调用的函数了。那么这里的写函数是要更新屏幕的，所以调用 AM 程序的 IO 接口 <code>io_write()</code> 函数就可以了。</p>
+<p>从硬件 NEMU 的角度看，调用 IO 接口，本质上还是对某一个地址进行读写操作。然而，不同的是，这些地址在底层实现上进行了映射。如果读写到这些地址，不是对真实的物理内存进行读写，而是对映射的 IO 地址进行读写。读写完后，新像素就更新到了屏幕上。</p>
+<p>上面就是自顶向下的应用程序进行屏幕更新的全过程。</p>
+<p>TODO: 搞清楚 native 和 riscv32-NEMU 的区别。（链接的库有哪些不同？）</p>
+<p>TODO: open 和 fopen 的区别</p>
+<p>TODO: malloc 和 free 的源代码实现。</p>
 
   <hr>
 <div class="md-source-file">
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2024-02-06</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2024-03-03</span>
       
         <br>
         Created:

@@ -901,6 +901,20 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#lecture-5-containers" class="md-nav__link">
+    Lecture 5: Containers
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lecture-6-iterators-and-pointers" class="md-nav__link">
+    Lecture 6: Iterators and Pointers
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -1200,6 +1214,20 @@
         
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lecture-5-containers" class="md-nav__link">
+    Lecture 5: Containers
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lecture-6-iterators-and-pointers" class="md-nav__link">
+    Lecture 6: Iterators and Pointers
+  </a>
   
 </li>
       
@@ -1668,13 +1696,55 @@
 <a id="__codelineno-39-4" name="__codelineno-39-4" href="#__codelineno-39-4"></a>设置有效数字位数为3位时：3.33e+03
 </code></pre></div></p>
 <p>总的来说感觉还是 <code>printf()</code> 好用？但是人要学会接受新事物。</p>
+<h2 id="lecture-5-containers">Lecture 5: Containers<a class="headerlink" href="#lecture-5-containers" title="Permanent link">&para;</a></h2>
+<p>Container 容器，就是对象的集合。更准确的说，container is an object that allows us to collect other objects together and interact with them in some way.</p>
+<p>我们用过的 <code>vectors</code>，<code>stacks</code>，<code>queues</code> 都是所谓的 container 类型。已经比较熟悉了，下面就只简单介绍 <code>vector</code>。</p>
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-40-1" name="__codelineno-40-1" href="#__codelineno-40-1"></a><span class="n">vector</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span><span class="w"> </span><span class="n">v</span><span class="p">{</span><span class="s">&quot;hello&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;hi&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;qq&quot;</span><span class="p">};</span><span class="w"> </span><span class="c1">//初始化</span>
+<a id="__codelineno-40-2" name="__codelineno-40-2" href="#__codelineno-40-2"></a><span class="n">v</span><span class="p">.</span><span class="n">push_pack</span><span class="p">(</span><span class="s">&quot;va&quot;</span><span class="p">);</span><span class="w"> </span><span class="c1">//&quot;va&quot;添加到vector的最后</span>
+<a id="__codelineno-40-3" name="__codelineno-40-3" href="#__codelineno-40-3"></a><span class="n">v</span><span class="p">.</span><span class="n">empty</span><span class="p">();</span><span class="w"> </span><span class="c1">//v 是否为空</span>
+<a id="__codelineno-40-4" name="__codelineno-40-4" href="#__codelineno-40-4"></a><span class="n">v</span><span class="p">.</span><span class="n">size</span><span class="p">();</span><span class="w"> </span><span class="c1">//元素个数</span>
+<a id="__codelineno-40-5" name="__codelineno-40-5" href="#__codelineno-40-5"></a><span class="n">v</span><span class="p">[</span><span class="n">n</span><span class="p">];</span><span class="w"> </span><span class="c1">//第n个位置上的元素引用</span>
+<a id="__codelineno-40-6" name="__codelineno-40-6" href="#__codelineno-40-6"></a><span class="n">v1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">v2</span><span class="p">;</span><span class="w"> </span><span class="c1">// v2 中的元素拷贝替换v1中的元素</span>
+<a id="__codelineno-40-7" name="__codelineno-40-7" href="#__codelineno-40-7"></a><span class="n">v1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">c</span><span class="w"> </span><span class="p">...}</span><span class="w"> </span><span class="c1">//列表中的元素拷贝替换v1中的元素</span>
+<a id="__codelineno-40-8" name="__codelineno-40-8" href="#__codelineno-40-8"></a><span class="n">v1</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">v2</span><span class="p">;</span><span class="w"> </span><span class="c1">//元素数量和元素值是否相同</span>
+<a id="__codelineno-40-9" name="__codelineno-40-9" href="#__codelineno-40-9"></a><span class="n">v1</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">v2</span><span class="p">;</span><span class="w"> </span>
+<a id="__codelineno-40-10" name="__codelineno-40-10" href="#__codelineno-40-10"></a><span class="n">v1</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">v2</span><span class="p">;</span><span class="w"> </span><span class="c1">//字典顺序比较</span>
+</code></pre></div>
+注意，下标运算符只能访问已存在的元素，而不能用于添加元素。
+<div class="highlight"><pre><span></span><code><a id="__codelineno-41-1" name="__codelineno-41-1" href="#__codelineno-41-1"></a><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">ivec</span><span class="p">;</span>
+<a id="__codelineno-41-2" name="__codelineno-41-2" href="#__codelineno-41-2"></a><span class="k">for</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">ix</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">ix</span><span class="o">&lt;</span><span class="mi">10</span><span class="p">;</span><span class="n">ix</span><span class="o">++</span><span class="p">)</span>
+<a id="__codelineno-41-3" name="__codelineno-41-3" href="#__codelineno-41-3"></a><span class="w">    </span><span class="n">ivec</span><span class="p">[</span><span class="n">ix</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ix</span><span class="p">;</span><span class="w"> </span><span class="c1">//严重错误</span>
+</code></pre></div>
+正确的是
+<div class="highlight"><pre><span></span><code><a id="__codelineno-42-1" name="__codelineno-42-1" href="#__codelineno-42-1"></a><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">ivec</span><span class="p">;</span>
+<a id="__codelineno-42-2" name="__codelineno-42-2" href="#__codelineno-42-2"></a><span class="k">for</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">ix</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">ix</span><span class="o">&lt;</span><span class="mi">10</span><span class="p">;</span><span class="n">ix</span><span class="o">++</span><span class="p">)</span>
+<a id="__codelineno-42-3" name="__codelineno-42-3" href="#__codelineno-42-3"></a><span class="w">    </span><span class="n">ivec</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">ix</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ix</span><span class="p">;</span><span class="w"> </span>
+</code></pre></div></p>
+<h2 id="lecture-6-iterators-and-pointers">Lecture 6: Iterators and Pointers<a class="headerlink" href="#lecture-6-iterators-and-pointers" title="Permanent link">&para;</a></h2>
+<p>要访问容器中的对象，除了用下标运算符，也可以使用 iterator（迭代器）实现。而且，所有标准库容器都支持迭代器，但是只有少数几种还同时支持下标运算符。</p>
+<p>对一个容器对象，我们可以用 <code>begin</code> 和 <code>end</code> 获得迭代器。<code>begin</code> 指向第一个元素，<code>end</code> 指向最后一个元素的下一个位置。</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-43-1" name="__codelineno-43-1" href="#__codelineno-43-1"></a><span class="k">auto</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">v</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span><span class="w"> </span><span class="n">e</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">v</span><span class="p">.</span><span class="n">end</span><span class="p">();</span>
+</code></pre></div>
+<p>迭代器的本质是指针。</p>
+<p>迭代器支持的运算如下：
+<div class="highlight"><pre><span></span><code><a id="__codelineno-44-1" name="__codelineno-44-1" href="#__codelineno-44-1"></a><span class="o">*</span><span class="n">iter</span><span class="p">;</span><span class="w"> </span><span class="c1">//返回迭代器所指元素的引用</span>
+<a id="__codelineno-44-2" name="__codelineno-44-2" href="#__codelineno-44-2"></a><span class="n">iter</span><span class="o">-&gt;</span><span class="n">mem</span><span class="p">;</span><span class="w"> </span><span class="c1">//相当于(*iter).mem</span>
+<a id="__codelineno-44-3" name="__codelineno-44-3" href="#__codelineno-44-3"></a><span class="o">++</span><span class="n">iter</span><span class="p">;</span><span class="w"> </span><span class="c1">//让迭代器指示容器的下一个元素</span>
+<a id="__codelineno-44-4" name="__codelineno-44-4" href="#__codelineno-44-4"></a><span class="o">--</span><span class="n">iter</span><span class="p">;</span><span class="w"> </span><span class="c1">//让迭代器指示容器的上一个元素</span>
+<a id="__codelineno-44-5" name="__codelineno-44-5" href="#__codelineno-44-5"></a><span class="n">iter</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">n</span><span class="p">;</span><span class="w"> </span><span class="c1">// 向后/向前移动 n 个元素</span>
+<a id="__codelineno-44-6" name="__codelineno-44-6" href="#__codelineno-44-6"></a><span class="n">iter1</span><span class="o">==</span><span class="n">iter2</span><span class="p">;</span>
+<a id="__codelineno-44-7" name="__codelineno-44-7" href="#__codelineno-44-7"></a><span class="n">iter1</span><span class="o">!=</span><span class="n">iter2</span><span class="p">;</span>
+<a id="__codelineno-44-8" name="__codelineno-44-8" href="#__codelineno-44-8"></a><span class="c1">//判断两个迭代器是否相等：是否指示同一个元素或者是同一个容器的尾后迭代器</span>
+<a id="__codelineno-44-9" name="__codelineno-44-9" href="#__codelineno-44-9"></a><span class="n">iter1</span><span class="o">-</span><span class="n">iter2</span><span class="p">;</span><span class="w"> </span><span class="c1">//比较两个迭代器的距离</span>
+<a id="__codelineno-44-10" name="__codelineno-44-10" href="#__codelineno-44-10"></a><span class="n">iter1</span><span class="o">&lt;</span><span class="n">iter2</span><span class="p">;</span><span class="w"> </span><span class="c1">//判断先后位置</span>
+</code></pre></div></p>
 
   <hr>
 <div class="md-source-file">
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2024-02-24</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2024-03-03</span>
       
         <br>
         Created:
