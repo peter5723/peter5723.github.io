@@ -657,3 +657,111 @@ iter1!=iter2;
 iter1-iter2; //比较两个迭代器的距离
 iter1<iter2; //判断先后位置
 ```
+
+
+## Lecture 7: Class
+
+来到最重要的部分了。（话说你的形容词除了重要能不能换点别的）（rewarding 咋样）
+
+
+我们已经在 python 和 Java 中都使用过 Class 了。C++ 中的写法和特性又有所不同（思想还是一样的）。
+
+类的声明放在同名的头文件（.h 文件）中，类的定义放在同名的 .cpp 文件中。
+
+下面是类的声明：
+```cpp
+// Student.h
+class Student {
+private:
+    std::string name;
+    std::string state;
+    int age;
+
+public:
+    Student();
+    Student(std::string name, std::string state, int age);
+    ~Student();
+    std::string getName();
+    std::string getState();
+    int getAge();
+
+    void setName(std::string name);
+    void setState(std::string state);
+    void setAge(int state);
+};
+```
+
+然后是类的定义（实现）：
+```cpp
+// Student.cpp
+#include "Student.h"
+
+// constructor
+// 需要名字空间，名字空间和类名相同
+Student::Student(std::string name, std::string state, int age) {
+    this->name = name;
+    this->state = state;
+    this->age = age;
+}
+
+// 函数重载
+Student::Student() {
+    name{"John"};
+    state{"Appleseed"};
+    age{18};
+}
+
+// Destructor
+Student::~Student(){}; 
+
+
+std::string Student::getName() {
+    return this->name;
+}
+
+std::string Student::getState() {
+    return this->state;
+}
+
+int Student::getAge() {
+    return this->age;
+}
+
+void Student::setName(std::string name) { this->name = name; }
+
+void Student::setState(std::string state) { this->state = state; }
+
+void Student::setAge(int age) { 
+  if ( age >= 0) {
+    this->age = age;
+  }
+}
+
+```
+
+上面就是一个完整的 Student 类实现了。我们可以在代码中使用这个类。
+
+```cpp
+Student s = Student("Haven", "AR", 21);
+auto s1 = Student();
+cout << s.getAge();
+s1.setName("Jack");
+```
+
+然后再来看一下 C++ 是怎么实现继承的，也很简单：
+
+```cpp
+class Shape {
+public:
+    virtual double area() const = 0;
+};
+
+class Circle : public Shape {
+private:
+    double _radius;
+    Circle(double radius): _radius{radius} {};
+    double area() const {
+        return 3.14 * _radius * _radius;
+    }
+};
+```

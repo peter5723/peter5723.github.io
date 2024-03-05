@@ -113,6 +113,8 @@ nav:
       - "DFS": "algorithm/search/DFS.md"
   - "C++":
     - "介绍": "Cpp/intro.md"
+  - "书":
+    - "鼠疫": "wen/LaPeste.md"
   - diary:
     - "one diary":
       - "one one diary": "diary.md"
