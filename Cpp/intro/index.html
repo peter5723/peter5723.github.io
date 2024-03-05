@@ -12,7 +12,7 @@
         <link rel="prev" href="../../algorithm/search/DFS/">
       
       
-        <link rel="next" href="../../diary/">
+        <link rel="next" href="../../wen/LaPeste/">
       
       <link rel="icon" href="../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.0.4">
@@ -915,6 +915,13 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#lecture-7-class" class="md-nav__link">
+    Lecture 7: Class
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -948,12 +955,61 @@
       
       
         <label class="md-nav__link" for="__nav_9" tabindex="0" aria-expanded="false">
+          书
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="书" data-md-level="1">
+        <label class="md-nav__title" for="__nav_9">
+          <span class="md-nav__icon md-icon"></span>
+          书
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../wen/LaPeste/" class="md-nav__link">
+        鼠疫
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_10" type="checkbox" id="__nav_10" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_10" tabindex="0" aria-expanded="false">
           diary
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <nav class="md-nav" aria-label="diary" data-md-level="1">
-        <label class="md-nav__title" for="__nav_9">
+        <label class="md-nav__title" for="__nav_10">
           <span class="md-nav__icon md-icon"></span>
           diary
         </label>
@@ -970,17 +1026,17 @@
       
       
       
-      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_9_1" type="checkbox" id="__nav_9_1" >
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_10_1" type="checkbox" id="__nav_10_1" >
       
       
       
-        <label class="md-nav__link" for="__nav_9_1" tabindex="0" aria-expanded="false">
+        <label class="md-nav__link" for="__nav_10_1" tabindex="0" aria-expanded="false">
           one diary
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <nav class="md-nav" aria-label="one diary" data-md-level="2">
-        <label class="md-nav__title" for="__nav_9_1">
+        <label class="md-nav__title" for="__nav_10_1">
           <span class="md-nav__icon md-icon"></span>
           one diary
         </label>
@@ -1227,6 +1283,13 @@
         <li class="md-nav__item">
   <a href="#lecture-6-iterators-and-pointers" class="md-nav__link">
     Lecture 6: Iterators and Pointers
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lecture-7-class" class="md-nav__link">
+    Lecture 7: Class
   </a>
   
 </li>
@@ -1738,13 +1801,104 @@
 <a id="__codelineno-44-9" name="__codelineno-44-9" href="#__codelineno-44-9"></a><span class="n">iter1</span><span class="o">-</span><span class="n">iter2</span><span class="p">;</span><span class="w"> </span><span class="c1">//比较两个迭代器的距离</span>
 <a id="__codelineno-44-10" name="__codelineno-44-10" href="#__codelineno-44-10"></a><span class="n">iter1</span><span class="o">&lt;</span><span class="n">iter2</span><span class="p">;</span><span class="w"> </span><span class="c1">//判断先后位置</span>
 </code></pre></div></p>
+<h2 id="lecture-7-class">Lecture 7: Class<a class="headerlink" href="#lecture-7-class" title="Permanent link">&para;</a></h2>
+<p>来到最重要的部分了。（话说你的形容词除了重要能不能换点别的）（rewarding 咋样）</p>
+<p>我们已经在 python 和 Java 中都使用过 Class 了。C++ 中的写法和特性又有所不同（思想还是一样的）。</p>
+<p>类的声明放在同名的头文件（.h 文件）中，类的定义放在同名的 .cpp 文件中。</p>
+<p>下面是类的声明：
+<div class="highlight"><pre><span></span><code><a id="__codelineno-45-1" name="__codelineno-45-1" href="#__codelineno-45-1"></a><span class="c1">// Student.h</span>
+<a id="__codelineno-45-2" name="__codelineno-45-2" href="#__codelineno-45-2"></a><span class="k">class</span><span class="w"> </span><span class="nc">Student</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-45-3" name="__codelineno-45-3" href="#__codelineno-45-3"></a><span class="k">private</span><span class="o">:</span>
+<a id="__codelineno-45-4" name="__codelineno-45-4" href="#__codelineno-45-4"></a><span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">name</span><span class="p">;</span>
+<a id="__codelineno-45-5" name="__codelineno-45-5" href="#__codelineno-45-5"></a><span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">state</span><span class="p">;</span>
+<a id="__codelineno-45-6" name="__codelineno-45-6" href="#__codelineno-45-6"></a><span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">age</span><span class="p">;</span>
+<a id="__codelineno-45-7" name="__codelineno-45-7" href="#__codelineno-45-7"></a>
+<a id="__codelineno-45-8" name="__codelineno-45-8" href="#__codelineno-45-8"></a><span class="k">public</span><span class="o">:</span>
+<a id="__codelineno-45-9" name="__codelineno-45-9" href="#__codelineno-45-9"></a><span class="w">    </span><span class="n">Student</span><span class="p">();</span>
+<a id="__codelineno-45-10" name="__codelineno-45-10" href="#__codelineno-45-10"></a><span class="w">    </span><span class="n">Student</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">state</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">age</span><span class="p">);</span>
+<a id="__codelineno-45-11" name="__codelineno-45-11" href="#__codelineno-45-11"></a><span class="w">    </span><span class="o">~</span><span class="n">Student</span><span class="p">();</span>
+<a id="__codelineno-45-12" name="__codelineno-45-12" href="#__codelineno-45-12"></a><span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="nf">getName</span><span class="p">();</span>
+<a id="__codelineno-45-13" name="__codelineno-45-13" href="#__codelineno-45-13"></a><span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="nf">getState</span><span class="p">();</span>
+<a id="__codelineno-45-14" name="__codelineno-45-14" href="#__codelineno-45-14"></a><span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="nf">getAge</span><span class="p">();</span>
+<a id="__codelineno-45-15" name="__codelineno-45-15" href="#__codelineno-45-15"></a>
+<a id="__codelineno-45-16" name="__codelineno-45-16" href="#__codelineno-45-16"></a><span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">setName</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">name</span><span class="p">);</span>
+<a id="__codelineno-45-17" name="__codelineno-45-17" href="#__codelineno-45-17"></a><span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">setState</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">state</span><span class="p">);</span>
+<a id="__codelineno-45-18" name="__codelineno-45-18" href="#__codelineno-45-18"></a><span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">setAge</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">state</span><span class="p">);</span>
+<a id="__codelineno-45-19" name="__codelineno-45-19" href="#__codelineno-45-19"></a><span class="p">};</span>
+</code></pre></div></p>
+<p>然后是类的定义（实现）：
+<div class="highlight"><pre><span></span><code><a id="__codelineno-46-1" name="__codelineno-46-1" href="#__codelineno-46-1"></a><span class="c1">// Student.cpp</span>
+<a id="__codelineno-46-2" name="__codelineno-46-2" href="#__codelineno-46-2"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;Student.h&quot;</span>
+<a id="__codelineno-46-3" name="__codelineno-46-3" href="#__codelineno-46-3"></a>
+<a id="__codelineno-46-4" name="__codelineno-46-4" href="#__codelineno-46-4"></a><span class="c1">// constructor</span>
+<a id="__codelineno-46-5" name="__codelineno-46-5" href="#__codelineno-46-5"></a><span class="c1">// 需要名字空间，名字空间和类名相同</span>
+<a id="__codelineno-46-6" name="__codelineno-46-6" href="#__codelineno-46-6"></a><span class="n">Student</span><span class="o">::</span><span class="n">Student</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">state</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">age</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-46-7" name="__codelineno-46-7" href="#__codelineno-46-7"></a><span class="w">    </span><span class="k">this</span><span class="o">-&gt;</span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">name</span><span class="p">;</span>
+<a id="__codelineno-46-8" name="__codelineno-46-8" href="#__codelineno-46-8"></a><span class="w">    </span><span class="k">this</span><span class="o">-&gt;</span><span class="n">state</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">state</span><span class="p">;</span>
+<a id="__codelineno-46-9" name="__codelineno-46-9" href="#__codelineno-46-9"></a><span class="w">    </span><span class="k">this</span><span class="o">-&gt;</span><span class="n">age</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">age</span><span class="p">;</span>
+<a id="__codelineno-46-10" name="__codelineno-46-10" href="#__codelineno-46-10"></a><span class="p">}</span>
+<a id="__codelineno-46-11" name="__codelineno-46-11" href="#__codelineno-46-11"></a>
+<a id="__codelineno-46-12" name="__codelineno-46-12" href="#__codelineno-46-12"></a><span class="c1">// 函数重载</span>
+<a id="__codelineno-46-13" name="__codelineno-46-13" href="#__codelineno-46-13"></a><span class="n">Student</span><span class="o">::</span><span class="n">Student</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-46-14" name="__codelineno-46-14" href="#__codelineno-46-14"></a><span class="w">    </span><span class="n">name</span><span class="p">{</span><span class="s">&quot;John&quot;</span><span class="p">};</span>
+<a id="__codelineno-46-15" name="__codelineno-46-15" href="#__codelineno-46-15"></a><span class="w">    </span><span class="n">state</span><span class="p">{</span><span class="s">&quot;Appleseed&quot;</span><span class="p">};</span>
+<a id="__codelineno-46-16" name="__codelineno-46-16" href="#__codelineno-46-16"></a><span class="w">    </span><span class="n">age</span><span class="p">{</span><span class="mi">18</span><span class="p">};</span>
+<a id="__codelineno-46-17" name="__codelineno-46-17" href="#__codelineno-46-17"></a><span class="p">}</span>
+<a id="__codelineno-46-18" name="__codelineno-46-18" href="#__codelineno-46-18"></a>
+<a id="__codelineno-46-19" name="__codelineno-46-19" href="#__codelineno-46-19"></a><span class="c1">// Destructor</span>
+<a id="__codelineno-46-20" name="__codelineno-46-20" href="#__codelineno-46-20"></a><span class="n">Student</span><span class="o">::~</span><span class="n">Student</span><span class="p">(){};</span><span class="w"> </span>
+<a id="__codelineno-46-21" name="__codelineno-46-21" href="#__codelineno-46-21"></a>
+<a id="__codelineno-46-22" name="__codelineno-46-22" href="#__codelineno-46-22"></a>
+<a id="__codelineno-46-23" name="__codelineno-46-23" href="#__codelineno-46-23"></a><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="nf">Student::getName</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-46-24" name="__codelineno-46-24" href="#__codelineno-46-24"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="k">this</span><span class="o">-&gt;</span><span class="n">name</span><span class="p">;</span>
+<a id="__codelineno-46-25" name="__codelineno-46-25" href="#__codelineno-46-25"></a><span class="p">}</span>
+<a id="__codelineno-46-26" name="__codelineno-46-26" href="#__codelineno-46-26"></a>
+<a id="__codelineno-46-27" name="__codelineno-46-27" href="#__codelineno-46-27"></a><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="nf">Student::getState</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-46-28" name="__codelineno-46-28" href="#__codelineno-46-28"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="k">this</span><span class="o">-&gt;</span><span class="n">state</span><span class="p">;</span>
+<a id="__codelineno-46-29" name="__codelineno-46-29" href="#__codelineno-46-29"></a><span class="p">}</span>
+<a id="__codelineno-46-30" name="__codelineno-46-30" href="#__codelineno-46-30"></a>
+<a id="__codelineno-46-31" name="__codelineno-46-31" href="#__codelineno-46-31"></a><span class="kt">int</span><span class="w"> </span><span class="nf">Student::getAge</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-46-32" name="__codelineno-46-32" href="#__codelineno-46-32"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="k">this</span><span class="o">-&gt;</span><span class="n">age</span><span class="p">;</span>
+<a id="__codelineno-46-33" name="__codelineno-46-33" href="#__codelineno-46-33"></a><span class="p">}</span>
+<a id="__codelineno-46-34" name="__codelineno-46-34" href="#__codelineno-46-34"></a>
+<a id="__codelineno-46-35" name="__codelineno-46-35" href="#__codelineno-46-35"></a><span class="kt">void</span><span class="w"> </span><span class="nf">Student::setName</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">name</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">this</span><span class="o">-&gt;</span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">name</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<a id="__codelineno-46-36" name="__codelineno-46-36" href="#__codelineno-46-36"></a>
+<a id="__codelineno-46-37" name="__codelineno-46-37" href="#__codelineno-46-37"></a><span class="kt">void</span><span class="w"> </span><span class="nf">Student::setState</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">state</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">this</span><span class="o">-&gt;</span><span class="n">state</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">state</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<a id="__codelineno-46-38" name="__codelineno-46-38" href="#__codelineno-46-38"></a>
+<a id="__codelineno-46-39" name="__codelineno-46-39" href="#__codelineno-46-39"></a><span class="kt">void</span><span class="w"> </span><span class="nf">Student::setAge</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">age</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span>
+<a id="__codelineno-46-40" name="__codelineno-46-40" href="#__codelineno-46-40"></a><span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">age</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-46-41" name="__codelineno-46-41" href="#__codelineno-46-41"></a><span class="w">    </span><span class="k">this</span><span class="o">-&gt;</span><span class="n">age</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">age</span><span class="p">;</span>
+<a id="__codelineno-46-42" name="__codelineno-46-42" href="#__codelineno-46-42"></a><span class="w">  </span><span class="p">}</span>
+<a id="__codelineno-46-43" name="__codelineno-46-43" href="#__codelineno-46-43"></a><span class="p">}</span>
+</code></pre></div></p>
+<p>上面就是一个完整的 Student 类实现了。我们可以在代码中使用这个类。</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-47-1" name="__codelineno-47-1" href="#__codelineno-47-1"></a><span class="n">Student</span><span class="w"> </span><span class="n">s</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Student</span><span class="p">(</span><span class="s">&quot;Haven&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;AR&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">21</span><span class="p">);</span>
+<a id="__codelineno-47-2" name="__codelineno-47-2" href="#__codelineno-47-2"></a><span class="k">auto</span><span class="w"> </span><span class="n">s1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Student</span><span class="p">();</span>
+<a id="__codelineno-47-3" name="__codelineno-47-3" href="#__codelineno-47-3"></a><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">s</span><span class="p">.</span><span class="n">getAge</span><span class="p">();</span>
+<a id="__codelineno-47-4" name="__codelineno-47-4" href="#__codelineno-47-4"></a><span class="n">s1</span><span class="p">.</span><span class="n">setName</span><span class="p">(</span><span class="s">&quot;Jack&quot;</span><span class="p">);</span>
+</code></pre></div>
+<p>然后再来看一下 C++ 是怎么实现继承的，也很简单：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-48-1" name="__codelineno-48-1" href="#__codelineno-48-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Shape</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-48-2" name="__codelineno-48-2" href="#__codelineno-48-2"></a><span class="k">public</span><span class="o">:</span>
+<a id="__codelineno-48-3" name="__codelineno-48-3" href="#__codelineno-48-3"></a><span class="w">    </span><span class="k">virtual</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">area</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<a id="__codelineno-48-4" name="__codelineno-48-4" href="#__codelineno-48-4"></a><span class="p">};</span>
+<a id="__codelineno-48-5" name="__codelineno-48-5" href="#__codelineno-48-5"></a>
+<a id="__codelineno-48-6" name="__codelineno-48-6" href="#__codelineno-48-6"></a><span class="k">class</span><span class="w"> </span><span class="nc">Circle</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="n">Shape</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-48-7" name="__codelineno-48-7" href="#__codelineno-48-7"></a><span class="k">private</span><span class="o">:</span>
+<a id="__codelineno-48-8" name="__codelineno-48-8" href="#__codelineno-48-8"></a><span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">_radius</span><span class="p">;</span>
+<a id="__codelineno-48-9" name="__codelineno-48-9" href="#__codelineno-48-9"></a><span class="w">    </span><span class="n">Circle</span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="n">radius</span><span class="p">)</span><span class="o">:</span><span class="w"> </span><span class="n">_radius</span><span class="p">{</span><span class="n">radius</span><span class="p">}</span><span class="w"> </span><span class="p">{};</span>
+<a id="__codelineno-48-10" name="__codelineno-48-10" href="#__codelineno-48-10"></a><span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="nf">area</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-48-11" name="__codelineno-48-11" href="#__codelineno-48-11"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="mf">3.14</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">_radius</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">_radius</span><span class="p">;</span>
+<a id="__codelineno-48-12" name="__codelineno-48-12" href="#__codelineno-48-12"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-48-13" name="__codelineno-48-13" href="#__codelineno-48-13"></a><span class="p">};</span>
+</code></pre></div>
 
   <hr>
 <div class="md-source-file">
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2024-03-03</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2024-03-05</span>
       
         <br>
         Created:
