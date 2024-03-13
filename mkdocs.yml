@@ -107,6 +107,9 @@ nav:
     - "GNU Make": "ICS/make.md"
     - "RISC-V": "ICS/riscv.md"
     - "数字与算术": "ICS/number.md"
+    - "链接和程序结构": "ICS/links.md"
+    - "IO 和文件系统": "ICS/io.md"
+    - "回调函数": "ICS/callback.md"
   - "算法":
     - "介绍": "algorithm/intro.md"
     - "搜索":

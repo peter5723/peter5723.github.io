@@ -474,6 +474,27 @@ int main() {
 
 文件流的输入输出和 IO 也是类似的，就好像 `fprintf` 和 `printf` 之间的关系一样。
 
+注意，fstream 对象在初始化时就已经打开了文件（如果文件存在），不要再 `fs.open()` 再打开一次，否则会导致 bug 出现。
+
+```cpp
+int main() {
+    std::ofstream ofs("hello.txt");
+    //ofs.open("hello.txt"); 不要这样！
+    if (ofs.is_open()) {
+        ofs << "Heloo CS106L!" << '\n';
+    }
+    ofs.close();
+    return 0;
+}
+```
+上面的例子输出 `Heloo CS106L!`
+
+然后 ofstream 是输出文件流，直接从文件的最开始开始写入，覆盖文件已有的内容，而不是像 fwrite 那样先清空。
+
+有时我们写入了乱七八糟的东西，要先清空的话，就要以特殊模式 `out` 来打开文件，即：
+```cpp
+std::fstream ofs("hello.txt", std::ios::out | std::ios::trunc);
+```
 
 ### 格式化输出
 
@@ -634,15 +655,13 @@ for(int ix=0;ix<10;ix++)
 ```
 
 ## Lecture 6: Iterators and Pointers
-要访问容器中的对象，除了用下标运算符，也可以使用 iterator（迭代器）实现。而且，所有标准库容器都支持迭代器，但是只有少数几种还同时支持下标运算符。
+要访问容器中的对象，除了用下标运算符，也可以使用 iterator（迭代器）实现。而且，大部分标准库容器都支持迭代器（除了 stack 和 queue 以外），但是只有少数几种还同时支持下标运算符。
 
 对一个容器对象，我们可以用 `begin` 和 `end` 获得迭代器。`begin` 指向第一个元素，`end` 指向最后一个元素的下一个位置。
 
 ```cpp
 auto b = v.begin(), e = v.end();
 ```
-
-迭代器的本质是指针。
 
 迭代器支持的运算如下：
 ```cpp
@@ -658,6 +677,34 @@ iter1-iter2; //比较两个迭代器的距离
 iter1<iter2; //判断先后位置
 ```
 
+如何获得 container 里面的元素？下面提供一个示例：
+
+```cpp
+std::map<int,int>{{1,6},{2,8},{0,3},{3,9}};
+for(auto iter = map.begin();iter != map.end();iter++) {
+    const auto& [key, value] = *iter;
+}
+```
+
+上面我们可以看到，迭代器的用法很像指针。那么它和指针有什么联系和区别吗？
+
+<https://www.geeksforgeeks.org/difference-between-iterators-and-pointers-in-c-c-with-examples/>
+
+首先要知道，迭代器并不是指针，它的类型是这样的：
+```cpp
+std::vector<int>::iterator it1;
+std::string::iterator it2;
+
+std::vector<int>::const_iterator it3;
+std::string::const_iterator it4;
+```
+iterator 类型的元素可读可写，const_iterator 类型的元素只读。<https://www.geeksforgeeks.org/const-vs-regular-iterators-in-c-with-examples/?ref=ml_lbp>
+
+可以看到，迭代器是一个对象，它可以包含比地址更多的东西，而指针只包含地址。
+
+指针通过自增、自减可以遍历连续地址空间的元素；然而有一些容器，它的元素的地址不是连续的，迭代器的自增和自减仍然可以遍历，这就说明了迭代器包含的不仅仅是地址。
+
+可以这样理解，迭代器是指针的高级抽象。
 
 ## Lecture 7: Class
 
@@ -765,3 +812,5 @@ private:
     }
 };
 ```
+
+值得一提的是，在 C++ 中，类的本质是 struct。（TODO 阅读 C++ primer）
