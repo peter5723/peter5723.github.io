@@ -7,21 +7,19 @@
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
       
-        <meta name="author" content="Peter">
       
       
+        <link rel="prev" href="../links/">
       
-        <link rel="prev" href="../../chem/thermo/">
       
-      
-        <link rel="next" href="../DFT/">
+        <link rel="next" href="../callback/">
       
       <link rel="icon" href="../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.0.4">
     
     
       
-        <title>单边z变换 - Peter's home</title>
+        <title>IO 和文件系统 - Peter's home</title>
       
     
     
@@ -75,7 +73,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#z" class="md-skip">
+        <a href="#io" class="md-skip">
           Skip to content
         </a>
       
@@ -108,7 +106,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              单边z变换
+              IO 和文件系统
             
           </span>
         </div>
@@ -354,20 +352,18 @@
 
   
   
-    
-  
   
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
       
       
       
-      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_5" type="checkbox" id="__nav_5" checked>
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_5" type="checkbox" id="__nav_5" >
       
       
       
-        <label class="md-nav__link" for="__nav_5" tabindex="0" aria-expanded="true">
+        <label class="md-nav__link" for="__nav_5" tabindex="0" aria-expanded="false">
           信号
           <span class="md-nav__icon md-icon"></span>
         </label>
@@ -383,21 +379,11 @@
               
   
   
-    
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../../signal/2023-11-04-oneside_z_transform/" class="md-nav__link">
         单边z变换
       </a>
-      
     </li>
   
 
@@ -409,7 +395,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../DFT/" class="md-nav__link">
+      <a href="../../signal/DFT/" class="md-nav__link">
         DFT
       </a>
     </li>
@@ -423,7 +409,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../stft/" class="md-nav__link">
+      <a href="../../signal/stft/" class="md-nav__link">
         短时傅里叶变换
       </a>
     </li>
@@ -437,7 +423,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../ch6_ss/" class="md-nav__link">
+      <a href="../../signal/ch6_ss/" class="md-nav__link">
         LTI系统频域特性（ss第6章）
       </a>
     </li>
@@ -457,18 +443,20 @@
 
   
   
+    
+  
   
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
       
       
-      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_6" type="checkbox" id="__nav_6" >
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_6" type="checkbox" id="__nav_6" checked>
       
       
       
-        <label class="md-nav__link" for="__nav_6" tabindex="0" aria-expanded="false">
+        <label class="md-nav__link" for="__nav_6" tabindex="0" aria-expanded="true">
           计算机系统
           <span class="md-nav__icon md-icon"></span>
         </label>
@@ -486,7 +474,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../ICS/2023-11-02-PAnote/" class="md-nav__link">
+      <a href="../2023-11-02-PAnote/" class="md-nav__link">
         PA 实验记录
       </a>
     </li>
@@ -500,7 +488,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../ICS/shell/" class="md-nav__link">
+      <a href="../shell/" class="md-nav__link">
         shell
       </a>
     </li>
@@ -514,7 +502,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../ICS/vim/" class="md-nav__link">
+      <a href="../vim/" class="md-nav__link">
         vim
       </a>
     </li>
@@ -528,7 +516,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../ICS/make/" class="md-nav__link">
+      <a href="../make/" class="md-nav__link">
         GNU Make
       </a>
     </li>
@@ -542,7 +530,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../ICS/riscv/" class="md-nav__link">
+      <a href="../riscv/" class="md-nav__link">
         RISC-V
       </a>
     </li>
@@ -556,7 +544,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../ICS/number/" class="md-nav__link">
+      <a href="../number/" class="md-nav__link">
         数字与算术
       </a>
     </li>
@@ -570,7 +558,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../ICS/links/" class="md-nav__link">
+      <a href="../links/" class="md-nav__link">
         链接和程序结构
       </a>
     </li>
@@ -582,11 +570,21 @@
               
   
   
+    
   
-    <li class="md-nav__item">
-      <a href="../../ICS/io/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         IO 和文件系统
       </a>
+      
     </li>
   
 
@@ -598,7 +596,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../ICS/callback/" class="md-nav__link">
+      <a href="../callback/" class="md-nav__link">
         回调函数
       </a>
     </li>
@@ -924,58 +922,18 @@
 
 
 
-<h1 id="z">单边z变换<a class="headerlink" href="#z" title="Permanent link">&para;</a></h1>
-<p>参考的资料：</p>
-<p><a href="https://math.stackexchange.com/questions/1719754/unilateral-laplace-transform-vs-bilateral-fourier-transform">https://math.stackexchange.com/questions/1719754/unilateral-laplace-transform-vs-bilateral-fourier-transform</a></p>
-<p><a href="http://episte.math.ntu.edu.tw/articles/mm/mm_02_4_10/index.html">http://episte.math.ntu.edu.tw/articles/mm/mm_02_4_10/index.html</a></p>
-<p><a href="https://mathworld.wolfram.com/BilateralZ-Transform.html">https://mathworld.wolfram.com/BilateralZ-Transform.html</a></p>
-<p>什么时候采用单边z变换，又是什么时候使用双边z变换呢？</p>
-<p>我们在教科书上，常常用微分或者差分方程来描述一个连续或者离散的时间系统。由于公式套用的太快了，有时候就会忘记了这一点：要求解一个差分方程除了方程本身，也是需要初值条件的。</p>
-<p>差分方程在什么时候能够来描述一个LTI离散时间系统呢？答案是弛豫条件（IAR，initial at rest）。什么是弛豫条件？就是：若<span class="arithmatex">\(n\leq n_0\)</span>时<span class="arithmatex">\(x[n]=0\)</span>，则<span class="arithmatex">\(y[n]=0\)</span>. 有这个条件的话，这个由差分方程描述的系统不仅是线性时不变的，而且也是因果的。</p>
-<p>上面说的条件非常重要，以奥本海姆的信号与系统为例，整本书关于系统的讨论都是基于这个条件的。有了这个条件，才能保证系统是LTI系统，那么才有这个性质：</p>
-<div class="arithmatex">\[
-H(z)X(z) \Leftrightarrow h[n] \ast x[n]
-\]</div>
-<p><span class="arithmatex">\(H(z)\)</span>是由差分方程得到的传递函数.</p>
-<p>我们用上面的式子来计算离散系统的输出。</p>
-<p>如果不满足这个条件的话，系统都不一定是线性的, 就更加不能用上面的性质了.</p>
-<p>很多教科书都会举一个这个例子:</p>
-<div class="arithmatex">\[
-y[n]-ay[n-1]=x[n]
-\]</div>
-<p>若告诉你输入为<span class="arithmatex">\(x[n]=Au[n]\)</span>和初值<span class="arithmatex">\(y[-1]=1\)</span> 求解差分方程</p>
-<p><span class="arithmatex">\(x[-1]=0\)</span> 而 <span class="arithmatex">\(y[-1]=1\)</span> 根据线性系统的尺度性质这是不可能的, 所以这是一个非线性系统.</p>
-<p>如果我们用双边z变换, 我们当然可以得到<span class="arithmatex">\(Y(z)=H(z)X(z)\)</span>,  然后做一个z逆变换, 得到<span class="arithmatex">\(y[n]\)</span>, 实际上这个<span class="arithmatex">\(y[n]=x[n]\ast z[n]\)</span>. 但是对于非线性系统来说, 它的输出肯定是不满足卷积的, 即<span class="arithmatex">\(y[n] \neq x[n] * h[n]\)</span>. 这就是双边z变换局限的地方了, 它必须建立在LTI系统的前提之上才能得到正确的结果, 而且技术上来说它也只能得到这样一种结果, 即系统弛豫状态下的输出. 因为它的time-shift性质无法考虑初值: <span class="arithmatex">\(x[n-1] \Leftrightarrow z^{-1}X(z)\)</span>.</p>
-<p>而单边z变换在技术上是可以解决这种初值不为0的差分方程的, 因为看它的time-shift性质: <span class="arithmatex">\(x[n-1]\Leftrightarrow z^{-1}X(z)+x[-1]\)</span>. 考虑到了初值. 上面的方程看奥本哈姆&lt;离散时间信号处理&gt;e3.23, 我就不继续解下去了.</p>
-<p><strong>总结来说</strong>, 就是双边的变换(不管是z变换/laplace变换/fourier变换)都必须基于一个假设, 也就是初始弛豫条件(IAR), 输入为0输出必为0. 然而单边的变换却可以用来分析非线性系统(比如设了初值的差分方程), 这使得它的用途更为广泛. 另外, 使用单边z变换求解差分方程本质上似乎是和生成函数求解是一致的. 这一点可以以后再看看.</p>
-<p>差分方程描绘的传递函数是(零状态响应/零初值条件响应) , 初值描绘的是(零输入响应).</p>
-<p>在初始弛豫条件下, 单边变换和双边变换对系统的分析基本上是完全一致的. 对于一个因果(<span class="arithmatex">\(x[n]=0, n&lt;0\)</span>)的信号单边变换和双边变换是一致的. 若一个信号非因果, 那么使用双边变换即可. 由于实际信号一般都是因果信号, 所以单边变换又赢.</p>
-<p>如果你在日常做信号题目,只要题目未给初值, 一般就默认有初始弛豫这个条件. 即没有输入就没有输出.</p>
-<p>matlab的filter函数也可以添加初值:</p>
-<p>对于下面这个方程:</p>
-<div class="arithmatex">\[
-y[n]+1.5y[n-1]+0.5y[n-2]=x[n]-x[n-1], y[-1]=2, y[-2]=1
-\]</div>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="n">num</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="p">];</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="n">den</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="w"> </span><span class="mf">1.5</span><span class="w"> </span><span class="mf">.5</span><span class="p">];</span>
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="n">n</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">0</span><span class="p">:</span><span class="mi">20</span><span class="p">;</span>
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="n">x</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">ones</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="nb">length</span><span class="p">(</span><span class="n">n</span><span class="p">));</span>
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="c">%zi = [-a1*y[-1] - a2*y[-2], -a2*y[-1]]</span>
-<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="n">zi</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="o">-</span><span class="mf">1.5</span><span class="o">*</span><span class="mi">2</span><span class="o">-</span><span class="mf">0.5</span><span class="o">*</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mf">0.5</span><span class="o">*</span><span class="mi">2</span><span class="p">];</span><span class="w"> </span><span class="c">%zi就是y[n]初值向量</span>
-<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="n">y</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">filter</span><span class="p">(</span><span class="n">num</span><span class="p">,</span><span class="n">den</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">zi</span><span class="p">);</span>
-</code></pre></div>
-<p>网上资料比较少, 有很多都是自己的整理和思考, 可能会有错误, 麻烦指正. 905609587@qq.com</p>
+<h1 id="io">IO 和 文件系统<a class="headerlink" href="#io" title="Permanent link">&para;</a></h1>
 
   <hr>
 <div class="md-source-file">
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-11-21</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2024-03-13</span>
       
         <br>
         Created:
-        <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-11-04</span>
+        <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2024-03-13</span>
       
     
   </small>
