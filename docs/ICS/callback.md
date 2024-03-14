@@ -16,43 +16,84 @@
 
 下面看一个回调函数的例子：（其实就是链接里的例子，懒的自己写了）
 ```c
-#include<stdio.h>
+#include <stdio.h>
 
 int Callback_1(int x) // Callback Function 1
 {
-    printf("Hello, this is Callback_1: x = %d \n", x);
-    return 0;
+    printf("Hello, this is Callback_1: x = %d \n", x);
+    return 0;
 }
 
 int Callback_2(int x) // Callback Function 2
 {
-    printf("Hello, this is Callback_2: x = %d \n", x);
-    return 0;
+    printf("Hello, this is Callback_2: x = %d \n", x);
+    return 0;
 }
 
 int Callback_3(int x) // Callback Function 3
 {
-    printf("Hello, this is Callback_3: x = %d \n", x);
-    return 0;
+    printf("Hello, this is Callback_3: x = %d \n", x);
+    return 0;
 }
 
 int Handle(int y, int (*Callback)(int))
 {
-    printf("Entering Handle Function. \n");
-    Callback(y);
-    printf("Leaving Handle Function. \n");
+    printf("Entering Handle Function. \n");
+    Callback(y);
+    printf("Leaving Handle Function. \n");
+    return 0;
 }
 
 int main()
 {
-    int a = 2;
-    int b = 4;
-    int c = 6;
-    printf("Entering Main Function. \n");
-    Handle(a, Callback_1);
-    Handle(b, Callback_2);
-    Handle(c, Callback_3);
-    printf("Leaving Main Function. \n");
-    return 0;
+    int a = 2;
+    int b = 4;
+    int c = 6;
+    printf("Entering Main Function. \n");
+    Handle(a, Callback_1);
+    Handle(b, Callback_2);
+    Handle(c, Callback_3);
+    printf("Leaving Main Function. \n");
+    return 0;
 }
 ```
+
+有时我们也会碰到“注册”回调函数的说法。这个“注册”的说法也是相当抽象了，其实就是初始化的意思。初始化需要调用的回调函数，之后在触发某种事件时，就可以直接调用这个函数了。比如说操作系统中的 `signal` 函数，函数原型是：
+```c
+void (*signal(int sig, void (*func)(int)))(int)
+```
+调用 `signal` 函数进行初始化，之后程序接受到 `sig` 信号时，就会调用回调函数 `func`。
+
+例程如下：
+
+```c
+#include <stdio.h>
+#include <unistd.h>
+#include <stdlib.h>
+#include <signal.h>
+
+void sighandler(int);
+
+int main()
+{
+   signal(SIGINT, sighandler);
+
+   while(1) 
+   {
+      printf("sleep 1 second\n");
+      sleep(1);
+   }
+
+   return(0);
+}
+
+void sighandler(int signum)
+{
+   printf("get signal: %d, jump out...\n", signum);
+   exit(1);
+}
+```
+
+程序首先是每个一秒打印一条语句，按下 <Ctrl-c> ，让程序接收到 `SIGINT` 信号，从而跳出，进入 `sighandler` 函数。
+
+<!-- 关于 `signal` 函数，可以看 <https://www.runoob.com/cprogramming/c-function-signal.html> 这个链接。 -->
