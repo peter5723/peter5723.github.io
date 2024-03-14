@@ -9,17 +9,17 @@
       
       
       
-        <link rel="prev" href="../shell/">
+        <link rel="prev" href="../callback/">
       
       
-        <link rel="next" href="../make/">
+        <link rel="next" href="../../algorithm/intro/">
       
       <link rel="icon" href="../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.0.4">
     
     
       
-        <title>vim - Peter's home</title>
+        <title>汇编的栈和函数 - Peter's home</title>
       
     
     
@@ -73,7 +73,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#vim" class="md-skip">
+        <a href="#_1" class="md-skip">
           Skip to content
         </a>
       
@@ -106,7 +106,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              vim
+              汇编的栈和函数
             
           </span>
         </div>
@@ -500,72 +500,11 @@
               
   
   
-    
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          vim
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../vim/" class="md-nav__link">
         vim
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#vim_1" class="md-nav__link">
-    Vim 基本操作
-  </a>
-  
-    <nav class="md-nav" aria-label="Vim 基本操作">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
-    替换
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
-    外部命令
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -659,11 +598,21 @@
               
   
   
+    
   
-    <li class="md-nav__item">
-      <a href="../stack/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         汇编的栈和函数
       </a>
+      
     </li>
   
 
@@ -973,41 +922,6 @@
     
   
   
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#vim_1" class="md-nav__link">
-    Vim 基本操作
-  </a>
-  
-    <nav class="md-nav" aria-label="Vim 基本操作">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
-    替换
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
-    外部命令
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-    </ul>
-  
 </nav>
                   </div>
                 </div>
@@ -1022,32 +936,33 @@
 
 
 
-<h1 id="vim">Vim<a class="headerlink" href="#vim" title="Permanent link">&para;</a></h1>
-<p>手册里面东西太多了放不下了，Vim 本身东西就很多，拿出来备忘一下也可以。</p>
-<h2 id="vim_1">Vim 基本操作<a class="headerlink" href="#vim_1" title="Permanent link">&para;</a></h2>
-<h3 id="_1">替换<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h3>
-<ul>
-<li><code>:s /old/new/ gc</code> 在一行内用 <code>new</code> 替换 <code>old</code>，<code>g</code> 表示对一整行匹配，<code>c</code> 表示替换前确认</li>
-<li><code>:%s /old/new/ gc</code> 对整篇文章进行搜索。</li>
-</ul>
-<p>字符均支持正则表达式，比如 <code>:%s/^/xxx/g</code> 就是在每一行的行首插入xxx，<code>^</code>表示行首，<code>$</code>表示行尾。</p>
-<h3 id="_2">外部命令<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
-<p><a href="https://zhuanlan.zhihu.com/p/56381336">https://zhuanlan.zhihu.com/p/56381336</a></p>
-<p>vim 可以执行外部命令</p>
-<p>最简单的 <code>:!</code> 就可以执行外部命令了。比如 <code>:!date</code> 显示今天日期</p>
-<p><code>:read</code> 命令可以获得命令执行的输出结果，新增一行插入该结果。如 <code>:read!date</code></p>
-<p>我最常用的还是 <code>:terminal</code>. 直接打开一个新的终端</p>
+<h1 id="_1">栈与函数调用<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
+<p>做 PA4 的时候，栈的方向给我搞晕了，就顺道整理一下。下面主要用 x86 来讲解，别的汇编语言也是同样的道理。</p>
+<p>首先是介绍一下栈指针寄存器（stack pointer）: <code>sp</code> 寄存器。它永远保存栈顶元素的地址。程序的栈放在内存中的某个区域并向下增长。也就是说，每 <code>push</code> 一个元素，<code>sp</code> 的地址减少，<code>pop</code> 则让 <code>sp</code> 的地址增加。</p>
+<p><code>pushq %rbp</code> 等价于
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nf">sub</span><span class="w"> </span><span class="no">$8</span><span class="p">,</span><span class="no">rsp</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="nf">movq</span><span class="w"> </span><span class="nv">%rbp</span><span class="p">,(</span><span class="nv">%rsp</span><span class="p">)</span>
+</code></pre></div></p>
+<p><code>popq %rax</code> 等价于 
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nf">movq</span><span class="w"> </span><span class="p">(</span><span class="nv">%rsp</span><span class="p">),</span><span class="nv">%rax</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="nf">addq</span><span class="w"> </span><span class="no">$8</span><span class="p">,(</span><span class="nv">%rsp</span><span class="p">)</span>
+</code></pre></div></p>
+<p>利用栈，我们就可以实现函数了。将栈指针减少一个适当的量可以分配空间，这段分配的空间叫做栈帧（stack frame）。分配空间后赋值本质上是和将需要的值一个个 push 进来是一样的。反过来，增加栈指针相当于释放空间。</p>
+<p>在调用一个函数时，首先 <code>call</code> 指令会将返回地址压入栈中，然后进入调用的函数。在新函数中，首先要减少栈指针的值分配空间，然后依次保存寄存器的值，分配局部变量空间，分配传入的参数所需的空间。这些都完成后，再执行之后的过程。执行完毕后，将栈指针加回原来的值释放空间，<code>ret</code> 指令将栈顶的地址 pop 给 <code>pc</code>，就从函数返回了。下面是一个函数 P 调用函数 Q 的局部栈图。</p>
+<p><a href="https://imgse.com/i/pFgJAqe"><img alt="pFgJAqe.jpg" src="https://s21.ax1x.com/2024/03/14/pFgJAqe.jpg" /></a></p>
+<p>看这张图片已经很直观了，栈底的地址高，栈顶的地址低。</p>
+<p>值得一提的是，C 语言参数是从右往左压入堆栈的，所以假定 <code>(%rsp)</code> 是第一个元素，那么 <code>4(%rsp)</code> 是第二个，<code>8(rsp)</code> 是第三个元素，以此类推。如果传入的是数组或者结构体，方向也是一样的。倒过来 push 入堆栈导致顺序符合内存增长的方向。</p>
 
   <hr>
 <div class="md-source-file">
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-12-10</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2024-03-15</span>
       
         <br>
         Created:
-        <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-11-20</span>
+        <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2024-03-15</span>
       
     
   </small>

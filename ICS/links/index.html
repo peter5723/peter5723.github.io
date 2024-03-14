@@ -567,9 +567,60 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          链接和程序结构
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         链接和程序结构
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#elf" class="md-nav__link">
+    ELF 文件结构
+  </a>
+  
+    <nav class="md-nav" aria-label="ELF 文件结构">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#section" class="md-nav__link">
+    Section 视角
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#segment" class="md-nav__link">
+    Segment 视角
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -598,6 +649,20 @@
     <li class="md-nav__item">
       <a href="../callback/" class="md-nav__link">
         回调函数
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../stack/" class="md-nav__link">
+        汇编的栈和函数
       </a>
     </li>
   
@@ -908,6 +973,41 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#elf" class="md-nav__link">
+    ELF 文件结构
+  </a>
+  
+    <nav class="md-nav" aria-label="ELF 文件结构">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#section" class="md-nav__link">
+    Section 视角
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#segment" class="md-nav__link">
+    Segment 视角
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -923,14 +1023,54 @@
 
 
 <h1 id="_1">链接<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
-<p>这一章会简单介绍链接和程序的结构</p>
+<p>这一章会简单介绍链接和程序的结构。事实上到做毕设我才体会到链接的力量：将一个大工程分解为各个可以独立修改、编译的模块。</p>
+<h2 id="elf">ELF 文件结构<a class="headerlink" href="#elf" title="Permanent link">&para;</a></h2>
+<p>可以 <code>man 5 elf</code> 来获得关于 ELF 文件的信息。</p>
+<p>别人也有一些介绍，比如：</p>
+<p><a href="https://zhuanlan.zhihu.com/p/286088470">https://zhuanlan.zhihu.com/p/286088470</a></p>
+<p><a href="https://blog.csdn.net/npy_lp/article/details/102604380">https://blog.csdn.net/npy_lp/article/details/102604380</a></p>
+<p>ELF 是 linux 系统下的可执行目标文件格式。理解它就理解了程序的结构。</p>
+<p>先来一张图来介绍 ELF 的文件结构。我们可以从 section（节）和 segment（段）两种视角来看 ELF 文件是怎么组织的。</p>
+<p><a href="https://imgse.com/i/pFgJXSP"><img alt="pFgJXSP.jpg" src="https://s21.ax1x.com/2024/03/14/pFgJXSP.jpg" /></a></p>
+<h3 id="section">Section 视角<a class="headerlink" href="#section" title="Permanent link">&para;</a></h3>
+<p>Section 视角提供了用于链接与重定位的信息。从节的角度，ELF header（ELF 头）介绍了这个 ELF 文件的基本信息，比如大小、机器类型、程序入口地址、Section header table （节头部表）的文件偏移等等。ELF 头之后是 Segment header table（程序头表），包括了段的信息，段在后面会介绍。文件的末尾是节头部表，描述了不同节的位置和大小。夹在中间的都是节。</p>
+<p>下面介绍一些典型的节。</p>
+<ul>
+<li><code>.text</code>：程序的机器代码</li>
+<li><code>.rodata</code>：只读数据（read-only data）。比如说常量和常量字符串，switch 语句的跳转表都储存在这里。对只读数据段内存尝试修改将会导致段错误。</li>
+<li><code>.data</code>：已初始化的全局和静态 C 变量。注意，局部变量不在 <code>.data</code> 或者 <code>.bss</code> 节中，而是储存在栈里。</li>
+<li><code>.bss</code>：未初始化的或者被初始化为 0 的全局或者静态变量（反正就是 0）。在文件中，这个节不占据任何的磁盘空间，只有在运行时，才在内存中分配给这些变量空间，初始值为 0。这样做大大提高了空间效率，也是 <code>.bss</code> 节为什么总是全都为 0 的原因。</li>
+<li><code>.symtab</code>：符号表，存放函数和全局变量的信息。</li>
+<li><code>.debug</code>：调试符号表，只有以 <code>-g</code> 选项编译才能得到这张表，包络必要的调试信息。</li>
+<li><code>.strtab</code>：一个字符串表，包括所有节的节名。</li>
+</ul>
+<h3 id="segment">Segment 视角<a class="headerlink" href="#segment" title="Permanent link">&para;</a></h3>
+<p>从段的视角，我们可以把 ELF 主要分为三段：代码段（<code>.text</code>，<code>.rodata</code>）、数据段（<code>.data</code>，<code>.bss</code>）和不加载到内存的符号表。其中，代码段只读，而数据段有读写权限。</p>
+<p>Linux 程序调用 <code>execve</code> 函数来调用加载器，加载器将可执行目标文件的代码和数据复制到内存中，然后跳转到程序的入口点来运行程序。</p>
+<p>下面我们来看一下程序运行时的内存映像。</p>
+<p><a href="https://imgse.com/i/pFgUHnf"><img alt="pFgUHnf.jpg" src="https://s21.ax1x.com/2024/03/15/pFgUHnf.jpg" /></a></p>
+<p>在 Linux 系统中，程序的代码段总是从地址 <code>0x400000</code> 处开始，后面是数据段。堆在数据段之后，调用 <code>malloc</code> 库向上增长。用户栈从最大的合法用户地址开始（2**48-1），向下增长。用户栈之上的区域是内核的代码和数据，对用户不可见。</p>
+<details class="note" open="open">
+<summary>练习</summary>
+<ol>
+<li>为什么下面的语句会导致段错误？</li>
+</ol>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;abcde&quot;</span><span class="p">;</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">q</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;edcba&quot;</span><span class="p">;</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="n">strcpy</span><span class="p">(</span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">q</span><span class="p">);</span>
+</code></pre></div>
+<ol>
+<li>使用 readelf 查看一个 ELF 文件的信息, 你会看到一个 segment 包含两个大小的属性, 分别是 FileSiz 和 MemSiz, 这是为什么? 再仔细观察一下, 你会发现 FileSiz 通常不会大于相应的 MemSiz, 这又是为什么?
+提示：MemSiz 是文件在磁盘中的大小，FileSiz 是文件运行时在内存中的大小。</li>
+</ol>
+</details>
 
   <hr>
 <div class="md-source-file">
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2024-03-13</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2024-03-15</span>
       
         <br>
         Created:
