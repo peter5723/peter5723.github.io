@@ -29,7 +29,7 @@ auto d = "Hello";
 
 <https://www.runoob.com/cplusplus/cpp-namespaces.html>
 
-在 C++ 中，名称（name）可以是符号常量、变量、函数、结构、枚举、类和对象等等。工程越大，名称互相冲突性的可能性越大。另外使用多个厂商的类库时，也可能导致名称冲突。于是 C++ 就引入了 namespace 名称空间，我们这里就简单的介绍一下 这个概念。
+在 C++ 中，名称（name）可以是符号常量、变量、函数、结构、枚举、类和对象等等。工程越大，名称互相冲突性的可能性越大。另外使用多个厂商的类库时，也可能导致名称冲突。于是 C++ 就引入了 namespace 名称空间，我们这里就简单的介绍一下这个概念。
 
 名称空间的定义就是：
 ```cpp
@@ -136,6 +136,8 @@ int main() {
     return 0; 
 }
 ```
+
+对于作用域解析运算符 `::`, 最常用的还是在定义类方法的时候, 来指明该方法来自哪一个类.
 
 ### overload
 
@@ -365,7 +367,7 @@ void squareN(int& n) {
 const int a = 1;
 ```
 
-只有一点是新的，常量不能被非常量引用引用，所以 `int& b = a` 会导致错误，而 `const int &b = a` 则语法正确。
+只有一点是新的，常量不能给非常量类型引用或者初始化，所以 `int& b = a` 会导致错误，而 `const int &b = a` 则语法正确。
 
 
 ## Lecture 4: Streams
@@ -753,9 +755,9 @@ Student::Student(std::string name, std::string state, int age) {
 
 // 函数重载
 Student::Student() {
-    name{"John"};
-    state{"Appleseed"};
-    age{18};
+    name = "John";
+    state = "Appleseed";
+    age = 18;
 }
 
 // Destructor
@@ -786,13 +788,17 @@ void Student::setAge(int age) {
 
 ```
 
-上面就是一个完整的 Student 类实现了。我们可以在代码中使用这个类。
+上面就是一个完整的 Student 类实现了。我们可以在代码中使用这个类。注意, 有多种方式使用构造函数来初始化一个新的类.
 
 ```cpp
-Student s = Student("Haven", "AR", 21);
-auto s1 = Student();
-cout << s.getAge();
+Student s = Student("Haven", "AR", 21); // 最基本的, 显式调用构造函数
+auto s1 = Student(); // 可以用 auto, 让编译器来决定
+Student s2{"Peter","kka",22}; // uniform initialization, 好用爱用
+Student s3("Ama", "lo", 12); // 隐式调用构造函数
+Student* p = new Student("Prata", "TE", 67); // 用 new, 返回一个指针来管理类
+cout << s.getAge()<< a << endl;
 s1.setName("Jack");
+cout << s.getName() << s1.getName() << s2.getName() << s3.getName() << p->getName() << endl;
 ```
 
 然后再来看一下 C++ 是怎么实现继承的，也很简单：
@@ -814,3 +820,221 @@ private:
 ```
 
 值得一提的是，在 C++ 中，类的本质是 struct。（TODO 阅读 C++ primer）
+
+
+## Lecture 8: Template Classes and Const Correctness
+
+### Template Class
+
+模版有什么作用? 之前在学数据结构课的时候, 写了一个 stack. 然后那个 stack 只能存储 int 类型的. 结果麻烦来了, 过了几天, 要存储 double 类型了, 再过几天, 要存储字符串了. 那该怎么办呢? 只能复制一份, 然后把里面的类型都改掉吗? 模板就是为了解决这个问题而诞生的.
+
+```cpp
+class IntContainer {
+public:
+    IntContainer(int val);
+    int getValue();
+
+private:
+    int value;
+};
+```
+
+先看上面的代码, 这个类是不是就碰到了上面的问题呢, 只能储存 `int` 类型的变量. 然后我们看看下面的类模板是怎么解决这个问题.
+
+```cpp
+// Container.hh
+template <typename T>
+class Container {
+public:
+    Container (T val);
+    T getValue();
+
+private:
+    T value;
+};
+
+```
+
+然后再来看一下 cpp 怎么实现
+```cpp
+//Container.cpp
+#include "Container.hh"
+
+template <class T>
+Container<T>::Container(T val) {
+    this->value = val;
+}
+
+template <typename T>
+T Container<T>::getValue() {
+    return value;
+}
+```
+
+在模版声明时, `typename` 和 `class` 两个关键字可以互换.
+
+你直接拿去运行, 结果发现报错了, 怎么回事? 这就是 C++ 神金的地方了. 下面的链接给出了一些答案.
+
+<https://blog.csdn.net/amnesiagreen/article/details/108575310>
+
+<http://www.uml.org.cn/c++/20112284.asp>
+
+通常情况下, 我们会把类的定义和方法的声明放在 .h 文件中, 把方法的定义放在 .cpp 文件中. 但是对于上面的类模板, 这样做就不行了. 因为当实例化一个模板时，编译器必须看到模板确切的定义，而不仅仅是它的声明。
+**因此，最好的办法就是将模板的声明和定义都放置在同一个.h文件中。**
+另外, STL 库好像就是这么干的. (有毒)
+
+另外, 经过测试, 编译器对于模版是会进行特殊处理的, 将定义和声明放在一起并不会导致重定义的编译错误.
+
+链接中还提到了 `export` 关键字的方法, 这个已经过时了, 就不要使用了.
+
+### Const Correctness
+
+`const` 其实有很多的细节要注意的. 下面就讲解除了修饰常量类型以外, 另外的用法.
+
+
+#### 介绍
+```cpp
+// Student.h
+class Student {
+private:
+    std::string name;
+    std::string state;
+    int age;
+
+public:
+    Student();
+    Student(std::string name, std::string state, int age);
+    ~Student();
+    std::string getName();
+    std::string getState();
+    int getAge();
+
+    void setName(std::string name);
+    void setState(std::string state);
+    void setAge(int state);
+};
+```
+
+我们添加一个函数
+```cpp
+std::string stringify(const Student& s) {
+    return s.getName() + " is " + std::to_string(s.getAge()) + " years old.";
+}
+```
+上面这个函数, 编译器会报错! 你知道为什么吗? 就在关键字 ` const`. 如果一个参数前面声明了 `const`, 就表示它是常量, 那么就要保证, 在运行的整个过程, 这个参数都不能改变. 但是目前, 编译器不能确定 `s.getName()` 和 `s.getAge()` 会否改变 `s`. 
+
+那么该怎么办呢? 我们要做的就是在方法里也声明 `const`, 来保证我们不会改变这个参数, 如下所示:
+```cpp
+// Student.h
+class Student {
+private:
+    std::string name;
+    std::string state;
+    int age;
+
+public:
+    Student();
+    Student(std::string name, std::string state, int age);
+    ~Student();
+    std::string getName() const;
+    std::string getState() const;
+    int getAge() const;
+
+    void setName(std::string name);
+    void setState(std::string state);
+    void setAge(int state);
+};
+```
+
+然后在方法的定义里面也记得改:
+```cpp
+std::string Student::getName() const {
+    return this->name;
+}
+
+std::string Student::getState() const {
+    return this->state;
+}
+
+int Student::getAge() const {
+    return this->age;
+}
+```
+
+简而言之, 就是 Objects that are const can only interact with the const-interface, which is the functions don't modify the object of the class.  被 const 修饰的对象, 只能被 const 接口调用
+
+const 修饰类成员函数，其目的是防止成员函数修改被调用对象的值，如果我们不想修改一个调用对象的值，所有的成员函数都应当声明为 const 成员函数。
+
+#### 一个例子
+然后我们来看一个神金的例子: `const T& data() const { return data_; }` (例子来自<https://stackoverflow.com/questions/16449889/why-using-the-const-keyword-before-and-after-method-or-function-name>)
+
+主要是要搞清楚两个 `const` 的区别.
+
+第一个 `const` 就是和之前一样, 表示返回的是常量类型. 这里是 `T` 的引用. 常量只能给常量类型初始化, 否则会导致错误. 如下例子所示:
+
+```cpp
+Class c;
+T& t = c.get_data()        ;     // Not allowed.
+const T& tc = c.get_data() ;     // OK.
+```
+
+第二个 `const` 是今天所学, 是一种声明, 声明这个类方法函数绝对不会改变类中的内容, 是一个 const interface. 如下例子所示:
+```cpp
+void Class::get_data() const {
+   this->data_ = ...;  // is not allowed here since get_data() is const (unless 'data_' is mutable)
+   this->anything = ... // Not allowed unless the thing is 'mutable'
+}
+```
+(`mutable` 是什么关键字, 下次再说吧...)
+
+#### const casting
+
+偶尔也许在被 const 类型修饰的类方法函数里, 要调用那些没有 const 保证的函数, 此时该怎么做呢? 当然是用 C 中臭名昭著的 casting (类型转换) 了. 见下面例子:
+
+```cpp
+int& findItem(int value) {
+    for (auto& elem: arr) {
+        if (elem == value) 
+            return elem;
+    }
+    throw std::out_of_range("not found");
+}
+
+const int& findItem(int value) const {
+    return const_cast<IntArray>(*this).findItem(value);
+}
+```
+
+到这里, 应该感受到 C++ 的复杂性了.
+
+## Lecture 9: Template Function
+
+上一章讲了类模板, 这一章看一下函数模板.
+
+模版函数的写法类似:
+
+```cpp
+template <typename Type>
+Type myMin(Type a, Type b) {
+    return a < b ? a : b;
+}
+```
+
+调用这个函数需要指定 `Type`:
+
+```cpp
+cout << myMin<int>(3, 4) << endl;
+```
+
+当然也有偷懒的办法, 叫 template argument deduction, 让编译器来推断类型
+
+```cpp
+template <typename T, typename U>
+auto smarterMyMin(T a, U b) {
+    return a < b ? a : b; 
+}
+
+cout << smarterMyMin(3.2, 4) << endl;
+```
+
+编译器为我们确定模版类型的过程称为模板的实例化. 直到实例化时, 才会生成代码

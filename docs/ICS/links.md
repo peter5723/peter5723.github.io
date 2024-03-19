@@ -1,4 +1,4 @@
-# 链接
+# 链接与程序结构
 
 
 这一章会简单介绍链接和程序的结构。事实上到做毕设我才体会到链接的力量：将一个大工程分解为各个可以独立修改、编译的模块。
@@ -17,8 +17,7 @@ ELF 是 linux 系统下的可执行目标文件格式。理解它就理解了程
 
 先来一张图来介绍 ELF 的文件结构。我们可以从 section（节）和 segment（段）两种视角来看 ELF 文件是怎么组织的。
 
-[![pFgJXSP.jpg](https://s21.ax1x.com/2024/03/14/pFgJXSP.jpg)](https://imgse.com/i/pFgJXSP)
-
+![pFgJXSP.jpg](https://s21.ax1x.com/2024/03/14/pFgJXSP.jpg)
 
 
 ### Section 视角
@@ -44,7 +43,9 @@ Linux 程序调用 `execve` 函数来调用加载器，加载器将可执行目�
 
 下面我们来看一下程序运行时的内存映像。
 
-[![pFgUHnf.jpg](https://s21.ax1x.com/2024/03/15/pFgUHnf.jpg)](https://imgse.com/i/pFgUHnf)
+<figure markdown="span">
+![pFgUHnf.jpg](https://s21.ax1x.com/2024/03/15/pFgUHnf.jpg){:height="50%" width="50%" }
+</figure>
 
 在 Linux 系统中，程序的代码段总是从地址 `0x400000` 处开始，后面是数据段。堆在数据段之后，调用 `malloc` 库向上增长。用户栈从最大的合法用户地址开始（2**48-1），向下增长。用户栈之上的区域是内核的代码和数据，对用户不可见。
 
@@ -52,7 +53,6 @@ Linux 程序调用 `execve` 函数来调用加载器，加载器将可执行目�
 ???+ note "练习"
 
     1. 为什么下面的语句会导致段错误？
-
     ```c
     char *p = "abcde";
     char *q = "edcba";

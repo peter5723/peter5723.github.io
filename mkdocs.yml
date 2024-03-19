@@ -93,6 +93,11 @@ nav:
     - "mkdocs": "website/mkdocs.md"
     - "jekyll": "website/github-pages.md"
     - "图床": "website/pic-bed.md"
+  - "工具":
+    - "vscode": "tools/vscode.md"
+    - "shell": "tools/shell.md"
+    - "vim": "tools/vim.md"
+    - "GNU Make": "tools/make.md"
   - "化学":
     - "化学热力学中的一些问题": "chem/thermo.md"
   - "信号": 
@@ -102,15 +107,12 @@ nav:
     - "LTI系统频域特性（ss第6章）": "signal/ch6_ss.md"
   - "计算机系统": 
     - "PA 实验记录": "ICS/2023-11-02-PAnote.md"
-    - "shell": "ICS/shell.md"
-    - "vim": "ICS/vim.md"
-    - "GNU Make": "ICS/make.md"
     - "RISC-V": "ICS/riscv.md"
     - "数字与算术": "ICS/number.md"
     - "链接和程序结构": "ICS/links.md"
     - "IO 和文件系统": "ICS/io.md"
     - "回调函数": "ICS/callback.md"
-    - "汇编的栈和函数": "ICS/stack.md"
+    - "栈和函数调用": "ICS/stack.md"
   - "算法":
     - "介绍": "algorithm/intro.md"
     - "搜索":
