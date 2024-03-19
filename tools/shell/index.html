@@ -9,17 +9,17 @@
       
       
       
-        <link rel="prev" href="../links/">
+        <link rel="prev" href="../vscode/">
       
       
-        <link rel="next" href="../callback/">
+        <link rel="next" href="../vim/">
       
       <link rel="icon" href="../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.0.4">
     
     
       
-        <title>IO 和文件系统 - Peter's home</title>
+        <title>shell - Peter's home</title>
       
     
     
@@ -73,7 +73,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#io" class="md-skip">
+        <a href="#shell" class="md-skip">
           Skip to content
         </a>
       
@@ -106,7 +106,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              IO 和文件系统
+              shell
             
           </span>
         </div>
@@ -303,18 +303,20 @@
 
   
   
+    
+  
   
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
       
       
-      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_4" type="checkbox" id="__nav_4" >
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_4" type="checkbox" id="__nav_4" checked>
       
       
       
-        <label class="md-nav__link" for="__nav_4" tabindex="0" aria-expanded="false">
+        <label class="md-nav__link" for="__nav_4" tabindex="0" aria-expanded="true">
           工具
           <span class="md-nav__icon md-icon"></span>
         </label>
@@ -332,7 +334,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../tools/vscode/" class="md-nav__link">
+      <a href="../vscode/" class="md-nav__link">
         vscode
       </a>
     </li>
@@ -344,11 +346,52 @@
               
   
   
+    
   
-    <li class="md-nav__item">
-      <a href="../../tools/shell/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          shell
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         shell
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#shell_1" class="md-nav__link">
+    shell 脚本
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -360,7 +403,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../tools/vim/" class="md-nav__link">
+      <a href="../vim/" class="md-nav__link">
         vim
       </a>
     </li>
@@ -374,7 +417,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../tools/make/" class="md-nav__link">
+      <a href="../make/" class="md-nav__link">
         GNU Make
       </a>
     </li>
@@ -534,20 +577,18 @@
 
   
   
-    
-  
   
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
       
       
       
-      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_7" type="checkbox" id="__nav_7" checked>
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_7" type="checkbox" id="__nav_7" >
       
       
       
-        <label class="md-nav__link" for="__nav_7" tabindex="0" aria-expanded="true">
+        <label class="md-nav__link" for="__nav_7" tabindex="0" aria-expanded="false">
           计算机系统
           <span class="md-nav__icon md-icon"></span>
         </label>
@@ -565,7 +606,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../2023-11-02-PAnote/" class="md-nav__link">
+      <a href="../../ICS/2023-11-02-PAnote/" class="md-nav__link">
         PA 实验记录
       </a>
     </li>
@@ -579,7 +620,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../riscv/" class="md-nav__link">
+      <a href="../../ICS/riscv/" class="md-nav__link">
         RISC-V
       </a>
     </li>
@@ -593,7 +634,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../number/" class="md-nav__link">
+      <a href="../../ICS/number/" class="md-nav__link">
         数字与算术
       </a>
     </li>
@@ -607,7 +648,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../links/" class="md-nav__link">
+      <a href="../../ICS/links/" class="md-nav__link">
         链接和程序结构
       </a>
     </li>
@@ -619,21 +660,11 @@
               
   
   
-    
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../../ICS/io/" class="md-nav__link">
         IO 和文件系统
       </a>
-      
     </li>
   
 
@@ -645,7 +676,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../callback/" class="md-nav__link">
+      <a href="../../ICS/callback/" class="md-nav__link">
         回调函数
       </a>
     </li>
@@ -659,7 +690,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../stack/" class="md-nav__link">
+      <a href="../../ICS/stack/" class="md-nav__link">
         栈和函数调用
       </a>
     </li>
@@ -971,6 +1002,21 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#shell_1" class="md-nav__link">
+    shell 脚本
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -985,18 +1031,26 @@
 
 
 
-<h1 id="io">IO 和 文件系统<a class="headerlink" href="#io" title="Permanent link">&para;</a></h1>
+<h1 id="shell">Shell<a class="headerlink" href="#shell" title="Permanent link">&para;</a></h1>
+<p>这里整理 shell 的指令脚本等。</p>
+<p>find 使用:
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>find<span class="w"> </span>.<span class="w"> </span>-name<span class="w"> </span><span class="s2">&quot;&lt;filename&gt;&quot;</span><span class="w"> </span><span class="c1"># 在当前文件夹下查找指定文件名</span>
+</code></pre></div></p>
+<p>grep 真的太常用了：
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>grep<span class="w"> </span>-r<span class="w"> </span><span class="s2">&quot;&lt;you want&gt;&quot;</span><span class="w"> </span>.<span class="w"> </span><span class="c1"># 在当前文件夹下搜索指定字符串输出的位置</span>
+</code></pre></div></p>
+<h2 id="shell_1">shell 脚本<a class="headerlink" href="#shell_1" title="Permanent link">&para;</a></h2>
 
   <hr>
 <div class="md-source-file">
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2024-03-13</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2024-03-19</span>
       
         <br>
         Created:
-        <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2024-03-13</span>
+        <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-12-10</span>
       
     
   </small>
