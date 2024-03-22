@@ -3,7 +3,7 @@
 
 这一章会简单介绍链接和程序的结构。事实上到做毕设我才体会到链接的力量：将一个大工程分解为各个可以独立修改、编译的模块。
 
-## ELF 文件结构
+## 1. ELF 文件结构
 
 可以 `man 5 elf` 来获得关于 ELF 文件的信息。
 
@@ -17,8 +17,7 @@ ELF 是 linux 系统下的可执行目标文件格式。理解它就理解了程
 
 先来一张图来介绍 ELF 的文件结构。我们可以从 section（节）和 segment（段）两种视角来看 ELF 文件是怎么组织的。
 
-![pFgJXSP.jpg](https://s21.ax1x.com/2024/03/14/pFgJXSP.jpg)
-
+![](https://cdn.jsdelivr.net/gh/peter5723/imagehost/links1.jpg)
 
 ### Section 视角
 
@@ -43,9 +42,7 @@ Linux 程序调用 `execve` 函数来调用加载器，加载器将可执行目�
 
 下面我们来看一下程序运行时的内存映像。
 
-<figure markdown="span">
-![pFgUHnf.jpg](https://s21.ax1x.com/2024/03/15/pFgUHnf.jpg){:height="50%" width="50%" }
-</figure>
+![](https://cdn.jsdelivr.net/gh/peter5723/imagehost/links2.jpg){:height="50%" width="50%" }
 
 在 Linux 系统中，程序的代码段总是从地址 `0x400000` 处开始，后面是数据段。堆在数据段之后，调用 `malloc` 库向上增长。用户栈从最大的合法用户地址开始（2**48-1），向下增长。用户栈之上的区域是内核的代码和数据，对用户不可见。
 
@@ -61,3 +58,15 @@ Linux 程序调用 `execve` 函数来调用加载器，加载器将可执行目�
 
     2. 使用 readelf 查看一个 ELF 文件的信息, 你会看到一个 segment 包含两个大小的属性, 分别是 FileSiz 和 MemSiz, 这是为什么? 再仔细观察一下, 你会发现 FileSiz 通常不会大于相应的 MemSiz, 这又是为什么?
     提示：MemSiz 是文件在磁盘中的大小，FileSiz 是文件运行时在内存中的大小。
+
+## 2. 链接
+
+这个[教程](https://blog.csdn.net/m0_37621078/article/details/88376228) 非常详细地介绍了如何在 linux 系统下使用静态库和动态库. 
+
+一个静态库可以看成是一组目标文件(.o/.obj)的集合, 就是很多目标文件经过压缩打包后形成的文件. Linux 静态库命名规范，必须是`lib[your_library_name].a`：lib 为前缀，中间是静态库名，扩展名为 .a。静态库对函数库的链接在编译时期就完成了. 
+
+动态库的出现, 为了解决静态库的问题. 代码虽然可以复用, 但是无法共享, 造成空间浪费. 静态库 a.lib 更新, 整个程序就要重新编译再发布给用户.
+
+动态库程序编译时不会连接到代码中, 而是在运行时才被载入. 对用户来说, 只需要更新动态库即可.
+
+Linux 动态库命名规范，必须是`lib[your_library_name].so`：lib为前缀，中间是静态库名，扩展名为 .so

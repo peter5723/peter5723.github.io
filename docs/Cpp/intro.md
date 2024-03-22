@@ -427,7 +427,7 @@ stream 提供了一种 universal 的方式来处理输入输出。
 
 除 `istream` 和 `ostream` 之外，标准库还定义了其他的一些 IO 类型，定义在三个独立的头文件中：`iostream` 定义了用于读写流的基本类型，`fstream` 定义了读写文件的类型，`sstream` 定义了读写字符串对象的类型。实际上，这三种 IO 类型是通过继承机制实现的，关系如下图所示：
 
-![pF1JSmt.jpg](https://s11.ax1x.com/2024/02/06/pF1JSmt.jpg)
+![](https://cdn.jsdelivr.net/gh/peter5723/imagehost/cpp1.jpg)
 
 `stringstream`和 `fstream` 都是继承自 `iostream` 的。
 

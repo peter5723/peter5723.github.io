@@ -163,14 +163,13 @@ test:
 ```makefile
 targets ...: target-pattern: prereq-patterns ...
 recipe
-...
+```
 
 先来看个例子吧：
 ```makefile
 objects = foo.o bar.o
 
 all: $(objects)
-
 $(objects): %.o: %.c
     $(CC) -c $(CFLAGS) $< -o $@
 ```
@@ -185,6 +184,8 @@ all:$(subst .c,.o,$(wildcard *.c))
     gcc -o $@ $<
 ```
 注意，此时 `%` 是从上下文寻找，也就是一定要上下文出现过才能匹配。这也就是为什么删除 `all:$(subst .c,.o,$(wildcard *.c))` 会导致 targets not found 这个编译错误的原因。
+
+其实总结起来很简单, 就是从 Makefile 文件的展开之后的上下文进行寻找.
 
 
 ### 伪目标 （prony targets）
@@ -223,6 +224,70 @@ all:$(subst .c,.o,$(wildcard *.c))
 ```makefile
 $(<function> <arguments>)
 ```
+
+
+下面介绍一些常见的函数
+
+```makefile
+$(subst from, to, text)
+# 将 text 中的 from 都替换成 to
+$(subst ee,EE,feet on the street)
+# fEEt on the strEEt
+```
+
+```makefile
+$(patsubst pattern,replacement,text)
+# 搜索 text 中以空格分开的单词, 将符合 pantern 的子串替换为 replacement. 常用模式通配符 % 来匹配
+
+$(patsubst %.c,%.o,x.c.c bar.c)
+# x.c.o bar.o
+```
+
+```makefile
+$(filter pattern...,text)
+# 只保留 text 中符合 pattern 的子串.
+
+sources := foo.c bar.c baz.s ugh.h
+foo: $(sources)
+cc $(filter %.c %.s,$(sources)) -o foo
+# $(filter %.c %.s,$(sources)) =  foo.c bar.c baz.s
+```
+
+```makefile
+$(wildcard pattern)
+# 在当前文件夹下匹配所有符合模式的文件名并返回使用空格分开的字符串
+
+objects := $(patsubst %.c,%.o,$(wildcard *.c))
+foo : $(objects)
+cc -o foo $(objects)
+# 利用 make 的隐含规则来编译 C 的源文件
+```
+
+```makefile
+# 一系列文件名操作
+
+$(dir names...)
+# 返回文件的目录名
+$(dir src/foo.c hacks)
+# src/ ./
+
+$(notdir names...)
+# 返回文件去掉目录部分后的名称. 若文件是目录, 返回空字符串.
+$(notdir src/foo.c hacks ./lib)
+# foo.c hacks
+
+
+$(suffix names...)
+# 返回文件的后缀名. 若没有后缀, 返回空字符串.
+$(suffix src/foo.c src-1.0/bar.c hacks)
+# .c .c
+
+$(basename names...)
+# 返回文件除后缀名以外的部分.
+$(basename src/foo.c src-1.0/bar hacks)
+# src/foo src-1.0/bar hacks
+```
+
 ### 分支语句
 很像 c 语言的条件宏语句，也是读取 `makefile` 文件就做了判断。
 下面是一个例子：
