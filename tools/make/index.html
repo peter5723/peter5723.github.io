@@ -799,6 +799,48 @@
   
   
     <li class="md-nav__item">
+      <a href="../../ICS/stack/" class="md-nav__link">
+        栈和函数调用
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ICS/memory/" class="md-nav__link">
+        基本存储
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ICS/vm/" class="md-nav__link">
+        虚拟内存
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../ICS/io/" class="md-nav__link">
         IO 和文件系统
       </a>
@@ -815,20 +857,6 @@
     <li class="md-nav__item">
       <a href="../../ICS/callback/" class="md-nav__link">
         回调函数
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../ICS/stack/" class="md-nav__link">
-        栈和函数调用
       </a>
     </li>
   
@@ -1438,72 +1466,121 @@ gcc 会找到同名的 c 文件进行编译。</p>
 <p>按照手册，不妨把 <code>%</code> 看成一个语法结构的组成部分，也就是 <strong>static pattern rules</strong>，静态匹配模式。语法如下：
 <div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="nf">targets ...</span><span class="o">:</span><span class="w"> </span><span class="n">target</span>-<span class="n">pattern</span>: <span class="n">prereq</span>-<span class="n">patterns</span> ...
 <a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="err">recipe</span>
-<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="err">...</span>
-<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>
-<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="err">先来看个例子吧：</span>
-<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span class="err">```makefile</span>
-<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a><span class="nv">objects</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>foo.o<span class="w"> </span>bar.o
-<a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a>
-<a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a><span class="nf">all</span><span class="o">:</span><span class="w"> </span><span class="k">$(</span><span class="nv">objects</span><span class="k">)</span>
-<a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a>
-<a id="__codelineno-8-11" name="__codelineno-8-11" href="#__codelineno-8-11"></a><span class="nf">$(objects)</span><span class="o">:</span><span class="w"> </span>%.<span class="n">o</span>: %.<span class="n">c</span>
-<a id="__codelineno-8-12" name="__codelineno-8-12" href="#__codelineno-8-12"></a><span class="w">    </span><span class="k">$(</span>CC<span class="k">)</span><span class="w"> </span>-c<span class="w"> </span><span class="k">$(</span>CFLAGS<span class="k">)</span><span class="w"> </span>$&lt;<span class="w"> </span>-o<span class="w"> </span><span class="nv">$@</span>
+</code></pre></div></p>
+<p>先来看个例子吧：
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="nv">objects</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>foo.o<span class="w"> </span>bar.o
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="nf">all</span><span class="o">:</span><span class="w"> </span><span class="k">$(</span><span class="nv">objects</span><span class="k">)</span>
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="nf">$(objects)</span><span class="o">:</span><span class="w"> </span>%.<span class="n">o</span>: %.<span class="n">c</span>
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="w">    </span><span class="k">$(</span>CC<span class="k">)</span><span class="w"> </span>-c<span class="w"> </span><span class="k">$(</span>CFLAGS<span class="k">)</span><span class="w"> </span>$&lt;<span class="w"> </span>-o<span class="w"> </span><span class="nv">$@</span>
 </code></pre></div></p>
 <p>规则就是首先 target-pattern（即 <code>%.o</code>） 在 target（即 <code>$(objects)</code>） 里面找到对应的模式，存储到 <code>%</code> 中，然后将这个模式替换 prereq-patterns（即 <code>%.c</code>） 中的 <code>%</code>。这个语法一下子可以处理很多文件，故而备受欢迎。</p>
 <p>实际也很常用的是用 <code>%</code> 编写 implicit rules（隐式规则）中的模式规则。
 下面是一个例子，编译文件夹里的所有 c 文件
-<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="nf">all</span><span class="o">:</span><span class="k">$(</span><span class="nv">subst</span> <span class="nv">.c</span>,<span class="nv">.o</span>,<span class="k">$(</span><span class="nv">wildcard</span> *<span class="nv">.c</span><span class="k">))</span>
-<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="nf">%.o</span><span class="o">:</span>%.<span class="n">c</span>
-<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="w">    </span>gcc<span class="w"> </span>-o<span class="w"> </span><span class="nv">$@</span><span class="w"> </span>$&lt;
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="nf">all</span><span class="o">:</span><span class="k">$(</span><span class="nv">subst</span> <span class="nv">.c</span>,<span class="nv">.o</span>,<span class="k">$(</span><span class="nv">wildcard</span> *<span class="nv">.c</span><span class="k">))</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="nf">%.o</span><span class="o">:</span>%.<span class="n">c</span>
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="w">    </span>gcc<span class="w"> </span>-o<span class="w"> </span><span class="nv">$@</span><span class="w"> </span>$&lt;
 </code></pre></div>
 注意，此时 <code>%</code> 是从上下文寻找，也就是一定要上下文出现过才能匹配。这也就是为什么删除 <code>all:$(subst .c,.o,$(wildcard *.c))</code> 会导致 targets not found 这个编译错误的原因。</p>
+<p>其实总结起来很简单, 就是从 Makefile 文件的展开之后的上下文进行寻找.</p>
 <h3 id="prony-targets">伪目标 （prony targets）<a class="headerlink" href="#prony-targets" title="Permanent link">&para;</a></h3>
 <p>伪目标同样也是 target，最大的不同是它不生成新的文件，比如一开始提到的 <code>clean</code>。</p>
 <p>伪目标有以下几种情况：</p>
 <ol>
 <li>
 <p>没有依赖（prerequisites），比如经典的 clean 例子：
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="nf">.PHONY </span><span class="o">:</span><span class="w"> </span><span class="n">clean</span>
-<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="nf">clean </span><span class="o">:</span>
-<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="w">    </span>rm<span class="w"> </span>*.o<span class="w"> </span>temp
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="nf">.PHONY </span><span class="o">:</span><span class="w"> </span><span class="n">clean</span>
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="nf">clean </span><span class="o">:</span>
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="w">    </span>rm<span class="w"> </span>*.o<span class="w"> </span>temp
 </code></pre></div></p>
 <p>此时目标就是单纯的执行 shell 语句。注意，<code>.PHONY : clean</code> 显式声明某一个目标是伪目标。不声明也可以，一般 make 能够自动推导出来。</p>
 </li>
 <li>
 <p>依赖也是 targets，看下面的例子：
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="nf">all </span><span class="o">:</span><span class="w"> </span><span class="n">prog</span>1 <span class="n">prog</span>2 <span class="n">prog</span>3
-<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="nf">.PHONY </span><span class="o">:</span><span class="w"> </span><span class="n">all</span>
-<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>
-<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="nf">prog1 </span><span class="o">:</span><span class="w"> </span><span class="n">prog</span>1.<span class="n">o</span> <span class="n">utils</span>.<span class="n">o</span>
-<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a><span class="w">    </span>cc<span class="w"> </span>-o<span class="w"> </span>prog1<span class="w"> </span>prog1.o<span class="w"> </span>utils.o
-<a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a>
-<a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a><span class="nf">prog2 </span><span class="o">:</span><span class="w"> </span><span class="n">prog</span>2.<span class="n">o</span>
-<a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a><span class="w">    </span>cc<span class="w"> </span>-o<span class="w"> </span>prog2<span class="w"> </span>prog2.o
-<a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a>
-<a id="__codelineno-11-10" name="__codelineno-11-10" href="#__codelineno-11-10"></a><span class="nf">prog3 </span><span class="o">:</span><span class="w"> </span><span class="n">prog</span>3.<span class="n">o</span> <span class="n">sort</span>.<span class="n">o</span> <span class="n">utils</span>.<span class="n">o</span>
-<a id="__codelineno-11-11" name="__codelineno-11-11" href="#__codelineno-11-11"></a><span class="w">    </span>cc<span class="w"> </span>-o<span class="w"> </span>prog3<span class="w"> </span>prog3.o<span class="w"> </span>sort.o<span class="w"> </span>utils.o
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="nf">all </span><span class="o">:</span><span class="w"> </span><span class="n">prog</span>1 <span class="n">prog</span>2 <span class="n">prog</span>3
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="nf">.PHONY </span><span class="o">:</span><span class="w"> </span><span class="n">all</span>
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>
+<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a><span class="nf">prog1 </span><span class="o">:</span><span class="w"> </span><span class="n">prog</span>1.<span class="n">o</span> <span class="n">utils</span>.<span class="n">o</span>
+<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a><span class="w">    </span>cc<span class="w"> </span>-o<span class="w"> </span>prog1<span class="w"> </span>prog1.o<span class="w"> </span>utils.o
+<a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a>
+<a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a><span class="nf">prog2 </span><span class="o">:</span><span class="w"> </span><span class="n">prog</span>2.<span class="n">o</span>
+<a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a><span class="w">    </span>cc<span class="w"> </span>-o<span class="w"> </span>prog2<span class="w"> </span>prog2.o
+<a id="__codelineno-12-9" name="__codelineno-12-9" href="#__codelineno-12-9"></a>
+<a id="__codelineno-12-10" name="__codelineno-12-10" href="#__codelineno-12-10"></a><span class="nf">prog3 </span><span class="o">:</span><span class="w"> </span><span class="n">prog</span>3.<span class="n">o</span> <span class="n">sort</span>.<span class="n">o</span> <span class="n">utils</span>.<span class="n">o</span>
+<a id="__codelineno-12-11" name="__codelineno-12-11" href="#__codelineno-12-11"></a><span class="w">    </span>cc<span class="w"> </span>-o<span class="w"> </span>prog3<span class="w"> </span>prog3.o<span class="w"> </span>sort.o<span class="w"> </span>utils.o
 </code></pre></div></p>
 <p>此时，<code>all</code> 就是一个伪目标，make 会实现后面作为依赖的多个目标。实际上，介绍 <code>%</code> 的那一节，举的例子中的 <code>all</code> 都是类似的伪目标。</p>
 </li>
 </ol>
 <h3 id="functions">函数 （functions）<a class="headerlink" href="#functions" title="Permanent link">&para;</a></h3>
 <p>函数也像是一种变量，格式如下
-<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="k">$(</span>&lt;<span class="nv">function</span>&gt; &lt;<span class="nv">arguments</span>&gt;<span class="k">)</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="k">$(</span>&lt;<span class="nv">function</span>&gt; &lt;<span class="nv">arguments</span>&gt;<span class="k">)</span>
 </code></pre></div></p>
+<p>下面介绍一些常见的函数</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="k">$(</span><span class="nv">subst</span> <span class="nv">from</span>, <span class="nv">to</span>, <span class="nv">text</span><span class="k">)</span>
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="c"># 将 text 中的 from 都替换成 to</span>
+<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span class="k">$(</span><span class="nv">subst</span> <span class="nv">ee</span>,<span class="nv">EE</span>,<span class="nv">feet</span> <span class="nv">on</span> <span class="nv">the</span> <span class="nv">street</span><span class="k">)</span>
+<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a><span class="c"># fEEt on the strEEt</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="k">$(</span><span class="nv">patsubst</span> <span class="nv">pattern</span>,<span class="nv">replacement</span>,<span class="nv">text</span><span class="k">)</span>
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="c"># 搜索 text 中以空格分开的单词, 将符合 pantern 的子串替换为 replacement. 常用模式通配符 % 来匹配</span>
+<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a>
+<a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a><span class="k">$(</span><span class="nv">patsubst</span> %<span class="nv">.c</span>,%<span class="nv">.o</span>,<span class="nv">x.c.c</span> <span class="nv">bar.c</span><span class="k">)</span>
+<a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a><span class="c"># x.c.o bar.o</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="k">$(</span><span class="nv">filter</span> <span class="nv">pattern...</span>,<span class="nv">text</span><span class="k">)</span>
+<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a><span class="c"># 只保留 text 中符合 pattern 的子串.</span>
+<a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a>
+<a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a><span class="nv">sources</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span>foo.c<span class="w"> </span>bar.c<span class="w"> </span>baz.s<span class="w"> </span>ugh.h
+<a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a><span class="nf">foo</span><span class="o">:</span><span class="w"> </span><span class="k">$(</span><span class="nv">sources</span><span class="k">)</span>
+<a id="__codelineno-16-6" name="__codelineno-16-6" href="#__codelineno-16-6"></a><span class="err">cc</span><span class="w"> </span><span class="k">$(</span><span class="nv">filter</span> %<span class="nv">.c</span> %<span class="nv">.s</span>,<span class="k">$(</span><span class="nv">sources</span><span class="k">))</span><span class="w"> </span><span class="err">-o</span><span class="w"> </span><span class="err">foo</span>
+<a id="__codelineno-16-7" name="__codelineno-16-7" href="#__codelineno-16-7"></a><span class="c"># $(filter %.c %.s,$(sources)) =  foo.c bar.c baz.s</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="k">$(</span><span class="nv">wildcard</span> <span class="nv">pattern</span><span class="k">)</span>
+<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a><span class="c"># 在当前文件夹下匹配所有符合模式的文件名并返回使用空格分开的字符串</span>
+<a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a>
+<a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a><span class="nv">objects</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="k">$(</span>patsubst<span class="w"> </span>%.c,%.o,<span class="k">$(</span>wildcard<span class="w"> </span>*.c<span class="k">))</span>
+<a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a><span class="nf">foo </span><span class="o">:</span><span class="w"> </span><span class="k">$(</span><span class="nv">objects</span><span class="k">)</span>
+<a id="__codelineno-17-6" name="__codelineno-17-6" href="#__codelineno-17-6"></a><span class="err">cc</span><span class="w"> </span><span class="err">-o</span><span class="w"> </span><span class="err">foo</span><span class="w"> </span><span class="k">$(</span><span class="nv">objects</span><span class="k">)</span>
+<a id="__codelineno-17-7" name="__codelineno-17-7" href="#__codelineno-17-7"></a><span class="c"># 利用 make 的隐含规则来编译 C 的源文件</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="c"># 一系列文件名操作</span>
+<a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a>
+<a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a><span class="k">$(</span><span class="nv">dir</span> <span class="nv">names...</span><span class="k">)</span>
+<a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a><span class="c"># 返回文件的目录名</span>
+<a id="__codelineno-18-5" name="__codelineno-18-5" href="#__codelineno-18-5"></a><span class="k">$(</span><span class="nv">dir</span> <span class="nv">src</span>/<span class="nv">foo.c</span> <span class="nv">hacks</span><span class="k">)</span>
+<a id="__codelineno-18-6" name="__codelineno-18-6" href="#__codelineno-18-6"></a><span class="c"># src/ ./</span>
+<a id="__codelineno-18-7" name="__codelineno-18-7" href="#__codelineno-18-7"></a>
+<a id="__codelineno-18-8" name="__codelineno-18-8" href="#__codelineno-18-8"></a><span class="k">$(</span><span class="nv">notdir</span> <span class="nv">names...</span><span class="k">)</span>
+<a id="__codelineno-18-9" name="__codelineno-18-9" href="#__codelineno-18-9"></a><span class="c"># 返回文件去掉目录部分后的名称. 若文件是目录, 返回空字符串.</span>
+<a id="__codelineno-18-10" name="__codelineno-18-10" href="#__codelineno-18-10"></a><span class="k">$(</span><span class="nv">notdir</span> <span class="nv">src</span>/<span class="nv">foo.c</span> <span class="nv">hacks</span> <span class="nv">.</span>/<span class="nv">lib</span><span class="k">)</span>
+<a id="__codelineno-18-11" name="__codelineno-18-11" href="#__codelineno-18-11"></a><span class="c"># foo.c hacks</span>
+<a id="__codelineno-18-12" name="__codelineno-18-12" href="#__codelineno-18-12"></a>
+<a id="__codelineno-18-13" name="__codelineno-18-13" href="#__codelineno-18-13"></a>
+<a id="__codelineno-18-14" name="__codelineno-18-14" href="#__codelineno-18-14"></a><span class="k">$(</span><span class="nv">suffix</span> <span class="nv">names...</span><span class="k">)</span>
+<a id="__codelineno-18-15" name="__codelineno-18-15" href="#__codelineno-18-15"></a><span class="c"># 返回文件的后缀名. 若没有后缀, 返回空字符串.</span>
+<a id="__codelineno-18-16" name="__codelineno-18-16" href="#__codelineno-18-16"></a><span class="k">$(</span><span class="nv">suffix</span> <span class="nv">src</span>/<span class="nv">foo.c</span> <span class="nv">src-1.0</span>/<span class="nv">bar.c</span> <span class="nv">hacks</span><span class="k">)</span>
+<a id="__codelineno-18-17" name="__codelineno-18-17" href="#__codelineno-18-17"></a><span class="c"># .c .c</span>
+<a id="__codelineno-18-18" name="__codelineno-18-18" href="#__codelineno-18-18"></a>
+<a id="__codelineno-18-19" name="__codelineno-18-19" href="#__codelineno-18-19"></a><span class="k">$(</span><span class="nv">basename</span> <span class="nv">names...</span><span class="k">)</span>
+<a id="__codelineno-18-20" name="__codelineno-18-20" href="#__codelineno-18-20"></a><span class="c"># 返回文件除后缀名以外的部分.</span>
+<a id="__codelineno-18-21" name="__codelineno-18-21" href="#__codelineno-18-21"></a><span class="k">$(</span><span class="nv">basename</span> <span class="nv">src</span>/<span class="nv">foo.c</span> <span class="nv">src-1.0</span>/<span class="nv">bar</span> <span class="nv">hacks</span><span class="k">)</span>
+<a id="__codelineno-18-22" name="__codelineno-18-22" href="#__codelineno-18-22"></a><span class="c"># src/foo src-1.0/bar hacks</span>
+</code></pre></div>
 <h3 id="_4">分支语句<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
 <p>很像 c 语言的条件宏语句，也是读取 <code>makefile</code> 文件就做了判断。
 下面是一个例子：
-<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="nv">libs_for_gcc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>-lgnu
-<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="nv">normal_libs</span><span class="w"> </span><span class="o">=</span>
-<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>
-<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a><span class="cp">ifeq ($(CC),gcc)</span>
-<a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a><span class="w">    </span><span class="nv">libs</span><span class="o">=</span><span class="k">$(</span>libs_for_gcc<span class="k">)</span>
-<a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a><span class="cp">else</span>
-<a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a><span class="w">    </span><span class="nv">libs</span><span class="o">=</span><span class="k">$(</span>normal_libs<span class="k">)</span>
-<a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a><span class="cp">endif</span>
-<a id="__codelineno-13-9" name="__codelineno-13-9" href="#__codelineno-13-9"></a>
-<a id="__codelineno-13-10" name="__codelineno-13-10" href="#__codelineno-13-10"></a><span class="nf">foo</span><span class="o">:</span><span class="w"> </span><span class="k">$(</span><span class="nv">objects</span><span class="k">)</span>
-<a id="__codelineno-13-11" name="__codelineno-13-11" href="#__codelineno-13-11"></a><span class="w">    </span><span class="k">$(</span>CC<span class="k">)</span><span class="w"> </span>-o<span class="w"> </span>foo<span class="w"> </span><span class="k">$(</span>objects<span class="k">)</span><span class="w"> </span><span class="k">$(</span>libs<span class="k">)</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="nv">libs_for_gcc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>-lgnu
+<a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a><span class="nv">normal_libs</span><span class="w"> </span><span class="o">=</span>
+<a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a>
+<a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a><span class="cp">ifeq ($(CC),gcc)</span>
+<a id="__codelineno-19-5" name="__codelineno-19-5" href="#__codelineno-19-5"></a><span class="w">    </span><span class="nv">libs</span><span class="o">=</span><span class="k">$(</span>libs_for_gcc<span class="k">)</span>
+<a id="__codelineno-19-6" name="__codelineno-19-6" href="#__codelineno-19-6"></a><span class="cp">else</span>
+<a id="__codelineno-19-7" name="__codelineno-19-7" href="#__codelineno-19-7"></a><span class="w">    </span><span class="nv">libs</span><span class="o">=</span><span class="k">$(</span>normal_libs<span class="k">)</span>
+<a id="__codelineno-19-8" name="__codelineno-19-8" href="#__codelineno-19-8"></a><span class="cp">endif</span>
+<a id="__codelineno-19-9" name="__codelineno-19-9" href="#__codelineno-19-9"></a>
+<a id="__codelineno-19-10" name="__codelineno-19-10" href="#__codelineno-19-10"></a><span class="nf">foo</span><span class="o">:</span><span class="w"> </span><span class="k">$(</span><span class="nv">objects</span><span class="k">)</span>
+<a id="__codelineno-19-11" name="__codelineno-19-11" href="#__codelineno-19-11"></a><span class="w">    </span><span class="k">$(</span>CC<span class="k">)</span><span class="w"> </span>-o<span class="w"> </span>foo<span class="w"> </span><span class="k">$(</span>objects<span class="k">)</span><span class="w"> </span><span class="k">$(</span>libs<span class="k">)</span>
 </code></pre></div></p>
 <h3 id="_5">等号辨析与追加<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
 <h3 id="_6">命令行<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
@@ -1530,7 +1607,7 @@ gcc 会找到同名的 c 文件进行编译。</p>
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2024-03-19</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2024-03-22</span>
       
         <br>
         Created:

@@ -12,7 +12,7 @@
         <link rel="prev" href="../number/">
       
       
-        <link rel="next" href="../io/">
+        <link rel="next" href="../stack/">
       
       <link rel="icon" href="../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.0.4">
@@ -641,11 +641,11 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#elf" class="md-nav__link">
-    ELF 文件结构
+  <a href="#1-elf" class="md-nav__link">
+    1. ELF 文件结构
   </a>
   
-    <nav class="md-nav" aria-label="ELF 文件结构">
+    <nav class="md-nav" aria-label="1. ELF 文件结构">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -667,10 +667,59 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    2. 链接
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
       
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../stack/" class="md-nav__link">
+        栈和函数调用
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../memory/" class="md-nav__link">
+        基本存储
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../vm/" class="md-nav__link">
+        虚拟内存
+      </a>
     </li>
   
 
@@ -698,20 +747,6 @@
     <li class="md-nav__item">
       <a href="../callback/" class="md-nav__link">
         回调函数
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../stack/" class="md-nav__link">
-        栈和函数调用
       </a>
     </li>
   
@@ -1029,11 +1064,11 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#elf" class="md-nav__link">
-    ELF 文件结构
+  <a href="#1-elf" class="md-nav__link">
+    1. ELF 文件结构
   </a>
   
-    <nav class="md-nav" aria-label="ELF 文件结构">
+    <nav class="md-nav" aria-label="1. ELF 文件结构">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -1055,6 +1090,13 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    2. 链接
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -1073,14 +1115,14 @@
 
 <h1 id="_1">链接与程序结构<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
 <p>这一章会简单介绍链接和程序的结构。事实上到做毕设我才体会到链接的力量：将一个大工程分解为各个可以独立修改、编译的模块。</p>
-<h2 id="elf">ELF 文件结构<a class="headerlink" href="#elf" title="Permanent link">&para;</a></h2>
+<h2 id="1-elf">1. ELF 文件结构<a class="headerlink" href="#1-elf" title="Permanent link">&para;</a></h2>
 <p>可以 <code>man 5 elf</code> 来获得关于 ELF 文件的信息。</p>
 <p>别人也有一些介绍，比如：</p>
 <p><a href="https://zhuanlan.zhihu.com/p/286088470">https://zhuanlan.zhihu.com/p/286088470</a></p>
 <p><a href="https://blog.csdn.net/npy_lp/article/details/102604380">https://blog.csdn.net/npy_lp/article/details/102604380</a></p>
 <p>ELF 是 linux 系统下的可执行目标文件格式。理解它就理解了程序的结构。</p>
 <p>先来一张图来介绍 ELF 的文件结构。我们可以从 section（节）和 segment（段）两种视角来看 ELF 文件是怎么组织的。</p>
-<p><img alt="pFgJXSP.jpg" src="https://s21.ax1x.com/2024/03/14/pFgJXSP.jpg" /></p>
+<p><img alt="" src="https://cdn.jsdelivr.net/gh/peter5723/imagehost/links1.jpg" /></p>
 <h3 id="section">Section 视角<a class="headerlink" href="#section" title="Permanent link">&para;</a></h3>
 <p>Section 视角提供了用于链接与重定位的信息。从节的角度，ELF header（ELF 头）介绍了这个 ELF 文件的基本信息，比如大小、机器类型、程序入口地址、Section header table （节头部表）的文件偏移等等。ELF 头之后是 Segment header table（程序头表），包括了段的信息，段在后面会介绍。文件的末尾是节头部表，描述了不同节的位置和大小。夹在中间的都是节。</p>
 <p>下面介绍一些典型的节。</p>
@@ -1097,9 +1139,7 @@
 <p>从段的视角，我们可以把 ELF 主要分为三段：代码段（<code>.text</code>，<code>.rodata</code>）、数据段（<code>.data</code>，<code>.bss</code>）和不加载到内存的符号表。其中，代码段只读，而数据段有读写权限。</p>
 <p>Linux 程序调用 <code>execve</code> 函数来调用加载器，加载器将可执行目标文件的代码和数据复制到内存中，然后跳转到程序的入口点来运行程序。</p>
 <p>下面我们来看一下程序运行时的内存映像。</p>
-<figure>
-<img alt="pFgUHnf.jpg" height="50%" src="https://s21.ax1x.com/2024/03/15/pFgUHnf.jpg" width="50%" />
-</figure>
+<p><img alt="" height="50%" src="https://cdn.jsdelivr.net/gh/peter5723/imagehost/links2.jpg" width="50%" /></p>
 <p>在 Linux 系统中，程序的代码段总是从地址 <code>0x400000</code> 处开始，后面是数据段。堆在数据段之后，调用 <code>malloc</code> 库向上增长。用户栈从最大的合法用户地址开始（2**48-1），向下增长。用户栈之上的区域是内核的代码和数据，对用户不可见。</p>
 <details class="note" open="open">
 <summary>练习</summary>
@@ -1117,13 +1157,19 @@
 </li>
 </ol>
 </details>
+<h2 id="2">2. 链接<a class="headerlink" href="#2" title="Permanent link">&para;</a></h2>
+<p>这个<a href="https://blog.csdn.net/m0_37621078/article/details/88376228">教程</a> 非常详细地介绍了如何在 linux 系统下使用静态库和动态库. </p>
+<p>一个静态库可以看成是一组目标文件(.o/.obj)的集合, 就是很多目标文件经过压缩打包后形成的文件. Linux 静态库命名规范，必须是<code>lib[your_library_name].a</code>：lib 为前缀，中间是静态库名，扩展名为 .a。静态库对函数库的链接在编译时期就完成了. </p>
+<p>动态库的出现, 为了解决静态库的问题. 代码虽然可以复用, 但是无法共享, 造成空间浪费. 静态库 a.lib 更新, 整个程序就要重新编译再发布给用户.</p>
+<p>动态库程序编译时不会连接到代码中, 而是在运行时才被载入. 对用户来说, 只需要更新动态库即可.</p>
+<p>Linux 动态库命名规范，必须是<code>lib[your_library_name].so</code>：lib为前缀，中间是静态库名，扩展名为 .so</p>
 
   <hr>
 <div class="md-source-file">
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2024-03-19</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2024-03-22</span>
       
         <br>
         Created:

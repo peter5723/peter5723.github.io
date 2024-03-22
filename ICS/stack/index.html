@@ -9,10 +9,10 @@
       
       
       
-        <link rel="prev" href="../callback/">
+        <link rel="prev" href="../links/">
       
       
-        <link rel="next" href="../../algorithm/intro/">
+        <link rel="next" href="../memory/">
       
       <link rel="icon" href="../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.0.4">
@@ -619,6 +619,58 @@
               
   
   
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        栈和函数调用
+      </a>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../memory/" class="md-nav__link">
+        基本存储
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../vm/" class="md-nav__link">
+        虚拟内存
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
   
     <li class="md-nav__item">
       <a href="../io/" class="md-nav__link">
@@ -638,30 +690,6 @@
       <a href="../callback/" class="md-nav__link">
         回调函数
       </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-    
-  
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
-        栈和函数调用
-      </a>
-      
     </li>
   
 
@@ -998,7 +1026,7 @@
 </code></pre></div></p>
 <p>利用栈，我们就可以实现函数了。将栈指针减少一个适当的量可以分配空间，这段分配的空间叫做栈帧（stack frame）。分配空间后赋值本质上是和将需要的值一个个 push 进来是一样的。反过来，增加栈指针相当于释放空间。</p>
 <p>在调用一个函数时，首先 <code>call</code> 指令会将返回地址压入栈中，然后进入调用的函数。在新函数中，首先要减少栈指针的值分配空间，然后依次保存寄存器的值，分配局部变量空间，分配传入的参数所需的空间。这些都完成后，再执行之后的过程。执行完毕后，将栈指针加回原来的值释放空间，<code>ret</code> 指令将栈顶的地址 pop 给 <code>pc</code>，就从函数返回了。下面是一个函数 P 调用函数 Q 的局部栈图。</p>
-<p><img alt="pFgJAqe.jpg" height="50%" src="https://s21.ax1x.com/2024/03/14/pFgJAqe.jpg" width="50%" /></p>
+<p><img alt="" height="50%" src="https://cdn.jsdelivr.net/gh/peter5723/imagehost/stack1.jpg" width="50%" /></p>
 <p>看这张图片已经很直观了，栈底的地址高，栈顶的地址低。</p>
 <p>值得一提的是，C 语言参数是从右往左压入堆栈的，所以假定 <code>(%rsp)</code> 是第一个元素，那么 <code>4(%rsp)</code> 是第二个，<code>8(%rsp)</code> 是第三个元素，以此类推。如果传入的是数组或者结构体，方向也是一样的。可以想象，倒过来将元素压入堆栈导致顺序符合内存增长的方向。</p>
 
@@ -1007,7 +1035,7 @@
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2024-03-19</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2024-03-22</span>
       
         <br>
         Created:
