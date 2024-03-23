@@ -672,6 +672,46 @@
     2. 链接
   </a>
   
+    <nav class="md-nav" aria-label="2. 链接">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    符号解析与重定位
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    静态库
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    动态库
+  </a>
+  
+    <nav class="md-nav" aria-label="动态库">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    位置无关代码
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
     </ul>
@@ -1095,6 +1135,46 @@
     2. 链接
   </a>
   
+    <nav class="md-nav" aria-label="2. 链接">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    符号解析与重定位
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    静态库
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    动态库
+  </a>
+  
+    <nav class="md-nav" aria-label="动态库">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    位置无关代码
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
     </ul>
@@ -1114,6 +1194,7 @@
 
 
 <h1 id="_1">链接与程序结构<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
+<p>本章主要是对 CSAPP 这本书第七章的整理.</p>
 <p>这一章会简单介绍链接和程序的结构。事实上到做毕设我才体会到链接的力量：将一个大工程分解为各个可以独立修改、编译的模块。</p>
 <h2 id="1-elf">1. ELF 文件结构<a class="headerlink" href="#1-elf" title="Permanent link">&para;</a></h2>
 <p>可以 <code>man 5 elf</code> 来获得关于 ELF 文件的信息。</p>
@@ -1122,7 +1203,10 @@
 <p><a href="https://blog.csdn.net/npy_lp/article/details/102604380">https://blog.csdn.net/npy_lp/article/details/102604380</a></p>
 <p>ELF 是 linux 系统下的可执行目标文件格式。理解它就理解了程序的结构。</p>
 <p>先来一张图来介绍 ELF 的文件结构。我们可以从 section（节）和 segment（段）两种视角来看 ELF 文件是怎么组织的。</p>
-<p><img alt="" src="https://cdn.jsdelivr.net/gh/peter5723/imagehost/links1.jpg" /></p>
+<div style="text-align:center;">
+    <img src="https://cdn.jsdelivr.net/gh/peter5723/imagehost/links1.jpg" style="width:50%; height:50%;">
+</div>
+
 <h3 id="section">Section 视角<a class="headerlink" href="#section" title="Permanent link">&para;</a></h3>
 <p>Section 视角提供了用于链接与重定位的信息。从节的角度，ELF header（ELF 头）介绍了这个 ELF 文件的基本信息，比如大小、机器类型、程序入口地址、Section header table （节头部表）的文件偏移等等。ELF 头之后是 Segment header table（程序头表），包括了段的信息，段在后面会介绍。文件的末尾是节头部表，描述了不同节的位置和大小。夹在中间的都是节。</p>
 <p>下面介绍一些典型的节。</p>
@@ -1132,6 +1216,8 @@
 <li><code>.data</code>：已初始化的全局和静态 C 变量。注意，局部变量不在 <code>.data</code> 或者 <code>.bss</code> 节中，而是储存在栈里。</li>
 <li><code>.bss</code>：未初始化的或者被初始化为 0 的全局或者静态变量（反正就是 0）。在文件中，这个节不占据任何的磁盘空间，只有在运行时，才在内存中分配给这些变量空间，初始值为 0。这样做大大提高了空间效率，也是 <code>.bss</code> 节为什么总是全都为 0 的原因。</li>
 <li><code>.symtab</code>：符号表，存放函数和全局变量的信息。</li>
+<li><code>.rel.text</code>: <code>.text</code> 节中位置的列表, 这些位置可能需要被重定位.</li>
+<li><code>.rel.data</code>: 所有全局变量的重定位信息. 如果全局变量的值是一个地址, 那么就可能被修改.  </li>
 <li><code>.debug</code>：调试符号表，只有以 <code>-g</code> 选项编译才能得到这张表，包络必要的调试信息。</li>
 <li><code>.strtab</code>：一个字符串表，包括所有节的节名。</li>
 </ul>
@@ -1139,7 +1225,10 @@
 <p>从段的视角，我们可以把 ELF 主要分为三段：代码段（<code>.text</code>，<code>.rodata</code>）、数据段（<code>.data</code>，<code>.bss</code>）和不加载到内存的符号表。其中，代码段只读，而数据段有读写权限。</p>
 <p>Linux 程序调用 <code>execve</code> 函数来调用加载器，加载器将可执行目标文件的代码和数据复制到内存中，然后跳转到程序的入口点来运行程序。</p>
 <p>下面我们来看一下程序运行时的内存映像。</p>
-<p><img alt="" height="50%" src="https://cdn.jsdelivr.net/gh/peter5723/imagehost/links2.jpg" width="50%" /></p>
+<div style="text-align:center;">
+    <img src="https://cdn.jsdelivr.net/gh/peter5723/imagehost/links2.jpg" style="width:50%; height:50%;">
+</div>
+
 <p>在 Linux 系统中，程序的代码段总是从地址 <code>0x400000</code> 处开始，后面是数据段。堆在数据段之后，调用 <code>malloc</code> 库向上增长。用户栈从最大的合法用户地址开始（2**48-1），向下增长。用户栈之上的区域是内核的代码和数据，对用户不可见。</p>
 <details class="note" open="open">
 <summary>练习</summary>
@@ -1158,18 +1247,86 @@
 </ol>
 </details>
 <h2 id="2">2. 链接<a class="headerlink" href="#2" title="Permanent link">&para;</a></h2>
-<p>这个<a href="https://blog.csdn.net/m0_37621078/article/details/88376228">教程</a> 非常详细地介绍了如何在 linux 系统下使用静态库和动态库. </p>
-<p>一个静态库可以看成是一组目标文件(.o/.obj)的集合, 就是很多目标文件经过压缩打包后形成的文件. Linux 静态库命名规范，必须是<code>lib[your_library_name].a</code>：lib 为前缀，中间是静态库名，扩展名为 .a。静态库对函数库的链接在编译时期就完成了. </p>
-<p>动态库的出现, 为了解决静态库的问题. 代码虽然可以复用, 但是无法共享, 造成空间浪费. 静态库 a.lib 更新, 整个程序就要重新编译再发布给用户.</p>
-<p>动态库程序编译时不会连接到代码中, 而是在运行时才被载入. 对用户来说, 只需要更新动态库即可.</p>
-<p>Linux 动态库命名规范，必须是<code>lib[your_library_name].so</code>：lib为前缀，中间是静态库名，扩展名为 .so</p>
+<p>这个<a href="https://blog.csdn.net/m0_37621078/article/details/88376228">教程</a> 非常详细地介绍了如何在 linux 系统下使用静态库和动态库, 瑕不掩瑜的是, 有一些理解还不够准确. 下面我就按教材来整理了.</p>
+<p>写完一个程序以后, 如果调用 gcc 来编译成可执行文件, 经历这样的步骤: 首先运行 C 预处理器, 将源程序的宏定义等等替换; 然后运行 C 编译器, 将 C 文件翻译成 .s 汇编文件; 接下来运行汇编器, 将 .s 汇编文件翻译成<strong>可重定位目标文件(relocatable object file)</strong>, 以 .o 为后缀名. 最后运行链接器, 将各个 .o 目标文件组合成一个可执行目标文件. 只需调用加载器, 就可以运行这个文件. 我们下面的重点, 就是放在链接这个步骤上面.</p>
+<p>提一嘴, 这个 object 翻译成目标, 使我看书看的云里雾里.</p>
+<p>ld 是 linux 系统下典型的静态链接器, 它以一组 .o 可重定位目标文件作为输入, 生成一个可执行目标文件作为输出. 输入的可重定位目标文件包含了各种不同的代码和数据节, 这些节的内容已经在前面介绍了. 链接器构造的可执行目标文件就是这些可重定位目标文件的结合.</p>
+<h3 id="_2">符号解析与重定位<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
+<p>为了构造可执行文件, 链接器必须完成两个主要任务: 符号解析和重定位.</p>
+<p>符号就是函数和变量的名字. 符号解析的工作就是把每个对符号的引用和一个确定的符号定义联系起来, 编译器只允许每个模块的局部符号有一个定义. 以函数为例, 符号引用就是函数的声明, 符号的定义就是函数定义, 函数可以被声明多次, 但是只能被定义一次. (我们假定你了解 static 的细节, 这些描述只是概括).</p>
+<p>完成了所有的符号解析, 接下来就是重定位了. 重定位由两步组成: </p>
+<ol>
+<li>重定位节和符号定义. 这一步中, 链接器将所有相同类型的节合并成一个新的聚合节, 然后将运行时内存地址赋给新的聚合节, 以及定义的每个符号, 这样程序的每条指令和全局变量都有唯一的地址了.</li>
+<li>重定位节中的符号引用. 连接器修改代码和数据节中对每个符号的引用, 使得它们指向正确的运行时地址.</li>
+</ol>
+<h3 id="_3">静态库<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<p>前面我们都是直接连接所有的 .o 文件并把它们链接起来形成一个输出的可执行文件. 但是实际上还有一种静态库机制: 把所有相关的目标模块打包成为一个单独的文件作为静态库用作链接器的输入, 但是链接器在构造输出时, 只复制静态库里被应用程序引用的模块.</p>
+<p>Linux 静态库命名规范，必须是<code>lib[your_library_name].a</code>：lib 为前缀，中间是静态库名，扩展名为 .a. 静态库是存档文件(archive), 是一组连接起来的 .o 文件的集合.</p>
+<p>以标准库的例子为例: C 语言标准库和数学库中的函数被封装在 <code>libc.a</code> 中. <code>libc.a</code> 的大小有大约 5 MB. 如果每一个调用 <code>printf</code> 函数的程序都链接一整个标准库的话, 那么即便是最简单的打印 <code>hello world</code> 程序都会有几兆的大小. 但实际当然不是这样, 链接器只选择了标准库中的 <code>printf.o</code> 和几个 <code>printf.o</code> 调用的模块进行链接, 因此程序的大小只有几 KB. </p>
+<p>假设我们这样的例程:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1">// addvec.c</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="kt">int</span><span class="w"> </span><span class="n">addcnt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="kt">void</span><span class="w"> </span><span class="nf">addvec</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="o">*</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="o">*</span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="o">*</span><span class="n">z</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="o">*</span><span class="n">n</span><span class="p">)</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="p">{</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">    </span><span class="n">addcnt</span><span class="o">++</span><span class="p">;</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="p">;</span>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="w">    </span><span class="k">for</span><span class="p">(</span><span class="n">i</span><span class="o">&lt;</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="w">        </span><span class="n">z</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="p">}</span>
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>
+<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="c1">//multvec.c</span>
+<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="kt">int</span><span class="w"> </span><span class="n">multcnt</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
+<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="kt">void</span><span class="w"> </span><span class="nf">multvec</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="o">*</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="o">*</span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="o">*</span><span class="n">z</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="o">*</span><span class="n">n</span><span class="p">)</span>
+<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a><span class="p">{</span>
+<a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a><span class="w">    </span><span class="n">multcnt</span><span class="o">++</span><span class="p">;</span>
+<a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a><span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="p">;</span>
+<a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a><span class="w">    </span><span class="k">for</span><span class="p">(</span><span class="n">i</span><span class="o">&lt;</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
+<a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a><span class="w">        </span><span class="n">z</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+<a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a><span class="p">}</span>
+<a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a>
+<a id="__codelineno-1-21" name="__codelineno-1-21" href="#__codelineno-1-21"></a><span class="c1">//main2.c</span>
+<a id="__codelineno-1-22" name="__codelineno-1-22" href="#__codelineno-1-22"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
+<a id="__codelineno-1-23" name="__codelineno-1-23" href="#__codelineno-1-23"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;vector.h&quot;</span>
+<a id="__codelineno-1-24" name="__codelineno-1-24" href="#__codelineno-1-24"></a><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">};</span>
+<a id="__codelineno-1-25" name="__codelineno-1-25" href="#__codelineno-1-25"></a><span class="kt">int</span><span class="w"> </span><span class="n">y</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">};</span>
+<a id="__codelineno-1-26" name="__codelineno-1-26" href="#__codelineno-1-26"></a><span class="kt">int</span><span class="w"> </span><span class="n">z</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span>
+<a id="__codelineno-1-27" name="__codelineno-1-27" href="#__codelineno-1-27"></a><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span>
+<a id="__codelineno-1-28" name="__codelineno-1-28" href="#__codelineno-1-28"></a><span class="p">{</span>
+<a id="__codelineno-1-29" name="__codelineno-1-29" href="#__codelineno-1-29"></a><span class="w">    </span><span class="n">addvec</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">z</span><span class="p">,</span><span class="mi">2</span><span class="p">);</span>
+<a id="__codelineno-1-30" name="__codelineno-1-30" href="#__codelineno-1-30"></a><span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;z = [%d %d]</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">z</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="w"> </span><span class="n">z</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
+<a id="__codelineno-1-31" name="__codelineno-1-31" href="#__codelineno-1-31"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<a id="__codelineno-1-32" name="__codelineno-1-32" href="#__codelineno-1-32"></a><span class="p">}</span>
+</code></pre></div>
+<p>首先创建上面两个函数的静态库:
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>gcc<span class="w"> </span>-c<span class="w"> </span>addvec.c<span class="w"> </span>multvec.c
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>ar<span class="w"> </span>rcs<span class="w"> </span>libvector.a<span class="w"> </span>addvec.o<span class="w"> </span>multvec.o
+</code></pre></div>
+创建可执行文件:
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>gcc<span class="w"> </span>-c<span class="w"> </span>main2.c
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>gcc<span class="w"> </span>-static<span class="w"> </span>-o<span class="w"> </span>prog2c<span class="w"> </span>main2.o<span class="w"> </span>-L.<span class="w"> </span>-lvector
+</code></pre></div></p>
+<p><img src="https://cdn.jsdelivr.net/gh/peter5723/imagehost/link3.png"/></p>
+<h2 id="_4">动态库<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
+<p>静态库的缺点是, 如果静态库更新, 那么程序就要重新和更新的库链接. 除此之外, 如果有多个进程同时使用相同的函数, 每个进程都要复制一份相同的函数代码, 这样浪费空间.</p>
+<p>于是就引入了所谓的动态共享库, 也叫共享目标, 在运行和加载时可以加载到任意的内存地址并和内存中的程序连接起来. 共享库的好处是, 多个进程可以共用内存中相同的库代码, 从而大大节省了内存资源.</p>
+<p>Linux 动态库命名规范，必须是<code>lib[your_library_name].so</code>：lib 为前缀，中间是动态库名，扩展名为 .so.</p>
+<p>接上面的例子, 生成位置无关的代码
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>gcc<span class="w"> </span>-shared<span class="w"> </span>-fpic<span class="w"> </span>-o<span class="w"> </span>libvector.so<span class="w"> </span>addvec.c<span class="w"> </span>multvec.c
+</code></pre></div>
+链接到示例程序
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>gcc<span class="w"> </span>-o<span class="w"> </span>prog2l<span class="w"> </span>main2.c<span class="w"> </span>./libvector.so
+</code></pre></div></p>
+<p>这里链接时, 只复制了一些动态库的重定位和符号表信息, 在程序运行时, 才由动态链接器将库中的内容复制到内存中; 而静态库是在编译过程就完成了这些动作.</p>
+<p><img src="https://cdn.jsdelivr.net/gh/peter5723/imagehost/link4.png"/></p>
+<h3 id="_5">位置无关代码<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
+<p>共享库中代码可以被加载到内存的任何位置而无需链接器修改, 这种代码叫位置无关代码(PIC). 编译器用延迟绑定(lazy binding)技术来实现 PIC 函数调用.</p>
 
   <hr>
 <div class="md-source-file">
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2024-03-22</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2024-03-23</span>
       
         <br>
         Created:
