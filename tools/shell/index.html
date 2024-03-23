@@ -382,9 +382,77 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    常用指令
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#shell_1" class="md-nav__link">
     shell 脚本
   </a>
+  
+    <nav class="md-nav" aria-label="shell 脚本">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    1. 第一个脚本
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    2. 一些例子
+  </a>
+  
+    <nav class="md-nav" aria-label="2. 一些例子">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21" class="md-nav__link">
+    2.1 输入输出
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-date" class="md-nav__link">
+    2.2 利用 date
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-pi" class="md-nav__link">
+    2.3 运算 pi
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    3. 几种执行方式
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    4. 特殊参数
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -1037,9 +1105,77 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    常用指令
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#shell_1" class="md-nav__link">
     shell 脚本
   </a>
+  
+    <nav class="md-nav" aria-label="shell 脚本">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    1. 第一个脚本
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    2. 一些例子
+  </a>
+  
+    <nav class="md-nav" aria-label="2. 一些例子">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21" class="md-nav__link">
+    2.1 输入输出
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-date" class="md-nav__link">
+    2.2 利用 date
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-pi" class="md-nav__link">
+    2.3 运算 pi
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    3. 几种执行方式
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    4. 特殊参数
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -1060,6 +1196,7 @@
 
 
 <h1 id="shell">Shell<a class="headerlink" href="#shell" title="Permanent link">&para;</a></h1>
+<h2 id="_1">常用指令<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
 <p>这里整理 shell 的指令脚本等。</p>
 <p>find 使用:
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>find<span class="w"> </span>.<span class="w"> </span>-name<span class="w"> </span><span class="s2">&quot;&lt;filename&gt;&quot;</span><span class="w"> </span><span class="c1"># 在当前文件夹下查找指定文件名</span>
@@ -1068,13 +1205,155 @@
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>grep<span class="w"> </span>-r<span class="w"> </span><span class="s2">&quot;&lt;you want&gt;&quot;</span><span class="w"> </span>.<span class="w"> </span><span class="c1"># 在当前文件夹下搜索指定字符串输出的位置</span>
 </code></pre></div></p>
 <h2 id="shell_1">shell 脚本<a class="headerlink" href="#shell_1" title="Permanent link">&para;</a></h2>
+<p>参考资料:</p>
+<p><a href="https://linux.vbird.org/linux_basic/centos7/0340bashshell-scripts.php#script_be">鸟哥私房菜第十二章</a></p>
+<h3 id="1">1. 第一个脚本<a class="headerlink" href="#1" title="Permanent link">&para;</a></h3>
+<p>先来看第一个 shell 脚本(script) 吧.
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="ch">#!/bin/bash</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="c1"># Program:</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="c1">#       This program shows &quot;Hello World!&quot; in your screen.</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="c1"># History:</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="c1"># 2015/07/16    VBird   First release</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="nv">PATH</span><span class="o">=</span>/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~/bin
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="nb">export</span><span class="w"> </span>PATH
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="nb">echo</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;Hello World! \a \n&quot;</span>
+<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="nb">exit</span><span class="w"> </span><span class="nv">$?</span>
+</code></pre></div></p>
+<p>介绍一下脚本的结构:</p>
+<ol>
+<li>第一行 <code>#!/bin/bash</code> 在宣告这个脚本使用的 shell 名称. 后面的 # 是注释用途.</li>
+<li>设定好变量的值, 如 PATH 与 LANG.</li>
+<li>主要程式: 这个例子, 就是 echo 那一行</li>
+<li>执行结果: $? 是执行结果, 若成功执行, 则返回 0.</li>
+</ol>
+<h3 id="2">2. 一些例子<a class="headerlink" href="#2" title="Permanent link">&para;</a></h3>
+<h4 id="21">2.1 输入输出<a class="headerlink" href="#21" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="ch">#!/bin/bash</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="nv">PATH</span><span class="o">=</span>/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~/bin
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="nb">export</span><span class="w"> </span>PATH
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="nb">read</span><span class="w"> </span>-p<span class="w"> </span><span class="s2">&quot;Please input your first name: &quot;</span><span class="w"> </span>firstname<span class="w">      </span>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="nb">read</span><span class="w"> </span>-p<span class="w"> </span><span class="s2">&quot;Please input your last name:  &quot;</span><span class="w"> </span>lastname<span class="w">       </span>
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="nb">echo</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;\nYour full name is: </span><span class="si">${</span><span class="nv">firstname</span><span class="si">}</span><span class="s2"> </span><span class="si">${</span><span class="nv">lastname</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span>
+</code></pre></div>
+<p>注意: read 用法, 读取用户输入, 并存储到变量中. 可选择 -p 选项可跟提示字符串. <code>read [-p] var</code></p>
+<h4 id="22-date">2.2 利用 date<a class="headerlink" href="#22-date" title="Permanent link">&para;</a></h4>
+<p>建立几个空文件, 文件名以用户输入为开头, 以今天/昨天/前天的名称结尾.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="ch">#!/bin/bash</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="nv">PATH</span><span class="o">=</span>/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~/bin
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="nb">export</span><span class="w"> </span>PATH
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="nb">echo</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;I will use &#39;touch&#39; command to create 3 files.&quot;</span><span class="w"> </span><span class="c1"># 純粹顯示資訊</span>
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="nb">read</span><span class="w"> </span>-p<span class="w"> </span><span class="s2">&quot;Please input your filename: &quot;</span><span class="w"> </span>fileuser<span class="w">         </span><span class="c1"># 提示使用者輸入</span>
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="nv">filename</span><span class="o">=</span><span class="si">${</span><span class="nv">fileuser</span><span class="k">:-</span><span class="s2">&quot;filename&quot;</span><span class="si">}</span>
+<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>
+<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="nv">date1</span><span class="o">=</span><span class="k">$(</span>date<span class="w"> </span>--date<span class="o">=</span><span class="s1">&#39;2 days ago&#39;</span><span class="w"> </span>+%Y%m%d<span class="k">)</span><span class="w">  </span><span class="c1"># 前兩天的日期</span>
+<a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a><span class="nv">date2</span><span class="o">=</span><span class="k">$(</span>date<span class="w"> </span>--date<span class="o">=</span><span class="s1">&#39;1 days ago&#39;</span><span class="w"> </span>+%Y%m%d<span class="k">)</span><span class="w">  </span><span class="c1"># 前一天的日期</span>
+<a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a><span class="nv">date3</span><span class="o">=</span><span class="k">$(</span>date<span class="w"> </span>+%Y%m%d<span class="k">)</span><span class="w">                      </span><span class="c1"># 今天的日期</span>
+<a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a><span class="nv">file1</span><span class="o">=</span><span class="si">${</span><span class="nv">filename</span><span class="si">}${</span><span class="nv">date1</span><span class="si">}</span><span class="w">                  </span><span class="c1"># 底下三行在設定檔名</span>
+<a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a><span class="nv">file2</span><span class="o">=</span><span class="si">${</span><span class="nv">filename</span><span class="si">}${</span><span class="nv">date2</span><span class="si">}</span>
+<a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a><span class="nv">file3</span><span class="o">=</span><span class="si">${</span><span class="nv">filename</span><span class="si">}${</span><span class="nv">date3</span><span class="si">}</span>
+<a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a>
+<a id="__codelineno-4-17" name="__codelineno-4-17" href="#__codelineno-4-17"></a>touch<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">file1</span><span class="si">}</span><span class="s2">&quot;</span><span class="w">                           </span><span class="c1"># 底下三行在建立檔案</span>
+<a id="__codelineno-4-18" name="__codelineno-4-18" href="#__codelineno-4-18"></a>touch<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">file2</span><span class="si">}</span><span class="s2">&quot;</span>
+<a id="__codelineno-4-19" name="__codelineno-4-19" href="#__codelineno-4-19"></a>touch<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">file3</span><span class="si">}</span><span class="s2">&quot;</span>
+</code></pre></div>
+<p>上面的脚本有几个要注意的点:
+1. <code>filename=${fileuser:-"filename"}</code>: <code>:-</code> 符号为变量提供默认值. 如果前面的变量未设定或者是空字符串, 那么就用后面的内容来赋值.
+2. <code>date</code> 指令. 很简单, 直接使用获得当前时间, 也可以添加选项设置特定日期等,  <code>+%Y%m%d</code> 设置日期格式. 用法: <code>date [OPTION]... [+FORMAT]</code>
+3. <code>touch</code> 指令: 如果文件不存在, 就创建一个新的以这个文件名命名的空文件; 反之则用当前的时间更新这个文件的访问和修改时间.</p>
+<h4 id="23-pi">2.3 运算 pi<a class="headerlink" href="#23-pi" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="ch">#!/bin/bash</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="nv">PATH</span><span class="o">=</span>/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~/bin
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="nb">export</span><span class="w"> </span>PATH
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="nb">echo</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;This program will calculate pi value. \n&quot;</span>
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="nb">echo</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;You should input a float number to calculate pi value.\n&quot;</span>
+<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="nb">read</span><span class="w"> </span>-p<span class="w"> </span><span class="s2">&quot;The scale number (10~10000) ? &quot;</span><span class="w"> </span>checking
+<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a><span class="nv">num</span><span class="o">=</span><span class="si">${</span><span class="nv">checking</span><span class="k">:-</span><span class="s2">&quot;10&quot;</span><span class="si">}</span><span class="w"> </span>
+<a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a>
+<a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a><span class="nb">echo</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;Starting calculate pi value.  Be patient.&quot;</span>
+<a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a><span class="nb">time</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;scale=</span><span class="si">${</span><span class="nv">num</span><span class="si">}</span><span class="s2">; 4*a(1)&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>bc<span class="w"> </span>-lq
+</code></pre></div>
+<p>这里的新知识是运算. bash 默认支持整数的运算, <code>var=$(expression)</code>, 比如 <code>echo $((13%3))</code>. 如果是小数运算, 就要用 bc 指令来运算, 比如 <code>echo "123.123*55.9" | bc</code>. 上面的脚本就是利用 bc 指令来计算 pi 的后 scale 位小数.</p>
+<p>最后, time 指令会显示后面指令的运行时间.</p>
+<h3 id="3">3. 几种执行方式<a class="headerlink" href="#3" title="Permanent link">&para;</a></h3>
+<p>shell 脚本有好几种执行方式, 一种是像前面那样, 直接运行脚本, <code>bash script.sh</code> 或 <code>chmod u+x script.sh; ./script.sh</code>; 还有一种就是使用 <code>source</code> 命令来执行脚本, <code>source script.sh</code>.</p>
+<p>两种方式的差别是, 直接运行的脚本, 是在一个新的子 shell 中执行的, 脚本中定义的变量和函数只有在脚本执行的函数存在, 执行完后, 子 shell 关闭, 这些变量, 函数和脚本中的环境改变都不存在了. 而使用 <code>source</code> 命令, 则是在当前 shell 环境中执行, 这意味着脚本中定义的变量和函数会在脚本执行完后仍然存在, 可以在当前shell中使用. 脚本中有改变环境的命令(如cd, export等), 这些改变也会影响到当前shell.</p>
+<p>因此, 如果脚本中的变量是要持续使用的话, 就要使用 <code>source</code> 命令来加载.</p>
+<h3 id="4">4. 特殊参数<a class="headerlink" href="#4" title="Permanent link">&para;</a></h3>
+<p>当然可以向脚本传递命令行参数了, 并且在脚本运行的过程中, 这些命令行参数都会被储存起来. (前面的例子里用 read 来输入参数还是笨笨的).</p>
+<p>看下面的例子: 
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="ch">#!/bin/bash</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="c1"># add two numbers</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="nv">total</span><span class="o">=</span><span class="k">$((</span><span class="nv">$1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nv">$2</span><span class="k">))</span><span class="w"> </span><span class="c1"># 赋值等号不要空格, 不然变量会被当做指令运行</span>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;a: </span><span class="nv">$1</span><span class="s2">&quot;</span>
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;b: </span><span class="nv">$2</span><span class="s2">&quot;</span>
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;a+b: </span><span class="si">${</span><span class="nv">total</span><span class="si">}</span><span class="s2">&quot;</span>
+</code></pre></div></p>
+<p>在脚本中, <code>${num}</code> 代表第 num 个命令行参数. num 大于 10 则必须用大括号, 否则可省略. $0 代表第 0 个变量, 即脚本的路径名. 后面就是 $1, $2, ... 依次类推了.</p>
+<p>除此之外, 在 bash 中有很多特殊变量. </p>
+<ul>
+<li><code>$#</code>: 命令行参数的数量</li>
+<li><code>$*</code>: 将所有命令行变量储存成一个字符串, 各个变量用空格分隔.</li>
+<li><code>$@</code>: 将所有命令行变量储存成一个数组</li>
+</ul>
+<p>看下面的例子: 
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="ch">#!/bin/bash</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;The script name is: </span><span class="nv">$0</span><span class="s2">&quot;</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Total parameter number is: </span><span class="nv">$#</span><span class="s2">&quot;</span>
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="o">[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$#</span><span class="s2">&quot;</span><span class="w"> </span>-lt<span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="o">]</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;The number of parameter is less than 2.  Stop here.&quot;</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">exit</span><span class="w"> </span><span class="m">0</span>
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;The 1st parameter: </span><span class="si">${</span><span class="nv">1</span><span class="si">}</span><span class="s2">&quot;</span>
+<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;The 2nd parameter: </span><span class="si">${</span><span class="nv">2</span><span class="si">}</span><span class="s2">&quot;</span>
+<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;print \$@: </span><span class="nv">$@</span><span class="s2">&quot;</span>
+<a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;print \$*: </span><span class="nv">$*</span><span class="s2">&quot;</span>
+<a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a>
+<a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a><span class="nv">count</span><span class="o">=</span><span class="m">1</span>
+<a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a><span class="k">for</span><span class="w"> </span>param<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$@</span><span class="s2">&quot;</span>
+<a id="__codelineno-7-12" name="__codelineno-7-12" href="#__codelineno-7-12"></a><span class="k">do</span>
+<a id="__codelineno-7-13" name="__codelineno-7-13" href="#__codelineno-7-13"></a><span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;\$@ Parameter #</span><span class="si">${</span><span class="nv">count</span><span class="si">}</span><span class="s2"> = </span><span class="si">${</span><span class="nv">param</span><span class="si">}</span><span class="s2">&quot;</span>
+<a id="__codelineno-7-14" name="__codelineno-7-14" href="#__codelineno-7-14"></a><span class="w">    </span><span class="nv">count</span><span class="o">=</span><span class="k">$((</span><span class="si">${</span><span class="nv">count</span><span class="si">}</span><span class="o">+</span><span class="m">1</span><span class="k">))</span>
+<a id="__codelineno-7-15" name="__codelineno-7-15" href="#__codelineno-7-15"></a><span class="k">done</span>
+<a id="__codelineno-7-16" name="__codelineno-7-16" href="#__codelineno-7-16"></a>
+<a id="__codelineno-7-17" name="__codelineno-7-17" href="#__codelineno-7-17"></a><span class="nv">count</span><span class="o">=</span><span class="m">1</span>
+<a id="__codelineno-7-18" name="__codelineno-7-18" href="#__codelineno-7-18"></a><span class="k">for</span><span class="w"> </span>param<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$*</span><span class="s2">&quot;</span>
+<a id="__codelineno-7-19" name="__codelineno-7-19" href="#__codelineno-7-19"></a><span class="k">do</span>
+<a id="__codelineno-7-20" name="__codelineno-7-20" href="#__codelineno-7-20"></a><span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;\$* Parameter #</span><span class="si">${</span><span class="nv">count</span><span class="si">}</span><span class="s2"> = </span><span class="si">${</span><span class="nv">param</span><span class="si">}</span><span class="s2">&quot;</span>
+<a id="__codelineno-7-21" name="__codelineno-7-21" href="#__codelineno-7-21"></a><span class="w">    </span><span class="nv">count</span><span class="o">=</span><span class="k">$((</span><span class="si">${</span><span class="nv">count</span><span class="si">}</span><span class="o">+</span><span class="m">1</span><span class="k">))</span>
+<a id="__codelineno-7-22" name="__codelineno-7-22" href="#__codelineno-7-22"></a><span class="k">done</span>
+</code></pre></div></p>
+<p>运行上面的程序 <code>bash param.sh 1x a2 sss</code></p>
+<p>输出:
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>The script name is: param.sh
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>Total parameter number is: 3
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>The 1st parameter: 1x
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>The 2nd parameter: a2
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>print $@: 1x a2 sss
+<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a>print $*: 1x a2 sss
+<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a>$@ Parameter #1 = 1x
+<a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a>$@ Parameter #2 = a2
+<a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a>$@ Parameter #3 = sss
+<a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a>$* Parameter #1 = 1x a2 sss
+</code></pre></div></p>
+<p>有几个注意点:</p>
+<ol>
+<li><code>$var</code> 和 <code>${var}</code> 都表示获取变量 <code>var</code> 的值. 有时需要用 <code>${var}</code> 来明确变量的边界. <code>${var}</code> 形式还支持变量扩展, 如前面用到的 <code>${var:-default}</code>, 以及字符串替换 <code>${var/old/new}</code></li>
+<li><code>$(command)</code> 语法用于命令替换, 执行括号中的命令, 并将输出替换到原位置, 如 <code>var="Hello world"; length=$(echo "$var" | wc -c);echo $length</code> 将输出变量 <code>var</code> 的长度</li>
+<li><code>$((expression))</code> 用于算术运算(只支持整数), 如 <code>a=5;b=10;sum=$(($a+$b));echo $sum</code> 将输出 <code>a+b</code> 的值. <code>$[expression]</code> 是它的过时形式.</li>
+<li><code>${var}</code> 和 <code>"${var}"</code> 的区别: 大多数情况等价, 但是如果 <code>${var}</code> 包含空格, 那 <code>${var}</code> 会自动将这个参数分成多个参数, 而 <code>"${var}"</code> 则保留原来的整个参数. 不妨将上面的 for 循环中的 <code>$@</code> 换成 <code>$*</code>, 会发现得到一样的结果.</li>
+</ol>
+<p>TODO: 结构化语句
+TODO: 函数
+TODO: 调试</p>
 
   <hr>
 <div class="md-source-file">
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2024-03-19</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2024-03-24</span>
       
         <br>
         Created:
