@@ -134,12 +134,12 @@ int main()
 ```
 
 首先创建上面两个函数的静态库:
-```shell
+```bash
 gcc -c addvec.c multvec.c
 ar rcs libvector.a addvec.o multvec.o
 ```
 创建可执行文件:
-```shell
+```bash
 gcc -c main2.c
 gcc -static -o prog2c main2.o -L. -lvector
 ```
@@ -147,7 +147,7 @@ gcc -static -o prog2c main2.o -L. -lvector
 <img src="https://cdn.jsdelivr.net/gh/peter5723/imagehost/link3.png"/>
 
 
-## 动态库
+### 动态库
 
 静态库的缺点是, 如果静态库更新, 那么程序就要重新和更新的库链接. 除此之外, 如果有多个进程同时使用相同的函数, 每个进程都要复制一份相同的函数代码, 这样浪费空间.
 
@@ -156,11 +156,11 @@ gcc -static -o prog2c main2.o -L. -lvector
 Linux 动态库命名规范，必须是`lib[your_library_name].so`：lib 为前缀，中间是动态库名，扩展名为 .so.
 
 接上面的例子, 生成位置无关的代码
-```shell
+```bash
 gcc -shared -fpic -o libvector.so addvec.c multvec.c
 ```
 链接到示例程序
-```shell 
+```bash 
 gcc -o prog2l main2.c ./libvector.so
 ```
 
