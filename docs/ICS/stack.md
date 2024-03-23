@@ -20,7 +20,9 @@ addq $8,(%rsp)
 
 在调用一个函数时，首先 `call` 指令会将返回地址压入栈中，然后进入调用的函数。在新函数中，首先要减少栈指针的值分配空间，然后依次保存寄存器的值，分配局部变量空间，分配传入的参数所需的空间。这些都完成后，再执行之后的过程。执行完毕后，将栈指针加回原来的值释放空间，`ret` 指令将栈顶的地址 pop 给 `pc`，就从函数返回了。下面是一个函数 P 调用函数 Q 的局部栈图。
 
-![](https://cdn.jsdelivr.net/gh/peter5723/imagehost/stack1.jpg){:height="50%" width="50%" }
+<div style="text-align:center;">
+    <img src="https://cdn.jsdelivr.net/gh/peter5723/imagehost/stack1.jpg" style="width:50%; height:50%;">
+</div>
 
 看这张图片已经很直观了，栈底的地址高，栈顶的地址低。
 

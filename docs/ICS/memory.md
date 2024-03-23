@@ -12,7 +12,9 @@ RAM 如果断电就会丢失信息, 因此称为易失性存储器. ROM 则是�
 
 CPU 可以直接和 DRAM 主存进行数据的交互. 如下图所示:
 
-![](https://cdn.jsdelivr.net/gh/peter5723/imagehost/memory1.jpg){:height="50%" width="50%" }
+<div style="text-align:center;">
+    <img src="https://cdn.jsdelivr.net/gh/peter5723/imagehost/memory1.jpg" style="width:50%; height:50%;">
+</div>
 
 执行 `movq A %rax` 时, CPU 先将地址 A 放到系统总线(system bus)上, I/O 桥将信号传递到内存总线(memory bus). 主存接受到内存总线上的地址信号, 从内存总线读地址, 读取出对应的数据, 将数据 x 写回内存总线. I/O 桥将内存总线信号翻译成系统总线信号, 被 CPU 接收. CPU 从系统总线上读到数据, 将数据复制给寄存器 `%rax`. 以上就是内存交互的过程.
 
@@ -20,7 +22,9 @@ CPU 可以直接和 DRAM 主存进行数据的交互. 如下图所示:
 
 磁盘可以分为机械硬盘和固态硬盘. CPU 访问磁盘的过程就是 CPU 与 IO 外设交互的过程.
 
-![](https://cdn.jsdelivr.net/gh/peter5723/imagehost/memory2.jpg){:height="50%" width="50%" }
+<div style="text-align:center;">
+    <img src="https://cdn.jsdelivr.net/gh/peter5723/imagehost/memory2.jpg" style="width:50%; height:50%;">
+</div>
 
 显卡/鼠标/键盘/磁盘这样的输入输出设备, 都是通过 IO 总线连接到 CPU 和主存的. IO 总线支持很多种类的第三方 IO 设备, 比如上图中的 USB(连接鼠标和键盘), 显卡(连接显示器), 主机总线适配器(连接磁盘), 还有我哪里过适配器等等.
 
@@ -28,7 +32,9 @@ CPU 使用内存映射 IO 来向 IO 设备发送命令. 使用内存映射 IO �
 
 举个例子, 如果磁盘映射到地址 0xa0, CPU 要读取磁盘内容, 首先 CPU 要将命令/逻辑块号/目的内存地址写到这个映射地址中. 由于磁盘的读写非常慢(16ms, 1GHZ 的处理器时钟周期 1ns), CPU 不会等待磁盘, 而是继续执行下面的指令, 而磁盘则读取对应扇区的数据, 并将数据不通过 CPU 就直接传送到主存中. 这种技术叫 DMA(direct memory access, 直接内存访问). DMA 传送完成后, 磁盘再发送一个中断信号给 CPU, 让 CPU 从主存中读取.
 
-![](https://cdn.jsdelivr.net/gh/peter5723/imagehost/memory3.jpg){:height="50%" width="50%" }
+<div style="text-align:center;">
+    <img src="https://cdn.jsdelivr.net/gh/peter5723/imagehost/memory3.jpg" style="width:50%; height:50%;">
+</div>
 
 ## 2. 局部性
 
@@ -121,7 +127,9 @@ int sumarraycols(int a[M][N])
 
 若有 S 组, 那么只需 s=logS 位就可以表示所有组的索引; 同理, 只需 b=logB 位就可以表示所有的字的偏移. 最后, 标记位的位数就是 t=m-(s+b) 了.
 
-![](https://cdn.jsdelivr.net/gh/peter5723/imagehost/memory6.jpg){:height="50%" width="50%" }
+<div style="text-align:center;">
+    <img src="https://cdn.jsdelivr.net/gh/peter5723/imagehost/memory6.jpg" style="width:50%; height:50%;">
+</div>
 
 至于高速缓存的不同分类, 只是将数据块按不同的方法分组罢了, 本质上大同小异, 包括直接映射高速缓存(E=1), 组相连高速缓存(1<E<C/B), 全相联高速缓存(E=C/B, S=1)三种方法, 寻址的过程已在上面介绍了.
 
