@@ -99,7 +99,7 @@ RV32I 的指令可以分为 6 种：
 
 我们来看一看这 6 种指令所对应的机器码的格式。
 
-### R 型
+### R 型指令
 
 我们可以将一条 R 型指令分成下面的字段：
 
@@ -187,7 +187,7 @@ func7、func3 和 opcode 字段组合起来确定是 add 操作。其中 opcode 
 
 剩下的字段就是用来表示寄存器操作数了。
 
-### I 型
+### I 型指令
 
 <table class="riscv-table">
 <tr>
@@ -226,7 +226,7 @@ I 型的运算类型由 opcode 和 funct3 决定。
 
 立即数是 {{20{inst[31]}}, inst[31:20]}。
 
-### S 型
+### S 型指令
 
 <table class="riscv-table">
 <tr>
@@ -267,7 +267,7 @@ sd x9, 240(x22) // x9 中的数据储存回 x22 中的地址后移 240 位的地
 为了保持寄存器 rs1 和 rs2 的位置一致，所以将一个立即数分成两部分表示。比如说，这里 (240)~10~ = (0000111 10000)~2~，那么 0000111 将会保存到 imm[11:5]，10000 将会保存到 imm[4:0]。
 
 S 型的立即数是 {{20{inst[31]}}, inst[31:25], inst[11:7]}。
-### B 型
+### B 型指令
 
 <table class="riscv-table">
 <tr>
@@ -305,7 +305,7 @@ B 型指令本质上是 S 型的变种，主要区别就是立即数读取的顺
 可以看到，B 型和 S 型都需要两个寄存器和一个立即数进行操作。
 
 立即数是 {{19{inst[31]}}, inst[31], inst[7], inst[30:25], inst[11:8], 1'b0}。前面是符号位填充到 32 位，补 1 位 0。
-### U 型
+### U 型指令
 
 <table class="riscv-table">
 <tr>
@@ -333,7 +333,7 @@ U 型操作只能通过 opcode 来区分。
 
 立即数是 {inst[31:12], 12'b0}
 
-### J 型
+### J 型指令
 
 <table class="riscv-table">
 <tr>
@@ -422,3 +422,73 @@ cs61c 的表：
 ## 6. 特权级指令
 
 TODO
+
+
+## 7. 分页机制
+
+参考:
+
+[鹤翔万里的笔记本 RISC-V 页表相关](https://note.tonycrane.cc/cs/pl/riscv/paging/)
+
+[riscv 的分页机制](https://junimay.github.io/wiki/RISCV/%E5%88%86%E9%A1%B5%E6%9C%BA%E5%88%B6/)
+
+[官方文档](https://github.com/riscv/riscv-isa-manual/releases/download/Priv-v1.12/riscv-privileged-20211203.pdf)
+
+分页机制的基本原理在虚拟内存的地址翻译介绍了, riscv 也是大同小异. 这里只介绍最基本的 SV32 分页机制.
+
+首先介绍一下将要用的符号:
+
+| 符号 | 描述                                    |
+|------|-----------------------------------------|
+| VA   | virtual address 虚拟地址                |
+| VPO  | virtual page offset 虚拟页面偏移量      |
+| VPN  | virtual page number 虚拟页号            |
+| PA   | physical address 物理地址               |
+| PPO  | physical page offset 物理页面偏移量     |
+| PPN  | physical page number 物理页号           |
+| PTBR | page table base register 页表基址寄存器 |
+| PTE  | page table entry 页表项                |
+
+riscv 有 PTBR 功能的是 satp 寄存器, 用于设置页表相关项. 其结构如下
+```
+                            +---+-----------+--------------------------+
+    satp register           | M |   ASID    |            PPN           |
+                            +---+-----------+--------------------------+
+                            (1b)    (9b)               (22b)
+```
+
+其中, PPN 是根页表物理页号;  ASID 是地址空间 ID; M 是分页模式, 0 代表不翻译, 1 代表采用 SV32 模式进行翻译. 
+
+SV32 的地址布局如下:
+
+```
+                            +----------+----------+------------+
+  Virtual Address           |  VPN[1]  |  VPN[0]  |   offset   |  -----> 32 bits
+                            +----------+----------+------------+
+                             (10 bits)  (10 bits)    (12 bits)
+
+  Physical Address        +------------+----------+------------+
+                          |   PPN[1]   |  PPN[0]  |   offset   |  -----> 34 bits
+                          +------------+----------+------------+
+                             (12 bits)   (10 bits)    (12 bits)
+
+                    +------------+----------+--+-+-+-+-+-+-+-+-+
+  Page Table Entry  |   PPN[1]   |  PPN[0]  |  |D|A|G|U|X|W|R|V|  -----> 32 bits
+                    +------------+----------+--+-+-+-+-+-+-+-+-+
+                       (12 bits)   (10 bits) |
+                                             `- RSW (2 bits)
+```
+
+上面就是 VA, PA 和 PTE 的结构. 注意 PTE 前面储存的是下一级物理页号/物理地址的高 20 位, 剩下的是 flag, 如最后一位 V 是有效位.
+
+下面是 SV32 地址翻译的流程图, 采用了两级页表.
+
+<img src="https://cdn.jsdelivr.net/gh/peter5723/imagehost/20240326000545.png"/>
+
+最后是地址翻译的具体过程, 在 RISC-V Privileged Spec 中的 4.3.2 节. 
+
+1. 获得页表的基地址 a,  和当前处在级数 i. 可知 a = satp.ppn × PAGESIZE, i = LEVELS - 1. 对 SV32 来说, PAGESIZE = 2^12, 两级页表 LEVELS = 2, 故 a = setp.ppn << 12, i = 1.
+2. 读取这一级的 PTE 项, pte = *(a + va.vpn[i] × PTESIZE), 其中 PTESIZE = 4.
+3. 如果 i = 0(或者利用 pte.R == 1 || pte.X == 1), 那么说明得到了物理地址, 退出到 4. 否则继续循环, 获得下一级页表的基地址, 即更新 a = pte.ppn × PAGESIZE, 更新 i = i - 1, 跳转到 2.
+4. 经过检验, 若都合法, 则翻译完成: pa.pgoff = va.pgoff, pa.PPN[1:i] = pte.PPN[1:i].
+

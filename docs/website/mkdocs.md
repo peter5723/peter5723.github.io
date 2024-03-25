@@ -105,6 +105,11 @@ body {
 ### 添加提示信息等
 
 <https://facelessuser.github.io/pymdown-extensions/extensions/details/>
+
+## 快速 markdown 表格
+
+怎么插入 markdown 表格？可以在这个网站快速生成：<https://www.tablesgenerator.com/markdown_tables>
+
 ### 别人的博客
 可以看看别人的博客怎么搭建:
 
