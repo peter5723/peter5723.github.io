@@ -1259,10 +1259,12 @@
 <a id="__codelineno-4-18" name="__codelineno-4-18" href="#__codelineno-4-18"></a>touch<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">file2</span><span class="si">}</span><span class="s2">&quot;</span>
 <a id="__codelineno-4-19" name="__codelineno-4-19" href="#__codelineno-4-19"></a>touch<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">file3</span><span class="si">}</span><span class="s2">&quot;</span>
 </code></pre></div>
-<p>上面的脚本有几个要注意的点:
-1. <code>filename=${fileuser:-"filename"}</code>: <code>:-</code> 符号为变量提供默认值. 如果前面的变量未设定或者是空字符串, 那么就用后面的内容来赋值.
-2. <code>date</code> 指令. 很简单, 直接使用获得当前时间, 也可以添加选项设置特定日期等,  <code>+%Y%m%d</code> 设置日期格式. 用法: <code>date [OPTION]... [+FORMAT]</code>
-3. <code>touch</code> 指令: 如果文件不存在, 就创建一个新的以这个文件名命名的空文件; 反之则用当前的时间更新这个文件的访问和修改时间.</p>
+<p>上面的脚本有几个要注意的点:</p>
+<ol>
+<li><code>filename=${fileuser:-"filename"}</code>: <code>:-</code> 符号为变量提供默认值. 如果前面的变量未设定或者是空字符串, 那么就用后面的内容来赋值.</li>
+<li><code>date</code> 指令. 很简单, 直接使用获得当前时间, 也可以添加选项设置特定日期等,  <code>+%Y%m%d</code> 设置日期格式. 用法: <code>date [OPTION]... [+FORMAT]</code></li>
+<li><code>touch</code> 指令: 如果文件不存在, 就创建一个新的以这个文件名命名的空文件; 反之则用当前的时间更新这个文件的访问和修改时间.</li>
+</ol>
 <h4 id="23-pi">2.3 运算 pi<a class="headerlink" href="#23-pi" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="ch">#!/bin/bash</span>
 <a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>
@@ -1353,7 +1355,7 @@ TODO: 调试</p>
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2024-03-24</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2024-03-26</span>
       
         <br>
         Created:

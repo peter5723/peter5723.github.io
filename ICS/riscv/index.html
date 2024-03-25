@@ -636,42 +636,42 @@
         
           <li class="md-nav__item">
   <a href="#r" class="md-nav__link">
-    R 型
+    R 型指令
   </a>
   
 </li>
         
           <li class="md-nav__item">
   <a href="#i" class="md-nav__link">
-    I 型
+    I 型指令
   </a>
   
 </li>
         
           <li class="md-nav__item">
   <a href="#s" class="md-nav__link">
-    S 型
+    S 型指令
   </a>
   
 </li>
         
           <li class="md-nav__item">
   <a href="#b" class="md-nav__link">
-    B 型
+    B 型指令
   </a>
   
 </li>
         
           <li class="md-nav__item">
   <a href="#u" class="md-nav__link">
-    U 型
+    U 型指令
   </a>
   
 </li>
         
           <li class="md-nav__item">
   <a href="#j" class="md-nav__link">
-    J 型
+    J 型指令
   </a>
   
 </li>
@@ -705,6 +705,13 @@
         <li class="md-nav__item">
   <a href="#6" class="md-nav__link">
     6. 特权级指令
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7" class="md-nav__link">
+    7. 分页机制
   </a>
   
 </li>
@@ -1150,42 +1157,42 @@
         
           <li class="md-nav__item">
   <a href="#r" class="md-nav__link">
-    R 型
+    R 型指令
   </a>
   
 </li>
         
           <li class="md-nav__item">
   <a href="#i" class="md-nav__link">
-    I 型
+    I 型指令
   </a>
   
 </li>
         
           <li class="md-nav__item">
   <a href="#s" class="md-nav__link">
-    S 型
+    S 型指令
   </a>
   
 </li>
         
           <li class="md-nav__item">
   <a href="#b" class="md-nav__link">
-    B 型
+    B 型指令
   </a>
   
 </li>
         
           <li class="md-nav__item">
   <a href="#u" class="md-nav__link">
-    U 型
+    U 型指令
   </a>
   
 </li>
         
           <li class="md-nav__item">
   <a href="#j" class="md-nav__link">
-    J 型
+    J 型指令
   </a>
   
 </li>
@@ -1219,6 +1226,13 @@
         <li class="md-nav__item">
   <a href="#6" class="md-nav__link">
     6. 特权级指令
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7" class="md-nav__link">
+    7. 分页机制
   </a>
   
 </li>
@@ -1315,7 +1329,7 @@ ARM 和 risc-v 都属于 RISC 指令集。</p>
 <li>J 型，无条件跳转</li>
 </ul>
 <p>我们来看一看这 6 种指令所对应的机器码的格式。</p>
-<h3 id="r">R 型<a class="headerlink" href="#r" title="Permanent link">&para;</a></h3>
+<h3 id="r">R 型指令<a class="headerlink" href="#r" title="Permanent link">&para;</a></h3>
 <p>我们可以将一条 R 型指令分成下面的字段：</p>
 <!-- ps, 要加上对应的 css 样式才能成功显示下面的表格 -->
 <table class="riscv-table">
@@ -1396,7 +1410,7 @@ ARM 和 risc-v 都属于 RISC 指令集。</p>
 
 <p>func7、func3 和 opcode 字段组合起来确定是 add 操作。其中 opcode 字段确定是这条指令的类型是 R 型；然后再由 funct3 和 funct7 确定是 add。</p>
 <p>剩下的字段就是用来表示寄存器操作数了。</p>
-<h3 id="i">I 型<a class="headerlink" href="#i" title="Permanent link">&para;</a></h3>
+<h3 id="i">I 型指令<a class="headerlink" href="#i" title="Permanent link">&para;</a></h3>
 <table class="riscv-table">
 <tr>
     <td class="riscv-table-numnodel">31</td>
@@ -1429,7 +1443,7 @@ ARM 和 risc-v 都属于 RISC 指令集。</p>
 <p>除此之外，load 类型的操作也属于 I 型的，比如 <code>ld x9, 240(x10)</code>。立即数用来储存变址寻址的偏移量。</p>
 <p>I 型的运算类型由 opcode 和 funct3 决定。</p>
 <p>立即数是 {{20{inst[31]}}, inst[31:20]}。</p>
-<h3 id="s">S 型<a class="headerlink" href="#s" title="Permanent link">&para;</a></h3>
+<h3 id="s">S 型指令<a class="headerlink" href="#s" title="Permanent link">&para;</a></h3>
 <table class="riscv-table">
 <tr>
     <td class="riscv-table-numnodel">31</td>
@@ -1467,7 +1481,7 @@ ARM 和 risc-v 都属于 RISC 指令集。</p>
 </code></pre></div>
 为了保持寄存器 rs1 和 rs2 的位置一致，所以将一个立即数分成两部分表示。比如说，这里 (240)<sub>10</sub> = (0000111 10000)<sub>2</sub>，那么 0000111 将会保存到 imm[11:5]，10000 将会保存到 imm[4:0]。</p>
 <p>S 型的立即数是 {{20{inst[31]}}, inst[31:25], inst[11:7]}。</p>
-<h3 id="b">B 型<a class="headerlink" href="#b" title="Permanent link">&para;</a></h3>
+<h3 id="b">B 型指令<a class="headerlink" href="#b" title="Permanent link">&para;</a></h3>
 <table class="riscv-table">
 <tr>
     <td class="riscv-table-numnodel">31</td>
@@ -1502,7 +1516,7 @@ ARM 和 risc-v 都属于 RISC 指令集。</p>
 <p>B 型指令本质上是 S 型的变种，主要区别就是立即数读取的顺序不同。它用于分支跳转指令，比如 beq，相等时跳转，对应 C 语言的 <code>if(rs1 == rs2) PC += imm</code>。</p>
 <p>可以看到，B 型和 S 型都需要两个寄存器和一个立即数进行操作。</p>
 <p>立即数是 {{19{inst[31]}}, inst[31], inst[7], inst[30:25], inst[11:8], 1'b0}。前面是符号位填充到 32 位，补 1 位 0。</p>
-<h3 id="u">U 型<a class="headerlink" href="#u" title="Permanent link">&para;</a></h3>
+<h3 id="u">U 型指令<a class="headerlink" href="#u" title="Permanent link">&para;</a></h3>
 <table class="riscv-table">
 <tr>
     <td class="riscv-table-numnodel">31</td>
@@ -1526,7 +1540,7 @@ ARM 和 risc-v 都属于 RISC 指令集。</p>
 例子就是 lui，对应的 C 语言描述是 <code>rd = imm &lt;&lt; 12</code></p>
 <p>U 型操作只能通过 opcode 来区分。</p>
 <p>立即数是 {inst[31:12], 12'b0}</p>
-<h3 id="j">J 型<a class="headerlink" href="#j" title="Permanent link">&para;</a></h3>
+<h3 id="j">J 型指令<a class="headerlink" href="#j" title="Permanent link">&para;</a></h3>
 <table class="riscv-table">
 <tr>
     <td class="riscv-table-numnodel">31</td>
@@ -1700,13 +1714,96 @@ ARM 和 risc-v 都属于 RISC 指令集。</p>
 </table>
 <h2 id="6">6. 特权级指令<a class="headerlink" href="#6" title="Permanent link">&para;</a></h2>
 <p>TODO</p>
+<h2 id="7">7. 分页机制<a class="headerlink" href="#7" title="Permanent link">&para;</a></h2>
+<p>参考:</p>
+<p><a href="https://note.tonycrane.cc/cs/pl/riscv/paging/">鹤翔万里的笔记本 RISC-V 页表相关</a></p>
+<p><a href="https://junimay.github.io/wiki/RISCV/%E5%88%86%E9%A1%B5%E6%9C%BA%E5%88%B6/">riscv 的分页机制</a></p>
+<p><a href="https://github.com/riscv/riscv-isa-manual/releases/download/Priv-v1.12/riscv-privileged-20211203.pdf">官方文档</a></p>
+<p>分页机制的基本原理在虚拟内存的地址翻译介绍了, riscv 也是大同小异. 这里只介绍最基本的 SV32 分页机制.</p>
+<p>首先介绍一下将要用的符号:</p>
+<table>
+<thead>
+<tr>
+<th>符号</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>VA</td>
+<td>virtual address 虚拟地址</td>
+</tr>
+<tr>
+<td>VPO</td>
+<td>virtual page offset 虚拟页面偏移量</td>
+</tr>
+<tr>
+<td>VPN</td>
+<td>virtual page number 虚拟页号</td>
+</tr>
+<tr>
+<td>PA</td>
+<td>physical address 物理地址</td>
+</tr>
+<tr>
+<td>PPO</td>
+<td>physical page offset 物理页面偏移量</td>
+</tr>
+<tr>
+<td>PPN</td>
+<td>physical page number 物理页号</td>
+</tr>
+<tr>
+<td>PTBR</td>
+<td>page table base register 页表基址寄存器</td>
+</tr>
+<tr>
+<td>PTE</td>
+<td>page table entry 页表项</td>
+</tr>
+</tbody>
+</table>
+<p>riscv 有 PTBR 功能的是 satp 寄存器, 用于设置页表相关项. 其结构如下
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>                            +---+-----------+--------------------------+
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>    satp register           | M |   ASID    |            PPN           |
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>                            +---+-----------+--------------------------+
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>                            (1b)    (9b)               (22b)
+</code></pre></div></p>
+<p>其中, PPN 是根页表物理页号;  ASID 是地址空间 ID; M 是分页模式, 0 代表不翻译, 1 代表采用 SV32 模式进行翻译. </p>
+<p>SV32 的地址布局如下:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>                            +----------+----------+------------+
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>  Virtual Address           |  VPN[1]  |  VPN[0]  |   offset   |  -----&gt; 32 bits
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>                            +----------+----------+------------+
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>                             (10 bits)  (10 bits)    (12 bits)
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>  Physical Address        +------------+----------+------------+
+<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a>                          |   PPN[1]   |  PPN[0]  |   offset   |  -----&gt; 34 bits
+<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a>                          +------------+----------+------------+
+<a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a>                             (12 bits)   (10 bits)    (12 bits)
+<a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a>
+<a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a>                    +------------+----------+--+-+-+-+-+-+-+-+-+
+<a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a>  Page Table Entry  |   PPN[1]   |  PPN[0]  |  |D|A|G|U|X|W|R|V|  -----&gt; 32 bits
+<a id="__codelineno-6-13" name="__codelineno-6-13" href="#__codelineno-6-13"></a>                    +------------+----------+--+-+-+-+-+-+-+-+-+
+<a id="__codelineno-6-14" name="__codelineno-6-14" href="#__codelineno-6-14"></a>                       (12 bits)   (10 bits) |
+<a id="__codelineno-6-15" name="__codelineno-6-15" href="#__codelineno-6-15"></a>                                             `- RSW (2 bits)
+</code></pre></div>
+<p>上面就是 VA, PA 和 PTE 的结构. 注意 PTE 前面储存的是下一级物理页号/物理地址的高 20 位, 剩下的是 flag, 如最后一位 V 是有效位.</p>
+<p>下面是 SV32 地址翻译的流程图, 采用了两级页表.</p>
+<p><img src="https://cdn.jsdelivr.net/gh/peter5723/imagehost/20240326000545.png"/></p>
+<p>最后是地址翻译的具体过程, 在 RISC-V Privileged Spec 中的 4.3.2 节. </p>
+<ol>
+<li>获得页表的基地址 a,  和当前处在级数 i. 可知 a = satp.ppn × PAGESIZE, i = LEVELS - 1. 对 SV32 来说, PAGESIZE = 2^12, 两级页表 LEVELS = 2, 故 a = setp.ppn &lt;&lt; 12, i = 1.</li>
+<li>读取这一级的 PTE 项, pte = *(a + va.vpn[i] × PTESIZE), 其中 PTESIZE = 4.</li>
+<li>如果 i = 0(或者利用 pte.R == 1 || pte.X == 1), 那么说明得到了物理地址, 退出到 4. 否则继续循环, 获得下一级页表的基地址, 即更新 a = pte.ppn × PAGESIZE, 更新 i = i - 1, 跳转到 2.</li>
+<li>经过检验, 若都合法, 则翻译完成: pa.pgoff = va.pgoff, pa.PPN[1:i] = pte.PPN[1:i].</li>
+</ol>
 
   <hr>
 <div class="md-source-file">
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2024-03-19</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2024-03-26</span>
       
         <br>
         Created:
