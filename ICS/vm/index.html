@@ -691,7 +691,7 @@
       
         <li class="md-nav__item">
   <a href="#2" class="md-nav__link">
-    2. 页, 页表
+    2. 页表
   </a>
   
 </li>
@@ -1093,7 +1093,7 @@
       
         <li class="md-nav__item">
   <a href="#2" class="md-nav__link">
-    2. 页, 页表
+    2. 页表
   </a>
   
 </li>
@@ -1164,7 +1164,7 @@
 <p>虚拟页面的集合可以分成三个不相交的子集 : VM 系统未分配的页, 缓存在物理内存的已分配页和未占用物理内存的已分配页. 如下图所示:</p>
 <p><img src="https://cdn.jsdelivr.net/gh/peter5723/imagehost/vm1.png"/></p>
 <p>和缓存一样, VM 也需要判断某个虚拟内存是否被缓存在了主存中. 这个功能是由软硬件联合提供的, 包括操作系统, MMU 和存放在物理内存中的<strong>页表</strong>数据结构. 页表将虚拟页映射到物理页, MMU 中的地址翻译硬件利用页表将虚拟地址转化为物理地址, 操作系统维护页表的内容并在磁盘和主存之间来回传送页.</p>
-<h2 id="2">2. 页, 页表<a class="headerlink" href="#2" title="Permanent link">&para;</a></h2>
+<h2 id="2">2. 页表<a class="headerlink" href="#2" title="Permanent link">&para;</a></h2>
 <p>下面介绍页表. 页表是页表条目(page table entry, PTE)的集合, 储存在物理内存中. 虚拟地址空间的每一页都在页表中有对应的 PTE. 我们假定一下每个条目的内容是由一个有效位和 n 位地址位组成. 有效位表示这个虚拟页是否缓存在内存中. 如果是, 地址字段就是缓存该虚拟页的物理页的起始位置. 反之, 设置一个空地址表示它未被分配, 或者这个地址指向虚拟页储存在磁盘的位置. 下面这张图来看看页表是怎么维护的:</p>
 <p><img src="https://cdn.jsdelivr.net/gh/peter5723/imagehost/vm.png"/></p>
 <p>注意, 任意物理页都可以包含任意虚拟页.</p>
@@ -1187,9 +1187,9 @@
 <p>虚拟内存也很好做内存保护的工作: 为每个 PTE 添加几个控制位即可. 几个控制位包括读写权限等. 如果有一条指令违反了控制位所给的权限, 那么 CPU 就抛出故障, 控制转给异常处理程序, 即 "段错误".</p>
 <h2 id="4">4. 地址翻译<a class="headerlink" href="#4" title="Permanent link">&para;</a></h2>
 <h3 id="41">4.1 基本介绍<a class="headerlink" href="#41" title="Permanent link">&para;</a></h3>
-<p>硬件的过程就放张图概括了:</p>
+<p>整体的硬件的过程就放张图概括了:</p>
 <p><img src="https://cdn.jsdelivr.net/gh/peter5723/imagehost/vm6.png"/></p>
-<p>具体的地址翻译, 首先介绍一下将要用的符号:</p>
+<p>而在 MMU 中实现的地址翻译, 经过了哪些过程呢? 首先介绍一下将要用的符号:</p>
 <table>
 <thead>
 <tr>
@@ -1232,7 +1232,7 @@
 </tr>
 </tbody>
 </table>
-<p>首先, PTBR 提供页表的地址. 虚拟地址被分为 VPN 和 VPO 两部分. VPN 作为索引用于在页表中找到当前页的 PLE, 在这个 PLE 中存储了对应的 PPN. 将这个 PPN 与虚拟地址的 VPO 结合起来, 就得到了最终的地址. 注意, 物理页面和虚拟页面的大小相同, 故 PPO 和 VPO 总是相同的. </p>
+<p>其中, PTBR 提供页表的地址. 虚拟地址被分为 VPN 和 VPO 两部分. VPN 作为索引用于在页表中找到当前页的 PLE, 在这个 PLE 中存储了对应的 PPN. 将这个 PPN 与虚拟地址的 VPO 结合起来, 就得到了最终的地址. 注意, 物理页面和虚拟页面的大小相同, 故 PPO 和 VPO 总是相同的. </p>
 <p>可以看下面图片: </p>
 <p><img src="https://cdn.jsdelivr.net/gh/peter5723/imagehost/vm7.png"/></p>
 <h3 id="42-tlb">4.2 TLB 地址翻译加速<a class="headerlink" href="#42-tlb" title="Permanent link">&para;</a></h3>
@@ -1246,7 +1246,7 @@
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2024-03-26</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2024-03-28</span>
       
         <br>
         Created:

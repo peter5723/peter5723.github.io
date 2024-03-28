@@ -2701,6 +2701,7 @@ NEMU 提供硬件功能；AM 抽象层负责和上层的软件和底层的硬件
 <div class="highlight"><pre><span></span><code><a id="__codelineno-40-1" name="__codelineno-40-1" href="#__codelineno-40-1"></a>AM = TRM + IOE + CTE + VME + MPE
 </code></pre></div>
 <p>TRM 提供计算功能，IOE 提供输入输出功能，其他的还未涉及。</p>
+<p>(2024年3月26日) 感觉自己上面有点啰嗦. 其实就是因为直接和硬件交互太麻烦了, 所以事先写好和硬件交互的函数再调用就不用这么麻烦每次都从零开始写了, AM 就是为了方便而产生的. </p>
 <h4 id="_18">具体实现<a class="headerlink" href="#_18" title="Permanent link">&para;</a></h4>
 <p>运行时环境可以分为架构相关和架构无关。io 就是典型的架构相关的，不同 isa 对应的底层硬件不同，所以对每一种架构都要写一个对应的函数。还有一些库函数是架构无关的，一个实现就可以给所有的架构用了。</p>
 <p>实现库函数这里都是苦力活，没什么好说的。就一个 bug 需要提一提，在实现 <code>strcmp</code> 的时候发现的，关于 <code>char</code> 的 bug。</p>
@@ -2901,7 +2902,7 @@ TODO：其实好理解的但是需要学一些新知识来准确解释。</p>
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2024-03-26</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2024-03-28</span>
       
         <br>
         Created:
