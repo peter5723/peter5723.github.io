@@ -8,6 +8,15 @@
 
 可以 `man 5 elf` 来获得关于 ELF 文件的信息。
 
+要查看程序 riscv 文件信息是这样的：
+
+```bash
+riscv64-linux-gnu-readelf -a <filename>
+riscv64-linux-gnu-objdump -d <filename>
+```
+
+elf 文件的魔数：0x7F,0x45,0x4c,0x46,
+
 别人也有一些介绍，比如：
 
 <https://zhuanlan.zhihu.com/p/286088470>
