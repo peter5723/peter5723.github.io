@@ -2823,7 +2823,7 @@ NEMU 提供硬件功能；AM 抽象层负责和上层的软件和底层的硬件
 <div class="highlight"><pre><span></span><code><a id="__codelineno-43-1" name="__codelineno-43-1" href="#__codelineno-43-1"></a><span class="k">asm</span><span class="w"> </span><span class="k">volatile</span><span class="p">(</span><span class="s">&quot;csrw mtvec, %0&quot;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="s">&quot;r&quot;</span><span class="p">(</span><span class="n">__am_asm_trap</span><span class="p">));</span>
 </code></pre></div>
 <p>也就是说，异常向量 mtvec 的地址就是 <code>__am_asm_trap</code> 这个函数的入口。</p>
-<p>然后经过一些无关紧要的操作后，调用 <code>yield</code> 函数。<code>yield</code> 函数里面就是内联汇编代码，使用 <code>ecall</code> 指令来进行自陷操作。<code>ecall</code> 指令让程序跳转到异常入口，即 <code>__am_asm_trap</code> 的起始地址。<code>__am_asm_trap</code> 是 <code>trap.S</code> 中的汇编代码。做的事情其实就是把寄存器信息压入到栈中保存，然后进入 <code>__am_irq_handle</code> 这个函数中，调用之前的初始化设置的回调函数，完成异常处理（这里就是打印 y 这个字符），然后回去恢复寄存器信息，最后 <code>mret</code> 回到原来的位置，就完成了一次异常处理。因为是在一个无限循环中，所以会不断的打印 y。</p>
+<p>然后经过一些无关紧要的操作后，调用 <code>yield</code> 函数。<code>yield</code> 函数里面就是内联汇编代码，使用 <code>ecall</code> 指令来进行自陷操作。<code>ecall</code> 指令让程序跳转到异常入口，即 <code>__am_asm_trap</code> 的起始地址。<code>__am_asm_trap</code> 是 <code>trap.S</code> 中的汇编代码。做的事情其实就是把寄存器信息压入到栈中保存，然后进入 <code>__am_irq_handle</code> 这个函数中，调用之前的初始化设置的回调函数，完成异常处理（这里就是打印 y 这个字符），然后回去恢复寄存器信息，最后 <code>mret</code> 回到原来的位置，就完成了一次异常处理。因为是在一个无限循环中，所以会不断的打印 y。如果没有在循环中, 那打印一次 y 程序就结束了.</p>
 <p>yield test 就这样走完了它的全过程。</p>
 <p>等等，还有一件事！<code>__am_irq_handle</code> 中上下文结构体指针 <code>c</code> 是什么时候来的，什么时候赋值的？都走完了也没见它的踪影啊。</p>
 <p>如果只看 C 语言代码的话，是永远也找不到答案的。答案在汇编代码 <code>trap.S</code> 中。<code>__am_irq_handle</code> 是在 <code>trap.S</code> 中被调用的。汇编语言的函数参数是怎么确定的呢？关键就是调用函数前一句代码，<code>mv a0, sp</code>，这是汇编语言的传参。看一下 riscv 的手册也可以知道，<code>a0</code> 寄存器储存函数的第一个参数。<code>__am_irq_handle</code> 的第一个参数就是结构指针 <code>c</code>，所以传入的参数就是栈地址 <code>sp</code>。<strong>结构体有这样的性质：如果某个地址开头正好是结构体的地址，并且写入顺序和结构体的定义顺序一致，那么就相当于向一个结构体写数据</strong>。所以，赋值的过程，在我们将寄存器压入内存的时候就已经完成了。这就是这个问题的答案，也是 PA 的其中一个问题，要求我们按规定的顺序来定义 context 结构体的原因。</p>
@@ -2839,7 +2839,7 @@ NEMU 提供硬件功能；AM 抽象层负责和上层的软件和底层的硬件
 <p>hallo 程序中涉及了上面除了 yield 外所有的系统调用。首先是 <code>write</code> 函数，查看一下 <code>write</code> 函数的源代码就知道，<code>write</code> 调用了 <code>_write_r</code> 函数，<code>_write_r</code> 函数调用了 <code>_write</code> 函数，<code>_write</code> 函数调用了我们的系统函数 <code>_syscall_</code>。上面都是应用程序层面的实现，一直到 <code>_syscall_</code> 才到底层的实现。<code>_syscall_</code> 函数将异常状态号和输入参数设置好以后，就执行 <code>ebreak</code> 指令，<code>ebreak</code> 指令跳转到之前设置的异常入口地址 <code>__am_asm_trap</code>，然后是 <code>__am_irq_handle</code>，然后是回调函数 <code>do_event</code>，<code>do_event</code> 识别是 <code>syscall</code> 类型的事件，然后执行 <code>do_syscall</code> 函数，<code>do_syscall</code> 识别是 <code>write</code> 系统调用，执行 <code>sys_write</code> 函数，在这个函数里终于通过 <code>putch</code> 函数，将字符一个个输出到串口。</p>
 <p>然后介绍 <code>printf</code> 函数。<code>printf</code> 的实现就非常复杂了。具体可以看这个链接：<a href="https://www.cnblogs.com/DF11G/p/14750056.html">https://www.cnblogs.com/DF11G/p/14750056.html</a>。可以简单的理解为，先通过 <code>sbrk</code> 系统调用获取内存，然后再通过上面讲解 <code>write</code> 系统调用输出。而 AM 中的 <code>printf</code>，本质上就是直接通过 <code>putch</code> 输出格式化的字符串。所以两者还是非常不同的。</p>
 <p>程序结束后，就会通过 <code>exit</code> 函数退出。（原来的 hello 程序是死循环，我把循环改了）。exit() 函数层层跳转后，就是我们的 <code>exit</code> 系统调用。另外，我这里有一个 bug 没有解决，就是在调用 <code>printf</code> 函数后，系统的退出值就不是 0，但是可惜很难看出是哪方面的原因，但是总而言之，与我无瓜，因为即使是 <code>sbrk</code> 没有实现的情况下，结果也如此。更新：完成 PA3.3 的文件系统后，这个 bug 突然消失了，又可以完美退出了，可怕。</p>
-<p>接下来我们来看一下 <code>sbrk</code> 系统调用吧。newlib 库中的 <code>malloc</code> 函数最终就是调用了 <code>_sbrk</code> 函数。这里我有一些不太理解的地方，感觉 <code>_sbrk</code> 函数实际上做的事情只不过是返回了一个地址而已。比如我们可以看一下 libgross 库中 ARM 体系的实现。（libgross 是 newlib 库中自带的底层实现，但是可惜没有 PA 系统的底层实现，哈哈）</p>
+<p>接下来我们来看一下 <code>sbrk</code> 系统调用吧。newlib 库中的 <code>malloc</code> 函数最终就是调用了 <code>_sbrk</code> 函数。比如我们可以看一下 libgross 库中 ARM 体系的实现。（libgross 是 newlib 库中自带的底层实现，但是可惜没有 PA 系统的底层实现，哈哈）</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-44-1" name="__codelineno-44-1" href="#__codelineno-44-1"></a><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nf">__attribute__</span><span class="p">((</span><span class="n">weak</span><span class="p">))</span>
 <a id="__codelineno-44-2" name="__codelineno-44-2" href="#__codelineno-44-2"></a><span class="n">_sbrk</span><span class="w"> </span><span class="p">(</span><span class="kt">ptrdiff_t</span><span class="w"> </span><span class="n">incr</span><span class="p">)</span>
 <a id="__codelineno-44-3" name="__codelineno-44-3" href="#__codelineno-44-3"></a><span class="p">{</span>
@@ -2863,17 +2863,10 @@ NEMU 提供硬件功能；AM 抽象层负责和上层的软件和底层的硬件
 <a id="__codelineno-44-21" name="__codelineno-44-21" href="#__codelineno-44-21"></a><span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="p">(</span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="n">prev_heap_end</span><span class="p">;</span>
 <a id="__codelineno-44-22" name="__codelineno-44-22" href="#__codelineno-44-22"></a><span class="p">}</span>
 </code></pre></div>
-<p>解答上面这个疑惑可能要知道 <code>&amp;end</code> 是程序 bss 段的起始地址。 
-TODO：其实好理解的但是需要学一些新知识来准确解释。</p>
+<p>之前说没理解, 现在感觉没有什么不好理解的, 分配内存就是这么做的, (可能是写了好几次的关系). 另外, <code>&amp;end</code> 地址是程序数据段的末尾地址, 即堆区的起始位置, (去看一下程序结构里的图就明白了). 堆的内存边界通常被称为 program break. 调用 <code>sbrk()</code> 的过程, 就会更新 program break. (即上述代码中的 heap_end). 看下图:</p>
+<p><img src="https://cdn.jsdelivr.net/gh/peter5723/imagehost/pa3.2.1.png"/></p>
 <p>上面基本就是 PA3, part 2 了。总结一下，在 NEMU 硬件上，我们实现了 AM 接口，然后写了一个 AM 程序 nanos-lite，在 nanos-lite 上，我们运行应用程序。应用程序不能直接操控底层，而是通过系统调用来和底层交互（对应用程序来说，AM 也算是底层了，毕竟是直接和硬件交互的库）。</p>
-<p>TODO：程序结构介绍</p>
-<p>查看程序 riscv 文件信息是这样的：
-<div class="highlight"><pre><span></span><code><a id="__codelineno-45-1" name="__codelineno-45-1" href="#__codelineno-45-1"></a>riscv64-linux-gnu-readelf -a &lt;filename&gt;
-<a id="__codelineno-45-2" name="__codelineno-45-2" href="#__codelineno-45-2"></a>riscv64-linux-gnu-objdump -d &lt;filename&gt;
-</code></pre></div></p>
-<p>elf 文件的魔数：0x7F,0x45,0x4c,0x46,</p>
-<p>学而不思则罔，思而不学则殆，PA3.2 基本上完成了，但是一些关于程序的知识仍然不了解，比如堆的机制。系统调用的过程还需要好好理解，elf 文件的结构要整理了。PA3 和前面最大的区别就是多了一些我没学习过的理论知识需要补充吧。</p>
-<p>TODO stdint 和 stddef 和 unistd 中的类型</p>
+<p>学而不思则罔，思而不学则殆，PA3.2 基本上完成了，但是一些关于程序的知识仍然不了解，比如堆的机制。系统调用的过程还需要好好理解，elf 文件的结构要整理了。PA3 和前面最大的区别就是多了一些我没学习过的理论知识需要补充吧。(补充, 这里说的问题基本都整理完毕 2024年3月30日)</p>
 <h3 id="pa-33">PA 3.3<a class="headerlink" href="#pa-33" title="Permanent link">&para;</a></h3>
 <p>PA3.3 首先是实现了一个简单的文件系统，实现了 open、read、write、lseek、close 系统调用，这样我们就可以进行文件操作了。在 linux 中，有一个说法是“一切皆文件”。这是因为 IO 接口也被抽象成文件了，我们进行 IO 的过程就被抽象成文件读写的过程，上层 API 无需改动，只要根据文件类型更改底层调用的读写函数就可以了。基于这个逻辑，我们很快就实现了操作系统的各种 IO 接口，比如输入输出，键盘，显存，时间等等。完成这些接口以后，我们就可以运行各式各样的应用程序了。</p>
 <p>当然理论如此，实践的时候总会碰到各种各样的问题。比如说，一开始提供的多媒体库是 NDL 库，它的实现是直接进行系统调用。然而，对于较为复杂的程序，直接用它编程仍然比较难，所以我们要提供更加上层的运行时环境，这里就是 SDL 库，在 SDL 库的实现中调用 NDL 库。具体的编程过程就不细说了，有些繁琐，调试了很久才基本完全跑通，主要还是要仔细阅读手册和讲义内容。</p>
@@ -2896,13 +2889,15 @@ TODO：其实好理解的但是需要学一些新知识来准确解释。</p>
 <p>riscv 的分页机制</p>
 <p>https://blog.csdn.net/df12138/article/details/120529340</p>
 <p>https://dingfen.github.io/risc-v/2020/08/05/riscv-privileged.html#%E5%86%85%E5%AD%98%E5%88%86%E9%A1%B5</p>
+<p>实现了虚拟内存转物理内存. 首先是操作系统在启动时将相关信息写入内存(虚拟页到物理页的映射关系). 后面翻译时, 拿到一个虚拟地址, 只需将其所在的虚拟页转化成物理页, 就迎刃而解了, 因为页大小相同, 所以偏移量也是相同的.</p>
+<p>其实虚拟内存还是挺简单的, 哈哈.</p>
 
   <hr>
 <div class="md-source-file">
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2024-03-28</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2024-03-31</span>
       
         <br>
         Created:
