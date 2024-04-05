@@ -1303,8 +1303,13 @@
 <p>扩展实在是太简单了，对无符号数，左边加 0 即可。有符号数则是左边添符号位。</p>
 <p>截断：再说。</p>
 <h2 id="_6">位运算<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
+<p>其实 C 语言中的位运算还挺麻烦的, 因为没办法直接置位清零.</p>
 <h3 id="_7">移位运算<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
 <p>左移右移。注意算数右移和有符号扩展对应，逻辑右移和无符号扩展对应。</p>
+<p>下面讲一些应用.</p>
+<p>将 value 的第 position 位置成 bitValue 的值. 方法是先清零, 再进行或运算.
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">value</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="o">~</span><span class="p">(</span><span class="mi">1</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">position</span><span class="p">))</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="p">(</span><span class="n">bitValue</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">position</span><span class="p">);</span>
+</code></pre></div></p>
 <h2 id="_8">整数运算<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
 <h3 id="_9">无符号加法<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
 <p>CSAPP 讲的有些抽象。两个无符号数进行加法或者减法，直接进行加法或者减法，然后在把结果转化成对应的无符号数即可。</p>
@@ -1321,7 +1326,7 @@
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-12-12</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2024-04-05</span>
       
         <br>
         Created:
