@@ -1038,3 +1038,263 @@ cout << smarterMyMin(3.2, 4) << endl;
 ```
 
 编译器为我们确定模版类型的过程称为模板的实例化. 直到实例化时, 才会生成代码
+
+值得一提的是, All algorithms are fully generic, templated functions in the STL algorithm library!
+
+
+## Lecture 10: Functions and Lambdas
+
+这一节课的主要内容就是, 函数作为函数的参数, 可不可以? 都学到这份上了, 就别装了, 当然是可以的, 用函数指针就可以轻松完成. 回调函数不就是一个典型的函数参数吗.
+
+OK, 看下面的例子, 函数指针作为模版函数的参数:
+
+```cpp
+template<typename InputIt, typename Unipred>
+int count_occurences(InputIt begin, InputIt end, Unipred pred) {
+    int count = 0;
+    for (auto iter = begin; iter != end; ++iter) {
+        if (pred(*iter)) {
+            count++;
+        }
+    }
+    return count;
+}
+
+bool isVowel(char c)
+{
+    std::string vowels = "aeiou";
+    return vowels.find(c) != std::string::npos;
+}
+
+int main()
+{
+    std::string str = "Peter";
+    std::cout << "number of vowel is: " << count_occurences(str.begin(), str.end(), isVowel) << "\n";
+}
+```
+
+但是, 我们仍然还不太满意. 如果预测函数 `pred` 是要和某一个值比大小呢? 要 `isMorethan3`, `isMorethan4`, `isMorethan5`... 这样子吗? 一种方法是修改函数为二参数函数就行, 但是有时写代码还有一种方法就是为了引出主角, lambda.
+
+Lambdas are **inline**, **anonymous** functions that can know about variables declared in their same scope.
+
+Lambda 函数的形式如下:
+```cpp
+auto var = [capture-clause] (auto param) -> returntype
+{
+    ...
+}
+```
+
+[] 中提供外部参数, param 就是函数参数, {} 中是函数主体, var 指向 lambda 函数的首地址. -> 后是指定的返回类型, 若 lambda 表达式包含除 return 之外的语句则必须指定, 否则默认返回 void 类型.
+
+举个例子, 
+
+```cpp
+int limit = 5;
+auto isMoreThan = [limit] (int n) { return n > limit; };
+// isMoreThan(4) is true
+
+std::vector<int> nums = {3, 5, 6, 7, 9, 13};
+count_occurences(nums.begin(), nums.end(), isMoreThan);
+```
+
+
+## Lecture 11: Operators Overloading
+
+这节课介绍一下 C++ 中的运算符重载.
+
+### 1. 运算符重载
+
+一般来说, 运算符用于基本数据类型. 但是我们也可以通过重载, 将运算符作用于类类型的运算对象.
+
+C++ 中大部分的运算符都可以重载, 作为笔记, 就不详细介绍反例了.
+
+类本身是不支持某些运算符的, 但是我们只要添加一个运算符的成员函数, 就可以使它支持了.
+
+举例, 看下面的 Time 类.
+
+```cpp
+//mytime2.hh
+#ifndef MYTIME2
+#define MYTIME2
+class Time
+{
+private:
+    int hours;
+    int minutes;
+public:
+    Time();
+    Time(int h, int m = 0);
+    Time operator+(const Time &t) const;
+    Time operator-(const Time &t) const;
+    Time operator*(double mult) const;
+    void Reset(int h=0, int m=0);
+    void Show() const;
+};
+#endif
+
+//mytime2.cpp
+#include <iostream>
+#include "mytime2.hh"
+
+Time::Time()
+{
+    hours = minutes = 0;
+}
+
+Time::Time(int h, int m)
+{
+    hours = h;
+    minutes = m;
+}
+
+Time Time::operator+(const Time &t) const
+{
+    Time sum;
+    sum.minutes = minutes + t.minutes;
+    sum.hours = hours + t.hours + sum.minutes / 60;
+    sum.minutes %= 60;
+    return sum;
+
+}
+
+Time Time::operator-(const Time &t) const
+{
+    // Omit
+    Time diff = Time();
+    return diff; 
+}
+
+Time Time::operator*(double mult) const
+{
+    //Omit
+    return Time();
+}
+
+void Time::Show() const
+{
+    std::cout << hours << " hours, " << minutes << " minutes" << std::endl;
+}
+
+//main.cpp
+#include <iostream>
+#include "mytime2.hh"
+int main(int, char**){
+    Time atime(4 ,35);
+    Time btime(2, 47);
+    Time total, diff, adjust;
+    total = atime + btime;
+    diff = atime - btime;
+    adjust = atime * 1.5;
+    total.Show();
+    diff.Show();
+    adjust.Show();
+    return 0;
+}
+```
+
+上面我们将 +, - , * 三个操作符, 作为类的成员函数(member function), 进行了重载, 从而实现了时间的加减乘方法.
+
+值得一提的是, 这里操作符最终的行为就是函数的调用, 比如, `atime * 1.5` 相当于 `atime.operator*(1.5)`. 所以想一想就知道, 不能写成 `1.5 * atime` 的形式, 因为左侧的操作数应该是调用对象, 而 `1.5` 不是一个对象. 所以, 上面的方法还有局限性, 下面将介绍利用友元, 进行非成员函数的运算符重载.
+
+### 2. 友元
+
+非成员函数的运算符重载需要用到友元的概念. 一个友元函数在类声明中用关键字 `friend` 声明, 表示它不是一个成员函数, 但是和成员函数有相同的访问权限.
+
+仍然以上面的例子为例:
+
+创建乘法的友元函数声明:
+```cpp
+friend Time operator*(double m, const Time & t);
+```
+
+创建函数定义. 注意, 由于不是成员函数, 所以不要使用 `Time::` 限定符. 另外, 不要在定义中使用关键字 `friend`, 如下所示:
+```cpp
+Time operator*(double m, const Time& t)
+{
+    Time result;
+    long tm = t.hours * m * 60 + t.minutes * m;
+    result.hours = tm / 60;
+    result.minutes = tm % 60;
+    return result;
+}
+```
+
+注意看上面的定义, 如果 `oprator*` 不是一个友元函数, 那么它不能访问 `hours` 和 `minutes` 成员, 因为它们都是 `private` 类型的. 但是我们在声明中用 `friend` 声明了它是类的友元, 于是就有了和类成员相同的访问权限.
+
+这样, `1.5 * atime` 就等价于 `operator*(1.5, atime)`.
+
+然后再看一个例子, 重载输出运算符, 由于 `ostream` 类必定在左边, 所以肯定也是要用非成员函数的. 重载输出运算符, 我们就可以直接按我们想要的方式用 `cout` 输出类了.
+
+```cpp
+// declaration
+friend std::ostream& operator<< (std::ostream & out, const Time& time);
+
+// definition
+std::ostream& operator<< (std::ostream & out, const Time& time)
+{
+    return out << "operator overload time: " << time.hours << ":" << time.minutes << "\n";
+}
+```
+
+
+## Lecture 12: Special Member Function
+
+C++ 的类有一些特殊成员函数, 就算我们不直接定义, 编译器也会帮我们直接合成. 这样的成员函数包括:
+
+- default constructor 默认构造函数
+- copy constructor 拷贝构造函数
+- copy assignment operator 拷贝复制运算符
+- destructor 析构函数
+- move constructor 移动构造函数
+- move assignment operator 移动赋值运算符
+
+它们对应的形式如下:
+
+```cpp
+class Widget {
+public:
+    Widget();
+    Widget(const Widget& w);
+    Widget& operator=(const Widget& w);
+    ~Widget();
+    Widget(Widget&& rhs);
+    Widget& operator=(Widget&& rhs);
+}
+```
+
+默认构造函数没什么好说的. 只有在你没定义构造函数的时候, 编译器才会合成默认构造函数, 否则是不会合成的. 可以用 `default` 和 `delete` 关键字来显式的说明要不要使用合成的默认构造函数. 对其他的特殊成员函数也适用. (注意, 析构函数不能用 delete, 不然无法释放空间)
+
+```cpp
+class Widget{
+public:
+    Widget() = default; // use
+    Widget() = delete; // not use
+    ...
+};
+```
+
+对于拷贝, 赋值和析构, 我们还是看看下面的例子, 简单理解一下吧.
+
+```cpp
+using std::vector;
+vector<int> fun(vector<int> vec0) {
+    vector<int> vec1;
+    vector<int> vec2(3);
+    vector<int> vec3{3};
+    vector<int> vec4();
+    vector<int> vec5(vec2);
+    vector<int> vec{vec3 + vec4};
+    vector<int> vec8 = vec4;
+    vec8 = vec2;
+    return vec8;
+}
+```
+从 vec0 开始, vec0 是函数形参, 拷贝构造得到, 拷贝构造函数构造的是新对象, 内容和原对象相同但是是两个不同对象. vec1 是默认构造函数. vec2, vec3 是自定义构造函数. vec4 是默认构造函数. vec5, vec 是拷贝构造函数. vec8 是拷贝赋值运算符, 它指向的对象和 vec2 或者 vec4 相同, 是同一个对象. 注意, `return vec8` 也是调用了拷贝构造函数, 将 vec8 的值写到对应的内存中. 最后函数结束, 所有局部变量对象都使用析构函数销毁.
+
+TODO: 考虑一下, 返回结构体不能保存在寄存器中, 是怎么返回的呢? 我感觉大概是直接保存到上一个函数栈的某一个位置.
+
+有的时候, 我们不满足于默认的拷贝函数而要自己重载一个, 这是可以的. 想想有哪些情况呢? 
+
+对于特殊成员函数的重载, 有规则0: "If the default operations work, then don't define your own." 和规则3: "If you explicitly define a copy constructor, copy assignment operator, or destructor, you should define all three."
+

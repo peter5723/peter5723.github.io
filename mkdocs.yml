@@ -115,6 +115,8 @@ nav:
     - "虚拟内存": "ICS/vm.md"
     - "IO 和文件系统": "ICS/io.md"
     - "回调函数": "ICS/callback.md"
+  - "操作系统":
+    - "os 实验记录": "os/os_note.md"
   - "算法":
     - "介绍": "algorithm/intro.md"
     - "搜索":
@@ -123,6 +125,7 @@ nav:
     - "介绍": "Cpp/intro.md"
   - "书":
     - "鼠疫": "wen/LaPeste.md"
+    - "西西弗神话": "wen/sisyphe.md"
   - diary:
     - "one diary":
       - "one one diary": "diary.md"
