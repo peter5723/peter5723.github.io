@@ -9,17 +9,17 @@
       
       
       
-        <link rel="prev" href="../../os/osnote/">
+        <link rel="prev" href="../../ICS/callback/">
       
       
-        <link rel="next" href="../search/DFS/">
+        <link rel="next" href="../../algorithm/intro/">
       
       <link rel="icon" href="../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.0.4">
     
     
       
-        <title>介绍 - Peter's home</title>
+        <title>os 实验记录 - Peter's home</title>
       
     
     
@@ -72,6 +72,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#_1" class="md-skip">
+          Skip to content
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -101,7 +106,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              介绍
+              os 实验记录
             
           </span>
         </div>
@@ -690,18 +695,20 @@
 
   
   
+    
+  
   
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
       
       
-      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_8" type="checkbox" id="__nav_8" >
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_8" type="checkbox" id="__nav_8" checked>
       
       
       
-        <label class="md-nav__link" for="__nav_8" tabindex="0" aria-expanded="false">
+        <label class="md-nav__link" for="__nav_8" tabindex="0" aria-expanded="true">
           操作系统
           <span class="md-nav__icon md-icon"></span>
         </label>
@@ -717,11 +724,52 @@
               
   
   
+    
   
-    <li class="md-nav__item">
-      <a href="../../os/osnote/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          os 实验记录
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         os 实验记录
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#lab1-utilities" class="md-nav__link">
+    Lab1: Utilities
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -739,20 +787,18 @@
 
   
   
-    
-  
   
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
       
       
       
-      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_9" type="checkbox" id="__nav_9" checked>
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_9" type="checkbox" id="__nav_9" >
       
       
       
-        <label class="md-nav__link" for="__nav_9" tabindex="0" aria-expanded="true">
+        <label class="md-nav__link" for="__nav_9" tabindex="0" aria-expanded="false">
           算法
           <span class="md-nav__icon md-icon"></span>
         </label>
@@ -768,19 +814,11 @@
               
   
   
-    
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-      
-      
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../../algorithm/intro/" class="md-nav__link">
         介绍
       </a>
-      
     </li>
   
 
@@ -819,7 +857,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../search/DFS/" class="md-nav__link">
+      <a href="../../algorithm/search/DFS/" class="md-nav__link">
         DFS
       </a>
     </li>
@@ -1052,6 +1090,23 @@
   
   
   
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#lab1-utilities" class="md-nav__link">
+    Lab1: Utilities
+  </a>
+  
+</li>
+      
+    </ul>
   
 </nav>
                   </div>
@@ -1067,24 +1122,32 @@
 
 
 
-<p>这个栏目会介绍我学习的算法和数据结构，会记录一下我做过的题。为了避免被找麻烦，课程的题目我不会放源代码（比如 PTA）。
-力扣或者别的地方的题目我会放。</p>
-<p>可以参考的资料或者学习的网站：</p>
-<p>OI Wiki: <a href="https://oi-wiki.org/">https://oi-wiki.org/</a></p>
-<p>CS61B(sp21): <a href="https://sp21.datastructur.es/">https://sp21.datastructur.es/</a></p>
-<p>CS61B 是伯克利的数据结构课程。我已经基本上学完了，还剩下一个 project 没有做，是一个生成随机迷宫的 project，我觉得我应该会咕咕了。
-感觉这门课算是比较简单的了。第 2 个 project 是实现一个 git，还是非常有趣的。</p>
+<h1 id="_1">操作系统<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
+<p>开始学操作系统. 学习的课程是 MIT 的 <a href="https://pdos.csail.mit.edu/6.828/2023/schedule.html">6.1810</a>(即之前的 6.S081). 使用的教材是 <a href="https://pages.cs.wisc.edu/~remzi/OSTEP/">OSTEP</a> 和 <a href="https://pdos.csail.mit.edu/6.828/2023/xv6/book-riscv-rev3.pdf">xv6-book</a></p>
+<p>由于是每节课一个实验, 那么我就把学习的笔记和实验记录在一起好了. 格外重要的需要详细讲的知识点, 再单独列出.</p>
+<p>在实验之前, 最好根据这个链接来配置你的 git: <a href="https://xv6.dgs.zone/labs/use_git/git1.html">https://xv6.dgs.zone/labs/use_git/git1.html</a>, 不然到时候可能觉得自己被坑到. 另外, 最好独立完成实验哦.</p>
+<p>整理一下，就是先 <code>git remote add github &lt;your-url&gt;</code> 添加自己仓库的链接为 github 分支。</p>
+<p>然后 MIT 那边的远程链接叫 origin，自己的仓库的远程链接叫 github，那么要做新实验 xxx 时：
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>git fetch origin
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>git checkout xxx
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>git push github xxx
+</code></pre></div>
+就可以在自己的仓库新建立一个 xxx 分支。</p>
+<p>每次想要上传作业到远程仓库时，<code>git push github xxx</code> 即可。<code>git checkout yyy</code> 可以去到之前完成的作业的分支。</p>
+<h2 id="lab1-utilities">Lab1: Utilities<a class="headerlink" href="#lab1-utilities" title="Permanent link">&para;</a></h2>
+<p>这个实验主要是要熟悉一些操作系统的接口. xv6 的接口是模仿 unix 的接口的.</p>
+<p>一些重要的接口有 fork，exec，pipe 等等。值得一提的是注意管道机制是阻塞的：只有读取端读取了数据以后，写入端才能写入新的数据。这是做 prime 实验的关键。</p>
 
   <hr>
 <div class="md-source-file">
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-11-22</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2024-04-20</span>
       
         <br>
         Created:
-        <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-11-22</span>
+        <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2024-04-20</span>
       
     
   </small>
