@@ -1298,3 +1298,9 @@ TODO: 考虑一下, 返回结构体不能保存在寄存器中, 是怎么返回�
 
 对于特殊成员函数的重载, 有规则0: "If the default operations work, then don't define your own." 和规则3: "If you explicitly define a copy constructor, copy assignment operator, or destructor, you should define all three."
 
+
+## Lectrure 13: Move Semantics
+
+下面进一步介绍特殊成员函数中的移动构造函数和移动赋值运算符，即 move 类型的。
+
+stackoverflow 中有很好的例子：<https://stackoverflow.com/questions/3106110/what-is-move-semantics?newreg=7ef8506e56544c8492d025934de2b2d0>
