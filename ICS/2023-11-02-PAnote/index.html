@@ -1445,6 +1445,20 @@
 
             
           
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../algorithm/dp/" class="md-nav__link">
+        动态规划
+      </a>
+    </li>
+  
+
+            
+          
         </ul>
       </nav>
     </li>
@@ -1487,7 +1501,7 @@
   
     <li class="md-nav__item">
       <a href="../../Cpp/intro/" class="md-nav__link">
-        介绍
+        CS106L 笔记
       </a>
     </li>
   
@@ -1551,6 +1565,20 @@
     <li class="md-nav__item">
       <a href="../../wen/sisyphe/" class="md-nav__link">
         西西弗神话
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../wen/outsider/" class="md-nav__link">
+        局外人
       </a>
     </li>
   
@@ -3072,6 +3100,8 @@ NEMU 提供硬件功能；AM 抽象层负责和上层的软件和底层的硬件
 <p><img src="https://cdn.jsdelivr.net/gh/peter5723/imagehost/pa4.3.2.jpg"/></p>
 <!-- PA4 必答题, 很简单我就不写了. 可以看这个网站: https://kristoff-starling.github.io/posts/coursenotes/nju-ics/pa/pa4/ -->
 
+<p>必答题：最后总结一下，仙剑奇侠传怎么同时和 hello 用户程序分时运行？</p>
+<p>以 hello 程序切换为例：每一条指令结束，NEMU 的 cpu_exec() 函数会检查 CPU 的 INTR 引脚是否被拉高，是则有时钟中断请求，若此时 CPU 允许中断，则会进入设置好的中断处理程序 trap.s。在其中，nanos-lite 会将 hello 进程的上下文保存到内核栈中，进入 __am_irq_handle() 函数，调用之前的回调函数 do_event()，再到 schedule() 函数切换到仙剑奇侠传进程的上下文。回到 trap.s 恢复这个上下文，将栈指针转移回用户栈，最后 mret 指令之后，就切换到了仙剑奇侠传的代码继续执行。</p>
 <p>那么现在, 我就完成了 PA 的所有必做项目. (虽然选做还留了一堆坑)</p>
 <p>整个 PA 全部做下来, 对于我这样的新手来说, 大概需要将近 300 个小时. 也陆陆续续做了快半年. 做这个 PA 不仅仅只是做了一个项目, 还顺带学习了一堆东西, 比如, vim, make, shell script, 以及这个笔记网站, 还有各种知识, 比如程序结构, 虚拟内存等等. 讲义里面老是强调状态机的事情, 做前面的内容还不以为意, 但是到了 PA4, 过程的复杂度就陡然上升了, 要模拟运行的过程把我的草稿纸都耗完了, 这才又回想起来.</p>
 <p>非常感谢 PA, 那么 PA 就暂时告一段落了, 再见!</p>
@@ -3081,7 +3111,7 @@ NEMU 提供硬件功能；AM 抽象层负责和上层的软件和底层的硬件
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2024-04-20</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2024-05-05</span>
       
         <br>
         Created:

@@ -9,7 +9,7 @@
       
       
       
-        <link rel="prev" href="../../algorithm/search/DFS/">
+        <link rel="prev" href="../../algorithm/dp/">
       
       
         <link rel="next" href="../../wen/LaPeste/">
@@ -19,7 +19,7 @@
     
     
       
-        <title>介绍 - Peter's home</title>
+        <title>CS106L 笔记 - Peter's home</title>
       
     
     
@@ -106,7 +106,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              介绍
+              CS106L 笔记
             
           </span>
         </div>
@@ -829,6 +829,20 @@
 
             
           
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../algorithm/dp/" class="md-nav__link">
+        动态规划
+      </a>
+    </li>
+  
+
+            
+          
         </ul>
       </nav>
     </li>
@@ -882,12 +896,12 @@
       
       
         <label class="md-nav__link md-nav__link--active" for="__toc">
-          介绍
+          CS106L 笔记
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <a href="./" class="md-nav__link md-nav__link--active">
-        介绍
+        CS106L 笔记
       </a>
       
         
@@ -1206,6 +1220,13 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#lectrure-13-move-semantics" class="md-nav__link">
+    Lectrure 13: Move Semantics
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -1272,6 +1293,20 @@
     <li class="md-nav__item">
       <a href="../../wen/sisyphe/" class="md-nav__link">
         西西弗神话
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../wen/outsider/" class="md-nav__link">
+        局外人
       </a>
     </li>
   
@@ -1690,6 +1725,13 @@
         <li class="md-nav__item">
   <a href="#lecture-12-special-member-function" class="md-nav__link">
     Lecture 12: Special Member Function
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lectrure-13-move-semantics" class="md-nav__link">
+    Lectrure 13: Move Semantics
   </a>
   
 </li>
@@ -2700,13 +2742,16 @@ iterator 类型的元素可读可写，const_iterator 类型的元素只读。<a
 <p>TODO: 考虑一下, 返回结构体不能保存在寄存器中, 是怎么返回的呢? 我感觉大概是直接保存到上一个函数栈的某一个位置.</p>
 <p>有的时候, 我们不满足于默认的拷贝函数而要自己重载一个, 这是可以的. 想想有哪些情况呢? </p>
 <p>对于特殊成员函数的重载, 有规则0: "If the default operations work, then don't define your own." 和规则3: "If you explicitly define a copy constructor, copy assignment operator, or destructor, you should define all three."</p>
+<h2 id="lectrure-13-move-semantics">Lectrure 13: Move Semantics<a class="headerlink" href="#lectrure-13-move-semantics" title="Permanent link">&para;</a></h2>
+<p>下面进一步介绍特殊成员函数中的移动构造函数和移动赋值运算符，即 move 类型的。</p>
+<p>stackoverflow 中有很好的例子：<a href="https://stackoverflow.com/questions/3106110/what-is-move-semantics?newreg=7ef8506e56544c8492d025934de2b2d0">https://stackoverflow.com/questions/3106110/what-is-move-semantics?newreg=7ef8506e56544c8492d025934de2b2d0</a></p>
 
   <hr>
 <div class="md-source-file">
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2024-04-20</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2024-05-05</span>
       
         <br>
         Created:
