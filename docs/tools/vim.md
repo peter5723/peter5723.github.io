@@ -25,3 +25,6 @@ vim 可以执行外部命令
 `:read` 命令可以获得命令执行的输出结果，新增一行插入该结果。如 `:read!date`
 
 我最常用的还是 `:terminal`. 直接打开一个新的终端
+
+
+有空看看 <https://www.zhihu.com/question/27478597/answer/2777381978>
