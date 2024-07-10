@@ -509,7 +509,7 @@
       
         <li class="md-nav__item">
   <a href="#z_1" class="md-nav__link">
-    z 变换
+    z 变换的讨论
   </a>
   
 </li>
@@ -1157,7 +1157,7 @@
       
         <li class="md-nav__item">
   <a href="#z_1" class="md-nav__link">
-    z 变换
+    z 变换的讨论
   </a>
   
 </li>
@@ -1193,7 +1193,7 @@
 
 
 <h1 id="z">z 变换<a class="headerlink" href="#z" title="Permanent link">&para;</a></h1>
-<h2 id="z_1">z 变换<a class="headerlink" href="#z_1" title="Permanent link">&para;</a></h2>
+<h2 id="z_1">z 变换的讨论<a class="headerlink" href="#z_1" title="Permanent link">&para;</a></h2>
 <p>z 变换的定义是</p>
 <div class="arithmatex">\[
 X(z) = \sum_{n=-\infty}^{\infty}x[n]z^{-n}
@@ -1227,12 +1227,15 @@ X(z) = \sum_{n=0}^{\infty}x[n]z^{-n}
 Y(z) - az^{-1}Y(z) - ay[-1] = X(z)
 \]</div>
 <p>后面是常规的做法就不多说了。前面说到 z 变换和信号是一一对应的关系，所以这里求解下去得到 <span class="arithmatex">\(Y(z)\)</span> 的表达式以后自然就会得到 <span class="arithmatex">\(y[n]\)</span> 的表达式，对单边 z 变换也一样。</p>
-<p>最后得到解的表达式是：
-$$
-y[n]=a<sup n="n">{n+1}y[-1]+\sum_{k=0}</sup>a^kx[n-k]
-$$</p>
+<p>最后得到解的表达式是：</p>
+<div class="arithmatex">\[
+y[n]=a^{n+1}y[-1]+\sum_{k=0}^{n}a^kx[n-k]
+\]</div>
 <p>简单分析一下，由于初始条件的存在，这个线性常系数差分方程的解包括两个部分，<span class="arithmatex">\(y_{zi}[n]=a^{n+1}y[-1]\)</span> 是系统的零输入响应，只和初始条件有关，并且衰减。<span class="arithmatex">\(y_{zs}[n]=\sum_{k=0}^{n}a^kx[n-k]\)</span> 是零状态响应，它是线性的输出。在弛豫条件下，系统的输出将只包含后一部分 <span class="arithmatex">\(y_{zs}[n]\)</span>，此时系统就是线性时不变的 IIR 系统。事实上，弛豫条件下，线性常系数差分方程描绘的系统都是线性时不变的。</p>
-<p><strong>TODO：这里有个问题，两本教材说的不符合，在有初始条件下，系统是否是 LTI 的呢？</strong></p>
+<p><strong>这里有个问题，两本教材说的不符合，在有初始条件下，系统是否是 LTI 的呢？</strong></p>
+<p>我的分析是对的，在有初始条件的情况下，系统是非线性而且时变的。我们要证明一个内容不简单，但是否定却很容易，因为举出一个反例就可以了。</p>
+<p>就这个问题来说，当我输入为 <span class="arithmatex">\(\delta[n]\)</span> 时，<span class="arithmatex">\(y_1[0]=ay[-1]\)</span>，当输入为 <span class="arithmatex">\(\delta[n-1]\)</span> 时，<span class="arithmatex">\(y_2[1]=1+a^2y[-1]\neq y_1[0]\)</span>，所以是时变的。</p>
+<p>当我输入是任意 <span class="arithmatex">\(x[n]\)</span> 时，<span class="arithmatex">\(n = -1\)</span> 时输出 <span class="arithmatex">\(y[-1]\)</span>；输入是 <span class="arithmatex">\(2x[n]\)</span> 时，输出仍然是 <span class="arithmatex">\(y[-1]\)</span>，并未扩大到原来两倍，所以显然是非线性的。</p>
 <p>总结而言，双边变换必须基于 IAR 条件（对傅里叶、拉普拉斯变换也是如此）。但实际情况下，虽然输入往往是只有有限时间，但在这之前，不可能保证输出都是 0，因此有初始条件的差分方程更加常见，所以单边 z 变换的应用更加广泛。我们也可以把单边 z 变换看成差分方程的一种普遍解决手段。</p>
 <p>另外值得一提的是，在 IAR 条件下，双边 z 变换和单边 z 变换是完全一致的。否则，就不能使用双边 z 变换。从表面上看，单边 z 变换的时移性质也是考虑了初始条件，这是双边 z 变换所没有的。</p>
 <p>matlab 的 filter 函数可以添加初值：</p>
@@ -1249,6 +1252,7 @@ y[n]+1.5y[n-1]+0.5y[n-2]=x[n]-x[n-1], y[-1]=2, y[-2]=1
 <a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="n">y</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">filter</span><span class="p">(</span><span class="n">num</span><span class="p">,</span><span class="n">den</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">zi</span><span class="p">);</span>
 </code></pre></div>
 <h2 id="_1">求解斐波那契数列<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<p>用 z 变换可以轻松求解出斐波那契数列的通项公式。已知其递推式是：</p>
 <div class="arithmatex">\[
 y[n+2]=y[n+1]+y[n], y[0]=y[1]=1
 \]</div>
@@ -1262,10 +1266,10 @@ Y(z) = \frac{1}{1-z^{-1}-z^{-2}}
 Y(z)=\frac{a_1a_2}{a_2-a_1}(\frac{a_1}{1-a_1z^{-1}}-\frac{a_2}{1-a_2z^{-1}})
 \]</div>
 <p>做 z 逆变换得到</p>
-<p>$$
-y[n]=\frac{a_1a_2}{a_2-a_1}(a_1<sup n_1="n+1">{n+1}-a_2</sup>)
-$$
-也就是：</p>
+<div class="arithmatex">\[
+y[n]=\frac{a_1a_2}{a_2-a_1}(a_1^{n+1}-a_2^{n+1})
+\]</div>
+<p>也就是：</p>
 <div class="arithmatex">\[
 y[n]=\frac{1}{\sqrt{5}}((\frac{1+\sqrt{5}}{2})^{n+1}-(\frac{1-\sqrt{5}}{2})^{n+1}),n\geq0
 \]</div>
@@ -1283,7 +1287,7 @@ G(x)=\sum_{n=0}^{\infty}a_nx^n
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2024-05-21</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2024-07-10</span>
       
         <br>
         Created:
