@@ -101,7 +101,7 @@ nav:
   - "化学":
     - "化学热力学中的一些问题": "chem/thermo.md"
   - "信号": 
-    - "单边z变换": "signal/onesidez.md"
+    - "z变换": "signal/onesidez.md"
     - "DFT": "signal/DFT.md"
     - "短时傅里叶变换": "signal/stft.md"
     - "LTI系统频域特性（ss第6章）": "signal/ch6_ss.md"
