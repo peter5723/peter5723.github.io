@@ -1357,3 +1357,48 @@ r = q;
 ```
 
 现在 `q` 指向的对象的引用计数再加 1，而 `r` 原先指向的对象没有引用者，于是自动释放。
+
+
+用智能指针有什么好处呢？我们可以看下面的例子进行对比。
+
+不使用智能指针，用传统方式分配内存：
+
+```cpp
+void f() {
+    Node* n = new Node;
+    // do sth
+    delete n;
+}
+```
+
+使用智能指针：
+
+```cpp
+void f() {
+    std::unique_ptr<Node> n(new Node);
+    // do sth
+    // automatically freed n
+}
+```
+
+看似两者差不多，但是如果考虑多线程的情况就不一样了。可能有一个线程在调用的时候触发了异常退出了，如果是前面传统的方式，就无法执行 `delete n`，而导致内存泄露。而智能指针，在变量离开作用域时就会自动释放内存，从而解决了这个问题。
+
+智能指针利用了 RALL（Resource Acquisition is Initialization）的思想。具体来说有两点：在初始化后获得资源，离开作用域时立刻释放资源，避免中间态的产生。操作系统中的锁设计也用到这个思想。
+
+```cpp
+void f_lock() {
+    lock();
+    //do sth
+    unlock();
+}
+```
+
+```cpp
+void f_lock() {
+    lock_guard();
+    //do sth
+    //if exception throws, unlock
+}
+```
+
+如果有一个线程突然退出，按前者的方式将导致锁永远无法关闭，导致其他线程无法进入临界区。而后者解决了这一问题。
