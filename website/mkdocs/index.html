@@ -1839,7 +1839,8 @@
 <p>The theme is <a href="https://squidfunk.github.io/mkdocs-material/">Material for Mkdocs</a>.</p>
 <h2 id="_1">安装<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
 <p>下面简单说下流程：</p>
-<p>首先是安装 mkdocs，它基于 Python，用 pip 安装即可。教程有。</p>
+<p>首先是安装 mkdocs，它基于 Python，用 pip 安装即可。教程有。由于我们使用 Material，看 Material 的部署即可。</p>
+<p>若显示找不到 <code>mkdocs</code>，运行时尝试在前面加上 <code>python -m</code> 选项。(但是注意，一般是路径的问题，好好看看)</p>
 <h3 id="_2">本地预览网页的一些命令<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
 <ul>
 <li><code>mkdocs new [dir-name]</code> - Create a new project.</li>
@@ -1878,15 +1879,16 @@ docs/
 今天才试了一下，好像宝藏一样。不仅很轻松地就可以管理博客的结构，而且换主题也很轻松，很好地解决了我的需求。mkdocs 用 markdown 就可以生成网页。还有一点问题是我用 Matlab 做笔记，用了很多实时脚本，不知道怎么导出。幸好今天发现了，最新版本的 Matlab 可以将实时脚本导出成 markdown 文件。我就把 Matlab 卸载了重装一遍，总算是解决掉笔记的问题啦。</p>
 <h2 id="_7">其它<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
 <p>介绍一些杂七杂八的问题、插件、主题、导航栏等等吧。</p>
+<p>插件要用 pip 安装，然后加到 yml 文件中。</p>
 <h3 id="_8">数学公式<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
-<p>数学公式的插件，参考这个链接即可: </p>
+<p>数学公式的插件，参考这个链接即可:</p>
 <p><a href="https://hucorz.github.io/myDoc/%E5%85%B6%E4%BB%96/Mkdocs/#markdown">https://hucorz.github.io/myDoc/%E5%85%B6%E4%BB%96/Mkdocs/#markdown</a></p>
 <p><a href="https://wdk-docs.github.io/mkdocs-material-docs/reference/mathjax/#configuration">https://wdk-docs.github.io/mkdocs-material-docs/reference/mathjax/#configuration</a></p>
 <h3 id="_9">显示修改日期<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
-<p>显示修改日期插件: </p>
+<p>显示修改日期插件:</p>
 <p><a href="https://timvink.github.io/mkdocs-git-revision-date-localized-plugin/">https://timvink.github.io/mkdocs-git-revision-date-localized-plugin/</a></p>
 <h3 id="_10">中文字体：<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h3>
-<p>就是想试试别的字体了，这个字体是霞鹜文楷（能用的中文字体不多啊2333）。官网是 <a href="https://lxgw.github.io/">https://lxgw.github.io/</a>. </p>
+<p>就是想试试别的字体了，这个字体是霞鹜文楷（能用的中文字体不多啊2333）。官网是 <a href="https://lxgw.github.io/">https://lxgw.github.io/</a>.</p>
 <p>配置很简单：在 <code>docs</code> 文件夹下建一个 <code>styesheets</code> 文件夹，用来放 css 文件。建一个 <code>extra.css</code> 文件，里面复制
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="l l-Scalar l-Scalar-Plain">body {</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">font-family</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="s">&quot;LXGW</span><span class="nv"> </span><span class="s">WenKai&quot;</span><span class="err">,</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">sans-serif;</span>
