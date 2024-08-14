@@ -382,6 +382,20 @@
 
             
           
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tools/ssh/" class="md-nav__link">
+        网络
+      </a>
+    </li>
+  
+
+            
+          
         </ul>
       </nav>
     </li>
@@ -726,6 +740,20 @@
     <li class="md-nav__item">
       <a href="../../os/osnote/" class="md-nav__link">
         os 实验记录
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../os/thread/" class="md-nav__link">
+        线程
       </a>
     </li>
   
@@ -1224,6 +1252,33 @@
   <a href="#lectrure-13-move-semantics" class="md-nav__link">
     Lectrure 13: Move Semantics
   </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lecture-14" class="md-nav__link">
+    Lecture 14:
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lecture-15-smart-pointers" class="md-nav__link">
+    Lecture 15: Smart Pointers
+  </a>
+  
+    <nav class="md-nav" aria-label="Lecture 15: Smart Pointers">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-shared_ptr" class="md-nav__link">
+    1. shared_ptr
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -1747,6 +1802,33 @@
   <a href="#lectrure-13-move-semantics" class="md-nav__link">
     Lectrure 13: Move Semantics
   </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lecture-14" class="md-nav__link">
+    Lecture 14:
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lecture-15-smart-pointers" class="md-nav__link">
+    Lecture 15: Smart Pointers
+  </a>
+  
+    <nav class="md-nav" aria-label="Lecture 15: Smart Pointers">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-shared_ptr" class="md-nav__link">
+    1. shared_ptr
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -2759,13 +2841,45 @@ iterator 类型的元素可读可写，const_iterator 类型的元素只读。<a
 <h2 id="lectrure-13-move-semantics">Lectrure 13: Move Semantics<a class="headerlink" href="#lectrure-13-move-semantics" title="Permanent link">&para;</a></h2>
 <p>下面进一步介绍特殊成员函数中的移动构造函数和移动赋值运算符，即 move 类型的。</p>
 <p>stackoverflow 中有很好的例子：<a href="https://stackoverflow.com/questions/3106110/what-is-move-semantics?newreg=7ef8506e56544c8492d025934de2b2d0">https://stackoverflow.com/questions/3106110/what-is-move-semantics?newreg=7ef8506e56544c8492d025934de2b2d0</a></p>
+<h2 id="lecture-14">Lecture 14:<a class="headerlink" href="#lecture-14" title="Permanent link">&para;</a></h2>
+<h2 id="lecture-15-smart-pointers">Lecture 15: Smart Pointers<a class="headerlink" href="#lecture-15-smart-pointers" title="Permanent link">&para;</a></h2>
+<p>这一章我们来看一下智能指针。C++ 中的智能指针是怎么回事呢？C 语言中如果忘记释放内存，就可能造成内存泄露。于是 C++ 就提供了智能指针，来自动释放管理的对象。智能指针包括三种指针：</p>
+<ul>
+<li><code>shared_ptr</code>：允许多个指针指向同一个对象</li>
+<li><code>unique_ptr</code>：独占所指向的对象</li>
+<li><code>weak_ptr</code>：一种弱引用，指向 <code>shared_ptr</code> 管理的对象</li>
+</ul>
+<p>这三种指针定义在 <code>memory</code> 头文件中。下面主要以 <code>shared_ptr</code> 为例子讲解。</p>
+<h3 id="1-shared_ptr">1. shared_ptr<a class="headerlink" href="#1-shared_ptr" title="Permanent link">&para;</a></h3>
+<p>和 <code>vector</code> 一样，智能指针也是模板类。因此创建智能指针时，必须提供指针指向的类型。例如：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-76-1" name="__codelineno-76-1" href="#__codelineno-76-1"></a><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span><span class="w"> </span><span class="n">p1</span><span class="p">;</span>
+<a id="__codelineno-76-2" name="__codelineno-76-2" href="#__codelineno-76-2"></a><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">list</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">p2</span><span class="p">;</span>
+</code></pre></div>
+<p>智能指针的使用方式和普通指针类似，解引用返回其指向的对象。</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-77-1" name="__codelineno-77-1" href="#__codelineno-77-1"></a><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">p1</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">p1</span><span class="o">-&gt;</span><span class="n">empty</span><span class="p">())</span>
+<a id="__codelineno-77-2" name="__codelineno-77-2" href="#__codelineno-77-2"></a><span class="w">    </span><span class="o">*</span><span class="n">p1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;hi&quot;</span><span class="p">;</span>
+</code></pre></div>
+<p>我们使用 <code>make_shared</code> 函数来初始化智能指针，分配内存。<code>make_shared</code> 是一个模板函数，函数名后跟一个尖括号给出参数类型。</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-78-1" name="__codelineno-78-1" href="#__codelineno-78-1"></a><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">p3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">make_shared</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="mi">42</span><span class="p">);</span>
+<a id="__codelineno-78-2" name="__codelineno-78-2" href="#__codelineno-78-2"></a><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span><span class="w"> </span><span class="n">p4</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">make_shared</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;9&#39;</span><span class="p">);</span>
+<a id="__codelineno-78-3" name="__codelineno-78-3" href="#__codelineno-78-3"></a><span class="k">auto</span><span class="w"> </span><span class="n">p6</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">make_shared</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;&gt;</span><span class="p">();</span>
+</code></pre></div>
+<p>智能指针通过计数器来管理何时释放内存。每当进行拷贝和赋值操作时，<code>shared_ptr</code> 都会记录有多少个其他 <code>shared_ptr</code> 指向相同的对象，这个计数称为引用计数。当我们拷贝（如初始化、参数传递、函数返回）一个 <code>shared_ptr</code> 时，其计数递增，反之我们给其赋值或者销毁（如离开作用域），那么计数器就会递减。当一个 <code>shared_ptr</code> 的计数器变为 0 的时候，它就会自动释放自己管理的对象。</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-79-1" name="__codelineno-79-1" href="#__codelineno-79-1"></a><span class="k">auto</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">make_shared</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="mi">42</span><span class="p">);</span>
+<a id="__codelineno-79-2" name="__codelineno-79-2" href="#__codelineno-79-2"></a><span class="k">auto</span><span class="w"> </span><span class="n">q</span><span class="p">(</span><span class="n">p</span><span class="p">);</span>
+</code></pre></div>
+<p><code>p</code> 和 <code>q</code> 指向相同对象，此对象有两个引用者。</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-80-1" name="__codelineno-80-1" href="#__codelineno-80-1"></a><span class="k">auto</span><span class="w"> </span><span class="n">r</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">make_shared</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="mi">42</span><span class="p">);</span>
+<a id="__codelineno-80-2" name="__codelineno-80-2" href="#__codelineno-80-2"></a><span class="n">r</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">q</span><span class="p">;</span>
+</code></pre></div>
+<p>现在 <code>q</code> 指向的对象的引用计数再加 1，而 <code>r</code> 原先指向的对象没有引用者，于是自动释放。</p>
 
   <hr>
 <div class="md-source-file">
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2024-05-05</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2024-08-14</span>
       
         <br>
         Created:
