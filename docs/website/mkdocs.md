@@ -9,7 +9,9 @@ The theme is [Material for Mkdocs](https://squidfunk.github.io/mkdocs-material/)
 ## 安装
 下面简单说下流程：
 
-首先是安装 mkdocs，它基于 Python，用 pip 安装即可。教程有。
+首先是安装 mkdocs，它基于 Python，用 pip 安装即可。教程有。由于我们使用 Material，看 Material 的部署即可。
+
+若显示找不到 `mkdocs`，运行时尝试在前面加上 `python -m` 选项。(但是注意，一般是路径的问题，好好看看)
 
 ### 本地预览网页的一些命令
 
@@ -64,21 +66,23 @@ The theme is [Material for Mkdocs](https://squidfunk.github.io/mkdocs-material/)
 
 介绍一些杂七杂八的问题、插件、主题、导航栏等等吧。
 
+插件要用 pip 安装，然后加到 yml 文件中。
+
 ### 数学公式
-数学公式的插件，参考这个链接即可: 
+数学公式的插件，参考这个链接即可:
 
 <https://hucorz.github.io/myDoc/%E5%85%B6%E4%BB%96/Mkdocs/#markdown>
 
 <https://wdk-docs.github.io/mkdocs-material-docs/reference/mathjax/#configuration>
 
 ### 显示修改日期
-显示修改日期插件: 
+显示修改日期插件:
 
 <https://timvink.github.io/mkdocs-git-revision-date-localized-plugin/>
 
 ### 中文字体：
 
-就是想试试别的字体了，这个字体是霞鹜文楷（能用的中文字体不多啊2333）。官网是 <https://lxgw.github.io/>. 
+就是想试试别的字体了，这个字体是霞鹜文楷（能用的中文字体不多啊2333）。官网是 <https://lxgw.github.io/>.
 
 配置很简单：在 `docs` 文件夹下建一个 `styesheets` 文件夹，用来放 css 文件。建一个 `extra.css` 文件，里面复制
 ```yaml
