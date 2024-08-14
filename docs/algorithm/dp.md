@@ -89,4 +89,24 @@ sum(max(min(l[i], r[i]) - h[i] , 0))
 dp[n] = max(dp[n-2] + w[n], dp[n-1])
 ```
 
-这种问题熟悉了以后就和求斐波那契数列一样简单的。
+这种问题熟悉了以后就和求斐波那契数列一样简单的。C++ 代码如下，自底向上，忘记时可作为模版参考。
+
+```cpp
+class Solution {
+public:
+    int rob(vector<int>& nums) {
+    vector<int> dp(nums.size(), 0);
+        for (int i = 0; i < nums.size(); i++) {
+            if (i == 0) {
+                dp[i] = nums[i];
+            } else if ( i == 1) {
+                dp[i] = max(nums[0], nums[1]);
+            }
+             else {
+                dp[i] = max(dp[i-1], dp[i-2]+nums[i]);
+            }
+        }
+        return dp[nums.size()-1];
+    }
+};
+```

@@ -4,7 +4,7 @@
 
 由于是每节课一个实验, 那么我就把学习的笔记和实验记录在一起好了. 格外重要的需要详细讲的知识点, 再单独列出.
 
-在实验之前, 最好根据这个链接来配置你的 git: <https://xv6.dgs.zone/labs/use_git/git1.html>, 不然到时候可能觉得自己被坑到. 另外, 最好独立完成实验哦.
+在实验之前, 最好根据这个链接来配置你的 git: <https://xv6.dgs.zone/labs/use_git/git1.html>, 因为有些坑和之前的不同。
 
 整理一下，就是先 `git remote add github <your-url>` 添加自己仓库的链接为 github 分支。
 

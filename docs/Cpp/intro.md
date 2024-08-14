@@ -1304,3 +1304,56 @@ TODO: 考虑一下, 返回结构体不能保存在寄存器中, 是怎么返回�
 下面进一步介绍特殊成员函数中的移动构造函数和移动赋值运算符，即 move 类型的。
 
 stackoverflow 中有很好的例子：<https://stackoverflow.com/questions/3106110/what-is-move-semantics?newreg=7ef8506e56544c8492d025934de2b2d0>
+
+
+## Lecture 14:
+
+## Lecture 15: Smart Pointers
+
+这一章我们来看一下智能指针。C++ 中的智能指针是怎么回事呢？C 语言中如果忘记释放内存，就可能造成内存泄露。于是 C++ 就提供了智能指针，来自动释放管理的对象。智能指针包括三种指针：
+
+- `shared_ptr`：允许多个指针指向同一个对象
+- `unique_ptr`：独占所指向的对象
+- `weak_ptr`：一种弱引用，指向 `shared_ptr` 管理的对象
+
+这三种指针定义在 `memory` 头文件中。下面主要以 `shared_ptr` 为例子讲解。
+
+### 1. shared_ptr
+
+和 `vector` 一样，智能指针也是模板类。因此创建智能指针时，必须提供指针指向的类型。例如：
+
+```cpp
+shared_ptr<string> p1;
+shared_ptr<list<int>> p2;
+```
+
+智能指针的使用方式和普通指针类似，解引用返回其指向的对象。
+
+```cpp
+if (p1 && p1->empty())
+    *p1 = "hi";
+```
+
+我们使用 `make_shared` 函数来初始化智能指针，分配内存。`make_shared` 是一个模板函数，函数名后跟一个尖括号给出参数类型。
+
+```cpp
+shared_ptr<int> p3 = make_shared<int>(42);
+shared_ptr<string> p4 = make_shared<string>(10, '9');
+auto p6 = make_shared<vector<string>>();
+```
+
+智能指针通过计数器来管理何时释放内存。每当进行拷贝和赋值操作时，`shared_ptr` 都会记录有多少个其他 `shared_ptr` 指向相同的对象，这个计数称为引用计数。当我们拷贝（如初始化、参数传递、函数返回）一个 `shared_ptr` 时，其计数递增，反之我们给其赋值或者销毁（如离开作用域），那么计数器就会递减。当一个 `shared_ptr` 的计数器变为 0 的时候，它就会自动释放自己管理的对象。
+
+```cpp
+auto p = make_shared<int>(42);
+auto q(p);
+```
+
+`p` 和 `q` 指向相同对象，此对象有两个引用者。
+
+```cpp
+auto r = make_shared<int>(42);
+r = q;
+```
+
+现在 `q` 指向的对象的引用计数再加 1，而 `r` 原先指向的对象没有引用者，于是自动释放。

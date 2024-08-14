@@ -98,6 +98,7 @@ nav:
     - "shell": "tools/shell.md"
     - "vim": "tools/vim.md"
     - "GNU Make": "tools/make.md"
+    - "网络": "tools/ssh.md"
   - "化学":
     - "化学热力学中的一些问题": "chem/thermo.md"
   - "信号": 
@@ -117,6 +118,7 @@ nav:
     - "回调函数": "ICS/callback.md"
   - "操作系统":
     - "os 实验记录": "os/osnote.md"
+    - "线程": "os/thread.md"
   - "算法":
     - "介绍": "algorithm/intro.md"
     - "搜索":
