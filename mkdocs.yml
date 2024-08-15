@@ -97,6 +97,7 @@ nav:
     - "vscode": "tools/vscode.md"
     - "shell": "tools/shell.md"
     - "vim": "tools/vim.md"
+    - "git": "tools/git.md"
     - "GNU Make": "tools/make.md"
     - "网络": "tools/ssh.md"
   - "化学":
@@ -119,6 +120,7 @@ nav:
   - "操作系统":
     - "os 实验记录": "os/osnote.md"
     - "线程": "os/thread.md"
+    - "xv6 源代码": "os/src.md"
   - "算法":
     - "介绍": "algorithm/intro.md"
     - "搜索":
