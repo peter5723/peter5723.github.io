@@ -28,3 +28,6 @@ git push github xxx
 ## Lab2: Syscall
 
 很简单，就是 GDB 的使用以及一些系统调用的添加。值得一提的是知道了 xv6 中的内存分配（kalloc 和 free）是通过链表实现的。
+
+
+本课程使用 GDB 的方法：  To use gdb with xv6, run make `make qemu-gdb` in one window, run `gdb-multiarch` (or riscv64-linux-gnu-gdb) in another window. 
