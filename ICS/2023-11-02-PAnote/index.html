@@ -457,6 +457,27 @@
   
   
     <li class="md-nav__item">
+      <a href="../../tools/git/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    git
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../tools/make/" class="md-nav__link">
         
   
@@ -1752,6 +1773,27 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../os/src/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    xv6 源代码
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -2080,6 +2122,27 @@
   
   <span class="md-ellipsis">
     卡拉马佐夫兄弟
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../wen/beggar/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    赌徒
   </span>
   
 
@@ -3263,6 +3326,7 @@ C语言声明可以有很多次，而定义只能有一次。故若要使用同�
 <h4 id="else">Else:<a class="headerlink" href="#else" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a>  where  ----   Print the current address and stack backtrace
 <a id="__codelineno-24-2" name="__codelineno-24-2" href="#__codelineno-24-2"></a>  list ---- see which line the code has examined and its contexts.
+<a id="__codelineno-24-3" name="__codelineno-24-3" href="#__codelineno-24-3"></a>    backtrace(bt) ---  Print the backtrace of the entire stack. 
 </code></pre></div>
 <h4 id="todo-frame">TODO: frame 找段错误<a class="headerlink" href="#todo-frame" title="Permanent link">&para;</a></h4>
 <h3 id="makefile">Makefile<a class="headerlink" href="#makefile" title="Permanent link">&para;</a></h3>
@@ -3309,8 +3373,9 @@ C语言声明可以有很多次，而定义只能有一次。故若要使用同�
 <p><code>vim +PluginInstall +qall</code></p>
 <p>安装新的包。</p>
 <h5 id="ctags">ctags<a class="headerlink" href="#ctags" title="Permanent link">&para;</a></h5>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a>&lt;C-]&gt; 跳转到定义处
-<a id="__codelineno-27-2" name="__codelineno-27-2" href="#__codelineno-27-2"></a>&lt;C-t&gt; 返回
+<div class="highlight"><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a>ctags -R 在当前文件夹下面创建tags
+<a id="__codelineno-27-2" name="__codelineno-27-2" href="#__codelineno-27-2"></a>&lt;C-]&gt; 跳转到定义处
+<a id="__codelineno-27-3" name="__codelineno-27-3" href="#__codelineno-27-3"></a>&lt;C-t&gt; 返回
 </code></pre></div>
 <h5 id="cscope">cscope<a class="headerlink" href="#cscope" title="Permanent link">&para;</a></h5>
 <p>我已经配置过：
@@ -3790,7 +3855,7 @@ NEMU 提供硬件功能；AM 抽象层负责和上层的软件和底层的硬件
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1-2.1-2M12.5 7v5.2l4 2.4-1 1L11 13V7h1.5M11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2v1.8Z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2024-08-14</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2024-08-15</span>
   </span>
 
     
@@ -3800,7 +3865,7 @@ NEMU 提供硬件功能；AM 抽象层负责和上层的软件和底层的硬件
     <span class="md-icon" title="Created">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14.47 15.08 11 13V7h1.5v5.25l3.08 1.83c-.41.28-.79.62-1.11 1m-1.39 4.84c-.36.05-.71.08-1.08.08-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8c0 .37-.03.72-.08 1.08.69.1 1.33.32 1.92.64.1-.56.16-1.13.16-1.72 0-5.5-4.5-10-10-10S2 6.5 2 12s4.47 10 10 10c.59 0 1.16-.06 1.72-.16-.32-.59-.54-1.23-.64-1.92M18 15v3h-3v2h3v3h2v-3h3v-2h-3v-3h-2Z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2024-08-14</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-11-02</span>
   </span>
 
     

@@ -12,7 +12,7 @@
         <link rel="prev" href="../osnote/">
       
       
-        <link rel="next" href="../../algorithm/intro/">
+        <link rel="next" href="../src/">
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
@@ -439,6 +439,27 @@
   
   <span class="md-ellipsis">
     vim
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tools/git/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    git
   </span>
   
 
@@ -1138,6 +1159,27 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../src/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    xv6 源代码
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -1475,6 +1517,27 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../wen/beggar/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    赌徒
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -1738,6 +1801,7 @@
 <li>一个进程中的多线程共享一个地址空间。在线程之间的上下文切换时，地址空间保持不变，不需要切换页表；但是进程的切换是需要切换页表的。</li>
 <li>传统的进程是单线程，只有一个栈，而多线程的进程中，每个线程独立运行，每个线程都有自己的栈。</li>
 </ol>
+<p>从这个概念上说，PA 中对进程和线程的概念是混用的。因为很明显 PA 中只用 PCB 控制，并且 PA 中的两个程序使用的虚拟地址空间不同，因此都是进程。</p>
 <h2 id="1-api">1. 两个 api<a class="headerlink" href="#1-api" title="Permanent link">&para;</a></h2>
 <p>关于线程，最先会遇到两个 api：线程创建和等待线程完成。</p>
 <h3 id="api">线程创建 api<a class="headerlink" href="#api" title="Permanent link">&para;</a></h3>
@@ -1937,7 +2001,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1-2.1-2M12.5 7v5.2l4 2.4-1 1L11 13V7h1.5M11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2v1.8Z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2024-08-14</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2024-08-15</span>
   </span>
 
     
