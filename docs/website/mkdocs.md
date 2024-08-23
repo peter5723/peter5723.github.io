@@ -11,7 +11,7 @@ The theme is [Material for Mkdocs](https://squidfunk.github.io/mkdocs-material/)
 
 首先是安装 mkdocs，它基于 Python，用 pip 安装即可。教程有。由于我们使用 Material，看 Material 的部署即可。
 
-若显示找不到 `mkdocs`，运行时尝试在前面加上 `python -m` 选项。(但是注意，一般是路径的问题，好好看看)
+若显示找不到 `mkdocs`，运行时尝试在前面加上 `python -m` 选项。(但是注意，一般是路径的问题，好好看看，之前在另外一台电脑的问题是，mkdocs 没有装在对应 anaconda 的环境中却装在了另一个地方)
 
 ### 本地预览网页的一些命令
 
