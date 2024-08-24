@@ -75,3 +75,68 @@ git push github xxx
 ```
 
 另外，PA 的实践收获还是挺大的，因为想不起来过程了可以看自己的代码回忆。
+
+
+## Lab4: trap
+
+第一题打印函数调用的 backtrace，看下图清晰：
+
+
+```
+                .
+      +->          .
+      |   +-----------------+   |
+      |   | return address  |   |
+      |   |   previous fp ------+
+      |   | saved registers |
+      |   | local variables |
+      |   |       ...       | <-+
+      |   +-----------------+   |
+      |   | return address  |   |
+      +------ previous fp   |   |
+          | saved registers |   |
+          | local variables |   |
+      +-> |       ...       |   |
+      |   +-----------------+   |
+      |   | return address  |   |
+      |   |   previous fp ------+
+      |   | saved registers |
+      |   | local variables |
+      |   |       ...       | <-+
+      |   +-----------------+   |
+      |   | return address  |   |
+      +------ previous fp   |   |
+          | saved registers |   |
+          | local variables |   |
+  $fp --> |       ...       |   |
+          +-----------------+   |
+          | return address  |   |
+          |   previous fp ------+
+          | saved registers |
+  $sp --> | local variables |
+          +-----------------+
+```
+
+原理就是在没有参数寄存器的情况下，栈帧寄存器（FP/s0/x8）指向加 8 储存返回地址的地址，加 16 储存了上一个栈帧的位置。我们只要读取出函数返回地址就可以了。
+
+回忆一下学 x86 时的函数调用：
+
+```
+push bp
+mov bp, sp
+```
+
+原理如出一辙。bp 是帧寄存器。
+
+TODO: 在 sys_sleep() 内核函数中调用 backtrace，为什么可以一路回溯到用户程序呢？因为照理说，用的是不同的栈。
+
+```
+0x0000000080002198
+0x000000008000207c
+0x0000000080001d72
+0x0000000000000012
+```
+
+前面三个地址是内核函数，最后一个地址是用户函数。
+
+思考一下应该和栈切换时保存的机制有关系。
