@@ -3255,7 +3255,7 @@ C语言声明可以有很多次，而定义只能有一次。故若要使用同�
 <div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>  info break ---- list all breaks 
 <a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a>  (b)
 <a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a>  break &lt;func&gt; ---- Set breakpoint at the entry to &lt;func&gt;
-<a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a>  break  \*0x80483c3 ----Set breakpoint at address 0x80483c3
+<a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a>  break  *0x80483c3 ----Set breakpoint at address 0x80483c3
 <a id="__codelineno-19-5" name="__codelineno-19-5" href="#__codelineno-19-5"></a>  break  9  ---- Set breakpoint at line 9
 <a id="__codelineno-19-6" name="__codelineno-19-6" href="#__codelineno-19-6"></a>  break main.c:9 if q==0 ---- conditional breakpoint
 <a id="__codelineno-19-7" name="__codelineno-19-7" href="#__codelineno-19-7"></a>  delete     ----     delete all breakpoints
@@ -3265,7 +3265,7 @@ C语言声明可以有很多次，而定义只能有一次。故若要使用同�
 <a id="__codelineno-19-11" name="__codelineno-19-11" href="#__codelineno-19-11"></a>  clear &lt;func&gt; ----   Clear any points at the entry to &lt;func&gt;
 <a id="__codelineno-19-12" name="__codelineno-19-12" href="#__codelineno-19-12"></a>
 <a id="__codelineno-19-13" name="__codelineno-19-13" href="#__codelineno-19-13"></a>  (w)
-<a id="__codelineno-19-14" name="__codelineno-19-14" href="#__codelineno-19-14"></a>  watch \*地址    # 当地址所指内容发送变化时断点
+<a id="__codelineno-19-14" name="__codelineno-19-14" href="#__codelineno-19-14"></a>  watch *地址    # 当地址所指内容发送变化时断点
 <a id="__codelineno-19-15" name="__codelineno-19-15" href="#__codelineno-19-15"></a>  watch var    #当var值变化时，断点
 <a id="__codelineno-19-16" name="__codelineno-19-16" href="#__codelineno-19-16"></a>  watch (condition)    #当条件符合时，断点
 </code></pre></div>
@@ -3365,6 +3365,7 @@ C语言声明可以有很多次，而定义只能有一次。故若要使用同�
 <p><code>t</code>在新tab里打开文件、文件夹（文件夹就是新树了）</p>
 <p><code>gt/gT</code>在tab之间切换</p>
 <p><code>s</code>垂直打开标签页</p>
+<p><code>r</code> 刷新树</p>
 <p>（当然，也可以用鼠标点。）</p>
 <p>除此之外，nerdtree 当然也支持对文件的增删查找等。用它就不用到外部命令行新建文件了。基本上用 <code>m</code> 打开菜单栏就可以实现。
 具体看这个链接：<a href="https://blog.csdn.net/weixin_37926734/article/details/124919260">https://blog.csdn.net/weixin_37926734/article/details/124919260</a></p>
@@ -3855,7 +3856,7 @@ NEMU 提供硬件功能；AM 抽象层负责和上层的软件和底层的硬件
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1-2.1-2M12.5 7v5.2l4 2.4-1 1L11 13V7h1.5M11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2v1.8Z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2024-08-15</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2024-08-24</span>
   </span>
 
     

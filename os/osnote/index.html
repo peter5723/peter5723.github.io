@@ -1054,6 +1054,15 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#lab4-trap" class="md-nav__link">
+    <span class="md-ellipsis">
+      Lab4: trap
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -1629,6 +1638,15 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#lab4-trap" class="md-nav__link">
+    <span class="md-ellipsis">
+      Lab4: trap
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -1685,6 +1703,55 @@
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">    </span><span class="n">p</span><span class="o">-&gt;</span><span class="n">u</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
 </code></pre></div>
 <p>另外，PA 的实践收获还是挺大的，因为想不起来过程了可以看自己的代码回忆。</p>
+<h2 id="lab4-trap">Lab4: trap<a class="headerlink" href="#lab4-trap" title="Permanent link">&para;</a></h2>
+<p>第一题打印函数调用的 backtrace，看下图清晰：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>                .
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>      +-&gt;          .
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>      |   +-----------------+   |
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>      |   | return address  |   |
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>      |   |   previous fp ------+
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>      |   | saved registers |
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>      |   | local variables |
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>      |   |       ...       | &lt;-+
+<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>      |   +-----------------+   |
+<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>      |   | return address  |   |
+<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>      +------ previous fp   |   |
+<a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a>          | saved registers |   |
+<a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a>          | local variables |   |
+<a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a>      +-&gt; |       ...       |   |
+<a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a>      |   +-----------------+   |
+<a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a>      |   | return address  |   |
+<a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a>      |   |   previous fp ------+
+<a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a>      |   | saved registers |
+<a id="__codelineno-2-19" name="__codelineno-2-19" href="#__codelineno-2-19"></a>      |   | local variables |
+<a id="__codelineno-2-20" name="__codelineno-2-20" href="#__codelineno-2-20"></a>      |   |       ...       | &lt;-+
+<a id="__codelineno-2-21" name="__codelineno-2-21" href="#__codelineno-2-21"></a>      |   +-----------------+   |
+<a id="__codelineno-2-22" name="__codelineno-2-22" href="#__codelineno-2-22"></a>      |   | return address  |   |
+<a id="__codelineno-2-23" name="__codelineno-2-23" href="#__codelineno-2-23"></a>      +------ previous fp   |   |
+<a id="__codelineno-2-24" name="__codelineno-2-24" href="#__codelineno-2-24"></a>          | saved registers |   |
+<a id="__codelineno-2-25" name="__codelineno-2-25" href="#__codelineno-2-25"></a>          | local variables |   |
+<a id="__codelineno-2-26" name="__codelineno-2-26" href="#__codelineno-2-26"></a>  $fp --&gt; |       ...       |   |
+<a id="__codelineno-2-27" name="__codelineno-2-27" href="#__codelineno-2-27"></a>          +-----------------+   |
+<a id="__codelineno-2-28" name="__codelineno-2-28" href="#__codelineno-2-28"></a>          | return address  |   |
+<a id="__codelineno-2-29" name="__codelineno-2-29" href="#__codelineno-2-29"></a>          |   previous fp ------+
+<a id="__codelineno-2-30" name="__codelineno-2-30" href="#__codelineno-2-30"></a>          | saved registers |
+<a id="__codelineno-2-31" name="__codelineno-2-31" href="#__codelineno-2-31"></a>  $sp --&gt; | local variables |
+<a id="__codelineno-2-32" name="__codelineno-2-32" href="#__codelineno-2-32"></a>          +-----------------+
+</code></pre></div>
+<p>原理就是在没有参数寄存器的情况下，栈帧寄存器（FP/s0/x8）指向加 8 储存返回地址的地址，加 16 储存了上一个栈帧的位置。我们只要读取出函数返回地址就可以了。</p>
+<p>回忆一下学 x86 时的函数调用：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>push bp
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>mov bp, sp
+</code></pre></div>
+<p>原理如出一辙。bp 是帧寄存器。</p>
+<p>TODO: 在 sys_sleep() 内核函数中调用 backtrace，为什么可以一路回溯到用户程序呢？因为照理说，用的是不同的栈。</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>0x0000000080002198
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>0x000000008000207c
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>0x0000000080001d72
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>0x0000000000000012
+</code></pre></div>
+<p>前面三个地址是内核函数，最后一个地址是用户函数。</p>
+<p>思考一下应该和栈切换时保存的机制有关系。</p>
 
 
 
@@ -1707,7 +1774,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1-2.1-2M12.5 7v5.2l4 2.4-1 1L11 13V7h1.5M11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2v1.8Z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2024-08-23</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2024-08-24</span>
   </span>
 
     
