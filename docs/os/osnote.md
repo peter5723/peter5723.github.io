@@ -1,8 +1,14 @@
 # 操作系统
 
+## 介绍
+
 开始学操作系统. 学习的课程是 MIT 的 [6.1810](https://pdos.csail.mit.edu/6.828/2023/schedule.html)(即之前的 6.S081). 使用的教材是 [OSTEP](https://pages.cs.wisc.edu/~remzi/OSTEP/) 和 [xv6-book](https://pdos.csail.mit.edu/6.828/2023/xv6/book-riscv-rev3.pdf)
 
 由于是每节课一个实验, 那么我就把学习的笔记和实验记录在一起好了. 格外重要的需要详细讲的知识点, 再单独列出.
+
+网上关于这门课的资料真的多，好好利用，网红课啊。
+
+### git 配置
 
 在实验之前, 最好根据这个链接来配置你的 git: <https://xv6.dgs.zone/labs/use_git/git1.html>, 因为有些坑和之前的不同。
 
@@ -17,6 +23,36 @@ git push github xxx
 就可以在自己的仓库新建立一个 xxx 分支。
 
 每次想要上传作业到远程仓库时，`git push github xxx` 即可。`git checkout yyy` 可以去到之前完成的作业的分支。
+
+
+### gdb 配置
+
+调试 xv6，自然是使用 gdb 了。但是，用 gdb 的过程中，碰到了一些坑，导致我配了一下午环境才好。首先，不要使用 `gdb-multiarch`，感觉问题很多，自己调试的时候碰到一系列莫名其妙的问题，比如执行 `ecall` 指令后不会跳转到中断向量，而是直接到 `ecall` 的下一条物理指令。最好用 `riscv64-unknown-elf-gdb` 来进行调试，感觉这个的表现比较正常。但是安装又有点麻烦。
+
+下载解压安装 gdb 的步骤看下面这个链接：
+
+<https://rcore-os.cn/rCore-Tutorial-deploy/docs/pre-lab/gdb.html>
+
+然后如果告诉你缺 GMP、MPFR 和 MPC 这三个包，照下面的链接安装这些包：
+
+<https://blog.csdn.net/weixin_38184741/article/details/107682135>
+
+这样安装好以后，就可以使用 `riscv64-unknown-elf-gdb` 了。调试的方法就是开两个窗口，一个运行 `make qemu-gdb`，一个运行 `riscv64-unknown-elf-gdb`。
+
+然后之前我还大费周章地思考如何调试用户程序，其实很简单，由于 xv6 编译时贴心地给上了反汇编的结果，直接在反汇编的结果找到目标函数的虚拟地址，断点打在这个地址上就行了，例如：`b *0xee`。当然自己稍微注意一下，可能运行了好几个程序，对应同样的虚拟地址，所以运行到断点处未必是你之前断的地方，而是另一个程序。
+
+而拿 ls 函数举例，我之前找到的解决方法是：
+
+在打开以后，如果要调试 ls 函数，首先 `file user/_ls` 加载 elf 文件，再 `b ls` 即可。
+
+注意，查看 `.gdbinit` 文件，可以发现默认加载 `kernel/kernel` 这个 elf 文件，所以调试时，内核中的 c 代码可以直接查看；而如果要调试时查看用户程序的 c 代码，就要像上面一样用 `file` 指令加载一下，否则就只能汇编级别的调试。
+
+看看教授的调试吧，有所收获：
+
+[【【操作系统工程】精译【MIT 公开课 MIT6.S081】】](https://www.bilibili.com/video/BV1rS4y1n7y1?p=5&vd_source=76a8da1c0cc599f90b921e944a47c151)
+
+关于 qemu， `<C-a> c` 打开 qemu 的控制台，输入 `info mem` 可以查看页表。
+
 
 ## Lab1: Utilities
 
@@ -34,8 +70,7 @@ git push github xxx
 
 很简单，就是 GDB 的使用以及一些系统调用的添加。值得一提的是知道了 xv6 中的内存分配（kalloc 和 free）是通过链表实现的。
 
-
-本课程使用 GDB 的方法：  To use gdb with xv6, run make `make qemu-gdb` in one window, run `gdb-multiarch` (or riscv64-linux-gnu-gdb) in another window. 
+GDB 有些坑，我在开头解释。
 
 
 ## Lab3: Pgtbl
@@ -77,10 +112,9 @@ git push github xxx
 另外，PA 的实践收获还是挺大的，因为想不起来过程了可以看自己的代码回忆。
 
 
-## Lab4: trap
+## Lab4: Trap
 
 第一题打印函数调用的 backtrace，看下图清晰：
-
 
 ```
                 .
@@ -140,3 +174,9 @@ TODO: 在 sys_sleep() 内核函数中调用 backtrace，为什么可以一路回
 前面三个地址是内核函数，最后一个地址是用户函数。
 
 思考一下应该和栈切换时保存的机制有关系。
+
+
+第二题添加一个 alarm 系统调用，相当有难度。碰到的困难是，需要在内核态中调用用户函数，这应该怎么实现？首先直接修改 satp 的值显然不行。因为就算切换到用户页表，寄存器的值也不同。题目给的思路是，首先将该函数的地址赋值到 sepc 中，这样到时候就直接返回到这个用户函数。然后在这个用户函数中，再使用一个系统调用切换到内核态，恢复调用该函数前的内核状态执行，然后再返回到原来的过程。
+
+题目指导很详细，按着一步步做即可，思路就这个思路，内核代码看懂后实现挺顺利的。
+

@@ -15,6 +15,15 @@ grep 真的太常用了：
 grep -r "<you want>" . # 在当前文件夹下搜索指定字符串输出的位置
 ```
 
+解压：
+
+```bash
+tar  -zcvf  xx666              # 压缩
+tar  -zxvf  fenci.py.tar.gz    # 解压
+gzip -d pythontab.gz
+
+```
+
 ## shell 脚本
 
 参考资料:

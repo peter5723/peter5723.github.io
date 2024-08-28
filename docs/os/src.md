@@ -76,7 +76,7 @@ kvmmap(kpgtbl, TRAMPOLINE, (uint64)trampoline, PGSIZE, PTE_R | PTE_X);
 kvmmap(kpgtbl, UART0, UART0, PGSIZE, PTE_R | PTE_W);
 ```
 
-用户态和内核态，`trampoline.S` 对应的虚拟地址一致，这样即使切换页表，`trampoline.S` 中的代码也能正常工作。（实际上 `trampoline` 应该就是内核栈的的作用）那么上面，`trampoline.S` 在用户态的页表上保存好上下文到 `trapframe` 中后，`csrw satp, t1` 就将页表切换到内核页表（内核页表的地址也储存在进程结构体中），跳转到内核代码。
+用户态和内核态，`trampoline.S` 对应的虚拟地址一致，这样即使切换页表，`trampoline.S` 中的代码也能正常工作。那么上面，`trampoline.S` 在用户态的页表上保存好上下文到 `trapframe` 中后，`csrw satp, t1` 就将页表切换到内核页表（内核页表的地址也储存在进程结构体中：`p->trapframe->kernel_satp`），跳转到内核代码。
 
 （而 PA 实验中，由于内核页表地址是恒等映射，这些映射直接复制到用户页表中，因此不必切换）
 
