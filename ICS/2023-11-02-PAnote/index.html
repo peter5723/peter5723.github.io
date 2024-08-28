@@ -3298,6 +3298,9 @@ C语言声明可以有很多次，而定义只能有一次。故若要使用同�
 <a id="__codelineno-21-15" name="__codelineno-21-15" href="#__codelineno-21-15"></a>   x/2wd 0xbffff890
 <a id="__codelineno-21-16" name="__codelineno-21-16" href="#__codelineno-21-16"></a>   x/200bc $rdi
 <a id="__codelineno-21-17" name="__codelineno-21-17" href="#__codelineno-21-17"></a>   x/s   $rsp (a string)
+<a id="__codelineno-21-18" name="__codelineno-21-18" href="#__codelineno-21-18"></a>   x/6i 0x200  打印地址 0x200 开始的 6 条指令
+<a id="__codelineno-21-19" name="__codelineno-21-19" href="#__codelineno-21-19"></a>
+<a id="__codelineno-21-20" name="__codelineno-21-20" href="#__codelineno-21-20"></a>   注意，p 用来打印寄存器的值，x 用来打印地址储存的值
 </code></pre></div>
 <h4 id="display">Display<a class="headerlink" href="#display" title="Permanent link">&para;</a></h4>
 <p>Compared with <code>examine</code>, If we use display, the value will be printed each time the code is stopped, which is very convenient.
@@ -3856,7 +3859,7 @@ NEMU 提供硬件功能；AM 抽象层负责和上层的软件和底层的硬件
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1-2.1-2M12.5 7v5.2l4 2.4-1 1L11 13V7h1.5M11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2v1.8Z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2024-08-24</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2024-08-28</span>
   </span>
 
     
