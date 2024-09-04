@@ -1096,6 +1096,15 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#lab5-copy-on-write-fork" class="md-nav__link">
+    <span class="md-ellipsis">
+      Lab5: Copy-on-Write Fork
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -1713,6 +1722,15 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#lab5-copy-on-write-fork" class="md-nav__link">
+    <span class="md-ellipsis">
+      Lab5: Copy-on-Write Fork
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -1821,7 +1839,7 @@
 <a id="__codelineno-2-31" name="__codelineno-2-31" href="#__codelineno-2-31"></a>  $sp --&gt; | local variables |
 <a id="__codelineno-2-32" name="__codelineno-2-32" href="#__codelineno-2-32"></a>          +-----------------+
 </code></pre></div>
-<p>原理就是在没有参数寄存器的情况下，栈帧寄存器（FP/s0/x8）指向加 8 储存返回地址的地址，加 16 储存了上一个栈帧的位置。我们只要读取出函数返回地址就可以了。</p>
+<p>原理就是在没有参数寄存器的情况下，栈帧寄存器（FP/s0/x8）指向的地址，其加 8 的地址储存返回地址，加 16 储存了上一个栈帧的位置。我们只要读取出函数返回地址就可以了。</p>
 <p>回忆一下学 x86 时的函数调用：</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>push bp
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>mov bp, sp
@@ -1837,6 +1855,19 @@
 <p>思考一下应该和栈切换时保存的机制有关系。</p>
 <p>第二题添加一个 alarm 系统调用，相当有难度。碰到的困难是，需要在内核态中调用用户函数，这应该怎么实现？首先直接修改 satp 的值显然不行。因为就算切换到用户页表，寄存器的值也不同。题目给的思路是，首先将该函数的地址赋值到 sepc 中，这样到时候就直接返回到这个用户函数。然后在这个用户函数中，再使用一个系统调用切换到内核态，恢复调用该函数前的内核状态执行，然后再返回到原来的过程。</p>
 <p>题目指导很详细，按着一步步做即可，思路就这个思路，内核代码看懂后实现挺顺利的。</p>
+<h2 id="lab5-copy-on-write-fork">Lab5: Copy-on-Write Fork<a class="headerlink" href="#lab5-copy-on-write-fork" title="Permanent link">&para;</a></h2>
+<p>一开始的写法很乱，应该记得用函数封装的，还有一页内存泄露，感觉很难排查了，计划重新写一遍了。</p>
+<p>另外，要异常重视异常情况的处理。</p>
+<p>这个实验有难度，做完看看老师是怎么思考的，会很有收获：<a href="https://www.bilibili.com/video/BV19k4y1C7kA?p=11&amp;vd_source=76a8da1c0cc599f90b921e944a47c151">【MIT 6.S081 2020 操作系统 [中英文字幕]】</a></p>
+<p>实际上实现的就是一种节省内存的 fork，在复制时，先让子进程的 PTE 指向父进程的物理地址，将父子可写的页都标为只读。在需要对页进行写操作时，会触发 page fault，这时再分配新的页面。而原来只读的页面，就永远父子共享了。</p>
+<p>实现的细节已经在作业网站里有了。这里作为复习和表达的练习，再说一下吧。</p>
+<p>首先，第一步在 <code>uvmcopy()</code> 函数中，修改逻辑，原先是子进程直接复制父进程的内容，现在要让子进程的虚拟地址指向父进程的物理地址。并且由于父子进程共用一份物理地址，所以应当将这里的 pte 的写权限清除。可以在 pte 中增加一个 <code>PTE_C</code> 标志，表示这是共用页，会很方便。</p>
+<p>第二步，硬件如果试图写入没有读权限的页面，就会产生 page fault。这个时候就要判断是该页面是共享的页面还是只读的（看 <code>PTE_C</code> 有没有设置是最简单的）。如果是只读的，就抛出异常终止；反之，就为这个页面的虚拟地址分配新的物理页，让它指向新的物理页。</p>
+<p>第三步，何时释放页面，引入一个数组，计数有多少个虚拟地址映射到对应的页面中。如果页面的映射为 0，就可以释放。比如上面，<code>uvmcopy()</code> 中新进程指向页面，映射数加一；<code>trap()</code> 中虚拟地址指向新页面，老页面的映射数减 1。
+调用一次 <code>kalloc()</code>，将物理地址的映射初始化为 1。
+修改 <code>kfree()</code> 的逻辑，调用时，物理地址的映射数减 1，然后看映射数，如果映射数为 0，没有虚拟地址指向这里，就可以释放这页空间。</p>
+<p>在第一步和第二步中，添加计数的功能，如第二步中，指向新的物理页后，直接调用 <code>kfree()</code> 即可。</p>
+<p>这些做完后，就差不多了，有一个 <code>copyout()</code> 函数也要增加一个类似的缺页异常处理，这个藏的很隐蔽。如果没有通过 <code>cowtest</code> 的 <code>filetest</code>，往上找是 <code>pipe()</code> 的问题，然后 <code>pipe()</code> 调用了 <code>copyout()</code> 函数。</p>
 
 
 
@@ -1859,7 +1890,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1-2.1-2M12.5 7v5.2l4 2.4-1 1L11 13V7h1.5M11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2v1.8Z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2024-08-28</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2024-09-04</span>
   </span>
 
     
