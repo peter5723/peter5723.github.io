@@ -76,10 +76,18 @@ kvmmap(kpgtbl, TRAMPOLINE, (uint64)trampoline, PGSIZE, PTE_R | PTE_X);
 kvmmap(kpgtbl, UART0, UART0, PGSIZE, PTE_R | PTE_W);
 ```
 
-用户态和内核态，`trampoline.S` 对应的虚拟地址一致，这样即使切换页表，`trampoline.S` 中的代码也能正常工作。那么上面，`trampoline.S` 在用户态的页表上保存好上下文到 `trapframe` 中后，`csrw satp, t1` 就将页表切换到内核页表（内核页表的地址也储存在进程结构体中：`p->trapframe->kernel_satp`），跳转到内核代码。
+用户态和内核态，`trampoline.S` 对应的虚拟地址一致，这样即使切换页表，`trampoline.S` 中的代码也能正常工作。那么上面，`trampoline.S` 在用户态的页表上保存好上下文到用户地址的 `trapframe` 中后，`csrw satp, t1` 就将页表切换到内核页表（内核页表的地址也储存在进程结构体中：`p->trapframe->kernel_satp`），跳转到内核代码。
 
 （而 PA 实验中，由于内核页表地址是恒等映射，这些映射直接复制到用户页表中，因此不必切换）
 
+
+## 4. 缺页异常
+
+page fault 对应的代码
+
+由硬件检测，若读取到无效地址，the `scause` register indicates the type of the page fault and the `stval` register contains the address that couldn’t be translated. 别忘了地址翻译由硬件执行，所以异常由硬件抛出（不管硬件还是软件异常，都先跳转到 epc 设置的中断向量）。
+
+## 5. exec
 
 
 
