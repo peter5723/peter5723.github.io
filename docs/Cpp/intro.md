@@ -1306,6 +1306,36 @@ TODO: 考虑一下, 返回结构体不能保存在寄存器中, 是怎么返回�
 stackoverflow 中有很好的例子：<https://stackoverflow.com/questions/3106110/what-is-move-semantics?newreg=7ef8506e56544c8492d025934de2b2d0>
 
 
+要介绍移动，首先从左值和右值开始。左值可以放在赋值语句的左边或右边，右值只能放在赋值语句的右边。更深层次的考虑是：左值的对象存储在内存区域中，持久存在；右值的变量是一个具体的数值，是临时的。
+
+继续介绍一下引用。
+
+之前 C++ 中提到的引用，`std::string& ref;` 是左值引用，必须指向一个左值。
+
+而 `&&` 是右值引用，可以指向一个右值，`std::string&& rrstr;`。
+
+这样的引用，帮助我们实现移动语义。来看看 C++ 的移动函数，`std::move()`。
+
+```cpp
+typename std::remove_reference<T>::type&& move(T&& t) noexcept;
+```
+
+它将传入的对象转换为一个右值引用，这使得传入的对象成为了一个临时变量，在赋值结束后就被销毁，从而实现了移动。
+
+
+举个例子：
+
+```cpp
+int main() {
+vector<string> vec1 = {"hello", "world"}
+vector<string> vec2 = std::move(vec1);
+vec1.push_back("Sure hope vec2 doesn’t see this!") // error
+}
+```
+
+在 `move()` 被调用后，`vec1` 成为临时变量，赋值后随即释放，故第三句代码就会报错。
+
+
 ## Lecture 14:
 
 ## Lecture 15: Smart Pointers
@@ -1383,7 +1413,7 @@ void f() {
 
 看似两者差不多，但是如果考虑多线程的情况就不一样了。可能有一个线程在调用的时候触发了异常退出了，如果是前面传统的方式，就无法执行 `delete n`，而导致内存泄露。而智能指针，在变量离开作用域时就会自动释放内存，从而解决了这个问题。
 
-智能指针利用了 RALL（Resource Acquisition is Initialization）的思想。具体来说有两点：在初始化后获得资源，离开作用域时立刻释放资源，避免中间态的产生。操作系统中的锁设计也用到这个思想。
+智能指针利用了 RALL（Resource Acquisition is Initialization）的思想。具体来说有两点：在初始化后获得资源，离开作用域时立刻释放资源，避免中间态的产生。操作系统中的锁设计也用到这个思想。（原子化思想）
 
 ```cpp
 void f_lock() {
@@ -1402,3 +1432,58 @@ void f_lock() {
 ```
 
 如果有一个线程突然退出，按前者的方式将导致锁永远无法关闭，导致其他线程无法进入临界区。而后者解决了这一问题。
+
+
+下面是 copilot 给出的一段智能指针的例程，不得不感慨大模型的强大了，写的代码也是非常的易懂好用！甚至连 `move` 都搞清楚了。
+
+```cpp
+#include <iostream>
+#include <memory>
+
+class MyClass {
+public:
+    MyClass() {
+        std::cout << "MyClass Constructor" << std::endl;
+    }
+    ~MyClass() {
+        std::cout << "MyClass Destructor" << std::endl;
+    }
+    void display() {
+        std::cout << "Hello from MyClass" << std::endl;
+    }
+};
+
+void uniquePtrExample() {
+    std::unique_ptr<MyClass> ptr1 = std::make_unique<MyClass>();
+    ptr1->display();
+
+    // std::unique_ptr不能被复制，但可以被移动
+    std::unique_ptr<MyClass> ptr2 = std::move(ptr1);
+    if (!ptr1) {
+        std::cout << "ptr1 is now nullptr" << std::endl;
+    }
+    ptr2->display();
+}
+
+void sharedPtrExample() {
+    std::shared_ptr<MyClass> ptr1 = std::make_shared<MyClass>();
+    {
+        std::shared_ptr<MyClass> ptr2 = ptr1;
+        std::cout << "ptr1 use count: " << ptr1.use_count() << std::endl;
+        std::cout << "ptr2 use count: " << ptr2.use_count() << std::endl;
+        ptr2->display();
+    }
+    std::cout << "ptr1 use count after ptr2 goes out of scope: " << ptr1.use_count() << std::endl;
+    ptr1->display();
+}
+
+int main() {
+    std::cout << "Unique Pointer Example:" << std::endl;
+    uniquePtrExample();
+
+    std::cout << "\nShared Pointer Example:" << std::endl;
+    sharedPtrExample();
+
+    return 0;
+}
+```
