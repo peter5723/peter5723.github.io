@@ -89,5 +89,20 @@ page fault 对应的代码
 
 ## 5. exec
 
+用户程序执行 `exec` 系统调用后进入 `kernel/exec` 中的 `exec` 函数，可以看到，它会按照指定的路径读取 ELF 文件。给新进程分配新的页表和内存（`proc_pagetable()` 和 `uvmalloc()`），再通过 `readi()` 函数把文件读取到内存中。然后用 `uvmalloc()` 分配用户栈的内存，并存储 `argv` 的参数。这些准备好以后，就可以通过下面代码更新当前进程的内容了，并释放旧有的内容：
 
+```c
+  // Commit to the user image.
+  oldpagetable = p->pagetable;
+  p->pagetable = pagetable;
+  p->sz = sz;
+  p->trapframe->epc = elf.entry;  // initial program counter = main
+  p->trapframe->sp = sp; // initial stack pointer
+  proc_freepagetable(oldpagetable, oldsz);
+```
+
+这样执行完毕后，就会跳转到新程序的起始位置 `elf.entry`。
+
+
+## 6. 多线程切换
 
