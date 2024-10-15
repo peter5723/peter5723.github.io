@@ -107,6 +107,7 @@ nav:
     - "DFT": "signal/DFT.md"
     - "短时傅里叶变换": "signal/stft.md"
     - "LTI系统频域特性（ss第6章）": "signal/ch6_ss.md"
+    - "PCA 法滤波": "signal/pca.md"
   - "计算机系统":
     - "PA 实验记录": "ICS/2023-11-02-PAnote.md"
     - "RISC-V": "ICS/riscv.md"

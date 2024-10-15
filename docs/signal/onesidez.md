@@ -1,5 +1,12 @@
 # z 变换
 
+未来如果需要从 matlab 的 mlx 文件导出 markdown 文件的话，用下面的指令即可。`EmbedImages` 选项关闭可以让我们以超链接的形式插入图片。更详细的内容，`doc export` 即可。
+
+```matlab
+mdfile = export("myscript.mlx",Format="markdown",EmbedImages=false)
+```
+
+
 ## z 变换的讨论
 
 z 变换的定义是
