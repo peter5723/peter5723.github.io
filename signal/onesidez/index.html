@@ -769,6 +769,27 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../pca/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    PCA 法滤波
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -1666,6 +1687,9 @@
 
 
 <h1 id="z">z 变换<a class="headerlink" href="#z" title="Permanent link">&para;</a></h1>
+<p>未来如果需要从 matlab 的 mlx 文件导出 markdown 文件的话，用下面的指令即可。<code>EmbedImages</code> 选项关闭可以让我们以超链接的形式插入图片。更详细的内容，<code>doc export</code> 即可。</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="n">mdfile</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">export</span><span class="p">(</span><span class="s">&quot;myscript.mlx&quot;</span><span class="p">,</span><span class="n">Format</span><span class="p">=</span><span class="s">&quot;markdown&quot;</span><span class="p">,</span><span class="n">EmbedImages</span><span class="p">=</span><span class="nb">false</span><span class="p">)</span>
+</code></pre></div>
 <h2 id="z_1">z 变换的讨论<a class="headerlink" href="#z_1" title="Permanent link">&para;</a></h2>
 <p>z 变换的定义是</p>
 <div class="arithmatex">\[
@@ -1716,13 +1740,13 @@ y[n]=a^{n+1}y[-1]+\sum_{k=0}^{n}a^kx[n-k]
 <div class="arithmatex">\[
 y[n]+1.5y[n-1]+0.5y[n-2]=x[n]-x[n-1], y[-1]=2, y[-2]=1
 \]</div>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="n">num</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="p">];</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="n">den</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="w"> </span><span class="mf">1.5</span><span class="w"> </span><span class="mf">.5</span><span class="p">];</span>
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="n">n</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">0</span><span class="p">:</span><span class="mi">20</span><span class="p">;</span>
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="n">x</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">ones</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="nb">length</span><span class="p">(</span><span class="n">n</span><span class="p">));</span>
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="c">%zi = [-a1*y[-1] - a2*y[-2], -a2*y[-1]]</span>
-<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="n">zi</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="o">-</span><span class="mf">1.5</span><span class="o">*</span><span class="mi">2</span><span class="o">-</span><span class="mf">0.5</span><span class="o">*</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mf">0.5</span><span class="o">*</span><span class="mi">2</span><span class="p">];</span><span class="w"> </span><span class="c">%zi就是y[n]初值向量</span>
-<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="n">y</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">filter</span><span class="p">(</span><span class="n">num</span><span class="p">,</span><span class="n">den</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">zi</span><span class="p">);</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">num</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="p">];</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="n">den</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="w"> </span><span class="mf">1.5</span><span class="w"> </span><span class="mf">.5</span><span class="p">];</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="n">n</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">0</span><span class="p">:</span><span class="mi">20</span><span class="p">;</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="n">x</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">ones</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="nb">length</span><span class="p">(</span><span class="n">n</span><span class="p">));</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="c">%zi = [-a1*y[-1] - a2*y[-2], -a2*y[-1]]</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="n">zi</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="o">-</span><span class="mf">1.5</span><span class="o">*</span><span class="mi">2</span><span class="o">-</span><span class="mf">0.5</span><span class="o">*</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mf">0.5</span><span class="o">*</span><span class="mi">2</span><span class="p">];</span><span class="w"> </span><span class="c">%zi就是y[n]初值向量</span>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="n">y</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">filter</span><span class="p">(</span><span class="n">num</span><span class="p">,</span><span class="n">den</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">zi</span><span class="p">);</span>
 </code></pre></div>
 <h2 id="_1">求解斐波那契数列<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
 <p>用 z 变换可以轻松求解出斐波那契数列的通项公式。已知其递推式是：</p>
@@ -1776,7 +1800,7 @@ G(x)=\sum_{n=0}^{\infty}a_nx^n
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1-2.1-2M12.5 7v5.2l4 2.4-1 1L11 13V7h1.5M11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2v1.8Z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2024-07-10</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2024-10-15</span>
   </span>
 
     
