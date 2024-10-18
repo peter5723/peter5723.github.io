@@ -41,16 +41,14 @@
         
         
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7C['Inconsolata']:400,400i,700,700i&display=fallback">
-        <style>:root{--md-text-font:"Roboto";--md-code-font:"['Inconsolata']"}</style>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Serif+SC:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Noto Serif SC";--md-code-font:"Roboto Mono"}</style>
       
     
     
       <link rel="stylesheet" href="../../stylesheets/riscv.css">
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
-    
-      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.1.0/style.css">
     
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
@@ -1994,7 +1992,7 @@ docs/
 <p><a href="https://timvink.github.io/mkdocs-git-revision-date-localized-plugin/">https://timvink.github.io/mkdocs-git-revision-date-localized-plugin/</a></p>
 <h3 id="_10">中文字体：<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h3>
 <p>就是想试试别的字体了，这个字体是霞鹜文楷（能用的中文字体不多啊2333）。官网是 <a href="https://lxgw.github.io/">https://lxgw.github.io/</a>.</p>
-<p>配置很简单：在 <code>docs</code> 文件夹下建一个 <code>styesheets</code> 文件夹，用来放 css 文件。建一个 <code>extra.css</code> 文件，里面复制
+<p>配置很简单：在 <code>docs</code> 文件夹下建一个 <code>stylesheets</code> 文件夹，用来放 css 文件。建一个 <code>extra.css</code> 文件，里面复制
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="l l-Scalar l-Scalar-Plain">body {</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">font-family</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="s">&quot;LXGW</span><span class="nv"> </span><span class="s">WenKai&quot;</span><span class="err">,</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">sans-serif;</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span><span class="l l-Scalar l-Scalar-Plain">}</span>
@@ -2005,6 +2003,11 @@ docs/
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.1.0/style.css</span>
 </code></pre></div>
 就可以成功改变字体了。</p>
+<p>2024年10月18日更新：今天开始改成用思源宋体了。用 Google Font 上带有的字体很简单：在 yml 文件的 <code>theme</code> 下指定 <code>font</code> 项就可以了：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nt">font</span><span class="p">:</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">    </span><span class="nt">text</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Noto Serif SC</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">    </span><span class="nt">code</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Roboto Mono</span>
+</code></pre></div>
 <h3 id="highlight">highlight 和 删除线<a class="headerlink" href="#highlight" title="Permanent link">&para;</a></h3>
 <p><a href="https://squidfunk.github.io/mkdocs-material/reference/formatting/#sub-and-superscripts">https://squidfunk.github.io/mkdocs-material/reference/formatting/#sub-and-superscripts</a></p>
 <h3 id="_11">下标<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h3>
@@ -2040,7 +2043,7 @@ docs/
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1-2.1-2M12.5 7v5.2l4 2.4-1 1L11 13V7h1.5M11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2v1.8Z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2024-08-23</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2024-10-18</span>
   </span>
 
     
