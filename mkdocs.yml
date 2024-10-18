@@ -26,8 +26,10 @@ theme:
     #- navigation.expand # 打开Tab时左侧目录全部展开
     #- navigation.indexes #启用节索引页后，可以将文档直接附加到节
   font:
-    code:
-      - Inconsolata
+    text: Noto Serif SC
+    code: Roboto Mono
+    # code:
+    #   - Inconsolata
 
 
 markdown_extensions:
@@ -79,7 +81,7 @@ plugins:
 extra_css:
   - stylesheets/riscv.css
   - stylesheets/extra.css
-  - https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.1.0/style.css  #字体
+  # - https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.1.0/style.css  #字体
 
 extra:
   social:

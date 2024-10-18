@@ -84,7 +84,7 @@ The theme is [Material for Mkdocs](https://squidfunk.github.io/mkdocs-material/)
 
 就是想试试别的字体了，这个字体是霞鹜文楷（能用的中文字体不多啊2333）。官网是 <https://lxgw.github.io/>.
 
-配置很简单：在 `docs` 文件夹下建一个 `styesheets` 文件夹，用来放 css 文件。建一个 `extra.css` 文件，里面复制
+配置很简单：在 `docs` 文件夹下建一个 `stylesheets` 文件夹，用来放 css 文件。建一个 `extra.css` 文件，里面复制
 ```yaml
 body {
       font-family: "LXGW WenKai", sans-serif;
@@ -98,6 +98,14 @@ body {
   - https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.1.0/style.css
 ```
 就可以成功改变字体了。
+
+2024年10月18日更新：今天开始改成用思源宋体了。用 Google Font 上带有的字体很简单：在 yml 文件的 `theme` 下指定 `font` 项就可以了：
+
+```yaml
+font:
+    text: Noto Serif SC
+    code: Roboto Mono
+```
 
 ### highlight 和 删除线
 

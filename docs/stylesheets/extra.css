@@ -7,11 +7,11 @@
 :root>* {
     --md-code-bg-color: rgb(255, 238, 194);
 }
-.md-search__input {
-  font-family: "LXGW WenKai", sans-serif;
-}
+/* .md-search__input { */
+  /* font-family: "LXGW WenKai", sans-serif; */
+/* } */
 body {
-    font-family: "LXGW WenKai", sans-serif;
+    /* font-family: "LXGW WenKai", sans-serif; */
     /* Lite version */
     /* font-family: "LXGW WenKai Lite", sans-serif; */
     /* TC version */
