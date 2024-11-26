@@ -101,6 +101,7 @@ nav:
     - "vim": "tools/vim.md"
     - "git": "tools/git.md"
     - "GNU Make": "tools/make.md"
+    - "cmake": "tools/cmake.md"
     - "网络": "tools/ssh.md"
   - "化学":
     - "化学热力学中的一些问题": "chem/thermo.md"
