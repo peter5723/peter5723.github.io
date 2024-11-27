@@ -495,6 +495,27 @@
   
   
     <li class="md-nav__item">
+      <a href="../../tools/cmake/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    cmake
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../tools/ssh/" class="md-nav__link">
         
   
@@ -1675,20 +1696,35 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#lectrure-13-move-semantics" class="md-nav__link">
+  <a href="#lecture-13-move-semantics" class="md-nav__link">
     <span class="md-ellipsis">
-      Lectrure 13: Move Semantics
+      Lecture 13: Move Semantics
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#lecture-14" class="md-nav__link">
+  <a href="#lecture-14-stdoptional-type-safety" class="md-nav__link">
     <span class="md-ellipsis">
-      Lecture 14:
+      Lecture 14: std::optional, Type Safety
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="Lecture 14: std::optional, Type Safety">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-stdoptional" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. std::optional
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -2408,20 +2444,35 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#lectrure-13-move-semantics" class="md-nav__link">
+  <a href="#lecture-13-move-semantics" class="md-nav__link">
     <span class="md-ellipsis">
-      Lectrure 13: Move Semantics
+      Lecture 13: Move Semantics
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#lecture-14" class="md-nav__link">
+  <a href="#lecture-14-stdoptional-type-safety" class="md-nav__link">
     <span class="md-ellipsis">
-      Lecture 14:
+      Lecture 14: std::optional, Type Safety
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="Lecture 14: std::optional, Type Safety">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-stdoptional" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. std::optional
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -3454,7 +3505,7 @@ iterator 类型的元素可读可写，const_iterator 类型的元素只读。<a
 <p>TODO: 考虑一下, 返回结构体不能保存在寄存器中, 是怎么返回的呢? 我感觉大概是直接保存到上一个函数栈的某一个位置.</p>
 <p>有的时候, 我们不满足于默认的拷贝函数而要自己重载一个, 这是可以的. 想想有哪些情况呢? </p>
 <p>对于特殊成员函数的重载, 有规则0: "If the default operations work, then don't define your own." 和规则3: "If you explicitly define a copy constructor, copy assignment operator, or destructor, you should define all three."</p>
-<h2 id="lectrure-13-move-semantics">Lectrure 13: Move Semantics<a class="headerlink" href="#lectrure-13-move-semantics" title="Permanent link">&para;</a></h2>
+<h2 id="lecture-13-move-semantics">Lecture 13: Move Semantics<a class="headerlink" href="#lecture-13-move-semantics" title="Permanent link">&para;</a></h2>
 <p>下面进一步介绍特殊成员函数中的移动构造函数和移动赋值运算符，即 move 类型的。</p>
 <p>stackoverflow 中有很好的例子：<a href="https://stackoverflow.com/questions/3106110/what-is-move-semantics?newreg=7ef8506e56544c8492d025934de2b2d0">https://stackoverflow.com/questions/3106110/what-is-move-semantics?newreg=7ef8506e56544c8492d025934de2b2d0</a></p>
 <p>要介绍移动，首先从左值和右值开始。左值可以放在赋值语句的左边或右边，右值只能放在赋值语句的右边。更深层次的考虑是：左值的对象存储在内存区域中，持久存在；右值的变量是一个具体的数值，是临时的。</p>
@@ -3473,7 +3524,9 @@ iterator 类型的元素可读可写，const_iterator 类型的元素只读。<a
 <a id="__codelineno-77-5" name="__codelineno-77-5" href="#__codelineno-77-5"></a><span class="p">}</span>
 </code></pre></div>
 <p>在 <code>move()</code> 被调用后，<code>vec1</code> 成为临时变量，赋值后随即释放，故第三句代码就会报错。</p>
-<h2 id="lecture-14">Lecture 14:<a class="headerlink" href="#lecture-14" title="Permanent link">&para;</a></h2>
+<h2 id="lecture-14-stdoptional-type-safety">Lecture 14: std::optional, Type Safety<a class="headerlink" href="#lecture-14-stdoptional-type-safety" title="Permanent link">&para;</a></h2>
+<h3 id="1-stdoptional">1. std::optional<a class="headerlink" href="#1-stdoptional" title="Permanent link">&para;</a></h3>
+<p><code>std::optional</code> 是 C++17 中引入的一个特性。</p>
 <h2 id="lecture-15-smart-pointers">Lecture 15: Smart Pointers<a class="headerlink" href="#lecture-15-smart-pointers" title="Permanent link">&para;</a></h2>
 <p>这一章我们来看一下智能指针。C++ 中的智能指针是怎么回事呢？C 语言中如果忘记释放内存，就可能造成内存泄露。于是 C++ 就提供了智能指针，来自动释放管理的对象。智能指针包括三种指针：</p>
 <ul>
