@@ -130,6 +130,7 @@ nav:
     - "搜索":
       - "DFS": "algorithm/search/DFS.md"
     - "动态规划": "algorithm/dp.md"
+    - "np 完全性问题": "algorithm/np.md"
   - "C++":
     - "CS106L 笔记": "Cpp/intro.md"
   - "书":

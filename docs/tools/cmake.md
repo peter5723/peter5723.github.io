@@ -40,7 +40,7 @@ CMake 的特殊变量都是以 `CMAKE_` 打头的。这个练习中我们要用�
 
 我们指定 C++ 标准为 C++11：
 
-```
+```cmake
 cmake_minimum_required(VERSION 3.10)
 
 project(Tutorial)
@@ -60,7 +60,7 @@ project(Tutorial VERSION 1.0)
 就可以指定 target 的变量 VERSION.
 
 
-```
+```cmake
 configure_file(TutorialConfig.h.in TutorialConfig.h)
 ```
 
@@ -106,7 +106,7 @@ target_include_directories(Tutorial PUBLIC "${PROJECT_BINARY_DIR}")
 
 首先，如果我们的项目有多个子目录，那么用 `add_subdirectory` 就可以在构建过程中包含另一个目录的 Cmakelist。不同的子目录下，我们可以用 `add_library()` 构建静态库：
 
-```
+```cmake
 add_library(MathFunctions MathFunctions.cxx)
 ```
 
@@ -115,12 +115,12 @@ add_library(MathFunctions MathFunctions.cxx)
 
 然后用 `target_link_libraries()` 进行库的链接，将库链接到 target 上：
 
-```
+```cmake
 target_link_libraries(Tutorial PUBLIC MathFunctions)
 ```
 
 更新头文件搜索路径：
-```
+```cmake
 target_include_directories(Tutorial PUBLIC
                            "${PROJECT_BINARY_DIR}"
                            "${PROJECT_SOURCE_DIR}/MathFunctions"
@@ -130,7 +130,7 @@ target_include_directories(Tutorial PUBLIC
 
 然后看看下面的语句：
 
-```
+```cmake
 if(USE_MYMATH)
 target_compile_definitions(MathFunctions PUBLIC USE_MYMATH)
 endif()
