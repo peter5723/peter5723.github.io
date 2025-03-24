@@ -6,3 +6,7 @@
 /local
 /.obsidian
 /draft
+
+
+*.py
+*.ipynb

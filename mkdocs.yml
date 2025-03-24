@@ -131,6 +131,10 @@ nav:
       - "DFS": "algorithm/search/DFS.md"
     - "动态规划": "algorithm/dp.md"
     - "np 完全性问题": "algorithm/np.md"
+  - "优化理论":
+    - "介绍": "opt/intro.md"
+    - "线性代数复习": "opt/la.md"
+    - "凸优化问题": "opt/convex.md"
   - "C++":
     - "CS106L 笔记": "Cpp/intro.md"
   - "书":
