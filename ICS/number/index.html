@@ -593,6 +593,27 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chem/balance/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    配平化学方程式
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -2116,7 +2137,7 @@ x = (-1)^s\cdot(1+f)\cdot2^e
 </code></pre></div>
 <p><span class="arithmatex">\(f\)</span> 首位的 1 不需要存储。指数 <span class="arithmatex">\(e\)</span> 存储的是 <span class="arithmatex">\(e+1023\)</span> 偏移值，保证指数是正数。</p>
 <p>下面，举两个实际的例子看如何将数字转换成浮点表示。</p>
-<p><span class="arithmatex">\(-12.25\)</span>：是负数，所以 <span class="arithmatex">\(s=1\)</span>。再将 <span class="arithmatex">\(12.25\)</span> 转化成二进制表示，<span class="arithmatex">\(12.25 = 1100.01\)</span>。（读者自行思考如何转换小数）。然后将移动小数点，将整数部分变为 <span class="arithmatex">\(1\)</span>——这就是浮点数名称的由来，<span class="arithmatex">\(1.10001*2^3\)</span>。到这里，指数，小数，和负号就都知道了。要存储的就是 <span class="arithmatex">\(s=1\)</span>，<span class="arithmatex">\(e=3+1023=1026\)</span>，小数部分 <span class="arithmatex">\(f=10001\)</span>，那么<span class="arithmatex">\(-12.25\)</span> 这个数的浮点表述就是：</p>
+<p><span class="arithmatex">\(-12.25\)</span>：是负数，所以 <span class="arithmatex">\(s=1\)</span>。再将 <span class="arithmatex">\(12.25\)</span> 转化成二进制表示，<span class="arithmatex">\(12.25 = 1100.01\)</span>。（读者自行思考如何转换小数）。然后将移动小数点，将整数部分变为 <span class="arithmatex">\(1\)</span>——这就是浮点数名称的由来，结果是 <span class="arithmatex">\(1.10001*2^3\)</span>。到这里，指数，小数，和负号就都知道了。要存储的就是 <span class="arithmatex">\(s=1\)</span>，<span class="arithmatex">\(e=3+1023=1026\)</span>，小数部分 <span class="arithmatex">\(f=10001\)</span>，那么<span class="arithmatex">\(-12.25\)</span> 这个数的浮点表述就是：</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>+----------------+----------------+----------------------------------------------------+
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>| 符号位 (1 bit) | 指数 (11 bits) | 尾数 (52 bits)                                     |
 <a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>+----------------+----------------+----------------------------------------------------+
@@ -2130,11 +2151,11 @@ x = (-1)^s\cdot(1+f)\cdot2^e
 <a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>| 0              | 01111111011    | 1001100110011001100110011001100110011001100110011010 |
 <a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>+----------------+----------------+----------------------------------------------------+
 </code></pre></div></p>
-<p>有个重要的值，eps，其定义了浮点数的精度，实际上就是 f 所能达到的最小值：
-$$
-eps = 2^{-52} = 2.220446*10^{-16}
-$$</p>
-<p>当然，浮点数能达到的最小绝对值是<span class="arithmatex">\(2^{-1022}\)</span>。每一个二进制区间 <span class="arithmatex">\([2^e, 2^{e+1}]\)</span> 中的精度是相同的，均为 <span class="arithmatex">\(2^e\cdot eps\)</span>。思考一下就可以知道，绝对值越小，精度越高。</p>
+<p>有个重要的值，<span class="arithmatex">\(\mathrm{eps}\)</span>，其定义了浮点数的精度，实际上就是 f 所能达到的最小值：</p>
+<div class="arithmatex">\[
+\mathrm{eps = 2^{-52} = 2.220446*10^{-16}}
+\]</div>
+<p>当然，浮点数能达到的最小绝对值是<span class="arithmatex">\(2^{-1022}\)</span>。每一个二进制区间 <span class="arithmatex">\([2^e, 2^{e+1}]\)</span> 中的精度是相同的，均为 <span class="arithmatex">\(2^e\cdot \mathrm{eps}\)</span>。思考一下就可以知道，绝对值越小，精度越高。</p>
 <p>浮点数的四则运算，对加法和减法来说，要将两数的指数化成一致，再对小数进行加减法运算，最后将计算结果化成标准形式。乘除则加减指数，对小数部分进行乘除法运算。</p>
 
 
@@ -2158,7 +2179,7 @@ $$</p>
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1-2.1-2M12.5 7v5.2l4 2.4-1 1L11 13V7h1.5M11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2v1.8Z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2025-03-28</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2025-03-29</span>
   </span>
 
     
