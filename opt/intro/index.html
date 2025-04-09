@@ -1763,11 +1763,11 @@
 <h1 id="_1">优化理论介绍<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
 <p>最优化问题非常常见。有高中学历的读者，求过函数的最大值和最小值，或者线性规划的最优解，这些就是最优化问题。简单说，最优化问题就是求出一个自变量的取值，使得函数取得最值。优化问题的数学定义是：</p>
 <div class="arithmatex">\[
-    \min_{x} \ f(x) \quad  \\
+    p^*=\min_{x} \ f(x) \quad  \\
     \text{subject to:} 
     \quad g_i(x) \leq 0, \quad i = 1, 2, \dots, m, \\
 \]</div>
-<p>就是，找到一个 <span class="arithmatex">\(n\)</span> 维向量 <span class="arithmatex">\(x\)</span>，使其满足约束函数 <span class="arithmatex">\(g(x)\)</span> 的限制，使目标函数 <span class="arithmatex">\(f(x)\)</span> 取得最小值。</p>
+<p>就是，找到一个 <span class="arithmatex">\(n\)</span> 维向量 <span class="arithmatex">\(x^*\)</span>，使其满足约束函数 <span class="arithmatex">\(g(x)\)</span> 的限制，使目标函数 <span class="arithmatex">\(f(x)\)</span> 取得最小值。我们将 <span class="arithmatex">\(x^*\)</span> 称为原问题的解或最优解，<span class="arithmatex">\(p^*\)</span> 称为最优值。</p>
 <p>人们已经总结出了许多问题的范式以及对应的求解最优值方法。在求解实际问题时，往往希望将问题转化成已知的问题，方便我们求解。以前在读教材的时候，一直不太清楚为何教材大费周章地介绍各类优化问题，却不给解决的算法。现在才知道，教材认为，求解的算法是简单的（不是简单的，而是已经有成熟的算法供给读者直接使用，读者不必知道求解细节），但是难点在于，从实际问题中，抽象出问题的范式，将之转化为有高效求解方法的问题。</p>
 <p>我们从最小二乘法开始。</p>
 <p>最小二乘法仍然是关于求解矩阵方程 <span class="arithmatex">\(Ax=y\)</span> 的方法。若 <span class="arithmatex">\(y\)</span> 不在 <span class="arithmatex">\(A\)</span> 的列空间中，则 <span class="arithmatex">\(Ax=b\)</span> 无解！但是，希望能找到一个最好的 <span class="arithmatex">\(x\)</span>，令残差 <span class="arithmatex">\(r=Ax-y\)</span> 尽可能小。我们用二范数度量 <span class="arithmatex">\(r\)</span> 的大小。那么最优化问题可以描述成：</p>
