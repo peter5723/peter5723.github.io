@@ -19,9 +19,12 @@ grep -r "<you want>" . # 在当前文件夹下搜索指定字符串输出的位�
 
 ```bash
 tar  -zcvf  xx666              # 压缩
-tar  -zxvf  fenci.py.tar.gz    # 解压
+tar  -zxvf  fenci.py.tar.gz -C output_dir   # 解压
 gzip -d pythontab.gz
 
+zip -r archive.zip folder_name #压缩文件夹
+unzip archive.zip -d /path/to/destination #解压到指定目录
+unzip -l archive.zip #查看文件不解压
 ```
 
 ## shell 脚本
@@ -59,9 +62,9 @@ exit $?
 PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~/bin
 export PATH
 
-read -p "Please input your first name: " firstname      
-read -p "Please input your last name:  " lastname       
-echo -e "\nYour full name is: ${firstname} ${lastname}" 
+read -p "Please input your first name: " firstname
+read -p "Please input your last name:  " lastname
+echo -e "\nYour full name is: ${firstname} ${lastname}"
 ```
 
 注意: read 用法, 读取用户输入, 并存储到变量中. 可选择 -p 选项可跟提示字符串. `read [-p] var`
@@ -107,7 +110,7 @@ export PATH
 echo -e "This program will calculate pi value. \n"
 echo -e "You should input a float number to calculate pi value.\n"
 read -p "The scale number (10~10000) ? " checking
-num=${checking:-"10"} 
+num=${checking:-"10"}
 
 echo -e "Starting calculate pi value.  Be patient."
 time echo "scale=${num}; 4*a(1)" | bc -lq
@@ -129,7 +132,7 @@ shell 脚本有好几种执行方式, 一种是像前面那样, 直接运行脚�
 
 当然可以向脚本传递命令行参数了, 并且在脚本运行的过程中, 这些命令行参数都会被储存起来. (前面的例子里用 read 来输入参数还是笨笨的).
 
-看下面的例子: 
+看下面的例子:
 ```bash
 #!/bin/bash
 # add two numbers
@@ -141,13 +144,13 @@ echo "a+b: ${total}"
 
 在脚本中, `${num}` 代表第 num 个命令行参数. num 大于 10 则必须用大括号, 否则可省略. $0 代表第 0 个变量, 即脚本的路径名. 后面就是 $1, $2, ... 依次类推了.
 
-除此之外, 在 bash 中有很多特殊变量. 
+除此之外, 在 bash 中有很多特殊变量.
 
 - `$#`: 命令行参数的数量
 - `$*`: 将所有命令行变量储存成一个字符串, 各个变量用空格分隔.
 - `$@`: 将所有命令行变量储存成一个数组
 
-看下面的例子: 
+看下面的例子:
 ```bash
 #!/bin/bash
 echo "The script name is: $0"
