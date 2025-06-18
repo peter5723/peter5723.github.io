@@ -138,6 +138,10 @@ nav:
     - "凸优化问题": "opt/convex.md"
   - "C++":
     - "CS106L 笔记": "Cpp/intro.md"
+  - "ai infra":
+    - "介绍": "ai/infra.md"
+  - "计算机网络":
+    - "网络": "network/network.md"
   - "书":
     - "鼠疫": "wen/LaPeste.md"
     - "西西弗神话": "wen/sisyphe.md"
