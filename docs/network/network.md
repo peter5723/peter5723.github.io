@@ -200,3 +200,55 @@ Web 缓存器
 - 浏览器接收到来自 DNS 的 IP 地址，向该 IP 地址定位的 HTTP 服务器发送一个 TCP 连接
 
 用 wireshark 抓包，过滤 DNS 协议，即可查看 DNS 服务器地址以及 DNS 报文。
+
+实验室的电脑不知道怎么回事，抽风了抓不出来，回寝室用自己的笔记本电脑就可以成功抓包 DNS 服务了。首先用 `nslookup <hostname>` 就可以找到域名对应的 IP 地址。`nslookup` 指令是走 DNS 服务查询的。我们开启 wireshark 抓包，过滤 DNS 协议，打开一个命令行输入 `nslookup bing.com`，就可以看到如下图的结果。
+
+![](https://cdn.jsdelivr.net/gh/peter5723/imagehost/img/net3.png)
+
+我们用 `ipconfig /all` 查看本机的 IP 地址是 `10.192.252.13`，DNS 服务器是 `10.10.0.21` 与 `10.10.2.21`，这是使用浙大校网使用的 DNS 服务器。这与上面抓包的结果一致。我们打开 DNS 服务器的响应报文，如下所示：
+
+```
+Frame 109837: 532 bytes on wire (4256 bits), 532 bytes captured (4256 bits) on interface \Device\NPF_{B8D67097-65C7-4EE3-90AD-955585FA85A3}, id 0
+Ethernet II, Src: H3CTechnolog_ff:80:10 (00:0f:e2:ff:80:10), Dst: Intel_25:25:88 (9c:b1:50:25:25:88)
+Internet Protocol Version 4, Src: 10.10.0.21, Dst: 10.193.252.13
+User Datagram Protocol, Src Port: 53, Dst Port: 50849
+Domain Name System (response)
+    Transaction ID: 0x0002
+    Flags: 0x8180 Standard query response, No error
+    Questions: 1
+    Answer RRs: 2
+    Authority RRs: 13
+    Additional RRs: 13
+    Queries
+    Answers
+        bing.com: type A, class IN, addr 150.171.27.10
+        bing.com: type A, class IN, addr 150.171.28.10
+    Authoritative nameservers
+    Additional records
+    [Request In: 109836]
+    [Time: 0.002144000 seconds]
+```
+
+可以知道服务器的端口号是53，本机的端口号是50849，传输的方式是 UDP，返回的结果在 `answer` 条目中，其中一个 IP 地址是 `150.171.27.10`，就是 `bing.com` 对应的 IP 地址。这与 `nslookup` 的输出结果是一致的。当然，出于多种原因，直接在浏览器中输入解析的 IP 地址是一般是打不开对应网页的，[原因在这里，大概是反向代理，我暂时不研究](https://blog.csdn.net/gui951753/article/details/83070180)
+
+这个链接较好，可以看看。[DNS 实验](https://zhuanlan.zhihu.com/p/335814524)
+
+在做实验的时候，发现现在 baidu ping 不通了，有说 baidu 是关闭了 ICMP 协议导致的，但是我 telnet 也连接不到。[baidu ping
+不到](https://www.cnblogs.com/a-s-m/p/11167669.html)
+
+上面动手实操了一下，下面我们继续学习原理。
+
+应用程序调用 DNS 客户机端，指明主机名，主机 DNS 接收到后，向网络中发送 DNS 查询报文。一般请求和回答报文均使用 UDP 经端口 53 发送。经过若干时间，主机 DNS 从服务器接收到一个 DNS 回答报文，即可解析出 IP 地址。
+
+看起来，DNS 是一个黑盒子。那么黑盒子内部如何？
+
+DNS 是一个典型的分布式应用。有三种类型的 DNS 服务器：根 DNS 服务器，顶级域服务器（TLD）和权威 DNS 服务器。以及用于代理的本地 DNS 服务器。
+
+下面图片比较清楚地展示了域名系统，域名系统与各级别 DNS 服务器相对应。
+
+![](https://cdn.jsdelivr.net/gh/peter5723/imagehost/img/net4.png)
+
+以 `www.baidu.com` 为例，`com` 是顶级域名，`baidu.com` 对应一个组织的权威域名服务器， `www` 是主机名，因特网中默认的主机名就叫 `www`。在 DNS 查询时，主机先将请求发送到本地 DNS 服务器，本地 DNS 服务器将该请求传到根 DNS 服务器，根 DNS 服务器注意到 `com` 前缀，于是向本地 DNS 服务器返回负责 `com` 的 TLD 的查询列表。本地 DNS 服务器向这些 TLD 发送查询报文。其中一个 TLD 服务器找到了 `baidu.com` 负责的权威 DNS 服务器，并用该权威 DNS 服务器的地址进行响应。最后，本地 DNS 服务器向该权威 DNS 服务器发送请求，寻找名为 `www` 的主机名。权威 DNS 服务器返回 `www` 的 IP 地址给本地服务器，本地服务器再将结果返还给我的主机，这样就完成了一整个 DNS 解析流程。
+
+这样查询开销大，DNS 也有缓存技术来减少开销。
+
