@@ -57,24 +57,24 @@ import socket
 # 创建TCP套接字
 server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 # 绑定本地地址和端口
-server_socket.bind(('192.168.223.1', 8888))  
+server_socket.bind(('192.168.223.1', 8888))
 # 监听连接（最大连接数5）
-server_socket.listen(5)  
+server_socket.listen(5)
 print("服务器已启动，等待客户端连接...")
 
 while True:
     # 接受客户端连接
-    client_socket, addr = server_socket.accept()  
+    client_socket, addr = server_socket.accept()
     print(f"客户端 {addr} 已连接")
-    
+
     # 接收客户端数据（最大1024字节）
-    data = client_socket.recv(1024).decode('utf-8')  
+    data = client_socket.recv(1024).decode('utf-8')
     print(f"收到消息: {data}")
-    
+
     # 发送响应
     response = f"已收到你的消息: {data}"
-    client_socket.send(response.encode('utf-8'))  
-    
+    client_socket.send(response.encode('utf-8'))
+
     # 关闭连接
     client_socket.close()
 ```
@@ -87,14 +87,14 @@ import socket
 # 创建TCP套接字
 client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 # 连接服务器
-client_socket.connect(('192.168.223.1', 8888))  
+client_socket.connect(('192.168.223.1', 8888))
 
 # 发送消息
 message = "Hello, Server!"
-client_socket.send(message.encode('utf-8'))  
+client_socket.send(message.encode('utf-8'))
 
 # 接收响应
-response = client_socket.recv(1024).decode('utf-8')  
+response = client_socket.recv(1024).decode('utf-8')
 print(f"服务器响应: {response}")
 
 # 关闭连接
@@ -182,3 +182,21 @@ Content-Type: text/html
 ```
 
 浏览器按 F12 打开开发者页面就可以轻松地看到 http 报文。
+
+http 是无状态协议。但是 http 可以使用 cookie 技术来让服务器跟踪用户状态。简单说：第一次到达一个使用 cookie 的站点，站点会产生一个唯一识别码，添加到后端数据库中。接着站点返回一个响应报文，包含 Set-cookie: 这个首部表项和识别码。用户端浏览器接收到这个报文，就往其管理的 cookie 文件中添加一行，包含站点服务器的主机名和识别码。之后用户再访问站点时，浏览器发送的请求报文都会包含这个识别码。服务器就可以根据这个识别码，检索数据库，来跟踪用户的状态，如访问活动。
+
+
+Web 缓存器
+
+电子邮件协议：SMTP 发送，POP3/IMAP 接收
+
+
+互联网主机识别：主机名（hostname）或者 IP 地址。进行转换的目录服务：域名系统（Domain Name System，DNS）。DNS 协议正常由其他应用层协议使用，用于将主机名转化成 IP 地址。举例，用户输入 `www.baidu.com` 时，发生的事情：
+
+- 用户主机运行 DNS 应用的客户机端
+- 浏览器将主机名 `www.baidu.com` 传给 DNS 应用的客户机端
+- DNS 客户机向 DNS 服务器发送一个包含主机名的请求
+- DNS 客户机收到 DNS 服务器的回答报文
+- 浏览器接收到来自 DNS 的 IP 地址，向该 IP 地址定位的 HTTP 服务器发送一个 TCP 连接
+
+用 wireshark 抓包，过滤 DNS 协议，即可查看 DNS 服务器地址以及 DNS 报文。
