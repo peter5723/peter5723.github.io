@@ -1363,6 +1363,29 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../algorithm/greedy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    贪心算法
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -1527,6 +1550,54 @@
       2. 对偶
     </span>
   </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. 无约束优化问题，梯度下降法
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. 无约束优化问题，梯度下降法">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      实例：二次函数拟合
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. 约束优化问题，内点法
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. 约束优化问题，内点法">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      实例：线性规划
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -2091,6 +2162,54 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. 无约束优化问题，梯度下降法
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. 无约束优化问题，梯度下降法">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      实例：二次函数拟合
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. 约束优化问题，内点法
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. 约束优化问题，内点法">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      实例：线性规划
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -2157,34 +2276,313 @@ d^*=\max_{\lambda \geq 0, \nu} \ g(\lambda, \nu)
 \]</div>
 <p>很容易知道，即使原问题不是凸的，对偶问题也是凸优化问题。</p>
 <p>我们容易得到： <span class="arithmatex">\(d^* \leq p^*\)</span>。根据是否取到等号来判断是强对偶性或者是弱对偶性。所以我们有时可以通过求对偶问题的解，再转化成原问题的解。</p>
+<p>原问题与对偶问题的关系大致如下所示（图是网上别人画的）：</p>
+<p><img alt="" src="https://cdn.jsdelivr.net/gh/peter5723/imagehost/img/opt1.png" /></p>
 <p>对于一个满足强对偶性的问题，若这个问题的最优解为 <span class="arithmatex">\(x^*\)</span>，其对偶问题的解是 <span class="arithmatex">\((\lambda^*, \nu^*)\)</span>。则它们满足 KKT(Karush-Kuhn-Tucker) 条件：</p>
-<ol>
+<ul>
 <li><strong>原始可行性</strong>：</li>
-</ol>
+</ul>
 <div class="arithmatex">\[ 
    f_i(x^*) \leq 0, \quad h_j(x^*) = 0.
 \]</div>
-<ol>
+<ul>
 <li><strong>对偶可行性</strong>：</li>
-</ol>
+</ul>
 <div class="arithmatex">\[
    \lambda_i^* \geq 0, \quad i = 1, 2, \dots, m.
 \]</div>
-<ol>
+<ul>
 <li><strong>互补松弛条件</strong>：</li>
-</ol>
+</ul>
 <div class="arithmatex">\[
    \lambda_i^* f_i(x^*) = 0, \quad i = 1, 2, \dots, m.
 \]</div>
-<ol>
+<ul>
 <li><strong>拉格朗日梯度条件</strong>：</li>
-</ol>
+</ul>
 <div class="arithmatex">\[
    \nabla f_0(x^*) + \sum_{i=1}^m \lambda_i^* \nabla f_i(x^*) + \sum_{j=1}^q \nu_j^* \nabla h_j(x^*) = 0.
 \]</div>
 <p>KKT 条件是一组最优解的必要条件。若原问题也是凸的，则 KKT 条件成为解的充分条件。</p>
 <p>KKT 条件非常重要，对一些问题来说，可以将求解原问题转化成求解满足 KKT 条件的点，从而找到最优解。</p>
-<p>后面，我们介绍一些典型的凸优化问题。</p>
+<p>下面，我们介绍一些典型的凸优化问题及其算法。目前典型的凸优化问题都有比较成熟的软件支持了。</p>
+<h2 id="3">3. 无约束优化问题，梯度下降法<a class="headerlink" href="#3" title="Permanent link">&para;</a></h2>
+<p>假设我们构造出了一个无约束优化问题：</p>
+<div class="arithmatex">\[
+\min_{x} \ f_0(x)
+\]</div>
+<p>我们想找到其最优解，经典的方法是梯度下降法。原理是在一个初始点 <span class="arithmatex">\(x_k\)</span> 进行一阶泰勒展开：</p>
+<div class="arithmatex">\[
+f(x) = f(x_k) + \nabla f(x_k)(x-x_k)
+\]</div>
+<p>于是不断地向负梯度方向进行迭代：</p>
+<div class="arithmatex">\[
+x_{k+1} = x_k - \lambda \nabla f(x_k)
+\]</div>
+<p><span class="arithmatex">\(\lambda\)</span> 是步长，可以是超参数，或者用搜索步长法确定。</p>
+<p>直到收敛条件为止。</p>
+<p>求解梯度的方法，简单的函数用解析法，复杂的函数可以用反向传播法进行自动微分计算。</p>
+<h3 id="_2">实例：二次函数拟合<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
+<p>我们下面再用二次函数的拟合，来介绍一下优化方法。</p>
+<p>假设我获得了 200 个点，其函数值是二次函数和高斯噪声的混合，我怎么对二次函数进行拟合呢？拟合问题是一个线性模型：</p>
+<div class="arithmatex">\[
+y^* = Ax
+\]</div>
+<p>其中 A 是数据矩阵 <span class="arithmatex">\([x^2, x, 1]\)</span> 向下叠 n 行，x 是我们要拟合的参数 <span class="arithmatex">\([a ,b ,c]^T\)</span>，<span class="arithmatex">\(y^*\)</span> 是预测值矩阵。</p>
+<p>我们希望求出最好的 x，使得 <span class="arithmatex">\(y^*\)</span> 与实际的 <span class="arithmatex">\(y\)</span> 相差最小，就可以得到这样无约束优化问题（用均方误差 MSE 作为损失函数）：</p>
+<div class="arithmatex">\[
+   \min_x ||Ax-y||^2
+\]</div>
+<p>其在点 x 处的梯度是:</p>
+<div class="arithmatex">\[
+2(Ax-y)x
+\]</div>
+<p>当然我们前面已经求过了解析解：<span class="arithmatex">\(x = (A^TA)^{-1}A^Ty\)</span>。但是当 <span class="arithmatex">\(A\)</span> 巨大的时候，求逆会非常困难，不太可行，现代求逆的复杂度是 <span class="arithmatex">\(o(n^3)\)</span>。</p>
+<p>所以我们用梯度下降法进行求解。代码大致如下：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">gradient_descent</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">learning_rate</span><span class="o">=</span><span class="mf">0.0001</span><span class="p">,</span> <span class="n">epochs</span><span class="o">=</span><span class="mi">1000</span><span class="p">):</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>    <span class="n">theta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>  <span class="c1"># 随机初始化参数</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>    <span class="n">m</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>    <span class="n">losses</span> <span class="o">=</span> <span class="p">[]</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>    <span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">epochs</span><span class="p">):</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>        <span class="n">gradients</span> <span class="o">=</span> <span class="mi">2</span><span class="o">/</span><span class="n">m</span> <span class="o">*</span> <span class="n">X</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="p">(</span><span class="n">X</span> <span class="o">@</span> <span class="n">theta</span> <span class="o">-</span> <span class="n">y</span><span class="p">)</span>
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>        <span class="n">theta</span> <span class="o">=</span> <span class="n">theta</span> <span class="o">-</span> <span class="n">learning_rate</span> <span class="o">*</span> <span class="n">gradients</span>
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>        <span class="n">loss</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">((</span><span class="n">X</span> <span class="o">@</span> <span class="n">theta</span> <span class="o">-</span> <span class="n">y</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>        <span class="n">losses</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">loss</span><span class="p">)</span>
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>        <span class="k">if</span> <span class="n">epoch</span> <span class="o">%</span> <span class="mi">100</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Epoch </span><span class="si">{</span><span class="n">epoch</span><span class="si">}</span><span class="s2">, Loss: </span><span class="si">{</span><span class="n">loss</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>
+<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>    <span class="k">return</span> <span class="n">theta</span><span class="p">,</span> <span class="n">losses</span>
+</code></pre></div>
+<p>在深度学习中，上面的数据矩阵 X 会非常大，导致 gradient 和 loss 的计算都很困难。于是人们想到抽样的方法，每次只使用几个样本进行梯度的更新，而不是全部数据，这种方法就是所谓的小批量梯度下降（mini-batch GD）。</p>
+<p>代码大致如下：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">mini_batch_gradient_descent</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">32</span><span class="p">,</span> <span class="n">learning_rate</span><span class="o">=</span><span class="mf">0.0001</span><span class="p">,</span> <span class="n">epochs</span><span class="o">=</span><span class="mi">1000</span><span class="p">):</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>    <span class="n">theta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>    <span class="n">m</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>    <span class="n">losses</span> <span class="o">=</span> <span class="p">[]</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>    <span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">epochs</span><span class="p">):</span>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>        <span class="n">shuffled_indices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">permutation</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>        <span class="n">X_shuffled</span> <span class="o">=</span> <span class="n">X</span><span class="p">[</span><span class="n">shuffled_indices</span><span class="p">]</span>
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>        <span class="n">y_shuffled</span> <span class="o">=</span> <span class="n">y</span><span class="p">[</span><span class="n">shuffled_indices</span><span class="p">]</span>
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>
+<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="n">batch_size</span><span class="p">):</span>
+<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>            <span class="n">X_batch</span> <span class="o">=</span> <span class="n">X_shuffled</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">i</span><span class="o">+</span><span class="n">batch_size</span><span class="p">]</span>
+<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>            <span class="n">y_batch</span> <span class="o">=</span> <span class="n">y_shuffled</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">i</span><span class="o">+</span><span class="n">batch_size</span><span class="p">]</span>
+<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a>            <span class="n">batch_m</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">y_batch</span><span class="p">)</span>
+<a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a>            <span class="n">gradients</span> <span class="o">=</span> <span class="mi">2</span><span class="o">/</span><span class="n">batch_m</span> <span class="o">*</span> <span class="n">X_batch</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="p">(</span><span class="n">X_batch</span> <span class="o">@</span> <span class="n">theta</span> <span class="o">-</span> <span class="n">y_batch</span><span class="p">)</span>
+<a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a>            <span class="n">theta</span> <span class="o">=</span> <span class="n">theta</span> <span class="o">-</span> <span class="n">learning_rate</span> <span class="o">*</span> <span class="n">gradients</span>
+<a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a>
+<a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a>        <span class="n">loss</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">((</span><span class="n">X</span> <span class="o">@</span> <span class="n">theta</span> <span class="o">-</span> <span class="n">y</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+<a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a>        <span class="n">losses</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">loss</span><span class="p">)</span>
+<a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a>
+<a id="__codelineno-1-21" name="__codelineno-1-21" href="#__codelineno-1-21"></a>        <span class="k">if</span> <span class="n">epoch</span> <span class="o">%</span> <span class="mi">100</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+<a id="__codelineno-1-22" name="__codelineno-1-22" href="#__codelineno-1-22"></a>            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Epoch </span><span class="si">{</span><span class="n">epoch</span><span class="si">}</span><span class="s2">, Loss: </span><span class="si">{</span><span class="n">loss</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<a id="__codelineno-1-23" name="__codelineno-1-23" href="#__codelineno-1-23"></a>
+<a id="__codelineno-1-24" name="__codelineno-1-24" href="#__codelineno-1-24"></a>    <span class="k">return</span> <span class="n">theta</span><span class="p">,</span> <span class="n">losses</span>
+</code></pre></div>
+<p>一开始每进行一次梯度下降就是一个 epoch。后来都是小批量算法，有 batch 的概念。将数据随机打乱抽样成一个个 batch。每次这些 batch 遍历完所有数据为一个 epoch。</p>
+<p>实际上深度学习问题，和上面二次函数的拟合问题，本质几乎一模一样。改变的只有模型、损失函数的计算、更新参数的方法。</p>
+<p>在深度学习中，我们要求解一个最优模型，参数数量远大于上面的二次函数系数，因此梯度非常难以用解析的方式表达。但是没关系，反向传播算法解决了这个问题，每次我们计算出 loss，就可以用反向传播，计算出每一层的梯度，从而继续用梯度下降法来更新参数。</p>
+<h2 id="4">4. 约束优化问题，内点法<a class="headerlink" href="#4" title="Permanent link">&para;</a></h2>
+<p>不等式约束的极小化问题，有一个非常好的方法，内点法。我们详细介绍一下。考虑问题的形式如下：</p>
+<div class="arithmatex">\[
+    p^* =\min_{x} \ f_0(x) \quad  \\
+    \text{subject to:} 
+    \quad f_i(x) \leq 0, \quad i = 1,  \dots, m, \\
+\]</div>
+<p>m 是约束条件个数，后面会用到。</p>
+<p>简单起见，不考虑等式约束。如果有等式约束，最简单的方法就是使用代入法进行消元，转化成上述形式，再做。其他方法读书去了。</p>
+<p>那么有不等式约束，应该怎么做呢？我们当然是想办法消除不等式约束。经典的方法是引入障碍函数（或者叫罚函数）。我们把问题重新表述成：</p>
+<div class="arithmatex">\[
+    p^* =\min_{x} \ f_0(x) + \sum_{i=1}^{m}I_-(f_i(x)) 
+\]</div>
+<div class="arithmatex">\[
+I_-(u) = 0(u\leq 0) \text{或} \infty (u&gt;0)
+\]</div>
+<p>这个函数不可微，所以想办法用其他函数近似。比如说，用对数障碍函数。</p>
+<div class="arithmatex">\[
+\phi(x) = -\sum^{m}_{i=1}\ln(-f_i(x))
+\]</div>
+<p>其梯度为：</p>
+<div class="arithmatex">\[
+\nabla\phi(x) = \sum^{m}_{i=1}\frac{\nabla f_i(x)}{-f_i(x)}
+\]</div>
+<p>那么问题转化成：</p>
+<div class="arithmatex">\[
+\min_x f_0(x) + \frac{1}{t} \phi(x)
+\]</div>
+<p>其中 <span class="arithmatex">\(t&gt;0\)</span> 是确定近似精度的参数。<span class="arithmatex">\(t\)</span> 越大，对数函数越平滑，越符合示性函数。</p>
+<p><img alt="" src="https://cdn.jsdelivr.net/gh/peter5723/imagehost/img/opt2.png" /></p>
+<p>好，现在这问题变成了一个无约束优化问题。我们求解这个问题的最优解，就可以求得原问题的解的一个近似。这近似好吗？一开始我有所怀疑，但是接下来可以用数学，来说明是好的，因为可以看到我们可以通过增加 t 来改进近似精度。</p>
+<p>为方便，下面我们考虑等价问题(1)：</p>
+<div class="arithmatex">\[
+\min_x tf_0(x)  + \phi(x), t&gt;0
+\]</div>
+<p>对任意一个 <span class="arithmatex">\(t\)</span>，我们将问题(1)的最优解记作 <span class="arithmatex">\(x^*(t)\)</span>。可知，这些点 <span class="arithmatex">\(x^*(t)\)</span> 都是在原问题的严格可行域内的，所以被叫做中心点（内点），这些点的集合叫做中心路径。</p>
+<p>由 KKT 最优性条件，考虑(1)的拉格朗日梯度条件有：</p>
+<div class="arithmatex">\[
+t\nabla f_0(x^*(t))+\sum^{m}_{i=1}\frac{\nabla f_i(x^*(t))}{-f_i(x^*(t))} = 0
+\]</div>
+<p>回到原问题的拉格朗日函数：</p>
+<div class="arithmatex">\[
+L(x, \lambda) = f_0(x) + \sum_{i=1}^m \lambda_i f_i(x)
+\]</div>
+<p>如果令</p>
+<div class="arithmatex">\[
+\lambda_i = \frac{1}{-tf_i(x^*(t))} &gt; 0
+\]</div>
+<p>则 <span class="arithmatex">\(x^*(t)\)</span> 正好使拉格朗日函数达到最小，对应的对偶函数 <span class="arithmatex">\(g(\lambda)=\min_xL(x,\lambda)\)</span>。（无需考虑 <span class="arithmatex">\(\lambda\)</span> 是否独立）</p>
+<p>于是，由弱对偶定理，有：</p>
+<div class="arithmatex">\[
+p^* \geq g(\lambda(t)) = \dots = f_0(x^*(t)) - \frac{m}{t}
+\]</div>
+<p>即：</p>
+<div class="arithmatex">\[
+f_0(x^*(t)) - p^* \leq \frac{m}{t}
+\]</div>
+<p>这个不等式说明了，我们用近似方法求得的近似解 <span class="arithmatex">\(x^*(t)\)</span> 是次最优解，并且随着 <span class="arithmatex">\(t\)</span> 的增大，能逐渐收敛于最优解。</p>
+<p>所以我们就可以想到这样的算法：从次优点向最优点逐步逼近，并增大 t，称为序列障碍法或路径跟踪法（SUMT）。算法伪代码如下</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>找一个严格可行的 x_0（不能在边界上，一定要是内点），确定初始 t_0&gt;0，mu&gt;1，eps&gt;0
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>重复进行
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>1. 中心点步骤，以 x 为初始点，求解极小化问题 tf_0(x)+phi(x) 的解 x(t)
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>2. 更新 x = x(t)
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>3. 判断收敛误差是否 m/t &lt;= mu，是则停止算法
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>4. 更新 t=mu*t。
+</code></pre></div>
+<p>上面的每次迭代找到新的中心点称为外迭代。找到中心点或是使用梯度下降，或是使用牛顿法，要做若干次迭代称为内迭代。由于中心点在可行集内部、中心路径朝着最优点走、使用了障碍函数，故被称为内点法/序列障碍法/中心路径法。</p>
+<h3 id="_3">实例：线性规划<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<p>下面以线性规划问题为例来实现一个内点法。</p>
+<p>考虑标准约束的线性规划问题：</p>
+<div class="arithmatex">\[
+    p^* =\min_{x} \ c^Tx \quad  \\
+    \text{subject to:} 
+    \quad a_i^Tx \leq b_i, \quad i = 1,  \dots, m, \\
+\]</div>
+<p>其对数障碍函数为：</p>
+<div class="arithmatex">\[
+\phi(x)=-\sum_{i=1}^{m}\ln(b_i-a_i^Tx)
+\]</div>
+<p>梯度为：</p>
+<div class="arithmatex">\[
+\nabla\phi(x)=\sum_{i=1}^m\frac{a_i}{b_i-a_i^Tx}
+\]</div>
+<p>我们用内点法来实现，写出代码如下：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">interior_point</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">t0</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">epsilon</span><span class="o">=</span><span class="mf">1e-8</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">1000</span><span class="p">):</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="sd">    内点法</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="sd">    参数:</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="sd">        A, b, c: 线性规划问题的参数，约束 A@x&lt;=b, 求解 min c@x</span>
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="sd">        x0: 初始点（必须严格可行）</span>
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="sd">        t0: 初始障碍参数</span>
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="sd">        mu: 障碍参数增长因子</span>
+<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="sd">        epsilon: 收敛阈值</span>
+<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="sd">        max_iter: 最大迭代次数</span>
+<a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a><span class="sd">    &quot;&quot;&quot;</span>
+<a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a>    <span class="n">m</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">b</span><span class="p">)</span> <span class="c1"># 不等式约束个数</span>
+<a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a>    <span class="n">t</span> <span class="o">=</span> <span class="n">t0</span>
+<a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a>    <span class="n">x</span> <span class="o">=</span> <span class="n">x0</span>
+<a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a>    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">max_iter</span><span class="p">):</span>
+<a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a>        <span class="c1"># solve min t*c@x+phi(x), get new_x</span>
+<a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a>        <span class="c1"># phi(x) = -sum(ln(bi-ai*x))</span>
+<a id="__codelineno-3-19" name="__codelineno-3-19" href="#__codelineno-3-19"></a>        <span class="n">new_x</span><span class="p">,</span> <span class="n">loss</span> <span class="o">=</span> <span class="n">central_path</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+<a id="__codelineno-3-20" name="__codelineno-3-20" href="#__codelineno-3-20"></a>        <span class="n">x</span> <span class="o">=</span> <span class="n">new_x</span>
+<a id="__codelineno-3-21" name="__codelineno-3-21" href="#__codelineno-3-21"></a>        <span class="k">if</span> <span class="n">m</span> <span class="o">/</span> <span class="n">t</span> <span class="o">&lt;=</span> <span class="n">epsilon</span><span class="p">:</span>
+<a id="__codelineno-3-22" name="__codelineno-3-22" href="#__codelineno-3-22"></a>            <span class="k">return</span> <span class="n">x</span><span class="p">,</span> <span class="n">c</span> <span class="o">@</span> <span class="n">x</span>
+<a id="__codelineno-3-23" name="__codelineno-3-23" href="#__codelineno-3-23"></a>        <span class="n">t</span> <span class="o">*=</span> <span class="n">mu</span>
+<a id="__codelineno-3-24" name="__codelineno-3-24" href="#__codelineno-3-24"></a>    <span class="n">loss</span> <span class="o">=</span> <span class="n">c</span> <span class="o">@</span> <span class="n">x</span>
+<a id="__codelineno-3-25" name="__codelineno-3-25" href="#__codelineno-3-25"></a>    <span class="k">return</span> <span class="n">x</span><span class="p">,</span> <span class="n">loss</span>
+</code></pre></div>
+<p>中间求解中心路径的算法，我使用了梯度下降法。虽然教材使用牛顿法。注意，外部迭代是一定会在可行域内的，但是内部迭代不会，有可能会超出可行域，需要进行一步判断。</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">gradient_descent</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">lr</span><span class="o">=</span><span class="mf">0.001</span><span class="p">,</span> <span class="n">epoch</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="mf">1e-8</span><span class="p">):</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="sd">    用梯度下降法求解中心路径问题，求最优 x</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="sd">    &quot;&quot;&quot;</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>    <span class="n">x</span> <span class="o">=</span> <span class="n">x0</span>
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>    <span class="n">loss</span> <span class="o">=</span> <span class="mi">0</span>
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>    <span class="n">last_loss</span> <span class="o">=</span> <span class="mi">0</span>
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>    <span class="n">last_x</span> <span class="o">=</span> <span class="mi">0</span>
+<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">epoch</span><span class="p">):</span>
+<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a>        <span class="n">Ax</span> <span class="o">=</span> <span class="n">A</span> <span class="o">@</span> <span class="n">x</span>
+<a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a>        <span class="n">bAx</span> <span class="o">=</span> <span class="n">b</span><span class="o">-</span><span class="n">Ax</span>
+<a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a>
+<a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a>        <span class="c1"># numpy 广播沿着纵向</span>
+<a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a>        <span class="n">grad_phi</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">A</span><span class="o">.</span><span class="n">T</span> <span class="o">/</span> <span class="p">(</span><span class="n">bAx</span><span class="o">+</span><span class="n">eps</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a>        <span class="n">grad</span> <span class="o">=</span> <span class="n">grad_phi</span><span class="o">+</span><span class="n">t</span><span class="o">*</span><span class="n">c</span>
+<a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a>        <span class="n">last_x</span><span class="o">=</span><span class="n">x</span>
+<a id="__codelineno-4-17" name="__codelineno-4-17" href="#__codelineno-4-17"></a>        <span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="o">-</span><span class="n">lr</span><span class="o">*</span><span class="n">grad</span>
+<a id="__codelineno-4-18" name="__codelineno-4-18" href="#__codelineno-4-18"></a>        <span class="n">last_loss</span> <span class="o">=</span> <span class="n">loss</span>
+<a id="__codelineno-4-19" name="__codelineno-4-19" href="#__codelineno-4-19"></a>
+<a id="__codelineno-4-20" name="__codelineno-4-20" href="#__codelineno-4-20"></a>        <span class="c1"># 判断是否是可行点，用梯度下降得到的结果，未必是可行点。</span>
+<a id="__codelineno-4-21" name="__codelineno-4-21" href="#__codelineno-4-21"></a>        <span class="c1"># 最优解一定是可行点没问题，但是梯度下降会震荡等等产生的结果未必是可行点，注意了。</span>
+<a id="__codelineno-4-22" name="__codelineno-4-22" href="#__codelineno-4-22"></a>        <span class="c1"># 所以这里加一个判断</span>
+<a id="__codelineno-4-23" name="__codelineno-4-23" href="#__codelineno-4-23"></a>        <span class="k">if</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">b</span><span class="o">-</span><span class="n">A</span><span class="nd">@x</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">))</span><span class="o">==</span><span class="kc">False</span><span class="p">:</span>
+<a id="__codelineno-4-24" name="__codelineno-4-24" href="#__codelineno-4-24"></a>            <span class="n">x</span><span class="o">=</span><span class="n">last_x</span>
+<a id="__codelineno-4-25" name="__codelineno-4-25" href="#__codelineno-4-25"></a>            <span class="n">lr</span><span class="o">=</span><span class="n">lr</span><span class="o">*</span><span class="mf">0.5</span>
+<a id="__codelineno-4-26" name="__codelineno-4-26" href="#__codelineno-4-26"></a>            <span class="k">continue</span>
+<a id="__codelineno-4-27" name="__codelineno-4-27" href="#__codelineno-4-27"></a>
+<a id="__codelineno-4-28" name="__codelineno-4-28" href="#__codelineno-4-28"></a>        <span class="n">phi</span> <span class="o">=</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">b</span><span class="o">-</span><span class="n">A</span><span class="nd">@x</span><span class="p">))</span>
+<a id="__codelineno-4-29" name="__codelineno-4-29" href="#__codelineno-4-29"></a>        <span class="n">loss</span> <span class="o">=</span> <span class="n">t</span><span class="o">*</span><span class="n">c</span><span class="nd">@x</span> <span class="o">+</span> <span class="n">phi</span>
+<a id="__codelineno-4-30" name="__codelineno-4-30" href="#__codelineno-4-30"></a>        <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">last_loss</span><span class="o">-</span><span class="n">loss</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">eps</span> <span class="ow">or</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">last_x</span><span class="o">-</span><span class="n">x</span><span class="p">))</span> <span class="o">&lt;</span> <span class="n">eps</span><span class="p">:</span>
+<a id="__codelineno-4-31" name="__codelineno-4-31" href="#__codelineno-4-31"></a>            <span class="k">break</span>
+<a id="__codelineno-4-32" name="__codelineno-4-32" href="#__codelineno-4-32"></a>
+<a id="__codelineno-4-33" name="__codelineno-4-33" href="#__codelineno-4-33"></a>    <span class="k">return</span> <span class="n">x</span><span class="p">,</span><span class="n">loss</span>
+<a id="__codelineno-4-34" name="__codelineno-4-34" href="#__codelineno-4-34"></a>
+<a id="__codelineno-4-35" name="__codelineno-4-35" href="#__codelineno-4-35"></a>
+<a id="__codelineno-4-36" name="__codelineno-4-36" href="#__codelineno-4-36"></a><span class="k">def</span><span class="w"> </span><span class="nf">central_path</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">c</span><span class="p">,</span><span class="n">t</span><span class="p">,</span><span class="n">x0</span><span class="p">):</span>
+<a id="__codelineno-4-37" name="__codelineno-4-37" href="#__codelineno-4-37"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<a id="__codelineno-4-38" name="__codelineno-4-38" href="#__codelineno-4-38"></a><span class="sd">    求解中心路径（内迭代），线性规划的中心路径最优化问题是：</span>
+<a id="__codelineno-4-39" name="__codelineno-4-39" href="#__codelineno-4-39"></a><span class="sd">    min t*c@x+phi(x)</span>
+<a id="__codelineno-4-40" name="__codelineno-4-40" href="#__codelineno-4-40"></a><span class="sd">    phi(x) = -sum(ln(bi-ai*x))</span>
+<a id="__codelineno-4-41" name="__codelineno-4-41" href="#__codelineno-4-41"></a><span class="sd">    以 x0 为迭代初始点，求 x</span>
+<a id="__codelineno-4-42" name="__codelineno-4-42" href="#__codelineno-4-42"></a><span class="sd">    &quot;&quot;&quot;</span>
+<a id="__codelineno-4-43" name="__codelineno-4-43" href="#__codelineno-4-43"></a>
+<a id="__codelineno-4-44" name="__codelineno-4-44" href="#__codelineno-4-44"></a>    <span class="n">lr</span> <span class="o">=</span> <span class="mf">0.001</span>
+<a id="__codelineno-4-45" name="__codelineno-4-45" href="#__codelineno-4-45"></a>    <span class="n">epoch</span> <span class="o">=</span> <span class="mi">200</span>
+<a id="__codelineno-4-46" name="__codelineno-4-46" href="#__codelineno-4-46"></a>    <span class="n">x</span><span class="p">,</span> <span class="n">loss</span> <span class="o">=</span> <span class="n">gradient_descent</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">lr</span><span class="p">,</span> <span class="n">epoch</span><span class="p">)</span>
+<a id="__codelineno-4-47" name="__codelineno-4-47" href="#__codelineno-4-47"></a>    <span class="c1"># x, loss = newton_method(A, b, c, t, x0, lr, epoch)</span>
+<a id="__codelineno-4-48" name="__codelineno-4-48" href="#__codelineno-4-48"></a>
+<a id="__codelineno-4-49" name="__codelineno-4-49" href="#__codelineno-4-49"></a>    <span class="k">return</span> <span class="n">x</span><span class="p">,</span> <span class="n">loss</span>
+</code></pre></div>
+<p>将官方代码和手写方法进行比较，可以看到几乎一致，内点法效果很好。</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">scipy.optimize</span><span class="w"> </span><span class="kn">import</span> <span class="n">linprog</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="c1"># 定义问题数据</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="n">c</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="o">-</span><span class="mi">5</span><span class="p">])</span>  <span class="c1"># 目标函数系数（取负值）</span>
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]])</span>  <span class="c1"># 不等式约束矩阵</span>
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">10</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">0</span> <span class="p">,</span><span class="mi">0</span> <span class="p">])</span>          <span class="c1"># 约束右侧值</span>
+<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>
+<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a><span class="c1"># 官方求解</span>
+<a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a><span class="n">result</span> <span class="o">=</span> <span class="n">linprog</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">A_ub</span><span class="o">=</span><span class="n">A</span><span class="p">,</span> <span class="n">b_ub</span><span class="o">=</span><span class="n">b</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;highs&#39;</span><span class="p">)</span>
+<a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a>
+<a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">=== scipy.optimize.linprog 结果 ===&quot;</span><span class="p">)</span>
+<a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;最优解:&quot;</span><span class="p">,</span> <span class="n">result</span><span class="o">.</span><span class="n">x</span><span class="p">)</span>
+<a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;最大利润:&quot;</span><span class="p">,</span> <span class="o">-</span><span class="n">result</span><span class="o">.</span><span class="n">fun</span><span class="p">)</span>  <span class="c1"># 目标值取负恢复最大值</span>
+<a id="__codelineno-5-15" name="__codelineno-5-15" href="#__codelineno-5-15"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;状态:&quot;</span><span class="p">,</span> <span class="n">result</span><span class="o">.</span><span class="n">message</span><span class="p">)</span>
+<a id="__codelineno-5-16" name="__codelineno-5-16" href="#__codelineno-5-16"></a>
+<a id="__codelineno-5-17" name="__codelineno-5-17" href="#__codelineno-5-17"></a><span class="c1"># 手写方法</span>
+<a id="__codelineno-5-18" name="__codelineno-5-18" href="#__codelineno-5-18"></a><span class="n">x0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
+<a id="__codelineno-5-19" name="__codelineno-5-19" href="#__codelineno-5-19"></a><span class="k">assert</span> <span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">A</span> <span class="o">@</span> <span class="n">x0</span> <span class="o">&lt;</span> <span class="n">b</span> <span class="o">-</span> <span class="mf">1e-6</span><span class="p">),</span> <span class="s2">&quot;初始点不是严格可行的&quot;</span>
+<a id="__codelineno-5-20" name="__codelineno-5-20" href="#__codelineno-5-20"></a><span class="n">x</span><span class="p">,</span> <span class="n">loss</span> <span class="o">=</span> <span class="n">interior_point</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">x0</span><span class="p">)</span>
+<a id="__codelineno-5-21" name="__codelineno-5-21" href="#__codelineno-5-21"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">=== my result ===&quot;</span><span class="p">)</span>
+<a id="__codelineno-5-22" name="__codelineno-5-22" href="#__codelineno-5-22"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;最优解:&quot;</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+<a id="__codelineno-5-23" name="__codelineno-5-23" href="#__codelineno-5-23"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;最大利润:&quot;</span><span class="p">,</span> <span class="o">-</span><span class="n">loss</span><span class="p">)</span>  <span class="c1"># 目标值取负恢复最大值</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>=== scipy.optimize.linprog 结果 ===
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>最优解: [2. 4.]
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>最大利润: 26.0
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>状态: Optimization terminated successfully. (HiGHS Status 7: Optimal)
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>=== my result ===
+<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a>最优解: [1.98894776 4.00552612]
+<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a>最大利润: 25.994473878868448
+</code></pre></div>
+<p>如果 t 和 初始 x_0 取的好，迭代收敛比较快，下面是这个问题的迭代路径，外迭代了 7 次就基本到达了最优解。</p>
+<p><img alt="" src="https://cdn.jsdelivr.net/gh/peter5723/imagehost/img/opt3.png" /></p>
+<p>到现在，研究出了很多凸的问题，也研究出了很多算法。上面只是一些大概的介绍。读者可以继续学习。</p>
 
 
 
@@ -2207,7 +2605,7 @@ d^*=\max_{\lambda \geq 0, \nu} \ g(\lambda, \nu)
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="April 12, 2025 13:12:11">2025-04-12</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="July 1, 2025 00:17:40">2025-07-01</span>
   </span>
 
     
