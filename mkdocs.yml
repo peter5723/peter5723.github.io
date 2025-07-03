@@ -144,7 +144,7 @@ nav:
   - "计算机网络":
     - "网络": "network/network.md"
   - "书":
-    - "诗词格律": "wen/Poem.md"
+    - "诗词格律": "wen/poem.md"
     - "鼠疫": "wen/LaPeste.md"
     - "西西弗神话": "wen/sisyphe.md"
     - "局外人": "wen/outsider.md"
