@@ -278,7 +278,7 @@ DNS 是一个典型的分布式应用。有三种类型的 DNS 服务器：根 D
 
 回想套接字。每个进程有一个或多个套接字和运输层交互。运输层是将数据交付给套接字的。每个套接字都有一个唯一标识符。所以关键是怎样将运输层报文段交接给合适的套接字。每个运输层报文段都有几个字段。在接收端，运输层检查这些字段，标识出接收套接字，然后将报文段定向到该套接字。将运输层报文段的数据交付到正确的套接字的工作叫多路分解（demultiplexing）。反过来，从源主机的不同套接字中收集数据块，并为每个数据块封装首部信息从而形成报文段，将报文段传给网络层的工作称为多路复用（multiplexing）。
 
-再具体一点，多路复用的要求是：1、套接字有唯一标识符。2、每个报文段有特殊字段来指示该报文段所要交付的套接字。这个标识符以及特殊字段就是端口号。报文段的端口字段包括源端口号和目的端口号字段（其他字段后面讲述）。端口号是一个 16 bit 的数字，值为 0 到 65535。0 到 1023 的端口号被保留，用于基本的应用层协议（如 HTTP 是 80）。 
+再具体一点，多路复用的要求是：1、套接字有唯一标识符。2、每个报文段有特殊字段来指示该报文段所要交付的套接字。这个标识符以及特殊字段就是端口号。报文段的端口字段包括源端口号和目的端口号字段（其他字段后面讲述）。端口号是一个 16 bit 的数字，值为 0 到 65535。0 到 1023 的端口号被保留，用于基本的应用层协议（如 HTTP 是 80）。
 
 这样，我们就可以对问题给出回答：
 
@@ -324,10 +324,10 @@ def service_one():
     while True:
         client_socket, addr = sock.accept()
         print(f"Service One: 客户端 {addr} 已连接")
-        
+
         data = client_socket.recv(65535)
         print(f"Service One received: {data.decode()}")
-        
+
         response = f"[Service One] Echo: {data.decode()}".encode()
         client_socket.sendall(response)
         client_socket.close()
@@ -336,23 +336,23 @@ def client_service_one():
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     sock.connect(('127.0.0.1', 9001))
     sock.sendall(b"Hello from Service One (TCP)")
-    
+
     data = sock.recv(65535)
     print("Response from Service One:", data.decode())
     sock.close()
 ```
 
-我们可以看到 UDP 和 TCP 的区别。UDP 是直接发送，直接接收的。TCP 多了一步 `client_socket, addr = sock.accept()`。TCP 是先再两台主机之间建立连接才交流数据，而 UDP 不需要。所以说 TCP 是面向连接的，UDP 是无连接的。
+我们可以看到 UDP 和 TCP 的区别。UDP 是直接发送，直接接收的。TCP 多了一步 `sock.connect(('127.0.0.1', 9001))`。TCP 是先再两台主机之间建立连接才交流数据，而 UDP 不需要。所以说 TCP 是面向连接的，UDP 是无连接的。
 
 ### 3.3 UDP 协议
 
-UDP 是非常简单的协议——它只做了运输层协议必须做的最少工作：多路复用/分解、差错检测。
+UDP （User Datagram Protocol，用户数据报协议）是非常简单的协议——它只做了运输层协议必须做的最少工作：多路复用/分解、差错检测。
 
 UDP 的工作过程：
 
 UDP takes messages from the application process, attaches source and destination port number fields for the multi
-plexing/demultiplexing service, adds two other small fields, and passes the resulting segment to the network layer. 
-The network layer encapsulates the transport-layer segment into an IP datagram and then makes a best-effort attempt to deliver the segment to the receiving host. 
+plexing/demultiplexing service, adds two other small fields, and passes the resulting segment to the network layer.
+The network layer encapsulates the transport-layer segment into an IP datagram and then makes a best-effort attempt to deliver the segment to the receiving host.
 If the segment arrives at the receiving host, UDP uses the destination port number to deliver the segment's data to the correct application process.
 
 UDP 在发送报文段之前，发送方和接收方的实体之间没有进行握手建立连接，所以说 UDP 是无连接的。
@@ -378,3 +378,53 @@ Data (22 bytes)
 ```
 
 UDP 报文段结构由报文头和报文组成。报文头包含四个字段：源端口号、目的端口号、报文长度、校验和。报文就是应用层数据。
+
+简单介绍一下校验和。发送方将所有字节相加（不考虑溢出），再对结果取反，得到一个校验和。接收方接收时，将所有字节相加，加上校验和，结果应当是所有二进制位均为 1。否则就说明这个分组出现了差错。
+
+UDP 提供了差错检测，但其无法进行差错恢复。
+
+### 3.4 可靠数据传输
+
+这个链接很好：[可靠数据传输原理详细图解](https://blog.csdn.net/Sqrt1230/article/details/121269131)
+
+​​可靠数据传输（Reliable Data Transfer）​​，下称 rdt。
+
+我们简单介绍一下，分析一下解决问题的思路。
+
+
+首先，假设运输层的下层不出任何差错。那我们什么都不用干。这是 rdt1.0。
+
+但是，底层信道大概率会出现比特差错，即 01 互换。我们引入自动重传请求（ARQ）协议。接收者在接收数据后，进行差错检测，提供反馈给发送者，回送肯定确认分组（ACK）或者否定确认分组（NAK）。发送方接收到确认信息后，重传这个分组。发送方在等待 ACK 时，不做其他事情，这样的协议被称为停等（stop and wait）协议。
+
+但是可能出现这样的问题：ACK 出错了怎么办？
+
+简单的解决方法是：在发送的分组中添加一个1 bit序号字段，如果是新包就变字段，如果是重传就不变。第一个包是 0，第二个包是新包则是 1，如果是第一个包的重传则是 0，以此类推。101010 就是一直新的数据包，10010 第三次是第二次的重传。这是 rdt2.0。
+
+现在再加入新的问题：如果丢包，怎么解决？如果分组丢失，当然连 ACK 都接收不到了。最简单的方法是加入一个定时器计时。发送方发送一个分组时启动一个倒计数定时器，如果在倒计数定时器倒计时结束之前收到了ACK响应，则中断定时器，进入准备接收来自上层的下一次调用。如果倒计数定时器超时，则发送方认为分组丢失，向接收方重传该分组，并且重新启动定时器。这是 rdt3.0。
+
+
+rdt3.0 可以说比较可靠。但是它是停等协议，效率极低。简单的解决方法称为“流水线”：发送方发送多个分组而无需等待确认，每个分组一个个处理。流水线中差错恢复两种基本方法：回退 N 步和选择重传。
+
+
+### 3.5 TCP
+
+TCP 全称为 Transmission Control Protocol，即传输控制协议。TCP 是运输层面向连接的可靠运输协议。其运用的原理包括差错检测、重传、累积确认、定时器等。
+
+我们来复习一下 TCP 连接是怎样建立的。一个进程想要与另一个进程建立连接。发起连接请求的进程称为客户进程，另一个进程成为服务器进程。python 代码 `sock.connect(('127.0.0.1', 9001))` 就实现了这样的请求，建立连接。建立连接的过程就是三次握手：the client first
+sends a special TCP segment;
+the server responds with a second special TCP segment;
+and finally the client responds again with a third special segment.
+The first two segments carry no payload, that is, no application-layer data; the third of these
+segments may carry a payload.
+
+建立连接后，两个进程间就可以发送数据了。TCP 连接是点对点的，单个发送方与单个接收方之间建立。
+
+TCP 连接组成包括：一台主机上的缓存、变量和与进程连接的套接字。
+
+客户进程通过套接字传递数据流到 TCP。TCP 将这些数据引导到发送缓存中。接下来 TCP 就会不时地从发送缓存中取出一块数据，传递到网络层。TCP 可从缓存中取出并放入报文段中的数据数量受限于最大报文段长度 (Maximum Segment Size, MSS)。TCP 为每块客户数据配上一个 TCP 首部，从而形成多个 TCP 报文段 (TCP segment)。这些报文段被下传给网络层， 网络层将其分别封装在网络层IP数据报中。 然后这些IP数据报被发送到网络中。 当TCP在另一端接收到一个报文段后，该报文段的数据就被放入该 TCP 连接的接收缓存中。 应用程序从此缓存中读取数据流。 该连接的每一端都有各自的发送缓存和接收缓存。
+
+
+然后，我们看一下 TCP 报文段的结构。
+
+
+TCP 除了可靠传输，还有拥塞控制，来处理网络拥塞问题。
