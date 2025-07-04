@@ -47,6 +47,8 @@ P2P
 
 ## 第二章 应用层
 
+### 2.1 例子
+
 我们用 Python 可以简单地写一个服务器客户端应用程序。可以在两台连接的计算机上跑，看会发生什么。
 
 ```python
@@ -101,6 +103,7 @@ print(f"服务器响应: {response}")
 client_socket.close()
 ```
 
+### 2.2 HTTP 协议
 
 客户机-服务器
 
@@ -191,6 +194,8 @@ Web 缓存器
 电子邮件协议：SMTP 发送，POP3/IMAP 接收
 
 
+### 2.3 DNS 协议
+
 互联网主机识别：主机名（hostname）或者 IP 地址。进行转换的目录服务：域名系统（Domain Name System，DNS）。DNS 协议正常由其他应用层协议使用，用于将主机名转化成 IP 地址。举例，用户输入 `www.baidu.com` 时，发生的事情：
 
 - 用户主机运行 DNS 应用的客户机端
@@ -254,6 +259,9 @@ DNS 是一个典型的分布式应用。有三种类型的 DNS 服务器：根 D
 
 ## 第三章 运输层 transport-layer
 
+
+### 3.1 概述
+
 首先仍然是概要：运输层为应用层的程序提供了“逻辑通信”功能。这里的“逻辑”是封装的意思。不同主机的应用层程序通过运输层连接好像直接相连一般，而不需要考虑实际的实现如何。运输层协议是在端系统中实现的。发送方的运输层将发送程序的报文转化成运输层分组，这个分组称为运输层报文段。然后将报文段传给网络层，网络层将其封装成网络层分组（称为数据报），向目的地发送。接收方的网络层提取出运输层报文段，向上交给运输层。
 
 运输层为不同主机上的进程提供了逻辑通信，而网络层则提供了主机之间的逻辑通信。这句话，看自顶向下方法中的邮政服务例子就容易理解了。
@@ -263,3 +271,110 @@ DNS 是一个典型的分布式应用。有三种类型的 DNS 服务器：根 D
 首先介绍网络层。因特网网络层协议，有一个 IP 协议。IP 为主机之间提供逻辑通信。IP 的服务模型是尽力而为交付服务，是不可靠服务，数据可能丢失。每台主机至少有一个网络层地址，即 IP 地址。
 
 再介绍运输层的具体任务。运输层协议的基本任务是将两个端系统之间的 IP 交付服务扩展成两个端系统上的进程之间的交付服务。主机间交互扩展成进程间交付的两个动作称为 transport-layer multiplexing and demultiplexing （多路复用和多路分解）。运输层协议可以在报文段的首部添加查错检测字段提供完整性检查。UDP 只进行数据交付和差错检测，也是不可靠服务，不保证数据完整性。TCP 提供附加服务：可靠数据传输和拥塞控制。
+
+### 3.2 多路复用和多路分解
+
+然后讨论一下多路复用和多路分解。考虑这样的问题，我有四个网络应用进程在运行，我的计算机的运输层从底层的网络层接收数据时，**如何将这些数据定位到其所需到达的进程？**
+
+回想套接字。每个进程有一个或多个套接字和运输层交互。运输层是将数据交付给套接字的。每个套接字都有一个唯一标识符。所以关键是怎样将运输层报文段交接给合适的套接字。每个运输层报文段都有几个字段。在接收端，运输层检查这些字段，标识出接收套接字，然后将报文段定向到该套接字。将运输层报文段的数据交付到正确的套接字的工作叫多路分解（demultiplexing）。反过来，从源主机的不同套接字中收集数据块，并为每个数据块封装首部信息从而形成报文段，将报文段传给网络层的工作称为多路复用（multiplexing）。
+
+再具体一点，多路复用的要求是：1、套接字有唯一标识符。2、每个报文段有特殊字段来指示该报文段所要交付的套接字。这个标识符以及特殊字段就是端口号。报文段的端口字段包括源端口号和目的端口号字段（其他字段后面讲述）。端口号是一个 16 bit 的数字，值为 0 到 65535。0 到 1023 的端口号被保留，用于基本的应用层协议（如 HTTP 是 80）。 
+
+这样，我们就可以对问题给出回答：
+
+**运输层的多路分解服务实现**：主机上的每一个套接字分配一个端口号，报文段到达主机时，运输层检查报文段中的目的端口号，再将之定向到对应的套接字，然后报文段中的数据通过套接字进入其所连接的进程。
+
+UDP 的客户端服务器例子：
+
+```python
+# service
+def service_one():
+    sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    sock.bind(('127.0.0.1', 9001))
+    print("Service One is running on port 9001")
+
+    while True:
+        data, addr = sock.recvfrom(65535)
+        print(f"Service One received from {addr}: {data.decode()}")
+        sock.sendto(f"[Service One] Echo: {data.decode()}".encode(), addr)
+
+# client
+def client_service_one():
+    sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    sock.sendto(b"Hello from Service One", ('127.0.0.1', 9001))
+    data, _ = sock.recvfrom(65535)
+    print("Response from Service One:", data.decode())
+```
+
+可以模拟，抓包一下，抓包要选择 `Npcap Loopback Adapter` 接口，对应 `127.0.0.1` 本地回环流量。
+
+然后我们再看一下 TCP 的代码：
+
+```python
+#service
+def service_one():
+    # 创建TCP套接字
+    sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    # 绑定地址和端口
+    sock.bind(('127.0.0.1', 9001))
+    # 开始监听
+    sock.listen(5)
+    print("Service One (TCP) is running on port 9001")
+
+    while True:
+        client_socket, addr = sock.accept()
+        print(f"Service One: 客户端 {addr} 已连接")
+        
+        data = client_socket.recv(65535)
+        print(f"Service One received: {data.decode()}")
+        
+        response = f"[Service One] Echo: {data.decode()}".encode()
+        client_socket.sendall(response)
+        client_socket.close()
+#client
+def client_service_one():
+    sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    sock.connect(('127.0.0.1', 9001))
+    sock.sendall(b"Hello from Service One (TCP)")
+    
+    data = sock.recv(65535)
+    print("Response from Service One:", data.decode())
+    sock.close()
+```
+
+我们可以看到 UDP 和 TCP 的区别。UDP 是直接发送，直接接收的。TCP 多了一步 `client_socket, addr = sock.accept()`。TCP 是先再两台主机之间建立连接才交流数据，而 UDP 不需要。所以说 TCP 是面向连接的，UDP 是无连接的。
+
+### 3.3 UDP 协议
+
+UDP 是非常简单的协议——它只做了运输层协议必须做的最少工作：多路复用/分解、差错检测。
+
+UDP 的工作过程：
+
+UDP takes messages from the application process, attaches source and destination port number fields for the multi
+plexing/demultiplexing service, adds two other small fields, and passes the resulting segment to the network layer. 
+The network layer encapsulates the transport-layer segment into an IP datagram and then makes a best-effort attempt to deliver the segment to the receiving host. 
+If the segment arrives at the receiving host, UDP uses the destination port number to deliver the segment's data to the correct application process.
+
+UDP 在发送报文段之前，发送方和接收方的实体之间没有进行握手建立连接，所以说 UDP 是无连接的。
+
+DNS 服务一般就使用 UDP 协议。
+
+用 wireshark 抓一下包，就可以看 UDP 报文段结构：
+
+```
+Frame 248: 54 bytes on wire (432 bits), 54 bytes captured (432 bits) on interface \Device\NPF_Loopback, id 0
+Null/Loopback
+Internet Protocol Version 4, Src: 127.0.0.1, Dst: 127.0.0.1
+User Datagram Protocol, Src Port: 51604, Dst Port: 9001
+    Source Port: 51604
+    Destination Port: 9001
+    Length: 30
+    Checksum: 0x2cd7 [unverified]
+    [Checksum Status: Unverified]
+    [Stream index: 7]
+    [Timestamps]
+    UDP payload (22 bytes)
+Data (22 bytes)
+```
+
+UDP 报文段结构由报文头和报文组成。报文头包含四个字段：源端口号、目的端口号、报文长度、校验和。报文就是应用层数据。
