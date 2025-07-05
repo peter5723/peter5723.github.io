@@ -424,7 +424,117 @@ TCP 连接组成包括：一台主机上的缓存、变量和与进程连接的�
 客户进程通过套接字传递数据流到 TCP。TCP 将这些数据引导到发送缓存中。接下来 TCP 就会不时地从发送缓存中取出一块数据，传递到网络层。TCP 可从缓存中取出并放入报文段中的数据数量受限于最大报文段长度 (Maximum Segment Size, MSS)。TCP 为每块客户数据配上一个 TCP 首部，从而形成多个 TCP 报文段 (TCP segment)。这些报文段被下传给网络层， 网络层将其分别封装在网络层IP数据报中。 然后这些IP数据报被发送到网络中。 当TCP在另一端接收到一个报文段后，该报文段的数据就被放入该 TCP 连接的接收缓存中。 应用程序从此缓存中读取数据流。 该连接的每一端都有各自的发送缓存和接收缓存。
 
 
-然后，我们看一下 TCP 报文段的结构。
+然后，我们看一下 TCP 报文段的结构。可见 TCP 首部有固定的 20 字节。
 
+![](https://cdn.jsdelivr.net/gh/peter5723/imagehost/img/net5.png)
+
+
+`curl` 是一个比较方便的测试 web 的工具。我们在命令行中输入 `curl -v www.baidu.com `，它会向百度发送 HTTPS 请求，百度会返回网页。我们输入这个指令，用 wireshark 抓包，过滤 TCP 请求，先看看 TCP 报文段的结构。下面是第一次握手的 TCP 报文段。
+
+```
+Transmission Control Protocol, Src Port: 51999, Dst Port: 80, Seq: 0, Len: 0
+    Source Port: 51999
+    Destination Port: 80
+    [Stream index: 7]
+    [Conversation completeness: Incomplete, DATA (15)]
+    [TCP Segment Len: 0]
+    Sequence Number: 0    (relative sequence number)
+    Sequence Number (raw): 619352399
+    [Next Sequence Number: 1    (relative sequence number)]
+    Acknowledgment Number: 0
+    Acknowledgment number (raw): 0
+    1000 .... = Header Length: 32 bytes (8)
+    Flags: 0x002 (SYN)
+    Window: 65535
+    [Calculated window size: 65535]
+    Checksum: 0xa281 [unverified]
+    [Checksum Status: Unverified]
+    Urgent Pointer: 0
+    Options: (12 bytes), Maximum segment size, No-Operation (NOP), Window scale, No-Operation (NOP), No-Operation (NOP), SACK permitted
+    [Timestamps]
+```
+
+TCP 报文段由首部字段和数据字段组成。上面这个是首部字段，第一次握手的话，没有数据字段。
+
+
+TCP 首部首先是源端口号和目的端口号。源端口号就是 `curl` 进程的端口，目的端口号是 HTTP，默认是 80。然后就是 32 bit 的序列号字段（Sequence Number）和 32 bit 的确认号字段（Acknowledgment Number），用来实现可靠传输服务。然后是 6 bit 的标志字段（flag），ACK 表示成功接收报文段，RST、SYN、FIN 用于连接建立和拆除。
+再是 16 bit 的接收窗口字段（window），用于流量控制，表示接收方愿意接受的字节数量。然后是校验和字段。
+再是选项字段（Option），包括最大报文段长度（MSS）、时间戳等。
+
+TCP 首部最重要的两个字段是序列号和确认号字段，是可靠传输服务的关键部分。TCP 将数据当成字节流处理。一个报文段的序列号是该报文段**首字节**的字节流编号。假设传输的数据有 500 000 字节，MSS（报文段最大长度）为 1000 字节，则这个数据将被划分成 500 个报文段，第一个报文段的序号是 0，第二个是 1000，以此类推。
+
+确认号是这样的：TCP 是全双工，即主机 A 向 B 发送数据的时候，也同时接收来自主机 B 的数据。从主机 B 到达 A 的每个报文段中都有一个序号用于从 B 流向 A 的数据。主机 A 填充进报文段的确认号是主机 A 期望从主机 B 收到的下一字节的序号。举例：主机 A 从 B 中收到了编号为 0 到 535 的所有字节，并正要发送一个报文段给主机 B，那么 A 就会在确认号字段中填上 536。
+
+知道这些，我们可以看看 TCP 的可靠数据传输的原理大致如何。
+
+主机 A 向主机 B 发送一个大文件。发送基本的事件有三个：上层应用数据接收数据，封装成报文段，启动定时器。如果定时器到时间没有收到 ACK，则默认丢包，进行重传。
+
+如下图所示：
+
+```
+发送端                          接收端
+   |                                 |
+   |---[SEQ=0, LEN=1000]----------->|    # 发送段
+   |<--[ACK=1001]--------------------|    # 确认收到
+   |                                 |
+   |---[SEQ=1000, LEN=1000]-------->|    # 发送下一数据段
+   |<--[ACK=2001]--------------------|    # 继续确认
+```
+
+若某段丢失：
+
+```
+   |---[SEQ=2000, LEN=1000]-------->|    # 发送段
+   |                                 |
+   |<-- (未响应)                     |
+   |                                 |
+   |------(等待超时)---------------->|
+   |---[SEQ=2000, RETRANSMITTED]--->|    # 重传该段
+   |<--[ACK=3001]--------------------|    # 接收方确认收到
+```
+
+下面的图片，抓取了 `curl -v www.baidu.com` 客户机与服务器进行数据交换的过程。观察客户机发送报文的 ack 和 服务器发送的报文的 seq。
+
+![](https://cdn.jsdelivr.net/gh/peter5723/imagehost/img/net6.png)
+
+最后我们来看看建立和断开 TCP 连接的过程。
+
+三次握手建立连接：
+
+```
+Client                  Server
+   |                         |
+   |----[SYN, SEQ=x]-------->|
+   |<--[SYN-ACK, SEQ=y, ACK=x+1]--|
+   |----[ACK, SEQ=x+1, ACK=y+1]-->|
+```
+
+1. 客户机端的 TCP 先向服务器端的 TCP 发送一个特殊的 TCP 报文段。该报文段不含应用层数据，SYN 比特置为 1。客户端选择了一个初始序列号 x。
+2. SYN 报文段的 IP 数据报到达服务器主机，服务器提取出 TCP SYN 报文段，为该 TCP 连接分配 TCP 缓存和变量，向用户发送允许连接的 SYNACK 报文段。服务器选择了一个初始序列号 y。
+3. 收到 SYNACK 报文段后，客户机给连接分配缓存和变量，并给服务器发送一个 ACK 报文段，对服务器的报文段进行确认。之后，客户机与服务器就可以相互发送数据了。客户端的序列号加 1。
+
+四次挥手断开连接：
+
+```
+Client                  Server
+   |                         |
+   |----[FIN, SEQ=u]-------->|
+   |<--[ACK, SEQ=v, ACK=u+1]--|
+   |<--[FIN, SEQ=w]----------|
+   |----[ACK, SEQ=u+1, ACK=w+1]-->|
+```
+
+1. 客户机想要关闭连接，先发送一个 FIN 报文段
+2. 服务器接收到，回送一个 ACK 报文段表示确认
+3. 服务器发送一个 FIN 报文段，表示可以终止连接
+4. 客户机发送 ACK 报文段，关闭连接
+
+
+下面的图片，展示了用 `curl` 进行连接的三次握手以及后续传输数据的过程。
+
+![](https://cdn.jsdelivr.net/gh/peter5723/imagehost/img/net7.png)
+
+为了节省开销，默认情况下，HTTP/1.1 会复用 TCP 连接（Connection: keep-alive），避免频繁握手。这点我们查看抓包中的 http 协议就可以确认。因此 `curl` 执行完毕后没有发送 FIN 报文段。
 
 TCP 除了可靠传输，还有拥塞控制，来处理网络拥塞问题。
+
