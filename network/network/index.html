@@ -1884,6 +1884,75 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="4.3 网际协议（The Internet Protocol，IP）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ipv4" class="md-nav__link">
+    <span class="md-ellipsis">
+      IPv4 数据报格式
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ipv4_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      IPv4 编址
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ip-dhcp" class="md-nav__link">
+    <span class="md-ellipsis">
+      获取 IP 地址，DHCP 协议
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nat" class="md-nav__link">
+    <span class="md-ellipsis">
+      NAT
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ipv6" class="md-nav__link">
+    <span class="md-ellipsis">
+      IPv6
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#44" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.4 选路
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#45-proxyvpn" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.5 proxy，vpn
+    </span>
+  </a>
+  
 </li>
       
     </ul>
@@ -2416,6 +2485,75 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="4.3 网际协议（The Internet Protocol，IP）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ipv4" class="md-nav__link">
+    <span class="md-ellipsis">
+      IPv4 数据报格式
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ipv4_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      IPv4 编址
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ip-dhcp" class="md-nav__link">
+    <span class="md-ellipsis">
+      获取 IP 地址，DHCP 协议
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nat" class="md-nav__link">
+    <span class="md-ellipsis">
+      NAT
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ipv6" class="md-nav__link">
+    <span class="md-ellipsis">
+      IPv6
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#44" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.4 选路
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#45-proxyvpn" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.5 proxy，vpn
+    </span>
+  </a>
+  
 </li>
       
     </ul>
@@ -2440,6 +2578,7 @@
 <p>端
 接入网
 网络核心——ISP（因特网服务提供商）</p>
+<p>最大的网：因特网/互联网（internet）</p>
 <p>分布式</p>
 <p>网络编程接口 API</p>
 <p>协议</p>
@@ -2849,9 +2988,10 @@ segments may carry a payload.</p>
 <ul>
 <li>IP 协议，确定网络层中主机的编址规则、数据报的格式与分组处理的规则</li>
 <li>选路协议（如 BGP），决定数据报从源到目的地所经过的路径</li>
-<li>差错报告设施，用于报告数据差错和对某些网络层信息请求进行响应，如 ICMP 协议。</li>
+<li>差错报告设施，用于报告数据差错和对某些网络层信息请求进行响应，如 ICMP 协议。ping 就是基于 ICMP 协议来检测网络。</li>
 </ul>
 <p><img alt="" src="https://cdn.jsdelivr.net/gh/peter5723/imagehost/img/net10.jpg" /></p>
+<h3 id="ipv4">IPv4 数据报格式<a class="headerlink" href="#ipv4" title="Permanent link">&para;</a></h3>
 <p>然后我们看看 IPv4 协议的数据报格式。IPv4 的数据报格式如下图所示：</p>
 <p><img alt="" src="https://cdn.jsdelivr.net/gh/peter5723/imagehost/img/net11.png" /></p>
 <p>随便打开 wireshark 抓包看看：</p>
@@ -2886,7 +3026,43 @@ segments may carry a payload.</p>
 <li>填充：使首部长度为 32 位的整数倍。</li>
 <li>数据（有效载荷）</li>
 </ul>
+<h3 id="ipv4_1">IPv4 编址<a class="headerlink" href="#ipv4_1" title="Permanent link">&para;</a></h3>
 <p>下面我们来看看 IPv4 编址。</p>
+<p>主机和物理链路之间有一个接口（interface）连接。而路由器的任务是从链路上接收数据报并将这些数据报从其他链路转发，故路由器有多个接口，每个接口对应一条链路。IP 协议要求每台主机和路由器的接口都有自己的 IP 地址。</p>
+<p>每个 IP 地址长度是 32 位，按字节分开。举例 IP：<code>192.168.30.2</code>。这种写法称为点分十进制。</p>
+<p>一些特殊 IP 地址：</p>
+<ul>
+<li><code>127.0.0.1</code>（本地回环地址）</li>
+<li><code>0.0.0.0</code>（默认路由）</li>
+<li><code>255.255.255.255</code>（广播地址）</li>
+</ul>
+<p>由于 IPv4 地址资源有限，用子网划分（subnet）允许将一个大的网络划分为多个小的子网，以提高地址利用率。一个 IPv4 地址可以分为网络部分和主机部分。这种分配策略称为 CIDR（无类别域间路由）。</p>
+<p>一个地址的形式为 <code>a.b.c.d/x</code>。<code>x</code> 指示 IP 地址的网络部分，地址前 <code>x</code> 位称为地址的前缀（prefix）。一个组织内部设备的 IP 地址的前缀都是相同的。在选路时，组织外部的路由器只需考虑地址前缀即可。</p>
+<p>一个地址的后 <code>32-x</code> 位是主机部分，用于区分组织的内部设备（主机）。 举例，<code>x=24</code>，则后 8 位用于区分不同的设备。</p>
+<p>我们可以使用子网掩码（subnet mask）来区分网络和主机部分，比如子网掩码是 <code>255.255.255.0</code>，即表示前 24 位是网络 IP。</p>
+<p>网络地址相同的接口可以构成一个子网。下面图中，3 台路由器构成了 6 个子网。</p>
+<p><img alt="" src="https://cdn.jsdelivr.net/gh/peter5723/imagehost/img/net12.png" /></p>
+<h3 id="ip-dhcp">获取 IP 地址，DHCP 协议<a class="headerlink" href="#ip-dhcp" title="Permanent link">&para;</a></h3>
+<p>然后我们看看在因特网中，主机和组织如何获取 IP 地址。</p>
+<p>首先，一个组织获得从一个 ISP 那里获得一块地址。然后，这个主机为组织内的主机和路由器接口分配独立的 IP 地址。我们有的时候会自己手动配（比如在局域网连开发板的时候），但是在因特网中连接的话，一般就使用 DHCP 协议来给我们自动分配好。</p>
+<p>DHCP 协议，全称 Dynamic Host Configuration Protocol，动态主机配置协议，自动为网络中的主机分配 IP 地址。它是一个基于 UDP 的应用层协议，是客户端-服务器模型。</p>
+<p>为一个新主机，其通过四个步骤完成地址分配，称为 DORA。</p>
+<ol>
+<li>Discover（发现）：这个新主机首先要寻找可用的 DHCP 服务器。客户机在 UDP 分组中向端口 67 发送 <code>DHCP Discover</code> 报文。但是它没有 IP 怎么办？不知道服务器地址怎么办？解决方法是使用源地址 <code>0.0.0.0</code>，目的地址使用 <code>255.255.255.255</code>，这是个广播地址，可以将这个分组传送到所有与这个子网连接的子网。</li>
+<li>Offer（提供）：DHCP 服务器收到了 <code>DHCP Discover</code> 报文，然后它用一个 <code>DHCP Offer</code> 报文对客户机响应，当然，目标地址仍然需要用 <code>255.255.255.255</code> 进行广播。在报文中有可供客户机选择的 IP 地址、子网掩码等参数。</li>
+<li>Request（请求）：服务器可能不止一个，客户端会收到许多 Offer，它选择其中一个 Offer，再广播 <code>DHCP Request</code> 报文，确认请求这个 IP。</li>
+<li>ACK（确认）：服务器确认，发送 <code>DHCP ACK</code> 报文，完成分配。</li>
+</ol>
+<h3 id="nat">NAT<a class="headerlink" href="#nat" title="Permanent link">&para;</a></h3>
+<p>NAT，全称 Network Address Translation，网络地址转换。为啥需要？在一个子网中，可能有非常多的设备连在一起，访问互联网。那 IPv4 的话只有 32 位，可能分配不过来。于是就引入了 NAT 技术。子网中的内部主机 IP 地址可能类似于 <code>10.0.0.1</code>，<code>10.0.0.2</code>，<code>10.0.0.3</code> 等等，它们和 NAT 路由器 <code>10.0.0.4</code> 相连。NAT 路由器还有一个对外的 IP 地址，比如 <code>138.76.29.7</code>。NAT 路由器将数据报的源私有 IP 替换成路由器的公有 IP，并记录转换映射。路由器接收外部服务器的响应后，再根据映射表将响应发送到对应的主机，就完成了一整个通讯过程。</p>
+<h3 id="ipv6">IPv6<a class="headerlink" href="#ipv6" title="Permanent link">&para;</a></h3>
+<h2 id="44">4.4 选路<a class="headerlink" href="#44" title="Permanent link">&para;</a></h2>
+<p>选路是网络层的核心功能之一，负责确定数据报从源主机到目的主机所经过的路径（Path）。网络层根据选路算法计算最优路径，并维护转发表（Forwarding Table），指导路由器如何转发分组。</p>
+<p>一台主机通常与一个路由器直接相连，这个路由器称为第一跳（first-hop）路由器或默认路由器。数据从路由器到路由器之间传一次称为一跳。源主机的第一跳路由器称为源路由器，目的主机的第一跳路由器称为目的路由器。</p>
+<p>现在选路协议有 RIP、OSPF、BGP 等。</p>
+<h2 id="45-proxyvpn">4.5 proxy，vpn<a class="headerlink" href="#45-proxyvpn" title="Permanent link">&para;</a></h2>
+<p>我们学了网络层，就能弄明白一些术语了。一是 proxy，即代理。代理是一种中介服务器，位于客户端和目标服务器之间，负责转发请求和响应。目标服务器看到的当然是代理服务器的 IP。有点像 NAT，当然完全不同。</p>
+<p>二是 vpn，全称 Virtual Private Network，虚拟专用网络。其在公共网络（如互联网）上创建一条加密的“隧道”，将用户的设备与远程网络（如企业内网）安全连接。用户的所有流量全部加密，通过 vpn 服务器传输，故其本质上也是一种 proxy。公司和学校常用 vpn。</p>
 
 
 
@@ -2909,7 +3085,7 @@ segments may carry a payload.</p>
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="July 18, 2025 13:14:04 CST">2025-07-18</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="July 22, 2025 22:12:32 CST">2025-07-22</span>
   </span>
 
     
