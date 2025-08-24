@@ -1933,6 +1933,15 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      子网和网关
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -1962,7 +1971,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_5" class="md-nav__link">
+  <a href="#_6" class="md-nav__link">
     <span class="md-ellipsis">
       第五章 链路层
     </span>
@@ -2633,6 +2642,15 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      子网和网关
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -2662,7 +2680,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_5" class="md-nav__link">
+  <a href="#_6" class="md-nav__link">
     <span class="md-ellipsis">
       第五章 链路层
     </span>
@@ -3234,7 +3252,7 @@ segments may carry a payload.</p>
 <li><code>0.0.0.0</code>（默认路由）</li>
 <li><code>255.255.255.255</code>（广播地址）</li>
 </ul>
-<p>由于 IPv4 地址资源有限，用子网划分（subnet）允许将一个大的网络划分为多个小的子网，以提高地址利用率。一个 IPv4 地址可以分为网络部分和主机部分。这种分配策略称为 CIDR（无类别域间路由）。</p>
+<p>由于 IPv4 地址资源有限，用子网划分（subnetting）允许将一个大的网络划分为多个小的子网，以提高地址利用率。一个 IPv4 地址可以分为网络部分和主机部分。这种分配策略称为 CIDR（无类别域间路由）。</p>
 <p>一个地址的形式为 <code>a.b.c.d/x</code>。<code>x</code> 指示 IP 地址的网络部分，地址前 <code>x</code> 位称为地址的前缀（prefix）。一个组织内部设备的 IP 地址的前缀都是相同的。在选路时，组织外部的路由器只需考虑地址前缀即可。</p>
 <p>一个地址的后 <code>32-x</code> 位是主机部分，用于区分组织的内部设备（主机）。 举例，<code>x=24</code>，则后 8 位用于区分不同的设备。</p>
 <p>我们可以使用子网掩码（subnet mask）来区分网络和主机部分，比如子网掩码是 <code>255.255.255.0</code>，即表示前 24 位是网络 IP。</p>
@@ -3254,6 +3272,18 @@ segments may carry a payload.</p>
 <h4 id="nat">NAT<a class="headerlink" href="#nat" title="Permanent link">&para;</a></h4>
 <p>NAT，全称 Network Address Translation，网络地址转换。为啥需要？在一个子网中，可能有非常多的设备连在一起，访问互联网。那 IPv4 的话只有 32 位，可能分配不过来。于是就引入了 NAT 技术。子网中的内部主机 IP 地址可能类似于 <code>10.0.0.1</code>，<code>10.0.0.2</code>，<code>10.0.0.3</code> 等等，它们和 NAT 路由器 <code>10.0.0.4</code> 相连。NAT 路由器还有一个对外的 IP 地址，比如 <code>138.76.29.7</code>。NAT 路由器将数据报的源私有 IP 替换成路由器的公有 IP，并记录转换映射。路由器接收外部服务器的响应后，再根据映射表将响应发送到对应的主机，就完成了一整个通讯过程。</p>
 <h4 id="ipv6">IPv6<a class="headerlink" href="#ipv6" title="Permanent link">&para;</a></h4>
+<h4 id="_5">子网和网关<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h4>
+<p>首先我们来看子网的定义。 IP 地址与子网掩码进行与运算得到相同结果的设备组成一个子网。这样的定义不是很严格，但是只是讨论一下。</p>
+<p>我们来解答这样一个问题吧：为什么不同子网下的主机不能直接通信呢？</p>
+<p>这个问题，把链路层的知识学了，才能解决。</p>
+<p>两台主机间传输数据，到链路层一定要找到 IP 地址对应的 MAC 地址。我们知道这时通过 ARP 协议完成。而 ARP 查询分组只在一个子网中广播。所以如果两台主机处于不同子网，那么就找不到目标主机的 MAC 地址，也就没有办法连接了。</p>
+<p>注意这点，<strong>广播报文是不会跨子网传播的。</strong></p>
+<p>但是跨子网连接的例子有很多，比如因特网就跨子网连接了，这怎么做到的呢？因为有网关（gateway）。网关是一类设备或节点，用于在不同网络或者子网间传输数据。路由器就是一个常见的网关，因为它的接口可以有不同的网络层 IP 地址。</p>
+<p>我们来看下面这张图的例子，一台路由器连着两个子网，子网 1 中的网络地址是 <code>111.111.111/24</code>，子网 2 的网络地址是 <code>222.222.222/24</code>。现在子网 1 的主机 <code>111.111.111.111</code> 要向子网 2 的主机 <code>222.222.222.222</code> 发送数据报，要怎么做呢？首先仍然发送主机向其适配器传递数据报，但是还要传递一个目的 MAC 地址用于帧的封装。MAC 地址不可以是 222 的 MAC 地址，因为子网 1 中 ARP 查询查不到，也就连不上。正确答案是路由器接口 1 的 MAC 地址 <code>E6-E9-00-17-BB-4B</code>，这是可以通过 ARP 查询获得的。路由器从接口 1 获得帧后将之解封，传给路由器的网络层。然后路由器根据目的 IP 地址查询转发表，知道要从接口 2 送出去。此时这个帧的目的地址才是 222 的物理 MAC 地址，路由器可以通过 ARP 查询获得。</p>
+<p><img alt="" src="https://cdn.jsdelivr.net/gh/peter5723/imagehost/img/net18.png" /></p>
+<p>所以在上面的例子中，路由器就充当了网关的角色。而对主机来说，网关就是外部网络的唯一出口，比如上面的例子中，子网 1 的网关地址就是 <code>111.111.111.110</code>。设备在连接时，首先判断目标是否是在同一子网，是就可以直接连接，不是就要走网关转发。</p>
+<p>一般默认网关地址是 <code>192.168.1.1</code>。路由器除了负责网关，DHCP 和 NAT 服务也是它负责的。</p>
+<p>配置局域网时，假设两个设备网络层地址不同，它们能不能连上，取决于有没有配置好网关，可以通过路由器转发。</p>
 <h3 id="44">4.4 选路<a class="headerlink" href="#44" title="Permanent link">&para;</a></h3>
 <p>选路是网络层的核心功能之一，负责确定数据报从源主机到目的主机所经过的路径（Path）。网络层根据选路算法计算最优路径，并维护转发表（Forwarding Table），指导路由器如何转发分组。</p>
 <p>一台主机通常与一个路由器直接相连，这个路由器称为第一跳（first-hop）路由器或默认路由器。数据从路由器到路由器之间传一次称为一跳。源主机的第一跳路由器称为源路由器，目的主机的第一跳路由器称为目的路由器。</p>
@@ -3261,7 +3291,7 @@ segments may carry a payload.</p>
 <h3 id="45-proxyvpn">4.5 proxy，vpn<a class="headerlink" href="#45-proxyvpn" title="Permanent link">&para;</a></h3>
 <p>我们学了网络层，就能弄明白一些术语了。一是 proxy，即代理。代理是一种中介服务器，位于客户端和目标服务器之间，负责转发请求和响应。目标服务器看到的当然是代理服务器的 IP。有点像 NAT，当然完全不同。</p>
 <p>二是 vpn，全称 Virtual Private Network，虚拟专用网络。其在公共网络（如互联网）上创建一条加密的“隧道”，将用户的设备与远程网络（如企业内网）安全连接。用户的所有流量全部加密，通过 vpn 服务器传输，故其本质上也是一种 proxy。公司和学校常用 vpn。</p>
-<h2 id="_5">第五章 链路层<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
+<h2 id="_6">第五章 链路层<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
 <h3 id="51">5.1 概述<a class="headerlink" href="#51" title="Permanent link">&para;</a></h3>
 <p>先介绍一些术语。</p>
 <p>网络层提供了两台主机间的通信服务。而分组是如何通过构成端到端通信路径的每一段链路，就是链路层协议考虑的事情。</p>
@@ -3441,7 +3471,7 @@ segments may carry a payload.</p>
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="August 2, 2025 20:22:16 CST">2025-08-02</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="August 24, 2025 23:23:23 CST">2025-08-24</span>
   </span>
 
     
