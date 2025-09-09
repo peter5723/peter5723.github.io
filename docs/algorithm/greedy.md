@@ -77,7 +77,153 @@ m 是 $a_i$ 结束之后第一个结束的活动的下标。
 此时状态已经和 j 没有关系，我们进一步简化问题，考虑 $S_i$ 是 $a_i$ 结束之后开始的活动集合，其最优解为 dp[i]，则
 
 $$
-dp[i] = dp[m] + 1
+dp[i] = \begin{cases}
+    dp[m] + 1, \text{m exists} \\
+    0, \text{m not exists}
+\end{cases}
 $$
 
+要求原问题的解，计算 $dp[0]$ 的值即可。
 
+然后简单地说一个技术问题，可以看到这次的迭代是从后往前计算的，然而 m 是要从前往后计算的，这样不是矛盾了吗？实际上，我们迭代之前可以先把每个下标对应的 m 的值计算出来。“m 是 $a_i$ 结束之后第一个结束的活动的下标。”这是可以做到的。
+
+下面是解决问题的代码：
+
+```cpp
+#include <vector>
+#include <iostream>
+using namespace std;
+
+vector<vector<std::pair<int, int>>> dp_stack(50);
+//计算 m
+void cal_m(int n, vector<int> &m, vector<int> s, vector<int> f)
+{
+    for (int i = 0; i < n; i++)
+    {
+        m[i] = -1;
+        // 按结束时间从低到高排序
+        //  j<i 不可能兼容，就不用考虑了
+        for (int j = i + 1; j < n; j++)
+        {
+            if (s[j] >= f[i])
+            {
+                m[i] = j;
+                break;
+            }
+        }
+    }
+}
+// 计算最优解
+int cal_dp(int n, vector<int> m, vector<int> s, vector<int> f)
+{
+    int dp[n] = {0};
+    for (int i = n - 1; i >= 0; i--)
+    {
+        if (m[i] == -1)
+        {
+            dp[i] = 0;
+        }
+        else
+        {
+            dp[i] = dp[m[i]] + 1;
+            dp_stack[i] = dp_stack[m[i]];
+            dp_stack[i].push_back(std::make_pair(s[m[i]], f[m[i]]));
+        }
+    }
+    dp_stack[0].push_back(std::make_pair(s[0], f[0]));
+    return dp[0] + 1;
+    // 根据定义，dp[0]计算的是第一个活动结束之后活动集合的最优解，所以整个活动的数量还要加上第一个活动
+}
+
+int main()
+{
+    // vector<int> s = {1,3,0,5,3,5,6,8,8,2,12};
+    // vector<int> f = {4,5,6,7,9,9,10,11,12,14,16};
+
+    // vector<int> s = {2};
+    // vector<int> f = {5};
+
+    // vector<int> s = {1, 1, 1, 1};
+    // vector<int> f = {5, 5, 5, 5};
+
+    // vector<int> s = {1, 2, 3, 4, 5, 6, 7, 8};
+    // vector<int> f = {3, 4, 5, 6, 7, 8, 9, 10};
+
+    vector<int> s = {1, 100, 200, 300, 400};
+    vector<int> f = {50, 150, 250, 350, 450};
+
+    int n = f.size();
+    vector<int> m(n, 0);
+    cal_m(n, m, s, f);
+    cout << "The result is " << cal_dp(n, m, s, f) << "\n";
+    for (int i = dp_stack[0].size() - 1; i >= 0; i--)
+    {
+        cout << "(" << dp_stack[0][i].first << "," << dp_stack[0][i].second << ")" << ",";
+    }
+    return 0;
+}
+```
+
+然后要说的是，由于贪心算法足够简单，实际上，我们在知道了最优策略以后，也不用真的按状态转移方程来写，而是直接模拟最优策略的行为就可以了（比如这个问题就是一直取第一个结束的活动），如下面代码所示：
+
+```cpp
+#include <vector>
+#include <iostream>
+using namespace std;
+
+vector<std::pair<int, int>> dp_stack;
+//实际上对应了计算 m 的过程。
+int greedy_search(vector<int> s, vector<int> f)
+{
+    int n = s.size();
+    int res = 0;
+    int old_f = 0;
+    for (int i = 0; i < n; i++)
+    {
+        if (s[i] >= old_f)
+        {
+            dp_stack.push_back(std::make_pair(s[i], f[i]));
+            res++;
+            old_f = f[i];
+        }
+    }
+    return res;
+}
+
+
+int main()
+{
+    vector<int> s = {1, 3, 0, 5, 3, 5, 6, 8, 8, 2, 12};
+    vector<int> f = {4, 5, 6, 7, 9, 9, 10, 11, 12, 14, 16};
+
+    // vector<int> s = {2};
+    // vector<int> f = {5};
+
+    // vector<int> s = {1, 1, 1, 1};
+    // vector<int> f = {5, 5, 5, 5};
+
+    // vector<int> s = {1, 2, 3, 4, 5, 6, 7, 8};
+    // vector<int> f = {3, 4, 5, 6, 7, 8, 9, 10};
+
+    // vector<int> s = {1, 100, 200, 300, 400};
+    // vector<int> f = {50, 150, 250, 350, 450};
+
+    int n = f.size();
+
+    cout << "The result is " << greedy_search(s, f) << "\n";
+    for (int i = 0; i < dp_stack.size(); i++)
+    {
+        cout << "(" << dp_stack[i].first << "," << dp_stack[i].second << ")" << ",";
+    }
+
+    return 0;
+}
+```
+
+以上，我们简单介绍了贪心算法。其由动态规划算法演化而来，基本思想仍然是类似的将问题分解为最优子结构，但是其贪心选择性质又大大减少了计算量，因为我们不必考虑子问题的解。
+
+贪心算法的设计步骤：
+
+- 将最优化问题转化为这样的形式：做出一次选择后只剩一个子问题需要求解。
+- 证明做出贪心选择后，原问题存在最优解。
+- 证明做出贪心选择后，剩下的子问题满足性质：其最优解和贪心选择的组合可以构成原问题的最优解。
