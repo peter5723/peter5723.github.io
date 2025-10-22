@@ -112,6 +112,8 @@ nav:
     - "短时傅里叶变换": "signal/stft.md"
     - "LTI系统频域特性（ss第6章）": "signal/ch6_ss.md"
     - "PCA 法滤波": "signal/pca.md"
+    - "小波变换": "signal/wavelet.md"
+    - "乐理": "signal/music.md"
   - "计算机系统":
     - "PA 实验记录": "ICS/2023-11-02-PAnote.md"
     - "RISC-V": "ICS/riscv.md"
@@ -143,6 +145,9 @@ nav:
     - "介绍": "ai/infra.md"
   - "计算机网络":
     - "网络": "network/network.md"
+    - "实际问题": "network/problem.md"
+  - "数学":
+    - "不等式": "math/ineq.md"
   - "书":
     - "诗词格律": "wen/poem.md"
     - "鼠疫": "wen/LaPeste.md"
@@ -152,6 +157,7 @@ nav:
     - "赌徒": "wen/beggar.md"
     - "Dubliners": "wen/Dubliners.md"
     - "欧洲卡车模拟": "wen/euro.md"
+    - "李白诗": "wen/libai.md"
   - diary:
     - "one diary":
       - "one one diary": "diary.md"
