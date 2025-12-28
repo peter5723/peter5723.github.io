@@ -1,5 +1,14 @@
 不会觉得是真的 diary 吧？我试一下 nav 能不能多层套。 Thanks for Material for MkDocs。
 
+## 2025-12-11
+
+今天解决 git push 失败的问题，其实很简单，使用魔法以后，设置 git 的代理就可以了。
+
+```
+git config --global http.proxy 127.0.0.1:7890
+git config --global https.proxy 127.0.0.1:7890
+```
+
 ## 2025-11-25
 
 我很久很久没有在这里写过东西了，因为很多东西写在了别的地方，看了以前写的东西，感觉很怀念啊，今天写一点吧。
