@@ -141,8 +141,10 @@ nav:
     - "凸优化问题": "opt/convex.md"
   - "C++":
     - "CS106L 笔记": "Cpp/intro.md"
-  - "ai infra":
+  - "ai":
     - "介绍": "ai/infra.md"
+    - "rag": "ai/rag.md"
+    - "vllm": "ai/vllm.md"
   - "计算机网络":
     - "网络": "network/network.md"
     - "实际问题": "network/problem.md"
