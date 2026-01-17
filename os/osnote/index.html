@@ -1293,6 +1293,15 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#lab6-multithreading" class="md-nav__link">
+    <span class="md-ellipsis">
+      Lab6: Multithreading
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -1766,7 +1775,7 @@
   
   
   <span class="md-ellipsis">
-    ai infra
+    ai
     
   </span>
   
@@ -1777,7 +1786,7 @@
         <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_12_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_12">
             <span class="md-nav__icon md-icon"></span>
-            ai infra
+            ai
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
@@ -1794,6 +1803,52 @@
   
   <span class="md-ellipsis">
     介绍
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ai/rag/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    rag
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ai/vllm/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    vllm
     
   </span>
   
@@ -2463,6 +2518,15 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#lab6-multithreading" class="md-nav__link">
+    <span class="md-ellipsis">
+      Lab6: Multithreading
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -2484,6 +2548,8 @@
 <p>开始学操作系统. 学习的课程是 MIT 的 <a href="https://pdos.csail.mit.edu/6.828/2023/schedule.html">6.1810</a>(即之前的 6.S081). 使用的教材是 <a href="https://pages.cs.wisc.edu/~remzi/OSTEP/">OSTEP</a> 和 <a href="https://pdos.csail.mit.edu/6.828/2023/xv6/book-riscv-rev3.pdf">xv6-book</a></p>
 <p>由于是每节课一个实验, 那么我就把学习的笔记和实验记录在一起好了. 格外重要的需要详细讲的知识点, 再单独列出.</p>
 <p>网上关于这门课的资料真的多，好好利用，网红课啊。</p>
+<p><code>make qemu</code> 运行 qemu
+<code>Ctrl-a x</code> 退出</p>
 <h3 id="git">git 配置<a class="headerlink" href="#git" title="Permanent link">&para;</a></h3>
 <p>在实验之前, 最好根据这个链接来配置你的 git: <a href="https://xv6.dgs.zone/labs/use_git/git1.html">https://xv6.dgs.zone/labs/use_git/git1.html</a>, 因为有些坑和之前的不同。</p>
 <p>整理一下，就是先 <code>git remote add github &lt;your-url&gt;</code> 添加自己仓库的链接为 github 分支。</p>
@@ -2601,6 +2667,11 @@
 修改 <code>kfree()</code> 的逻辑，调用时，物理地址的映射数减 1，然后看映射数，如果映射数为 0，没有虚拟地址指向这里，就可以释放这页空间。</p>
 <p>在第一步和第二步中，添加计数的功能，如第二步中，指向新的物理页后，直接调用 <code>kfree()</code> 即可。</p>
 <p>这些做完后，就差不多了，有一个 <code>copyout()</code> 函数也要增加一个类似的缺页异常处理，这个藏的很隐蔽。如果没有通过 <code>cowtest</code> 的 <code>filetest</code>，往上找是 <code>pipe()</code> 的问题，然后 <code>pipe()</code> 调用了 <code>copyout()</code> 函数。</p>
+<h2 id="lab6-multithreading">Lab6: Multithreading<a class="headerlink" href="#lab6-multithreading" title="Permanent link">&para;</a></h2>
+<p>switching between threads in a user-level threads package.</p>
+<p>第一题是实现了在用户态的线程切换。思路很简单，储存切换前线程的上下文在自己定义的结构中，指针为 a0（<code>thread_switch(old, new)</code>，寄存器 <code>a0</code> <code>a1</code> 是函数的两个参数），从 a1 中储存的地址加载寄存器，函数的返回地址放在 ra 中，当我执行 thread_switch(old, new) 的ret，就将 ra 中的值放到 pc 里面，就成功切换到了新线程。</p>
+<p>如果是新创建的线程，将 ra 的值指向函数入口就行了。</p>
+<p>这和内核态线程切换的区别是，不涉及任何从用户态陷入内核态的过程，很方便。</p>
 
 
 
@@ -2623,7 +2694,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="September 10, 2024 14:59:53 CST">2024-09-10</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="January 17, 2026 19:02:28 CST">2026-01-17</span>
   </span>
 
     
