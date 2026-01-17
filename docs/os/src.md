@@ -106,3 +106,103 @@ page fault 对应的代码
 
 ## 6. 多线程切换
 
+A -> CPU 调度器 -> B
+
+首先，进程 A 让出 CPU，调用 `yield()`，最终调用 `sched()`，切换到 CPU 的scheduler 线程
+
+```c
+// kernel/proc.c
+
+void sched(void)
+{
+  struct proc *p = myproc();
+  // ... 一些检查代码，比如确保持有锁 ...
+
+  // 【关键代码】
+  // 切换：从 "当前进程 A 的上下文" -> "当前 CPU 的调度器上下文"
+  swtch(&p->context, &mycpu()->context);
+}
+```
+
+现在 CPU 运行的是 scheduler 线程（每个 CPU 核都有一个专属的调度器线程）。这是一个无限循环。
+
+```c
+// kernel/proc.c
+
+void scheduler(void)
+{
+  struct proc *p;
+  struct cpu *c = mycpu();
+
+  c->proc = 0;
+  for(;;){ // 无限循环
+    // 1. 开启中断，避免死锁
+    intr_on();
+
+    // 2. 遍历进程表，寻找一个 RUNNABLE 的进程 (比如进程 B)
+    for(p = proc; p < &proc[NPROC]; p++) {
+      acquire(&p->lock);
+      if(p->state == RUNNABLE) {
+        
+        // 找到了进程 B！准备切换
+        p->state = RUNNING;
+        c->proc = p;
+
+        // 【关键代码】
+        // 切换：从 "当前 CPU 的调度器上下文" -> "进程 B 的上下文"
+        swtch(&c->context, &p->context);
+
+        // -- 这里是分割线 --
+        // 当进程 B 将来由运行完 yield 时，CPU 会再次回到这里
+        
+        c->proc = 0;
+      }
+      release(&p->lock);
+    }
+  }
+}
+```
+
+这样就切成了 B 线程，它从内核的 `sched()` 回来。继续执行它的代码。
+
+## 7. Trap
+
+整理一下 trap 的过程，包括 ecall（系统调用）、硬件中断和软件异常。这里以硬件中断为例。
+
+时钟到期，向 CPU 发送信号，CPU 强行停止执行，读取 `stvec` 寄存器，进入内核态（Supervisor Mode）。
+
+`stvec` 指向的地址是 `trampoline.S` 中的 `uservec` 代码段。它保存寄存器到 `trapframe` 里面；然后从 `trapframe` 中读出内核页表的地址写入 `satp` 寄存器；跳转 `trapframe` 里面记录的 `usertrap` 函数地址。
+
+```c
+// kernel/trap.c
+void usertrap(void) {
+  // ... 检查中断原因 ...
+  
+  // 如果是系统调用
+  if(r_scause() == 8) { ... }
+  
+  // 如果是设备中断 (包括时钟)
+  else if((which_dev = devintr()) != 0) {
+    // 这里的 devintr() 会检查是不是时钟中断
+  }
+
+  // ...
+
+  // 【关键点】如果是时钟中断，并且进程还在运行，就强迫它让出 CPU
+  if(which_dev == 2) // 2 代表时钟中断
+    yield(); 
+
+  usertrapret(); // 如果没切换，或者切换回来后，从这里返回
+}
+
+// kernel/proc.c
+void yield(void) {
+  struct proc *p = myproc();
+  acquire(&p->lock);
+  p->state = RUNNABLE; // 将状态从 RUNNING 改为 RUNNABLE
+  sched();             // 调用调度器，这里面会执行 swtch
+  release(&p->lock);
+}
+```
+
+然后就进行了线程切换。

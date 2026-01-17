@@ -8,6 +8,9 @@
 
 网上关于这门课的资料真的多，好好利用，网红课啊。
 
+`make qemu` 运行 qemu
+`Ctrl-a x` 退出
+
 ### git 配置
 
 在实验之前, 最好根据这个链接来配置你的 git: <https://xv6.dgs.zone/labs/use_git/git1.html>, 因为有些坑和之前的不同。
@@ -205,3 +208,14 @@ TODO: 在 sys_sleep() 内核函数中调用 backtrace，为什么可以一路回
 在第一步和第二步中，添加计数的功能，如第二步中，指向新的物理页后，直接调用 `kfree()` 即可。
 
 这些做完后，就差不多了，有一个 `copyout()` 函数也要增加一个类似的缺页异常处理，这个藏的很隐蔽。如果没有通过 `cowtest` 的 `filetest`，往上找是 `pipe()` 的问题，然后 `pipe()` 调用了 `copyout()` 函数。
+
+
+## Lab6: Multithreading
+
+switching between threads in a user-level threads package.
+
+第一题是实现了在用户态的线程切换。思路很简单，储存切换前线程的上下文在自己定义的结构中，指针为 a0（`thread_switch(old, new)`，寄存器 `a0` `a1` 是函数的两个参数），从 a1 中储存的地址加载寄存器，函数的返回地址放在 ra 中，当我执行 thread_switch(old, new) 的ret，就将 ra 中的值放到 pc 里面，就成功切换到了新线程。
+
+如果是新创建的线程，将 ra 的值指向函数入口就行了。
+
+这和内核态线程切换的区别是，不涉及任何从用户态陷入内核态的过程，很方便。
