@@ -219,3 +219,32 @@ switching between threads in a user-level threads package.
 如果是新创建的线程，将 ra 的值指向函数入口就行了。
 
 这和内核态线程切换的区别是，不涉及任何从用户态陷入内核态的过程，很方便。
+
+第二题是多线程同时占用资源导致冲突。具体来说是一个哈希表，我同时对哈希表进行 `get()` 和 `put()` 操作而导致问题。解决方法很简单，加上锁保证都是原子化操作就可以了。
+
+注意锁应当定义为全局变量由所有线程共享，在 `main()` 函数里面初始化。
+
+第三题则是实现一个 barrier， a point in an application at which all participating threads must wait until all other participating threads reach that point too。需要用到条件变量。
+
+```c
+static void 
+barrier()
+{
+  // YOUR CODE HERE
+  //
+  // Block until all threads have called barrier() and
+  // then increment bstate.round.
+  //
+  pthread_mutex_lock(&bstate.barrier_mutex);
+  bstate.nthread++;
+  if (bstate.nthread < nthread) {
+    pthread_cond_wait(&bstate.barrier_cond, &bstate.barrier_mutex);
+  } else {
+    bstate.nthread = 0;
+    bstate.round++;
+    pthread_cond_broadcast(&bstate.barrier_cond);
+  }
+ 
+  pthread_mutex_unlock(&bstate.barrier_mutex);
+}
+```
