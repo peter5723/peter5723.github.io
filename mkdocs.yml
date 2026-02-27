@@ -136,6 +136,7 @@ nav:
     - "动态规划": "algorithm/dp.md"
     - "np 完全性问题": "algorithm/np.md"
     - "贪心算法": "algorithm/greedy.md"
+    - "lc100": "algorithm/leetcode100.md"
   - "优化理论":
     - "介绍": "opt/intro.md"
     - "线性代数复习": "opt/la.md"
@@ -147,6 +148,7 @@ nav:
     - "transformer": "ai/transformer.md"
     - "rag": "ai/rag.md"
     - "vllm": "ai/vllm.md"
+    - "minimind": "ai/minimind.md"
   - "计算机网络":
     - "网络": "network/network.md"
     - "实际问题": "network/problem.md"
