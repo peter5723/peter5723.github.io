@@ -136,6 +136,7 @@ nav:
     - "动态规划": "algorithm/dp.md"
     - "np 完全性问题": "algorithm/np.md"
     - "贪心算法": "algorithm/greedy.md"
+    - "图": "algorithm/graph.md"
   - "优化理论":
     - "介绍": "opt/intro.md"
     - "线性代数复习": "opt/la.md"
