@@ -704,3 +704,73 @@ public:
     }
 };
 ```
+
+
+## 回溯
+
+括号生成：阿里常考这道题
+
+全排列：
+
+```cpp
+class Solution {
+public:
+    void dfs(vector<int>& nums, vector<vector<int>>& ans, vector<int>& path,
+             unordered_set<int>& has_exist) {
+        int n = nums.size();
+        if (path.size() == nums.size()) {
+            ans.push_back(path);
+            return;
+        }
+        for(int i=0;i<n;i++) {
+            if(has_exist.count(nums[i])) {
+                continue;
+            }
+            path.push_back(nums[i]);
+            has_exist.insert(nums[i]);
+            dfs(nums, ans, path, has_exist);
+            path.pop_back();
+            has_exist.erase(nums[i]);
+        }
+    }
+    vector<vector<int>> permute(vector<int>& nums) {
+        vector<vector<int>> ans;
+        vector<int> path;
+        unordered_set<int> has_exist;
+        dfs(nums, ans, path, has_exist);
+        return ans;
+    }
+};
+```
+
+
+组合总和：
+
+```cpp
+class Solution {
+public:
+    void dfs(vector<int>& candidates, vector<vector<int>>& ans,
+             vector<int>& path, int target, int back_index) {
+        if (target < 0) {
+            return;
+        }
+        if (target == 0) {
+            ans.push_back(path);
+            return;
+        }
+        int n = candidates.size();
+
+        for (int i = back_index; i < n; i++) {
+            path.push_back(candidates[i]);
+            dfs(candidates, ans, path, target - candidates[i], i); // 这个地方是 i，不是 back_index，想象一下即可
+            path.pop_back();
+        }
+    }
+    vector<vector<int>> combinationSum(vector<int>& candidates, int target) {
+        vector<vector<int>> ans;
+        vector<int> path;
+        dfs(candidates, ans, path, target, 0);
+        return ans;
+    }
+};
+```
