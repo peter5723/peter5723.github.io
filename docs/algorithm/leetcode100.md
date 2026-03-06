@@ -414,3 +414,172 @@ public:
     }
 };
 ```
+
+二叉树前序中序遍历可以构造树，如下一题所示。
+
+快速由值定位到index构建一个哈希表就可以了
+
+```cpp
+class Solution {
+private:
+    unordered_map<int, int> index;
+
+public:
+    TreeNode* mybuildTree(const vector<int>& preorder,
+                          const vector<int>& inorder, int preorder_left,
+                          int preorder_right, int inorder_left,
+                          int inorder_right) {
+        if (preorder_left > preorder_right) {
+            return nullptr;
+        }
+        int preorder_root = preorder_left;
+        int inorder_root = index[preorder[preorder_left]];
+
+        TreeNode* root = new TreeNode(preorder[preorder_root]);
+        int size_left_subtree = inorder_root - inorder_left;
+        root->left = mybuildTree(preorder, inorder, preorder_left + 1,
+                                 preorder + size_left_subtree, inorder_left,
+                                 inorder_root - 1);
+        root->right = mybuildTree(
+            preorder, inorder, preorder_left + size_left_subtree + 1,
+            preorder_right, inorder_root + 1, inorder_right);
+        return root;
+    }
+    TreeNode* buildTree(vector<int>& preorder, vector<int>& inorder) {
+        int n = preorder.size();
+        for(int i=0;i<n;i++) {
+            index[inorder[i]] = i;
+            // 如何快速的从值创建下标，可以用 哈希表
+        }
+        return mybuildTree(preorder, inorder, 0, n-1,0, n-1);
+    }
+};
+```
+
+路径总和这道题，思路和和为 k 的子数组做法一模一样。枚举路径的终点，统计有多少个起点
+
+
+最近公共祖先
+```cpp
+class Solution {
+public:
+    TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
+        if(!root || root==p || root==q) {
+            return root;
+        }
+        TreeNode* left = lowestCommonAncestor(root->left, p, q);
+        TreeNode* right = lowestCommonAncestor(root->right, p,q);
+        if(left && right) return root;
+        return left ? left : right;
+    }
+};
+```
+
+二叉树中的最大路径和，这本质上是一个图的问题，我们这里就用 dfs 算每个节点的最大贡献值，同时更新结果：
+
+```cpp
+class Solution {
+public:
+
+    int maxSum = INT_MIN;
+    int maxGain(TreeNode * node) {
+        if(node == nullptr) {
+            return 0;
+        }
+
+        int leftGain = max(maxGain(node->left), 0);
+        int rightGain = max(maxGain(node->right), 0);
+
+        int priceNewpath = node->val + leftGain + rightGain;
+
+        maxSum = max(maxSum, priceNewpath);
+        // 一边算出每个节点的最大贡献值一边更新回答的最大值
+        return node->val + max(leftGain, rightGain);
+    }
+    int maxPathSum(TreeNode* root) {
+        maxGain(root);
+        return maxSum;
+    }
+};
+```
+
+## 图论
+
+岛屿数量问题：很经典地用 dfs 涂色，然后计算岛屿数量。
+
+```cpp
+class Solution {
+public:
+    void dfs(vector<vector<char>>& grid, int i, int j, int m, int n) {
+        // 将 (坐标i,j) 所在的岛屿每个位置都做上标记
+        if (i < 0 || i >= m || j < 0 || j >= n || grid[i][j] != '1') {
+            return;
+        }
+        grid[i][j] = 2;
+        dfs(grid, i, j - 1, m, n);
+        dfs(grid, i, j + 1, m, n);
+        dfs(grid, i - 1, j, m, n);
+        dfs(grid, i + 1, j, m, n);
+    }
+
+    int numIslands(vector<vector<char>>& grid) {
+        int m = grid.size(), n = grid[0].size();
+        int ans = 0;
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                if (grid[i][j] == '1') {
+                    dfs(grid, i, j, m,
+                        n); // 注意，dfs 可以保证，我在循环里碰到的 1
+                            // 一定是我没有跑到的新岛屿
+                    ans++;
+                }
+            }
+        }
+        return ans;
+    }
+};
+```
+
+烂橘子这道题就是对多头 BFS 的模拟：
+
+```cpp
+class Solution {
+    int DIRECTIONS[4][2] = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}};
+
+public:
+    int orangesRotting(vector<vector<int>>& grid) {
+        int m = grid.size(), n = grid[0].size();
+        int fresh = 0;
+        vector<pair<int, int>> q;
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                if (grid[i][j] == 1) {
+                    fresh++;
+                } else if (grid[i][j] == 2) {
+                    q.push_back({i, j});
+                }
+            }
+        }
+
+        int ans = 0;
+        while (fresh && !q.empty()) {
+            ans++;
+            vector<pair<int, int>> nxt;
+            for (auto& [x, y] : q) {
+                // 注意这里的C++写法，pair 赋值给两变量
+                for (auto d : DIRECTIONS) {
+                    int i = x + d[0], j = y + d[1];
+                    if (i >= 0 && i < m && j >= 0 && j < n &&
+                        grid[i][j] == 1) {
+                        fresh--;
+                        grid[i][j] = 2;
+                        nxt.push_back({i, j});
+                    }
+                }
+            }
+            q = move(nxt);
+        }
+        return fresh ? -1 : ans;
+    }
+};
+```
