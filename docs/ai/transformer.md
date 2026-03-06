@@ -173,3 +173,62 @@ print(f"Loss: {loss.item()}")
 ![](https://cdn.jsdelivr.net/gh/peter5723/imagehost/img/gpt1.png)
 
 
+我们来看看 transformer 的伪代码：
+
+```python
+class TransformerBlock:
+    def forward(self, x):
+        # x shape: [batch, seq_len, dim]
+        
+        # 1. Self-Attention (Mix information between tokens)
+        residual = x
+        x = self.layer_norm_1(x)
+        # 这里的 attention 计算就需要用到 Q, K, V
+        # 也是 KV Cache 发挥作用的地方
+        x_attn = self.attention(x) 
+        x = residual + x_attn # 残差连接
+        
+        # 2. Feed-Forward (Process information individually)
+        residual = x
+        x = self.layer_norm_2(x)
+        x_mlp = self.mlp(x) # 放大再缩小，非线性变换
+        x = residual + x_mlp # 残差连接
+        
+        return x
+```
+
+$$
+\text{Attention}(Q, K, V) = \text{softmax}\left(\frac{QK^T}{\sqrt{d_k}}\right)V
+$$
+
+| 符号 | 含义 | 作用 |
+| :--- | :--- | :--- |
+| $Q$ | **Query** (查询) | 代表当前 token “想要寻找”什么信息。 |
+| $K^T$ | **Key** (键) 的转置 | 代表序列中其他 token “能提供”什么特征。 |
+| $QK^T$ | **相似度矩阵** | 得到每一对 token 之间的原始相关性分数。 |
+| $\sqrt{d_k}$ | **缩放因子** | 防止点积数值过大导致梯度消失。 |
+| $\text{softmax}$ | **归一化函数** | 将分数转化为概率分布，确定关注权重。 |
+| $V$ | **Value** (值) | 代表 token 携带的实际内容信息。 |
+
+我们还是来看看一些实际的问题吧：
+
+Q1: 请简述 Transformer 中 Q, K, V 的作用，以及为什么需要除以 $\sqrt{d_k}$？
+
+参考回答：
+
+- 作用： Q (Query) 是查询向量，代表当前 token 想要寻找的信息；K (Key) 是键向量，代表被查询 token 的特征标识；V (Value) 是值向量，代表实际包含的内容信息。Attention 本质是根据 Q 和 K 的相似度（点积）计算权重，然后对 V 进行加权求和。
+- Scaling 原因： 当 $d_k$（维度）较大时，点积的结果数值方差会很大。如果数值过大，经过 Softmax 后会进入饱和区（极端的 0 或 1），导致梯度极小（梯度消失），模型难以训练。除以 $\sqrt{d_k}$ 是为了将数值拉回对 Softmax 敏感的区间（-1 到 1 附近），保证训练稳定性。
+
+Q2: Decoder-only 模型（如 GPT）在推理时，Self-Attention 为什么要加 Mask？Cross-Attention 需要 Mask 吗？
+
+参考回答：
+
+Self-Attention Mask： 因为推理是自回归（Autoregressive）的，生成第 $t$ 个词时，不能看到 $t+1$ 及之后的词。Mask 通过将 Attention 矩阵的上三角区域置为 $-\infty$（在 Softmax 后变为 0），强制模型“只能看过去，不能看未来”，防止信息泄露。Cross-Attention Mask： 通常不需要 Causal Mask。因为 Cross-Attention 的 K 和 V 来自 Encoder（源序列），源序列是已知的完整输入，Decoder 在生成任何位置时都可以查看源序列的全文。
+
+Q3: 为什么现在的 LLM（Llama, Qwen）大多采用 Decoder-only 架构，而不是 Encoder-Decoder？
+
+参考回答：
+
+主要原因是 Scaling Law（缩放定律） 和训练效率。Decoder-only 架构在预训练任务（Next Token Prediction）上表现出更强的泛化能力和零样本（Zero-shot）能力。
+
+此外，Decoder-only 架构结构更统一，KV Cache 管理更直接（只有 Self-Attention 的 Cache），便于工程优化（如 vLLM 的 PagedAttention）。
