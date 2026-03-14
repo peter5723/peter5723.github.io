@@ -64,29 +64,27 @@ public:
 
 ## 滑动窗口
 
+
 ```cpp
 class Solution {
 public:
     int lengthOfLongestSubstring(string s) {
-        unordered_set<char> occ;
-        int n = s.size();
-        int rk=-1,ans=0;
-        for(int i=0;i<n;i++){
-            if(i!=0) occ.erase(s[i-1]);
+        int n = s.length(), ans = 0,left = 0;
+        unordered_set<char> window;
+        for(int right=0;right<n;right++){
+            char c=s[right];
+            while(window.count(c)){
+                window.erase(s[left]);
+                left++;
+            }
+            window.insert(c);
+            ans = max(ans, right-left+1);
         }
-        while(rk+1<n && !occ.count(s[rk+1])) {
-            occ.insert(s[rk+1]);
-            rk++;
-        }
-        ans = max(ans, rk-i+1);
+        return ans;
     }
-    return ans;
 };
 ```
-动长滑动窗口
-
-注意，滑动窗口虽然是二重循环，但本质上只不过是左指针（i）和右边指针（rk）遍历两次，所以复杂度仍然是 
-o(N)。
+此题已采取公式做法。`[left,right]`. right 遍历，left 更新边界。
 
 ```cpp
 class Solution {
@@ -703,6 +701,107 @@ public:
         return fresh ? -1 : ans;
     }
 };
+```
+
+
+
+课程表：拓扑排序的典型例子
+
+用邻接表和入度就可以了。
+
+```cpp
+class Solution {
+private:
+    vector<vector<int>> edges;
+    vector<int> indeg;
+public:
+    bool canFinish(int numCourses, vector<vector<int>>& prerequisites) {
+        edges.resize(numCourses);
+        indeg.resize(numCourses);
+        // 首先构造图：用表存储图，并且存储每个节点的入度
+        for(const auto& info: prerequisites) {
+            edges[info[1]].push_back(info[0]);
+            indeg[info[0]]++;
+        }
+
+        // 然后接下来就是用广度优先搜索就可以了，不断将入度为0的课程加入队列学习。
+        queue<int> q;
+        for(int i=0;i<numCourses;i++){
+            if(indeg[i]==0){
+                q.push(i);
+            }
+        }
+        int visited = 0;
+        while(!q.empty()){
+            visited++;
+            int u = q.front();
+            q.pop();
+            for(int v:edges[u]) {
+                indeg[v]--;
+                if(indeg[v]==0){
+                    q.push(v);
+                }
+            }
+        }
+        // 如果存在环那么入度就不可能变成 0。
+        return visited == numCourses;
+
+    }
+};
+```
+
+前缀树。
+
+按照 0x3f，最简单的理解方式就是理解成 26 叉树，每一个字母对应不同的分叉，结束了。
+
+```cpp
+struct Node {
+    Node* son[26]{};
+    bool end = false; // 标志一个单词是否结束
+};
+
+class Trie {
+private:
+    Node* root = new Node();
+    int find(string word) {
+        Node* cur = root;
+        for (char c : word) {
+            c -= 'a';
+            if (cur->son[c] == nullptr) {
+                return 0;
+            }
+            cur = cur->son[c];
+        }
+        return cur->end ? 2 : 1;
+    }
+
+public:
+    Trie() {}
+
+    void insert(string word) {
+        Node* cur = root;
+        for (char c : word) {
+            c -= 'a';
+            if (cur->son[c] == nullptr) {
+                cur->son[c] = new Node();
+            }
+            cur = cur->son[c];
+        }
+        cur->end = true;
+    }
+
+    bool search(string word) { return find(word) == 2; }
+
+    bool startsWith(string prefix) { return find(prefix); }
+};
+
+/**
+ * Your Trie object will be instantiated and called as such:
+ * Trie* obj = new Trie();
+ * obj->insert(word);
+ * bool param_2 = obj->search(word);
+ * bool param_3 = obj->startsWith(prefix);
+ */
 ```
 
 
