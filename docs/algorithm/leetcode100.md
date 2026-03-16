@@ -875,5 +875,151 @@ public:
 ```
 
 
-## 动态规划
+## 栈
 
+涉及表达式解析的题目，一定用栈
+思路都一样，不是右括号就一直入栈
+是右括号就出栈处理。
+
+```cpp
+class Solution {
+public:
+    // 获取字符串 s 中从ptr处开始的数字
+    string getDigits(string& s, size_t& ptr) {
+        string ret = "";
+        while (isdigit(s[ptr])) {
+            ret.push_back(s[ptr]);
+            ptr++;
+        }
+        return ret;
+    }
+    // 将字符串拼接成字符串，拼接用+即可。
+    string getString(vector<string>& v) {
+        string ret;
+        for (const auto& s : v) {
+            ret += s;
+        }
+        return ret;
+    }
+
+    string decodeString(string s) { 
+        vector<string> stk; 
+        size_t ptr = 0;
+        while(ptr<s.size()) {
+            char cur = s[ptr];
+            if(isdigit(cur)) {
+                string digits = getDigits(s,ptr); // getDigits 会更新ptr
+                stk.push_back(digits);
+            } else if(isalpha(cur)||cur=='['){
+                stk.push_back(string(1, s[ptr]));
+                ptr++;
+            } else {
+                // 是右括号，出stack
+                ptr++;
+                vector<string> sub;
+                while(stk.back()!="[") {
+                    // 读取[中的所有字符
+                    sub.push_back(stk.back());
+                    stk.pop_back();
+                }
+                reverse(sub.begin(), sub.end());
+                stk.pop_back();// 把[也弹出来，此时stk首部是数字
+                int repTime = stoi(stk.back());
+                stk.pop_back();// 弹数字处理
+                string t;
+                string o = getString(sub);
+                while(repTime) {
+                    t+=o;
+                    repTime--;
+                }
+                stk.push_back(t);
+            }
+        }
+        return getString(stk);
+    }
+};
+```
+
+
+每日温度这道题，是单调栈的典型题目，单调栈就是顾名思义的真的单调栈，从栈底到栈顶温度递减，并每次进入新元素都维护这个关系，将温度比新元素低的元素全部弹出，就可以记录气温的升高了。
+
+```cpp
+class Solution {
+public:
+    vector<int> dailyTemperatures(vector<int>& temperatures) {
+        int n = temperatures.size();
+        vector<int> ans(n);
+        stack<int> st; // 存储下标
+        for (int i = 0; i < n; i++) {
+            int t = temperatures[i];
+            while (!st.empty() && t > temperatures[st.top()]) {
+                int j = st.top();
+                st.pop();
+                ans[j] = i - j;
+            }
+            st.push(i);
+        }
+        return ans;
+    }
+};
+```
+
+另外，虽然这也是二重循环，但是每一个元素入栈一次出栈一次，所以还是 o(n)。
+
+
+## 排序
+
+数组的第 k 个最大元素，用快速排序可以达到 o(n) 的速度。
+
+我们来学习一下快速排序
+
+```cpp
+class Solution {
+public:
+    int partition(vector<int>& nums, int left, int right) {
+        
+        int i = left + rand() % (right - left + 1);
+        int pivot = nums[i];
+
+        swap(nums[i], nums[left]);
+
+        i = left + 1;
+        int j = right;
+        // 只需要记住，未处理的区间是 [i,j] 就可以了
+        while (true) {
+            while (i <= j && nums[i] < pivot) {
+                i++;
+            }
+            while (i <= j && nums[j] > pivot) {
+                j--;
+            }
+
+            if (i >= j) {
+                break;
+            }
+            swap(nums[i], nums[j]);
+            i++;
+            j--;
+        }
+        swap(nums[left], nums[j]);
+        return j;
+    }
+    void quick_sort(vector<int>& nums, int left, int right) {
+        if(left>=right) {
+            return;
+        }
+        int i = partition(nums, left, right);
+        quick_sort(nums, left, i-1);
+        quick_sort(nums, i+1, right);
+    }
+
+    vector<int> sortArray(vector<int>& nums) {
+        quick_sort(nums, 0, (int)nums.size()-1);
+        return nums;
+    }
+};
+```
+
+关键也就是一个找到 pivot，进行划分的过程。只要这个 pivot 比较趋近数组的中间值，就会很快。
+
+## 动态规划
