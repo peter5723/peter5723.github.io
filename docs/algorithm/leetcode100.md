@@ -250,6 +250,7 @@ public:
 推荐使用哨兵
 
 删除倒数第 n 个节点，快指针先走 n 步即可。
+```cpp
     unordered_map<Node*, Node*> cachedNode;
     Node* copyRandomList(Node* head) {
         if(head == NULL) {
