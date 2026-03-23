@@ -876,6 +876,49 @@ public:
 ```
 
 
+分割回文串，回溯的思想很简单，暴力遍历。
+
+优化就是判段子串是否是回文串先用动态规划保存答案。
+
+```cpp
+class Solution {
+public:
+    vector<vector<int>> dp;
+    vector<vector<string>> ret;
+    vector<string> ans;
+    int n;
+
+    void dfs(string& s, int i) {
+        // i 表示现在到了第 i 个
+        if (n == i) {
+            ret.push_back(ans);
+            return;
+        }
+        for (int j = i; j < n; j++) {
+            if (dp[i][j]) { // dp[i][j] 判断s[i..j] 是回文串
+                ans.push_back(s.substr(i, j - i + 1)); // 是，将分割加入答案
+                dfs(s, j + 1);
+                ans.pop_back();
+            }
+        }
+    }
+    vector<vector<string>> partition(string s) {
+        n = s.size();
+        dp.assign(n, vector<int>(n, true));
+
+        for (int i = n - 1; i >= 0; i--) {
+            for (int j = i + 1; j < n; j++) {
+                dp[i][j] = (s[i] == s[j]) && dp[i + 1][j - 1];
+            }
+        }
+
+        dfs(s, 0);
+        return ret;
+    }
+};
+```
+
+
 ## 栈
 
 涉及表达式解析的题目，一定用栈
@@ -1024,3 +1067,60 @@ public:
 关键也就是一个找到 pivot，进行划分的过程。只要这个 pivot 比较趋近数组的中间值，就会很快。
 
 ## 动态规划
+
+
+## 最长有效括号
+
+感觉笨一点方法，先用栈判断出哪些字符可以构成有效括号然后存下来，有效的为1无效的为0，然后在存下来的数组里找最长的连续1的长度就可以了。
+
+## 二分法
+
+闭区间，公式代码
+
+```cpp
+class Solution {
+public:
+    int searchInsert(vector<int>& nums, int target) {
+        // 我写闭区间
+        int left = 0, right = (int)nums.size() - 1;
+        while (left <= right) {
+            int mid = left + (right - left) / 2;
+            if (nums[mid] < target) {
+                left = mid + 1;
+            } else {
+                right = mid - 1;
+            }
+        }
+        return left;
+        // 如果是bool，return nums[left]==target; 即可
+    }
+};
+```
+
+## 智力题
+快慢指针入口。
+```cpp
+class Solution {
+public:
+    int findDuplicate(vector<int>& nums) {
+        int slow = 0, fast = 0;
+        // 由于题目设置范围是1到n所以直接把数组看成一个链表的实现，
+        // 数组里存储下一个节点的index
+        // 重复元素说明链表里有一个元素的入度为2，所以形成了环。我们只要找到环的入口就行了
+        while(true) {
+            slow = nums[slow];
+            fast = nums[nums[fast]];
+            if(fast==slow){
+                break;
+            }
+        }
+        // 他们相遇的位置是距离入口c步，c等于从起点到入口的距离。
+        int head = 0;
+        while(slow!=head){
+            slow = nums[slow];
+            head = nums[head];
+        }
+        return slow;
+    }
+};
+```
