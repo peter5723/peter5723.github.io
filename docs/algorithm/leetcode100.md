@@ -881,36 +881,251 @@ public:
 
 找第 k 大的东西，用快速算法排序即可。
 
-## 动态规划
+分割回文串，回溯的思想很简单，暴力遍历。
 
-最长回文子串，用中心扩展法
-
-编辑距离这道题，考的很常见，注意状态方程的写法，最好记住：
+优化就是判段子串是否是回文串先用动态规划保存答案。
 
 ```cpp
 class Solution {
 public:
-    int minDistance(string word1, string word2) {
-        int m = word1.length();
-        int n = word2.length();
-        vector dp(m + 1, vector<int>(n + 1, 0));
-        for (int i = 0; i < m + 1; i++) {
-            dp[i][0] = i;
-        }
-        for (int j = 0; j < n + 1; j++) {
-            dp[0][j] = j;
-        }
+    vector<vector<int>> dp;
+    vector<vector<string>> ret;
+    vector<string> ans;
+    int n;
 
-        for (int i = 1; i < m + 1; i++) {
-            for (int j = 1; j < n + 1; j++) {
-                int insert_dp = dp[i][j - 1] + 1;
-                int delete_dp = dp[i - 1][j] + 1;
-                int update_dp =
-                    dp[i - 1][j - 1] + (word1[i - 1] != word2[j - 1]);
-                dp[i][j] = min({insert_dp, delete_dp, update_dp});
+    void dfs(string& s, int i) {
+        // i 表示现在到了第 i 个
+        if (n == i) {
+            ret.push_back(ans);
+            return;
+        }
+        for (int j = i; j < n; j++) {
+            if (dp[i][j]) { // dp[i][j] 判断s[i..j] 是回文串
+                ans.push_back(s.substr(i, j - i + 1)); // 是，将分割加入答案
+                dfs(s, j + 1);
+                ans.pop_back();
             }
         }
-        return dp[m][n];
+    }
+    vector<vector<string>> partition(string s) {
+        n = s.size();
+        dp.assign(n, vector<int>(n, true));
+
+        for (int i = n - 1; i >= 0; i--) {
+            for (int j = i + 1; j < n; j++) {
+                dp[i][j] = (s[i] == s[j]) && dp[i + 1][j - 1];
+            }
+        }
+
+        dfs(s, 0);
+        return ret;
+    }
+};
+```
+
+
+## 栈
+
+涉及表达式解析的题目，一定用栈
+思路都一样，不是右括号就一直入栈
+是右括号就出栈处理。
+
+```cpp
+class Solution {
+public:
+    // 获取字符串 s 中从ptr处开始的数字
+    string getDigits(string& s, size_t& ptr) {
+        string ret = "";
+        while (isdigit(s[ptr])) {
+            ret.push_back(s[ptr]);
+            ptr++;
+        }
+        return ret;
+    }
+    // 将字符串拼接成字符串，拼接用+即可。
+    string getString(vector<string>& v) {
+        string ret;
+        for (const auto& s : v) {
+            ret += s;
+        }
+        return ret;
+    }
+
+    string decodeString(string s) { 
+        vector<string> stk; 
+        size_t ptr = 0;
+        while(ptr<s.size()) {
+            char cur = s[ptr];
+            if(isdigit(cur)) {
+                string digits = getDigits(s,ptr); // getDigits 会更新ptr
+                stk.push_back(digits);
+            } else if(isalpha(cur)||cur=='['){
+                stk.push_back(string(1, s[ptr]));
+                ptr++;
+            } else {
+                // 是右括号，出stack
+                ptr++;
+                vector<string> sub;
+                while(stk.back()!="[") {
+                    // 读取[中的所有字符
+                    sub.push_back(stk.back());
+                    stk.pop_back();
+                }
+                reverse(sub.begin(), sub.end());
+                stk.pop_back();// 把[也弹出来，此时stk首部是数字
+                int repTime = stoi(stk.back());
+                stk.pop_back();// 弹数字处理
+                string t;
+                string o = getString(sub);
+                while(repTime) {
+                    t+=o;
+                    repTime--;
+                }
+                stk.push_back(t);
+            }
+        }
+        return getString(stk);
+    }
+};
+```
+
+
+每日温度这道题，是单调栈的典型题目，单调栈就是顾名思义的真的单调栈，从栈底到栈顶温度递减，并每次进入新元素都维护这个关系，将温度比新元素低的元素全部弹出，就可以记录气温的升高了。
+
+```cpp
+class Solution {
+public:
+    vector<int> dailyTemperatures(vector<int>& temperatures) {
+        int n = temperatures.size();
+        vector<int> ans(n);
+        stack<int> st; // 存储下标
+        for (int i = 0; i < n; i++) {
+            int t = temperatures[i];
+            while (!st.empty() && t > temperatures[st.top()]) {
+                int j = st.top();
+                st.pop();
+                ans[j] = i - j;
+            }
+            st.push(i);
+        }
+        return ans;
+    }
+};
+```
+
+另外，虽然这也是二重循环，但是每一个元素入栈一次出栈一次，所以还是 o(n)。
+
+
+## 排序
+
+数组的第 k 个最大元素，用快速排序可以达到 o(n) 的速度。
+
+我们来学习一下快速排序
+
+```cpp
+class Solution {
+public:
+    int partition(vector<int>& nums, int left, int right) {
+        
+        int i = left + rand() % (right - left + 1);
+        int pivot = nums[i];
+
+        swap(nums[i], nums[left]);
+
+        i = left + 1;
+        int j = right;
+        // 只需要记住，未处理的区间是 [i,j] 就可以了
+        while (true) {
+            while (i <= j && nums[i] < pivot) {
+                i++;
+            }
+            while (i <= j && nums[j] > pivot) {
+                j--;
+            }
+
+            if (i >= j) {
+                break;
+            }
+            swap(nums[i], nums[j]);
+            i++;
+            j--;
+        }
+        swap(nums[left], nums[j]);
+        return j;
+    }
+    void quick_sort(vector<int>& nums, int left, int right) {
+        if(left>=right) {
+            return;
+        }
+        int i = partition(nums, left, right);
+        quick_sort(nums, left, i-1);
+        quick_sort(nums, i+1, right);
+    }
+
+    vector<int> sortArray(vector<int>& nums) {
+        quick_sort(nums, 0, (int)nums.size()-1);
+        return nums;
+    }
+};
+```
+
+关键也就是一个找到 pivot，进行划分的过程。只要这个 pivot 比较趋近数组的中间值，就会很快。
+
+## 动态规划
+
+
+## 最长有效括号
+
+感觉笨一点方法，先用栈判断出哪些字符可以构成有效括号然后存下来，有效的为1无效的为0，然后在存下来的数组里找最长的连续1的长度就可以了。
+
+## 二分法
+
+闭区间，公式代码
+
+```cpp
+class Solution {
+public:
+    int searchInsert(vector<int>& nums, int target) {
+        // 我写闭区间
+        int left = 0, right = (int)nums.size() - 1;
+        while (left <= right) {
+            int mid = left + (right - left) / 2;
+            if (nums[mid] < target) {
+                left = mid + 1;
+            } else {
+                right = mid - 1;
+            }
+        }
+        return left;
+        // 如果是bool，return nums[left]==target; 即可
+    }
+};
+```
+
+## 智力题
+快慢指针入口。
+```cpp
+class Solution {
+public:
+    int findDuplicate(vector<int>& nums) {
+        int slow = 0, fast = 0;
+        // 由于题目设置范围是1到n所以直接把数组看成一个链表的实现，
+        // 数组里存储下一个节点的index
+        // 重复元素说明链表里有一个元素的入度为2，所以形成了环。我们只要找到环的入口就行了
+        while(true) {
+            slow = nums[slow];
+            fast = nums[nums[fast]];
+            if(fast==slow){
+                break;
+            }
+        }
+        // 他们相遇的位置是距离入口c步，c等于从起点到入口的距离。
+        int head = 0;
+        while(slow!=head){
+            slow = nums[slow];
+            head = nums[head];
+        }
+        return slow;
     }
 };
 ```
