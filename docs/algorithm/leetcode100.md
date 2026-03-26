@@ -876,5 +876,41 @@ public:
 ```
 
 
+
+## 排序
+
+找第 k 大的东西，用快速算法排序即可。
+
 ## 动态规划
 
+最长回文子串，用中心扩展法
+
+编辑距离这道题，考的很常见，注意状态方程的写法，最好记住：
+
+```cpp
+class Solution {
+public:
+    int minDistance(string word1, string word2) {
+        int m = word1.length();
+        int n = word2.length();
+        vector dp(m + 1, vector<int>(n + 1, 0));
+        for (int i = 0; i < m + 1; i++) {
+            dp[i][0] = i;
+        }
+        for (int j = 0; j < n + 1; j++) {
+            dp[0][j] = j;
+        }
+
+        for (int i = 1; i < m + 1; i++) {
+            for (int j = 1; j < n + 1; j++) {
+                int insert_dp = dp[i][j - 1] + 1;
+                int delete_dp = dp[i - 1][j] + 1;
+                int update_dp =
+                    dp[i - 1][j - 1] + (word1[i - 1] != word2[j - 1]);
+                dp[i][j] = min({insert_dp, delete_dp, update_dp});
+            }
+        }
+        return dp[m][n];
+    }
+};
+```
