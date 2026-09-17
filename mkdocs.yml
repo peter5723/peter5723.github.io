@@ -167,6 +167,8 @@ nav:
     - "欧洲卡车模拟": "wen/euro.md"
     - "李白诗": "wen/libai.md"
     - "离骚": "wen/lisao.md"
+  - "金融":
+    - "金融知识": "finance/finance.md"
   - diary:
     - "one diary":
       - "one one diary": "diary.md"
